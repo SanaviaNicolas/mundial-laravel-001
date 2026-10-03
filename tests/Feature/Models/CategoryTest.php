@@ -110,4 +110,29 @@ class CategoryTest extends TestCase
         $this->assertSame('Drinks', $category->translate('name', 'en'));
         $this->assertSame('Cold', $category->translate('description', 'en'));
     }
+
+    public function test_path_label_shows_the_macro_and_the_subcategory(): void
+    {
+        $macro = Category::factory()->create(['name' => ['it' => 'Pizze', 'en' => 'Pizzas']]);
+        $sub = Category::factory()->for($macro, 'parent')->create(['name' => ['it' => 'Classiche', 'en' => 'Classic']]);
+
+        $this->assertSame('Pizze', $macro->pathLabel());
+        $this->assertSame('Pizze › Classiche', $sub->pathLabel());
+        $this->assertSame('Pizzas › Classic', $sub->pathLabel('en'));
+    }
+
+    public function test_path_options_list_every_category_in_tree_order(): void
+    {
+        $drinks = Category::factory()->create(['name' => ['it' => 'Bibite'], 'sort_order' => 2]);
+        $pizzas = Category::factory()->create(['name' => ['it' => 'Pizze'], 'sort_order' => 1]);
+        $classic = Category::factory()->for($pizzas, 'parent')->create(['name' => ['it' => 'Classiche'], 'sort_order' => 1]);
+        $soft = Category::factory()->for($drinks, 'parent')->create(['name' => ['it' => 'Analcolici'], 'sort_order' => 1]);
+
+        $this->assertSame([
+            $pizzas->id => 'Pizze',
+            $classic->id => 'Pizze › Classiche',
+            $drinks->id => 'Bibite',
+            $soft->id => 'Bibite › Analcolici',
+        ], Category::pathOptions());
+    }
 }

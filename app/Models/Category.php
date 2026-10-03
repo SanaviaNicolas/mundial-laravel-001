@@ -73,6 +73,36 @@ class Category extends TranslatableModel
     }
 
     /**
+     * "Macro › Sub" for a subcategory, just the name for a macro category.
+     */
+    public function pathLabel(?string $locale = null): string
+    {
+        $name = (string) $this->translate('name', $locale);
+
+        return $this->parent_id === null ? $name : $this->parent->pathLabel($locale).' › '.$name;
+    }
+
+    /**
+     * Every category as [id => path label], in tree order (each macro followed by its subcategories).
+     *
+     * @return array<int, string>
+     */
+    public static function pathOptions(): array
+    {
+        $options = [];
+
+        foreach (self::query()->whereNull('parent_id')->with('children')->ordered()->get() as $macro) {
+            $options[$macro->id] = $macro->pathLabel();
+
+            foreach ($macro->children as $child) {
+                $options[$child->id] = $child->setRelation('parent', $macro)->pathLabel();
+            }
+        }
+
+        return $options;
+    }
+
+    /**
      * @param  Builder<static>  $query
      */
     public function scopeOrdered(Builder $query): void
