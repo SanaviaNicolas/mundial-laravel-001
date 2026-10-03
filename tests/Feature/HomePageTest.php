@@ -14,7 +14,7 @@ class HomePageTest extends TestCase
     public function test_home_has_essential_markup(): void
     {
         $this->get('/')
-            ->assertSee('<html lang="it">', false)
+            ->assertSee('<html lang="it"', false)
             ->assertSee('<meta name="viewport" content="width=device-width, initial-scale=1">', false)
             ->assertSee('<title>Visciano 82 — Pizzeria e ristorante</title>', false)
             ->assertSee('<meta name="description" content="', false);

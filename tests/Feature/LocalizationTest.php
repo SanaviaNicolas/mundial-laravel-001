@@ -23,7 +23,7 @@ class LocalizationTest extends TestCase
     {
         $this->get($uri)
             ->assertOk()
-            ->assertSee('<html lang="en">', false)
+            ->assertSee('<html lang="en"', false)
             ->assertSee('<title>'.$title.'</title>', false)
             ->assertSee('<link rel="alternate" hreflang="it" href="'.url($italianUri).'">', false)
             ->assertSee('<link rel="alternate" hreflang="en" href="'.url($uri).'">', false)
@@ -34,7 +34,7 @@ class LocalizationTest extends TestCase
     public function test_italian_pages_declare_their_english_alternate_and_canonical(): void
     {
         $this->get('/menu')
-            ->assertSee('<html lang="it">', false)
+            ->assertSee('<html lang="it"', false)
             ->assertSee('<link rel="alternate" hreflang="en" href="'.url('/en/menu').'">', false)
             ->assertSee('<link rel="alternate" hreflang="x-default" href="'.url('/menu').'">', false)
             ->assertSee('<link rel="canonical" href="'.url('/menu').'">', false)

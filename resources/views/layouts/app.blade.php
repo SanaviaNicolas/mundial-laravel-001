@@ -4,7 +4,7 @@
     $alternates = \App\Support\Pages::alternates();
 @endphp
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"@if (\App\Support\Pages::current() === 'home') data-home @endif>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,9 +20,12 @@
         @unless (app()->isProduction())
             <meta name="robots" content="noindex, nofollow">
         @endunless
+        <script>try{if(document.documentElement.hasAttribute('data-home')&&!sessionStorage.getItem('intro')){document.documentElement.classList.add('intro');sessionStorage.setItem('intro','1')}}catch(e){}</script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="min-h-screen">
+        <div class="progress" aria-hidden="true"></div>
+        <div class="curtain" aria-hidden="true"><span class="font-display text-5xl font-extrabold tracking-tight md:text-7xl">Visciano <b class="text-blu">82</b></span></div>
         <a href="#contenuto" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-3 focus:text-ink">{{ __('site.ui.skip') }}</a>
         <header @class(['z-30', 'absolute inset-x-0 top-0 text-white transition-colors duration-300 js:fixed data-[scrolled]:bg-crema/90 data-[scrolled]:text-ink data-[scrolled]:shadow-sm data-[scrolled]:backdrop-blur' => $overlay, 'bg-crema text-ink' => ! $overlay]) @if ($overlay) data-overlay @endif>
             <div class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 md:h-[4.5rem]">
@@ -53,7 +56,7 @@
                 <nav aria-label="{{ __('site.ui.menu_panel') }}" class="mt-6">
                     <ul class="list-none border-t border-white/15 p-0">
                         @foreach ($pagine as $nome => $url)
-                            <li class="border-b border-white/15"><a href="{{ $url }}" class="block py-5 font-display text-[2.5rem] font-extrabold leading-none tracking-tight text-white no-underline" @if (request()->is(ltrim($url, '/'))) aria-current="page" @endif>{{ $nome }}</a></li>
+                            <li class="border-b border-white/15" style="--i: {{ $loop->index }}"><a href="{{ $url }}" class="block py-5 font-display text-[2.5rem] font-extrabold leading-none tracking-tight text-white no-underline" @if (request()->is(ltrim($url, '/'))) aria-current="page" @endif>{{ $nome }}</a></li>
                         @endforeach
                     </ul>
                 </nav>
@@ -70,7 +73,7 @@
             @yield('content')
         </main>
 
-        <footer class="border-t border-white/10 bg-ink pb-24 pt-12 text-stone-200 md:pb-12">
+        <footer class="overflow-hidden border-t border-white/10 bg-ink pb-24 pt-12 text-stone-200 md:pb-0">
             <div class="mx-auto max-w-6xl px-4">
                 <p class="font-display text-xl font-bold text-white">{{ config('app.name') }}</p>
                 <ul class="mt-4 flex list-none flex-wrap gap-x-5 p-0">
@@ -80,6 +83,7 @@
                 </ul>
                 <p class="mt-2">{{ config('site.address') }} · {{ __('site.footer.tel') }} {{ config('site.phone') }}@if (config('site.vat')) · {{ __('site.footer.vat') }} {{ config('site.vat') }}@endif</p>
             </div>
+            <p class="ghost-text mt-10 select-none whitespace-nowrap text-center font-display text-[15.5vw] font-extrabold leading-[0.78] tracking-tighter [--ghost:rgb(255_255_255/0.08)] md:text-[13rem]" aria-hidden="true">Visciano 82</p>
         </footer>
 
         <div class="fixed inset-x-4 bottom-4 z-10 md:hidden">

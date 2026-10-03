@@ -150,3 +150,31 @@ Il sito non è una one page: Home, Menù (`/menu`), La storia (`/la-nostra-stori
 - **Sostituire una foto = copiare i file con lo stesso nome**, senza toccare il codice. Finché i file non esistono compare il segnaposto "Foto provvisoria".
 - Generazione delle varianti (esempio con `sharp`, installato fuori dal progetto): per ogni larghezza `resize({ width })` e poi `.webp({ quality: 72 })` e `.avif({ quality: 50 })`. La foto di prova dell'hero pesa 18 KB (AVIF) / 27 KB (WebP) a 640 px e 78 KB (AVIF) / 116 KB (WebP) a 1920 px.
 - **Foto provvisoria di prova**: l'hero usa una foto fornita solo "per rendere l'idea". Non è nostra e il repository è pubblico, quindi `public/images/hero-*` è in `.gitignore` e **non va committata**: sul repository l'hero mostra il segnaposto. Va sostituita con una foto del locale (o con diritti chiari) prima del rilascio.
+
+### Effetti "wow" (quarto passaggio)
+
+Tutti sono **miglioramento progressivo**: senza supporto o con `prefers-reduced-motion: reduce` il sito resta completo e statico; quelli da puntatore esistono solo con mouse (`hover: hover` e `pointer: fine`); gli elementi puramente decorativi sono `aria-hidden`. Il JS totale è circa 4 KB (`resources/js/app.js`).
+
+| Effetto | Dove | Tecnica |
+|---|---|---|
+| **Sipario d'ingresso** con il logo che si alza | Home, solo alla prima visita della sessione | classe `intro` messa da un micro-script nell'`<head>` + `sessionStorage`; CSS |
+| **Parole del titolo che salgono da una maschera**, una dopo l'altra | Titoli degli hero | componente `x-parole` (testo intatto per crawler e screen reader), CSS |
+| **Zoom lento** e **parallasse** della foto, che segue anche il **mouse** | Hero | CSS `animation-timeline: view()` + piccolo JS (`data-mouse`) |
+| **Foto che si apre** (clip-path) mentre entra nello schermo | Bande fotografiche | `.unveil`, scroll-driven CSS |
+| **Frase a parole che si accendono** | Home, storia | componente `x-frase`, scroll-driven CSS |
+| **Fasce di parole giganti** mosse dallo scroll (una in verso opposto) | Home | componente `x-marquee`, scroll-driven CSS |
+| **Racconto "pinned"**: la sezione si blocca e i tre punti dell'impasto cambiano scorrendo, con barra di avanzamento | Storia | JS (`--p`, `data-active`) + CSS; senza JS resta un elenco |
+| **Foto che segue il cursore** sulle righe del menù, con la riga che si colora | Home (indice del menù) | JS; usa le foto disponibili, nessuna se mancano |
+| **Cursore personalizzato** (cerchio che segue il mouse e cresce sui link) | Desktop | JS, `mix-blend-mode: difference` |
+| **Pulsanti magnetici** e **card che si inclinano in 3D** | Pulsanti; "In evidenza" del menù | JS |
+| **Righe del menù che entrano** una alla volta | Menù | scroll-driven CSS (`.row-reveal`) |
+| **Barra di avanzamento** di lettura | Tutte le pagine | scroll-driven CSS |
+| **Transizione tra pagine** a cerchio che si espande | Tutte (browser con View Transitions) | CSS `@view-transition` |
+| **Voci dei pannelli** (menu mobile, categorie) che entrano a cascata | Menu mobile, categorie | CSS, `@starting-style` |
+| **Scritta gigante "Visciano 82"** tenue nel footer | Tutte le pagine | CSS |
+
+Scelte tecniche da ricordare: niente animazioni con **timeline con nome** (`view-timeline: --x`), perché in Chromium bloccavano il rendering: il racconto "pinned" usa JS. Niente testo a contorno (`-webkit-text-stroke`) su font variabili: mostra le sovrapposizioni interne dei glifi; si usa un riempimento tenue.
+
+### Bandiere nel selettore di lingua
+
+Il selettore **IT / EN** (header e menu mobile) mostra una **bandiera tonda in SVG inline** (`x-bandiera`) accanto alla sigla, con `lang`/`hreflang` sul link e la lingua corrente evidenziata. SVG e non emoji: le emoji delle bandiere non si vedono su Windows.

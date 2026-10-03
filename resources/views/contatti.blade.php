@@ -7,9 +7,9 @@
 @section('content')
     <x-hero name="forno" :alt="__('site.contact.hero_alt')" height="min-h-[65svh]" :eager="true" position="object-[50%_60%]">
         <h1 class="type-page text-white">
-            <span class="line"><span>{{ __('site.contact.h1') }}</span></span>
+            <x-parole :text="__('site.contact.h1')" />
         </h1>
-        <p class="fade-in mt-6 text-xl text-white" style="--i: 2">{{ config('site.address') }}</p>
+        <p class="fade-in mt-6 text-xl text-white" style="--i: 4">{{ config('site.address') }}</p>
     </x-hero>
 
     <section class="py-20 md:py-28">

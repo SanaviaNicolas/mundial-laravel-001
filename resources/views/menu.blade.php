@@ -11,9 +11,9 @@
 @section('content')
     <x-hero name="ingredienti" :alt="__('site.menu.hero_alt')" height="min-h-[75svh]" position="object-[60%_50%]">
         <h1 class="type-page text-white">
-            <span class="line"><span>{{ __('site.menu.h1') }}</span></span>
+            <x-parole :text="__('site.menu.h1')" />
         </h1>
-        <p class="fade-in mt-6 max-w-lg text-lg text-white" style="--i: 2">{{ __('site.menu.lead') }}</p>
+        <p class="fade-in mt-6 max-w-lg text-lg text-white" style="--i: 4">{{ __('site.menu.lead') }}</p>
     </x-hero>
 
     @if ($evidenza->isNotEmpty())
@@ -22,7 +22,7 @@
                 <h2 class="type-section">{{ __('site.menu.featured') }}</h2>
                 <ul class="mt-10 grid list-none gap-4 p-0 md:grid-cols-2 md:gap-6">
                     @foreach ($evidenza as $voce)
-                        <li class="flex flex-col rounded-2xl bg-white p-7 md:p-10">
+                        <li class="row-reveal flex flex-col rounded-2xl bg-white p-7 md:p-10" data-tilt>
                             <x-badge :tipo="$voce['badge']" class="self-start" />
                             <h3 class="mt-6 text-3xl md:text-4xl">{{ $voce['nome'] }}</h3>
                             <p class="mt-3 flex-1 text-lg text-ink-soft">{{ $voce['ingredienti'] }}</p>
@@ -58,7 +58,7 @@
             <nav aria-label="{{ __('site.menu.categories_nav') }}" data-spy class="mt-4">
                 <ul class="list-none border-t border-white/15 p-0">
                     @foreach ($menu as $slug => $categoria)
-                        <li class="border-b border-white/15">
+                        <li class="border-b border-white/15" style="--i: {{ $loop->index }}">
                             <a href="#{{ $slug }}" data-name="{{ $categoria['nome'] }}" class="group flex items-baseline justify-between gap-4 py-4 text-white no-underline aria-[current=true]:text-pomodoro md:py-5">
                                 <span class="font-display type-list font-extrabold tracking-tight">{{ $categoria['nome'] }}</span>
                                 <span class="shrink-0 text-sm opacity-70">{{ count($categoria['voci']) }}</span>
@@ -83,7 +83,7 @@
                 </div>
                 <ul class="list-none divide-y divide-ink/15 border-y border-ink/15 p-0 md:col-span-7">
                     @foreach ($categoria['voci'] as $voce)
-                        <li class="py-6">
+                        <li class="row-reveal py-6">
                             <div class="flex items-baseline justify-between gap-6">
                                 <h3 class="text-2xl">{{ $voce['nome'] }}</h3>
                                 <span class="shrink-0 font-display text-xl font-extrabold text-pomodoro-scuro md:text-2xl">{{ $voce['prezzo'] }}</span>

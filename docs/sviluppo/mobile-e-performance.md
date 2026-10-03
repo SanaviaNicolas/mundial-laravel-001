@@ -17,7 +17,7 @@ Misure su **mobile** (emulazione Moto G Power/rete 4G lenta di Lighthouse) e, qu
 | CLS (Cumulative Layout Shift) | ≤ 0,1 (obiettivo ≤ 0,05) |
 | TTFB | ≤ 0,8 s |
 | Peso pagina (trasferito, prima visita, esclusa la parte sotto la piega caricata in lazy) | Home ≤ 500 KB; Menù ≤ 300 KB senza foto |
-| JavaScript | ≤ 30 KB compresso per pagina (obiettivo: nessun JS necessario per leggere il contenuto) |
+| JavaScript | ≤ 30 KB compresso per pagina (obiettivo: nessun JS necessario per leggere il contenuto). Attuale: ~4 KB, solo per effetti e navigazione |
 | CSS | ≤ 30 KB compresso |
 | Richieste a domini di terze parti | 0 (font, analytics, mappe incluse) salvo decisione esplicita |
 
