@@ -18,3 +18,7 @@ Il setup passo-passo è nel [README](../../README.md). Qui i dettagli che servon
 ## Locale
 
 `APP_LOCALE=it`, `APP_FALLBACK_LOCALE=it`, timezone `Europe/Rome` (impostata in `config/app.php`).
+
+## CI
+
+`.github/workflows/ci.yml` (GitHub Actions) gira su ogni push su `main` e su ogni pull request: PHP 8.5, servizio PostgreSQL 18 con database `mundial_testing`, poi `composer check`. La password del Postgres di CI (`postgres`) è usa e getta, vale solo dentro il job. Gli asset non vengono compilati: i test non ne hanno bisogno (`withoutVite()`).
