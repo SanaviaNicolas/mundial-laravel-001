@@ -6,7 +6,7 @@
 
 @section('content')
     <section class="relative flex min-h-[100svh] flex-col justify-end overflow-hidden bg-ink text-white">
-        <x-foto ratio="" alt="Una pizza napoletana appena sfornata" :eager="true" :dark="true" label-class="self-start justify-self-end mr-4 mt-32 md:mt-28" class="absolute inset-0 h-full" />
+        <x-foto name="hero" ratio="" alt="Primo piano di una pizza napoletana con basilico e pomodorini" :eager="true" :dark="true" label-class="self-start justify-self-end mr-4 mt-32 md:mt-28" class="absolute inset-0 h-full object-[55%_50%]" sizes="(orientation: portrait) 178vh, 100vw" />
         <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/25 to-black/80" aria-hidden="true"></div>
         <div class="relative mx-auto w-full max-w-6xl px-4 pb-28 pt-40 md:pb-24">
             <h1 class="max-w-3xl text-5xl text-white sm:text-6xl md:text-7xl">Pizza napoletana, fatta come si deve.</h1>

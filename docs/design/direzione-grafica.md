@@ -125,3 +125,10 @@ Regola di progetto: mai scroll orizzontale della pagina, né a mobile né a desk
 ### Sito multipagina
 
 Il sito non è una one page: Home, Menù (`/menu`), La storia (`/la-nostra-storia`) e Contatti (`/contatti`), con la stessa navigazione in header e footer (voce corrente evidenziata e con `aria-current`). La home è un'anteprima che rimanda alle pagine, non contiene i contenuti completi. Le pagine interne riusano lo stesso linguaggio (titolo grande su fondo crema, strisce di sfondo alternate, foto 4:3 arrotondate, chiusura nera con invito a chiamare).
+
+### Gestione delle immagini (implementata)
+
+- Le foto si cercano come `public/images/{nome}-{640,1280,1920,2560}.{avif,webp}`; il componente Blade `x-foto name="hero"` genera `<picture>` con AVIF e WebP responsive (`srcset`/`sizes`), `width`/`height` letti dal file (niente layout shift), `loading="lazy"` di default e `eager` + `fetchpriority="high"` per l'immagine LCP (hero).
+- **Sostituire una foto = copiare i file con lo stesso nome**, senza toccare il codice. Finché i file non esistono compare il segnaposto "Foto provvisoria".
+- Generazione delle varianti (esempio con `sharp`, installato fuori dal progetto): per ogni larghezza `resize({ width })` e poi `.webp({ quality: 72 })` e `.avif({ quality: 50 })`. La foto di prova dell'hero pesa 18 KB (AVIF) / 27 KB (WebP) a 640 px e 78 KB (AVIF) / 116 KB (WebP) a 1920 px.
+- **Foto provvisoria di prova**: l'hero usa una foto fornita solo "per rendere l'idea". Non è nostra e il repository è pubblico, quindi `public/images/hero-*` è in `.gitignore` e **non va committata**: sul repository l'hero mostra il segnaposto. Va sostituita con una foto del locale (o con diritti chiari) prima del rilascio.

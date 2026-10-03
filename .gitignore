@@ -15,6 +15,8 @@
 /auth.json
 /node_modules
 /public/build
+# Provisional hero photo (not ours, repo is public): never commit it. See docs/design/direzione-grafica.md
+/public/images/hero-*
 /public/css/filament
 /public/fonts-manifest.dev.json
 /public/fonts/filament
