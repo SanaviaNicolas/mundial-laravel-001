@@ -9,6 +9,7 @@ Identificativo tecnico del progetto: `mundial` (repo, database, slug).
 - PHP 8.5 e Composer 2
 - Node.js 22 e npm
 - PostgreSQL 18 (in locale tramite il container Docker `docker-postgres`)
+- [Laravel Herd](https://herd.laravel.com) per servire il sito in locale
 - Git
 
 Stack: Laravel 13, Filament 5, PostgreSQL, PHPUnit, Pint, Larastan, Vite + Tailwind.
@@ -29,15 +30,20 @@ Database (container PostgreSQL già in esecuzione, con utente `postgres`):
 docker exec docker-postgres psql -U postgres -c "CREATE DATABASE mundial" -c "CREATE DATABASE mundial_testing"
 ```
 
-Imposta in `.env` il valore di `DB_PASSWORD` (la password locale del tuo container; non va mai committata), poi:
+In `.env` imposta:
+
+- `DB_PASSWORD`: la password locale del tuo container (non va mai committata);
+- `ADMIN_PATH`: il prefisso segreto del pannello admin, senza slash iniziale (se vuoto il pannello è disattivato; vedi [ADR 0003](docs/decisioni/0003-pannello-admin.md)).
+
+Poi:
 
 ```bash
 php artisan migrate
 npm install
-npm run dev        # oppure: composer dev
+npm run dev
 ```
 
-Il sito è su <http://localhost:8000> (`php artisan serve`), il pannello admin su `/admin`.
+Il sito si serve con Laravel Herd: dalla cartella del progetto lancia `herd link mundial` e aprilo su <http://mundial.test> (`APP_URL` in `.env.example` è già coerente). Il pannello admin è su `/<ADMIN_PATH>`, con login su `/<ADMIN_PATH>/accesso`.
 
 ## Comandi
 

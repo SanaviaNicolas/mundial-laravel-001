@@ -9,7 +9,7 @@ class RobotsController extends Controller
     public function __invoke(): Response
     {
         $rules = app()->isProduction()
-            ? ['Disallow: /admin', '', 'Sitemap: '.url('/sitemap.xml')]
+            ? ['Disallow:', '', 'Sitemap: '.url('/sitemap.xml')]
             : ['Disallow: /'];
 
         return response(implode("\n", ['User-agent: *', ...$rules])."\n", 200, [

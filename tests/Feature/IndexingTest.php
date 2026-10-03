@@ -24,7 +24,7 @@ class IndexingTest extends TestCase
             ->assertDontSee('name="robots"', false);
     }
 
-    public function test_robots_txt_in_production_points_to_sitemap_and_hides_admin(): void
+    public function test_robots_txt_in_production_points_to_sitemap_without_exposing_the_admin_path(): void
     {
         $this->app['env'] = 'production';
 
@@ -32,7 +32,8 @@ class IndexingTest extends TestCase
 
         $this->assertStringStartsWith('text/plain', $response->headers->get('Content-Type'));
         $response->assertSeeText('User-agent: *')
-            ->assertSeeText('Disallow: /admin')
+            ->assertDontSeeText('/'.config('admin.path'))
+            ->assertDontSeeText('admin')
             ->assertSeeText('Sitemap: '.url('/sitemap.xml'));
         $this->assertDoesNotMatchRegularExpression('#^Disallow: /$#m', $response->getContent());
     }

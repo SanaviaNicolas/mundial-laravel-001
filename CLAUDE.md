@@ -23,6 +23,10 @@ Stack: PHP 8.5, Laravel 13, Filament 5, PostgreSQL, PHPUnit, Pint, Larastan, Vit
 - Remote `origin` uses the SSH alias of the correct account: `git@SanaviaNicolas:SanaviaNicolas/mundial-laravel-001.git` (NOT `git@github.com`).
 - Before every commit: `git status` / `git diff`, then `composer check` (Pint + Larastan + tests) must pass.
 
+## Local environment
+- The site is served by Laravel Herd (NOT `php artisan serve`): `herd link mundial` → http://mundial.test. Never run `herd` commands: tell the user what to run.
+- The admin panel path is secret: it comes from `ADMIN_PATH` in `.env` (empty = panel disabled), read via `config('admin.path')`. NEVER write the real value anywhere in the repo, docs, tests or commit messages (public repo); tests must use `config('admin.path')`. Do not expose the path in `robots.txt`. The panel is always `noindex` via `X-Robots-Tag`. See `docs/decisioni/0003-pannello-admin.md`.
+
 ## Commands
 - `composer test` — tests (PHPUnit, database `mundial_testing`, `RefreshDatabase`)
 - `composer lint` — Pint (check only); `vendor/bin/pint` fixes

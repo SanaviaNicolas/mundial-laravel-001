@@ -14,9 +14,9 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 | Canonical per pagina | ⬜ | |
 | Open Graph / Twitter card | ⬜ | |
 | `sitemap.xml` | ⬜ | Già referenziata da `robots.txt` in production |
-| `robots.txt` | ✅ | Dinamico (`RobotsController`): in production `Disallow: /admin` + `Sitemap:`; fuori production `Disallow: /` |
+| `robots.txt` | ✅ | Dinamico (`RobotsController`): in production `Sitemap:` senza esporre il percorso admin; fuori production `Disallow: /` |
 | Ambienti non production `noindex` | ✅ | Header `X-Robots-Tag` + meta robots, testati |
-| Panel `/admin` non indicizzabile | ✅ | `X-Robots-Tag` sempre, `Disallow: /admin` in production |
+| Panel admin non indicizzabile, URL non di default | ✅ | `X-Robots-Tag` sempre attivo; percorso segreto da `ADMIN_PATH`, non in `robots.txt` né nel repo |
 | Dati strutturati JSON-LD (Restaurant/Pizzeria, Menu, orari) | ⬜ | |
 | URL puliti | ✅ | Route Laravel senza parametri inutili |
 | Immagini ottimizzate con `alt` | ⬜ | |

@@ -22,13 +22,23 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
 {
+    public function register(): void
+    {
+        if (blank(config('admin.path'))) {
+            return;
+        }
+
+        parent::register();
+    }
+
     public function panel(Panel $panel): Panel
     {
         return $panel
             ->default()
             ->id('admin')
-            ->path('admin')
+            ->path(config('admin.path'))
             ->login()
+            ->loginRouteSlug('accesso')
             ->colors([
                 'primary' => Color::Amber,
             ])
