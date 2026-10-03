@@ -10,6 +10,9 @@ Indice della documentazione di Visciano 82. Va aggiornata nello stesso commit di
 ## Design
 - [Direzione grafica](design/direzione-grafica.md) — palette con contrasti, tipografia, spaziature, componenti, immagini
 
+## Contenuti
+- [Sitemap e schede pagina](contenuti/sitemap-e-pagine.md) — pagine, sezioni, SEO, dati strutturati, `TODO-DATO`
+
 ## Decisioni tecniche (ADR)
 - [0001 — Stack e identificativi](decisioni/0001-stack.md)
 - [0002 — Test e qualità del codice](decisioni/0002-testing-e-qualita.md)
