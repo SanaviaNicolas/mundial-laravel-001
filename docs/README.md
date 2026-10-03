@@ -8,5 +8,6 @@ Indice della documentazione di Visciano 82. Va aggiornata nello stesso commit di
 ## Decisioni tecniche (ADR)
 - [0001 — Stack e identificativi](decisioni/0001-stack.md)
 - [0002 — Test e qualità del codice](decisioni/0002-testing-e-qualita.md)
+- [0003 — Pannello admin Filament](decisioni/0003-pannello-admin.md)
 
 Le sezioni su contenuti, design e SEO verranno aggiunte insieme alle prime pagine reali.
