@@ -4,7 +4,11 @@ Il setup passo-passo è nel [README](../../README.md). Qui i dettagli che servon
 
 ## Server locale
 
-Il sito si serve con [Laravel Herd](https://herd.laravel.com), non con `php artisan serve`: dalla cartella del progetto `herd link mundial` lo espone su <http://mundial.test> (`APP_URL=http://mundial.test`). `npm run dev` avvia Vite per gli asset.
+Il sito si serve con [Laravel Herd](https://herd.laravel.com), non con `php artisan serve`: dalla cartella del progetto si lanciano `herd link` e `herd secure` (senza passare un nome: il sito prende il nome della cartella) e il sito risponde su <https://mundial-laravel-001.test> (`APP_URL=https://mundial-laravel-001.test`). `npm run dev` avvia Vite per gli asset.
+
+## Workflow Git
+
+Si lavora direttamente su `main`, con commit piccole. Prima di pushare si esegue `git pull --rebase` e `composer check` deve essere verde; dopo il push la CI deve diventare verde. `composer check` va provato anche su una clone pulita (`git clone` in una cartella temporanea, copia di `.env`, `composer install`, `composer check`): la CI parte solo dai file tracciati da git, quindi file o cartelle vuote presenti solo in locale non ci sono.
 
 ## Pannello admin
 

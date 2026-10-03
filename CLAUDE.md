@@ -21,10 +21,12 @@ Stack: PHP 8.5, Laravel 13, Filament 5, PostgreSQL, PHPUnit, Pint, Larastan, Vit
 - Never force push. Never commit `.env`, `vendor`, `node_modules`.
 - The repository is PUBLIC: never commit secrets. Real credentials live only in `.env`; `.env.example` has placeholders.
 - Remote `origin` uses the SSH alias of the correct account: `git@SanaviaNicolas:SanaviaNicolas/mundial-laravel-001.git` (NOT `git@github.com`).
+- We work directly on `main`. Before pushing, the user runs `git pull --rebase`; CI must be green.
+- Before declaring a task done, `composer check` must ALSO pass on a clean clone (clone the local repo into a temp folder, copy `.env`, `composer install`, `composer check`, delete the folder): CI starts only from tracked files (git does not track empty directories).
 - Before every commit: `git status` / `git diff`, then `composer check` (Pint + Larastan + tests) must pass.
 
 ## Local environment
-- The site is served by Laravel Herd (NOT `php artisan serve`): `herd link mundial` → http://mundial.test. Never run `herd` commands: tell the user what to run.
+- The site is served by Laravel Herd (NOT `php artisan serve`): `herd link` + `herd secure` from the project folder (no name argument) → https://mundial-laravel-001.test. Never run `herd` commands: tell the user what to run.
 - The admin panel path is secret: it comes from `ADMIN_PATH` in `.env` (empty = panel disabled), read via `config('admin.path')`. NEVER write the real value anywhere in the repo, docs, tests or commit messages (public repo); tests must use `config('admin.path')`. Do not expose the path in `robots.txt`. The panel is always `noindex` via `X-Robots-Tag`. See `docs/decisioni/0003-pannello-admin.md`.
 
 ## Commands

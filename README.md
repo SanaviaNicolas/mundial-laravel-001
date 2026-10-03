@@ -43,7 +43,7 @@ npm install
 npm run dev
 ```
 
-Il sito si serve con Laravel Herd: dalla cartella del progetto lancia `herd link mundial` e aprilo su <http://mundial.test> (`APP_URL` in `.env.example` è già coerente). Il pannello admin è su `/<ADMIN_PATH>`, con login su `/<ADMIN_PATH>/accesso`.
+Il sito si serve con Laravel Herd: dalla cartella del progetto lancia `herd link` e `herd secure` (senza passare un nome) e aprilo su <https://mundial-laravel-001.test> (`APP_URL` in `.env.example` è già coerente). Il pannello admin è su `/<ADMIN_PATH>`, con login su `/<ADMIN_PATH>/accesso`.
 
 ## Comandi
 
