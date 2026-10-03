@@ -1,0 +1,90 @@
+<?php
+
+namespace App\Models;
+
+use App\Models\Concerns\HasTranslations;
+use Database\Factories\CategoryFactory;
+use DomainException;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+/**
+ * Menu category on two levels: macro categories (no parent) and subcategories.
+ *
+ * @property array<string, string> $name
+ * @property array<string, string>|null $description
+ */
+#[Fillable(['parent_id', 'name', 'slug', 'description', 'sort_order', 'is_visible'])]
+class Category extends Model
+{
+    /** @use HasFactory<CategoryFactory> */
+    use HasFactory, HasTranslations;
+
+    protected array $translatable = ['name', 'description'];
+
+    protected static function booted(): void
+    {
+        static::saving(function (Category $category) {
+            if ($category->parent_id === null) {
+                return;
+            }
+
+            $isSelf = $category->parent_id === $category->getKey();
+            $parentIsSub = Category::whereKey($category->parent_id)->whereNotNull('parent_id')->exists();
+            $hasChildren = $category->exists && $category->children()->exists();
+
+            if ($isSelf || $parentIsSub || $hasChildren) {
+                throw new DomainException('Categories can be nested on two levels at most.');
+            }
+        });
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'is_visible' => 'boolean',
+        ];
+    }
+
+    /**
+     * @return BelongsTo<Category, $this>
+     */
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(self::class, 'parent_id');
+    }
+
+    /**
+     * @return HasMany<Category, $this>
+     */
+    public function children(): HasMany
+    {
+        return $this->hasMany(self::class, 'parent_id')->ordered();
+    }
+
+    /**
+     * @param  Builder<static>  $query
+     */
+    public function scopeOrdered(Builder $query): void
+    {
+        $query->orderBy('sort_order')->orderBy('id');
+    }
+
+    /**
+     * Visible on the public site: hiding a macro category hides its subcategories too.
+     *
+     * @param  Builder<static>  $query
+     */
+    public function scopeVisible(Builder $query): void
+    {
+        $query->where('is_visible', true)->where(
+            fn (Builder $query) => $query
+                ->whereNull('parent_id')
+                ->orWhereIn('parent_id', self::query()->where('is_visible', true)->select('id')),
+        );
+    }
+}

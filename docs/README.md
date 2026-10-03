@@ -10,6 +10,8 @@ Indice della documentazione di Visciano 82. Va aggiornata nello stesso commit di
 - [0002 — Test e qualità del codice](decisioni/0002-testing-e-qualita.md)
 - [0003 — Pannello admin Filament](decisioni/0003-pannello-admin.md)
 - [0004 — Indicizzazione e ambienti non production](decisioni/0004-seo-ambienti-non-production.md)
+- [0005 — Traduzioni dei contenuti](decisioni/0005-traduzioni.md)
+- [0006 — Modello dati del menù](decisioni/0006-modello-dati-menu.md)
 
 ## SEO
 - [Checklist SEO, AI-friendly e mobile](seo/checklist.md) — stato di ogni voce
