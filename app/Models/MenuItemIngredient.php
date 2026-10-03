@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\Concerns\HasTranslations;
 use Database\Factories\MenuItemIngredientFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -17,10 +15,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property bool $after_cooking
  */
 #[Fillable(['menu_item_id', 'ingredient_id', 'sort_order', 'after_cooking', 'section'])]
-class MenuItemIngredient extends Model
+class MenuItemIngredient extends TranslatableModel
 {
     /** @use HasFactory<MenuItemIngredientFactory> */
-    use HasFactory, HasTranslations;
+    use HasFactory;
 
     public $timestamps = false;
 

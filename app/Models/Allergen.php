@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Concerns\HasTranslations;
 use Database\Factories\AllergenFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
@@ -16,10 +14,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property array<string, string> $name
  */
 #[Fillable(['key', 'name', 'sort_order'])]
-class Allergen extends Model
+class Allergen extends TranslatableModel
 {
     /** @use HasFactory<AllergenFactory> */
-    use HasFactory, HasTranslations;
+    use HasFactory;
 
     public $timestamps = false;
 

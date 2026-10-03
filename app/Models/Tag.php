@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\Concerns\HasTranslations;
 use Database\Factories\TagFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
@@ -15,10 +13,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property array<string, string> $name
  */
 #[Fillable(['slug', 'name'])]
-class Tag extends Model
+class Tag extends TranslatableModel
 {
     /** @use HasFactory<TagFactory> */
-    use HasFactory, HasTranslations;
+    use HasFactory;
 
     protected array $translatable = ['name'];
 

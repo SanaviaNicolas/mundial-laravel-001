@@ -16,4 +16,7 @@ Indice della documentazione di Visciano 82. Va aggiornata nello stesso commit di
 ## SEO
 - [Checklist SEO, AI-friendly e mobile](seo/checklist.md) — stato di ogni voce
 
+## Contenuti
+- [Il menù nel pannello di amministrazione](contenuti/menu.md) — guida per chi gestisce il menù
+
 Le sezioni su contenuti e design verranno aggiunte insieme alle prime pagine reali.

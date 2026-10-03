@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\Concerns\HasTranslations;
 use Database\Factories\IngredientFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
@@ -16,10 +14,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property bool $is_frozen
  */
 #[Fillable(['name', 'is_frozen'])]
-class Ingredient extends Model
+class Ingredient extends TranslatableModel
 {
     /** @use HasFactory<IngredientFactory> */
-    use HasFactory, HasTranslations;
+    use HasFactory;
 
     protected array $translatable = ['name'];
 

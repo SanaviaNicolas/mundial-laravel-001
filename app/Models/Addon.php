@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Concerns\HasTranslations;
 use Database\Factories\AddonFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
@@ -18,10 +16,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property int $price_cents
  */
 #[Fillable(['name', 'price_cents', 'sort_order', 'is_visible'])]
-class Addon extends Model
+class Addon extends TranslatableModel
 {
     /** @use HasFactory<AddonFactory> */
-    use HasFactory, HasTranslations;
+    use HasFactory;
 
     protected array $translatable = ['name'];
 

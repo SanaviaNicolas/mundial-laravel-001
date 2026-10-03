@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\Concerns\HasTranslations;
 use Database\Factories\CategoryFactory;
 use DomainException;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -19,10 +17,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property array<string, string>|null $description
  */
 #[Fillable(['parent_id', 'name', 'slug', 'description', 'sort_order', 'is_visible'])]
-class Category extends Model
+class Category extends TranslatableModel
 {
     /** @use HasFactory<CategoryFactory> */
-    use HasFactory, HasTranslations;
+    use HasFactory;
 
     protected array $translatable = ['name', 'description'];
 
