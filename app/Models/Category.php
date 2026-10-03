@@ -67,6 +67,14 @@ class Category extends Model
     }
 
     /**
+     * @return HasMany<MenuItem, $this>
+     */
+    public function items(): HasMany
+    {
+        return $this->hasMany(MenuItem::class)->ordered();
+    }
+
+    /**
      * @param  Builder<static>  $query
      */
     public function scopeOrdered(Builder $query): void
