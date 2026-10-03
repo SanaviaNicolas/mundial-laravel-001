@@ -11,7 +11,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="min-h-screen pb-20 md:pb-0">
-        <header class="border-b border-sabbia bg-white">
+        <header class="bg-crema">
             <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 px-4 py-3">
                 <x-logo />
                 <x-button :href="$tel" class="hidden md:order-3 md:inline-flex">Chiama</x-button>

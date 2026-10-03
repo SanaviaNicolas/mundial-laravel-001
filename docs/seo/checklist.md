@@ -87,7 +87,7 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 
 | Voce | Stato | Note |
 |---|---|---|
-| Font self-hosted, nessuna richiesta a CDN di terzi | ✅ | Montserrat e Inter locali in `resources/fonts/`; `bunny` rimosso |
+| Font self-hosted, nessuna richiesta a CDN di terzi | ✅ | Bricolage Grotesque e Inter locali in `resources/fonts/`; `bunny` rimosso |
 | Lighthouse mobile: Performance ≥ 90, SEO 100, A11y ≥ 95 | ⬜ | Target in [mobile e performance](../sviluppo/mobile-e-performance.md) |
 | LCP ≤ 2,5 s · INP ≤ 200 ms · CLS ≤ 0,1 | ⬜ | |
 | Peso pagina e JS entro i budget | ⬜ | |

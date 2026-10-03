@@ -51,7 +51,7 @@ C) è sconsigliata oggi: il costo (build, SSR, doppio ecosistema, JS) è spropor
 2. Hosting e deploy: si compila `npm run build` in CI/deploy? Quale server web (compressione brotli/gzip, cache HTTP degli asset)?
 3. Modello dati del menù (categorie, voci, ordine, asterisco, note, prezzo, allergeni): lo definisci tu in Filament? Il frontend ha bisogno dei campi prima di costruire le viste.
 4. Pipeline immagini: elaborazione (AVIF/WebP, ridimensionamenti) in upload Filament oppure pre-generata? Libreria (GD/Imagick) disponibile sul server?
-5. Font self-hosted: ok sostituire `bunny('Instrument Sans')` in `vite.config.js` e il `--font-sans` in `resources/css/app.css` (default Laravel, CDN esterno) con Montserrat + Inter locali?
+5. Font self-hosted: ok sostituire `bunny('Instrument Sans')` in `vite.config.js` e il `--font-sans` in `resources/css/app.css` (default Laravel, CDN esterno) con Bricolage Grotesque + Inter locali (già fatto in `frontend/home-layout-base`, da approvare)?
 6. `sitemap.xml` e JSON-LD: chi genera cosa? Proposta: il backend espone i dati, il frontend li rende in Blade.
 7. Politica cookie/terze parti (mappa, analytics): serve un banner? Preferenza: nessuna terza parte, quindi nessun banner.
 

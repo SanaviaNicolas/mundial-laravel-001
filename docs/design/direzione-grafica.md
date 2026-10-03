@@ -51,9 +51,9 @@ Regole: il blu logo non si usa mai per testo sotto i 24 px; il colore non è mai
 
 ## Tipografia
 
-- **Titoli**: sans geometrico, Montserrat (pesi 600–700).
+- **Titoli**: Bricolage Grotesque (pesi 700–800), sans con carattere e calore; sostituisce Montserrat, scartato perché troppo freddo e generico.
 - **Testo**: sans molto leggibile, Inter (pesi 400, 500, 600).
-- **Self-hosted**: file `woff2` serviti dal sito, **nessun Google Fonts / CDN di terzi** (prestazioni, GDPR). I file `woff2` (Montserrat e Inter variable, sottoinsieme latino) stanno in `resources/fonts/` e sono dichiarati con `@font-face` in `resources/css/app.css`; il provider `bunny` (CDN) del default Laravel è stato rimosso da `vite.config.js`.
+- **Self-hosted**: file `woff2` serviti dal sito, **nessun Google Fonts / CDN di terzi** (prestazioni, GDPR). I file `woff2` (Bricolage Grotesque e Inter variable, sottoinsieme latino) stanno in `resources/fonts/` e sono dichiarati con `@font-face` in `resources/css/app.css`; il provider `bunny` (CDN) del default Laravel è stato rimosso da `vite.config.js`.
 - **Sottoinsiemi**: solo latino (con lettere accentate italiane e punteggiatura tipografica `’ « » € •`). Variable font se più leggero dei singoli pesi.
 - **`font-display: swap`** per il testo; fallback di sistema con metriche allineate (`size-adjust`) per ridurre il layout shift. `preload` solo del font del testo principale.
 - **Scala** (mobile → desktop, indicativa): corpo 16–18 px / interlinea 1,6; H1 32→48 px; H2 24→32 px; H3 20→24 px. Non scendere sotto 16 px per il testo corrente (evita lo zoom automatico su iOS).
@@ -82,7 +82,7 @@ Elenco di ciò che serve, non un design system: si creano solo quando la prima p
 ## Immagini
 
 - **Formati**: AVIF con fallback WebP (e JPEG dove serve), generati dalla sorgente; mai solo in immagine le informazioni (menù, orari, indirizzo).
-- **Rapporti fissi** per tipo, per evitare layout shift: hero **16:9**, pizze **4:3**, galleria/locale **3:2**, anteprima social Open Graph **1200×630**. `width`/`height` sempre presenti (o `aspect-ratio`).
+- **Rapporti fissi** per tipo, per evitare layout shift: hero e pizze **1:1 ritagliate a cerchio** (foto dall'alto: il cerchio è la firma visiva del sito), locale **3:2**, altre foto **3:2**, anteprima social Open Graph **1200×630**. `width`/`height` sempre presenti (o `aspect-ratio`).
 - **Responsive**: `srcset`/`sizes` con larghezze ~ 480 / 800 / 1200 / 1600 px; non servire più pixel del necessario.
 - **Caricamento**: `loading="lazy"` e `decoding="async"` ovunque **tranne** l'immagine LCP (hero), che ha `fetchpriority="high"` ed è `preload`-ata se serve.
 - **`alt`** descrittivo e in italiano per ogni immagine di contenuto; vuoto (`alt=""`) per le decorative.
@@ -100,3 +100,12 @@ Elenco di ciò che serve, non un design system: si creano solo quando la prima p
 - Palette e font sono definiti come token Tailwind in `resources/css/app.css` (`@theme`): `crema`, `ink`, `blu`, `blu-scuro`, `pomodoro`, ecc.
 - Componenti Blade in `resources/views/components/`: `logo` (segnaposto testuale), `button` (primario/secondario), `foto` (immagine o segnaposto "Foto provvisoria").
 - **Dati segnaposto**: i dati reali mancanti sono testo di esempio riconoscibile (`Via Esempio 1`, `000 000 0000`, `€ 00,00`, testi "di esempio"), centralizzati in `config/site.php` per telefono, indirizzo, P.IVA e orari. Nei contenuti visibili non compare più la dicitura `TODO-DATO` (sostituita da questa scelta); nelle schede pagina resta come elenco di ciò che manca. Prima del rilascio vanno sostituiti tutti.
+
+### Vivacità (secondo passaggio)
+
+- **Firma visiva**: le pizze sono cerchi (foto dall'alto ritagliate a cerchio), nell'hero sopra un grande cerchio blu sfalsato e nelle card sovrapposte al bordo superiore. Quando arriveranno le foto reali vanno scattate dall'alto, con la pizza centrata.
+- **Blocchi di colore a tutta larghezza** per dare ritmo: crema (hero, menù, contatti), blu scuro (pizze), rosso pomodoro (il ristorante), nero inchiostro (footer). Su blu scuro e rosso il testo è bianco (5,49:1 e 5,18:1, AA).
+- **Titoli grandi** (fino a 72 px su desktop) in Bricolage Grotesque extrabold, interlinea stretta; testo in Inter 17 px.
+- **Categorie del menù** come pillole con bordo blu (per ora non cliccabili).
+- **Movimento**: una sola animazione, all'apertura della pagina (l'hero si ingrandisce con dissolvenza), disattivata con `prefers-reduced-motion`.
+- Rimosse le etichette in maiuscolo sopra i titoli e i filetti decorativi: non portavano informazione.
