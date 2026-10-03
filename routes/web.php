@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\RobotsController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'home');
+Route::get('/robots.txt', RobotsController::class);
