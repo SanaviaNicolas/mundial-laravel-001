@@ -29,6 +29,14 @@ class Ingredient extends TranslatableModel
     }
 
     /**
+     * @return BelongsToMany<MenuItem, $this>
+     */
+    public function menuItems(): BelongsToMany
+    {
+        return $this->belongsToMany(MenuItem::class, 'menu_item_ingredients');
+    }
+
+    /**
      * @return BelongsToMany<Allergen, $this, AllergenIngredient>
      */
     public function allergens(): BelongsToMany
