@@ -25,7 +25,8 @@ class MenuPageTest extends TestCase
         $categories = config('menu');
 
         $this->assertCount(9, $categories);
-        $this->assertSame(count($categories), preg_match_all('/<h2[\s>]/i', $response->getContent()));
+        // One h2 per category plus "In evidenza" for the highlighted pizzas.
+        $this->assertSame(count($categories) + 1, preg_match_all('/<h2[\s>]/i', $response->getContent()));
 
         foreach ($categories as $slug => $category) {
             $response->assertSee('id="'.$slug.'"', false)
@@ -55,5 +56,36 @@ class MenuPageTest extends TestCase
     public function test_menu_has_no_zero_prices(): void
     {
         $this->get('/menu')->assertDontSee('00,00');
+    }
+
+    public function test_menu_shows_badges_on_highlighted_items_and_features_them(): void
+    {
+        $response = $this->get('/menu');
+
+        $response->assertSeeText('Pizza del mese')
+            ->assertSeeText('La più scelta')
+            ->assertSeeText('In evidenza');
+    }
+
+    public function test_menu_without_badges_has_no_highlight_section(): void
+    {
+        config(['menu' => ['prova' => [
+            'nome' => 'Categoria prova',
+            'voci' => [['nome' => 'Pizza prova', 'ingredienti' => 'a, b', 'prezzo' => '€ 7,50']],
+        ]]]);
+
+        $this->get('/menu')
+            ->assertDontSeeText('In evidenza')
+            ->assertDontSeeText('Pizza del mese');
+    }
+
+    public function test_badge_is_shown_next_to_the_item_that_has_it(): void
+    {
+        config(['menu' => ['prova' => [
+            'nome' => 'Categoria prova',
+            'voci' => [['nome' => 'Pizza prova', 'ingredienti' => 'a, b', 'prezzo' => '€ 7,50', 'badge' => 'scelta']],
+        ]]]);
+
+        $this->get('/menu')->assertSeeText('La più scelta')->assertDontSeeText('Pizza del mese');
     }
 }

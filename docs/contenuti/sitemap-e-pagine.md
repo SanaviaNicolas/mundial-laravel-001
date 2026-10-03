@@ -46,6 +46,7 @@ Il sito è **multipagina**: ogni contenuto ha la sua pagina e la sua URL (niente
 - **Obiettivo**: consultare velocemente tutte le pizze e i piatti da smartphone; trovare la pizza giusta.
 - **Sezioni**: H1 + indice delle 9 categorie (ancore) · una sezione `H2` per categoria con le voci (`H3` il nome o elemento lista) · note generali (allergeni, asterisco `*`, coperto) · invito a chiamare.
 - **Categorie** (ordine proposto): Tradizione napoletana con bordo alto · Le classiche · Le speciali · Fiorfritta/Coccodrillo · Le bianche · Le chiuse · Baguette · Panuozzi · Tegamini. Struttura pronta per bevande e dolci (`TODO-DATO`).
+- **Badge**: alcune voci hanno un badge statico ("Pizza del mese", "La più scelta"), mostrato accanto alla voce e in una sezione "In evidenza" in testa alla pagina.
 - **Voce di menù**: nome (spesso dialettale), ingredienti (testo), riga "A fine cottura"/"Servito con", nota libera (es. "1° premio oscar della pizza '73"), asterisco su certi ingredienti, prezzo e allergeni (segnaposto), foto opzionale.
 - **Pagina unica** con tutte le categorie in HTML server-side (leggibile da crawler e AI senza JS); l'eventuale filtro/ricerca è un miglioramento progressivo, non un requisito.
 - **SEO**: title `Menù — pizze, panuozzi e cucina | Visciano 82`; meta description con le categorie principali; H1 `Il menù di Visciano 82`.

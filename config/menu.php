@@ -5,7 +5,8 @@
  * It will be replaced by the dynamic menu managed in Filament.
  *
  * Item keys: nome, ingredienti, prezzo, and optionally `nota`
- * (e.g. "A fine cottura: ...", "Servito con: ...").
+ * (e.g. "A fine cottura: ...", "Servito con: ...") and `badge`
+ * (`mese` = pizza of the month, `scelta` = most chosen).
  */
 return [
     'tradizione-napoletana' => [
@@ -13,7 +14,7 @@ return [
         'descrizione' => 'Con bordo alto, come si fa a Napoli.',
         'voci' => [
             ['nome' => 'Marinara', 'ingredienti' => 'Pomodoro, aglio, origano, olio extravergine.', 'prezzo' => '€ 6,00'],
-            ['nome' => 'Margherita', 'ingredienti' => 'Pomodoro, fior di latte, basilico.', 'nota' => 'A fine cottura: olio extravergine.', 'prezzo' => '€ 7,00'],
+            ['nome' => 'Margherita', 'ingredienti' => 'Pomodoro, fior di latte, basilico.', 'nota' => 'A fine cottura: olio extravergine.', 'prezzo' => '€ 7,00', 'badge' => 'scelta'],
             ['nome' => 'Margherita con bufala', 'ingredienti' => 'Pomodoro, mozzarella di bufala, basilico.', 'prezzo' => '€ 9,50'],
         ],
     ],
@@ -31,7 +32,7 @@ return [
         'descrizione' => 'Le idee della casa.',
         'voci' => [
             ['nome' => 'Pizza della casa', 'ingredienti' => 'Ingredienti della pizza, scritti per esteso.', 'nota' => 'Nota sulla pizza: testo di esempio.', 'prezzo' => '€ 11,00'],
-            ['nome' => 'Salsiccia e friarielli', 'ingredienti' => 'Fior di latte, salsiccia, friarielli.', 'prezzo' => '€ 10,50'],
+            ['nome' => 'Salsiccia e friarielli', 'ingredienti' => 'Fior di latte, salsiccia, friarielli.', 'prezzo' => '€ 10,50', 'badge' => 'mese'],
             ['nome' => 'Pizza speciale', 'ingredienti' => 'Altra pizza con ingredienti di esempio.', 'nota' => 'Servito con: contorno di esempio.', 'prezzo' => '€ 12,00'],
         ],
     ],

@@ -109,7 +109,8 @@ Dopo i primi tentativi (blocchi di colore, foto a cerchio, bollino rotante, fasc
 - **Frase d'impatto a parole che si accendono**: "Almeno 2 giorni di lievitazione. Alta idratazione. Alta digeribilità…" in testo enorme su nero; ogni parola passa da opaca a piena mentre entra nello schermo (CSS `animation-timeline: view()`).
 - **Menù come indice tipografico**: le nove categorie sono righe giganti separate da filetti; all'hover/focus una **fascia rosso pomodoro** scorre da sinistra e il testo diventa bianco; a destra il numero di voci.
 - **Banda fotografica** a tutta altezza con parallasse ("Una famiglia di pizzaioli") che rimanda alla storia.
-- **Contatti** su nero con un **bagliore rosso dal basso** (il forno acceso) e il numero di telefono gigante.
+- **Contatti** su nero **piatto** con il numero di telefono gigante.
+- **Niente gradienti di colore** come decorazione (un tentativo con un bagliore rosso nei contatti è stato scartato: effetto brutto). Sono ammessi solo gli **scrim neri** sopra le foto, necessari per leggere il testo.
 - **Header**: trasparente sopra l'hero; dopo 40 px di scroll diventa crema semi-trasparente con sfocatura e resta fisso (piccolo JS). Sulle pagine interne è sempre pieno.
 - **Transizioni tra pagine** con la View Transitions API (`@view-transition`), dove supportata.
 - **Menù (`/menu`)**: la categoria che si sta leggendo si evidenzia nella barra delle categorie (IntersectionObserver).
@@ -119,9 +120,19 @@ Dopo i primi tentativi (blocchi di colore, foto a cerchio, bollino rotante, fasc
 - **JS**: circa 1 KB (`resources/js/app.js`): classe `js`, header allo scroll, evidenziazione delle categorie. Il sito funziona senza.
 - **Foto provvisorie**: l'hero e la banda "famiglia" usano due ritagli della stessa foto di prova (vedi sotto); le altre foto sono ancora segnaposto. Le foto reali dovranno avere soggetto centrale e zone scure o sfocate dove va il testo.
 
-### Pagina menù
+### Pagine interne
 
-`/menu` ha titolo e introduzione su fondo crema, una barra di categorie (pillole con bordo nero, a capo su mobile, **fissa in alto da tablet in su**) e una sezione per categoria con voci in due colonne su desktop: nome, prezzo, ingredienti e un'eventuale nota ("A fine cottura", "Servito con"). Sfondi alternati crema/crema scuro e chiusura nera con "Chiama". Il contenuto viene da `config/menu.php` (dati **statici di esempio**, prezzi indicativi): sarà sostituito dal menù dinamico gestito in Filament; la struttura dei dati (`nome`, `descrizione`, `voci` con `nome`, `ingredienti`, `nota`, `prezzo`) è la base proposta per il modello.
+Tutte le pagine (menù, storia, contatti) condividono il linguaggio della home: **hero fotografico** con menu trasparente (`x-hero` + sezione `header-overlay`), titolo gigante rivelato riga per riga, **strisce di sfondo** alternate e banda fotografica finale. Componenti riusabili in `resources/views/components/`: `hero` (foto a tutta larghezza con parallasse e scrim), `frase` (testo grande a parole che si accendono), `badge`, `button`, `foto`, `logo`.
+
+**Menù (`/menu`)**: hero con foto → sezione **"In evidenza"** (le pizze con badge, in due riquadri grandi) → barra delle categorie (a capo su mobile, fissa da tablet in su, con evidenziazione della categoria corrente) → una sezione per categoria in **layout editoriale a due colonne** (titolo e descrizione fissi a sinistra da tablet in su, voci a destra con nome, prezzo, ingredienti, nota) → chiusura nera con "Chiama". Sfondi alternati crema/crema scuro.
+
+**Badge** (dati statici, chiave `badge` della voce in `config/menu.php`): `mese` → "Pizza del mese" (rosso pomodoro, stella) e `scelta` → "La più scelta" (blu logo con testo nero, cuore). Compaiono accanto alla voce e la fanno entrare in "In evidenza". Due tipi distinti, scelti per colore e icona oltre che per testo. Quando il menù passerà a Filament, `badge` sarà un campo opzionale della voce (enum con i due valori).
+
+**Storia (`/la-nostra-storia`)**: hero con titolo → frase a parole che si accendono → foto + testo sulla tradizione → tre righe giganti su nero (lievitazione, idratazione, digeribilità) → banda fotografica con invito a guardare il menù o chiamare.
+
+**Contatti (`/contatti`)**: hero con indirizzo → "Chiamaci" (telefono gigante, pulsanti Chiama e mappa) accanto agli orari in tabella semantica a righe grandi.
+
+Il contenuto del menù viene da `config/menu.php` (dati **statici di esempio**, prezzi indicativi): sarà sostituito dal menù dinamico gestito in Filament; la struttura (`nome`, `descrizione`, `voci` con `nome`, `ingredienti`, `nota`, `prezzo`, `badge`) è la base proposta per il modello.
 
 ### Nessuno scroll orizzontale
 
