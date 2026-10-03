@@ -6,7 +6,7 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 
 | Voce | Stato | Note |
 |---|---|---|
-| HTML semantico (`header`, `nav`, `main`, `footer`, ecc.) | 🟡 | Layout base con `<main>`; da completare con header/nav/footer |
+| HTML semantico (`header`, `nav`, `main`, `footer`, ecc.) | ✅ | Layout con header, nav, main, footer; testato |
 | Un solo H1 per pagina, gerarchia heading corretta | 🟡 | Home ok, testato; da testare su ogni nuova pagina |
 | Rendering lato server (contenuto leggibile senza JS) | ✅ | Pagine Blade, nessun rendering client |
 | `<title>` per pagina, univoco | 🟡 | Home ok, testato; layout con `@yield('title')` |
@@ -35,7 +35,7 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 | Immagini con `alt` descrittivo in italiano (vuoto se decorative) | ⬜ | |
 | Immagini ottimizzate (AVIF/WebP, `srcset`, `width`/`height`, lazy tranne LCP) | ⬜ | Regole in [direzione grafica](../design/direzione-grafica.md) |
 | Link interni con testo descrittivo, navigazione coerente | ⬜ | |
-| Nessuna foto provvisoria o `TODO-DATO` in produzione | ⬜ | Blocco al rilascio |
+| Nessuna foto provvisoria o dato segnaposto in produzione | ⬜ | Blocco al rilascio: `config/site.php`, "Foto provvisoria", testi e prezzi di esempio |
 | Contenuto testuale originale (non solo immagini) per ogni pagina | ⬜ | Testi `TODO-DATO` |
 
 ## SEO locale
@@ -80,14 +80,14 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 | Target touch adeguati (≥ 44×44 px, distanza ≥ 8 px) | ⬜ | |
 | Nessuno scroll orizzontale (320–768 px) | ⬜ | Da verificare con le pagine vere |
 | Test del layout a viewport mobile (320, 360, 390, 768) | ⬜ | Metodo in [mobile e performance](../sviluppo/mobile-e-performance.md) |
-| Pulsante "Chiama" sempre raggiungibile | ⬜ | |
+| Pulsante "Chiama" sempre raggiungibile | ✅ | Nell'header (desktop) e fisso in basso su mobile; testato |
 | Contrasti WCAG AA | 🟡 | Palette verificata in [direzione grafica](../design/direzione-grafica.md); da riverificare sulle pagine reali |
 
 ## Performance
 
 | Voce | Stato | Note |
 |---|---|---|
-| Font self-hosted, nessuna richiesta a CDN di terzi | ⬜ | Il default Laravel usa `bunny` in `vite.config.js`: da sostituire |
+| Font self-hosted, nessuna richiesta a CDN di terzi | ✅ | Montserrat e Inter locali in `resources/fonts/`; `bunny` rimosso |
 | Lighthouse mobile: Performance ≥ 90, SEO 100, A11y ≥ 95 | ⬜ | Target in [mobile e performance](../sviluppo/mobile-e-performance.md) |
 | LCP ≤ 2,5 s · INP ≤ 200 ms · CLS ≤ 0,1 | ⬜ | |
 | Peso pagina e JS entro i budget | ⬜ | |

@@ -53,7 +53,7 @@ Regole: il blu logo non si usa mai per testo sotto i 24 px; il colore non è mai
 
 - **Titoli**: sans geometrico, Montserrat (pesi 600–700).
 - **Testo**: sans molto leggibile, Inter (pesi 400, 500, 600).
-- **Self-hosted**: file `woff2` serviti dal sito, **nessun Google Fonts / CDN di terzi** (prestazioni, GDPR). Attenzione: il default di Laravel in `vite.config.js` usa il provider font `bunny` (CDN esterno) e `resources/css/app.css` dichiara `Instrument Sans`: vanno sostituiti nello step di implementazione (vedi domande aperte nell'ADR 0005).
+- **Self-hosted**: file `woff2` serviti dal sito, **nessun Google Fonts / CDN di terzi** (prestazioni, GDPR). I file `woff2` (Montserrat e Inter variable, sottoinsieme latino) stanno in `resources/fonts/` e sono dichiarati con `@font-face` in `resources/css/app.css`; il provider `bunny` (CDN) del default Laravel è stato rimosso da `vite.config.js`.
 - **Sottoinsiemi**: solo latino (con lettere accentate italiane e punteggiatura tipografica `’ « » € •`). Variable font se più leggero dei singoli pesi.
 - **`font-display: swap`** per il testo; fallback di sistema con metriche allineate (`size-adjust`) per ridurre il layout shift. `preload` solo del font del testo principale.
 - **Scala** (mobile → desktop, indicativa): corpo 16–18 px / interlinea 1,6; H1 32→48 px; H2 24→32 px; H3 20→24 px. Non scendere sotto 16 px per il testo corrente (evita lo zoom automatico su iOS).
@@ -94,3 +94,9 @@ Elenco di ciò che serve, non un design system: si creano solo quando la prima p
 - Attualmente solo JPG con sfondo bianco: **non va usato così nel sito** (fondo crema).
 - Si usa un **segnaposto testuale** ("Visciano 82") in un unico componente/partial (`<x-logo>` o simile), così la sostituzione con l'SVG è una modifica in un solo file.
 - Quando arriva l'SVG: inline o `<img>` con `alt="Visciano 82"`, versione monocromatica per sfondi scuri, favicon e icone derivate. Il campionamento esatto del blu va fatto sul file vettoriale e riportato in questa pagina.
+
+## Stato di implementazione
+
+- Palette e font sono definiti come token Tailwind in `resources/css/app.css` (`@theme`): `crema`, `ink`, `blu`, `blu-scuro`, `pomodoro`, ecc.
+- Componenti Blade in `resources/views/components/`: `logo` (segnaposto testuale), `button` (primario/secondario), `foto` (immagine o segnaposto "Foto provvisoria").
+- **Dati segnaposto**: i dati reali mancanti sono testo di esempio riconoscibile (`Via Esempio 1`, `000 000 0000`, `€ 00,00`, testi "di esempio"), centralizzati in `config/site.php` per telefono, indirizzo, P.IVA e orari. Nei contenuti visibili non compare più la dicitura `TODO-DATO` (sostituita da questa scelta); nelle schede pagina resta come elenco di ciò che manca. Prima del rilascio vanno sostituiti tutti.

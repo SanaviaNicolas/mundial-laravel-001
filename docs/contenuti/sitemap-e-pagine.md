@@ -1,6 +1,6 @@
 # Sitemap e schede pagina
 
-**Stato:** proposta, da confermare. Tutti i dati reali mancanti sono indicati come `TODO-DATO`: non vanno inventati né sostituiti con valori plausibili.
+**Stato:** proposta, da confermare. I dati reali mancanti sono indicati in questo documento come `TODO-DATO`; nel sito appaiono come testo segnaposto evidente (vedi [direzione grafica](../design/direzione-grafica.md)). Non vanno inventati valori plausibili.
 
 ## Dati reali mancanti
 

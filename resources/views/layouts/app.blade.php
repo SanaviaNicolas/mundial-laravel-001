@@ -10,9 +10,34 @@
         @endunless
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="min-h-screen bg-stone-50 text-stone-900 antialiased">
-        <main class="mx-auto max-w-3xl px-4 py-12">
+    <body class="min-h-screen pb-20 md:pb-0">
+        <header class="border-b border-sabbia bg-white">
+            <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 px-4 py-3">
+                <x-logo />
+                <x-button :href="$tel" class="hidden md:order-3 md:inline-flex">Chiama</x-button>
+                <nav aria-label="Principale" class="order-last w-full md:order-2 md:w-auto">
+                    <ul class="-mx-3 flex list-none gap-1 p-0">
+                        <li><a href="#menu" class="inline-flex min-h-11 items-center px-3 font-medium text-ink no-underline">Menù</a></li>
+                        <li><a href="#ristorante" class="inline-flex min-h-11 items-center px-3 font-medium text-ink no-underline">Il ristorante</a></li>
+                        <li><a href="#contatti" class="inline-flex min-h-11 items-center px-3 font-medium text-ink no-underline">Contatti</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
             @yield('content')
         </main>
+
+        <footer class="bg-ink py-10 text-stone-200">
+            <div class="mx-auto max-w-6xl px-4">
+                <p class="font-display text-lg font-bold text-white">{{ config('app.name') }}</p>
+                <p class="mt-2">{{ config('site.address') }} · Tel. {{ config('site.phone') }} · P.IVA {{ config('site.vat') }}</p>
+            </div>
+        </footer>
+
+        <div class="fixed inset-x-4 bottom-4 z-10 md:hidden">
+            <x-button :href="$tel" class="w-full shadow-xl">Chiama ora</x-button>
+        </div>
     </body>
 </html>
