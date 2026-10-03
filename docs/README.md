@@ -5,7 +5,6 @@ Indice della documentazione di Visciano 82. Va aggiornata nello stesso commit di
 ## Sviluppo
 - [Setup e comandi](sviluppo/setup.md) — ambiente locale, database, test, qualità, CI
 - [Checklist prima del lancio](sviluppo/prima-del-lancio.md) — cosa completare o controllare prima della produzione
-- [Branch e Pull Request](sviluppo/branch-e-pr.md) — **PROPOSTA, da approvare**
 - [Mobile e performance](sviluppo/mobile-e-performance.md) — target misurabili e checklist
 
 ## Design
