@@ -4,6 +4,39 @@ Guida per chi gestisce i contenuti (non serve conoscere il codice). Il pannello 
 
 Le voci si trovano nel gruppo **Menù** della barra laterale. In tutte le liste si può cercare, ordinare per colonna e, dove previsto, riordinare trascinando le righe.
 
+## Categorie
+
+Le categorie hanno **due livelli**: le *macrocategorie* e, dentro, le *sottocategorie*. Non si può andare oltre.
+
+Esempio di struttura (solo a titolo illustrativo):
+
+```
+Ristorante            ← macrocategoria
+├── Primi             ← sottocategoria
+└── Secondi
+Pizze
+├── Tradizione napoletana
+├── Classiche
+├── Speciali
+├── Bianche
+└── Chiuse
+Baguette              ← macrocategoria senza sottocategorie (le voci stanno direttamente qui)
+Panuozzi
+Tegamini
+Bibite
+├── Alcolici
+└── Analcolici
+Dolci
+```
+
+- Una voce può stare in una macrocategoria o in una sottocategoria.
+- Nella sezione **Categorie** si vedono le macrocategorie; per ognuna, nella pagina di modifica, ci sono le schede **Sottocategorie** (si creano e si riordinano lì) e **Voci** (le voci di quella categoria, riordinabili trascinando). Il pulsante *Voci* accanto a una sottocategoria apre la sua pagina, con le sue voci.
+- **Ordine**: si trascinano le righe (macrocategorie nella lista, sottocategorie e voci nelle rispettive schede).
+- **Visibile sul sito**: nascondere una macrocategoria nasconde anche tutte le sue sottocategorie e le loro voci.
+- **Descrizione** (facoltativa, it/en): per le note di categoria, ad esempio "con bordo alto".
+- **Slug**: l'identificativo usato negli indirizzi del sito (es. `tradizione-napoletana`); si propone dal nome.
+- Una categoria che contiene sottocategorie o voci non si può eliminare: prima vanno spostate o eliminate.
+
 ## Tag
 
 I tag sono etichette da applicare alle voci: *vegano*, *vegetariano*, *senza glutine*, *piccante*, *novità*, *stagionale*… Servono anche per i piatti che nascono già senza glutine, senza lattosio o vegani.
