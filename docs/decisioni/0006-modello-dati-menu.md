@@ -21,5 +21,11 @@
 ## Tag
 `tags`: slug univoco e stabile, nome traducibile; relazione molti-a-molti con le voci. "Novità" e "Stagionale" sono tag come gli altri.
 
+## Aggiunte
+- `addons`: nome traducibile, supplemento `price_cents` (intero, anche 0), `sort_order`, `is_visible`.
+- Si applicano **di default a tutte le voci di una categoria** (tabella `addon_category`; un'aggiunta assegnata a una macro vale anche per le sue sottocategorie, il contrario no) e/o si **collegano direttamente a singole voci** (`addon_menu_item`).
+- **Esclusioni**: la stessa tabella `addon_menu_item` ha il flag `is_excluded`: `true` = quell'aggiunta, anche se ereditata dalla categoria, non vale per quella voce (es. "cornicione ripieno" su tutte le pizze tranne le calzoni). È la rappresentazione più semplice: una sola tabella, nessun caso particolare.
+- `MenuItem::effectiveAddons()` = (aggiunte della categoria e della macro + collegate alla voce) − esclusioni, senza duplicati, in ordine, solo visibili (con `visibleOnly: false` anche le nascoste, per l'admin).
+
 ## Dati di riferimento
 Le migration creano solo la struttura. Gli allergeni (14, Reg. UE 1169/2011) si caricano con `AllergenSeeder` (upsert per chiave, idempotente, eseguibile in production). Vedi [setup](../sviluppo/setup.md).
