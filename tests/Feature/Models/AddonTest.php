@@ -133,4 +133,20 @@ class AddonTest extends TestCase
         $this->assertSame(0, $this->app['db']->table('addon_category')->count());
         $this->assertSame(0, $this->app['db']->table('addon_menu_item')->count());
     }
+
+    public function test_for_category_returns_the_addons_inherited_from_the_category_and_its_macro(): void
+    {
+        $macro = Category::factory()->create();
+        $sub = Category::factory()->for($macro, 'parent')->create();
+        $fromMacro = Addon::factory()->create();
+        $fromSub = Addon::factory()->create();
+        $other = Addon::factory()->create();
+        $fromMacro->categories()->attach($macro);
+        $fromSub->categories()->attach($sub);
+        $other->categories()->attach(Category::factory()->create());
+
+        $this->assertEqualsCanonicalizing([$fromMacro->id, $fromSub->id], Addon::forCategory($sub->id)->pluck('id')->all());
+        $this->assertSame([$fromMacro->id], Addon::forCategory($macro->id)->pluck('id')->all());
+        $this->assertSame([], Addon::forCategory(null)->pluck('id')->all());
+    }
 }

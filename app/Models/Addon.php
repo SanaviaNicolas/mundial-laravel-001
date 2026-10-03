@@ -59,6 +59,22 @@ class Addon extends TranslatableModel
     }
 
     /**
+     * Addons applied by default to the items of a category: those assigned to the category
+     * itself or to its macro category.
+     *
+     * @param  Builder<static>  $query
+     */
+    public function scopeForCategory(Builder $query, ?int $categoryId): void
+    {
+        $categoryIds = Category::query()
+            ->whereKey($categoryId)
+            ->orWhereIn('id', Category::query()->whereKey($categoryId)->select('parent_id'))
+            ->select('id');
+
+        $query->whereHas('categories', fn (Builder $categories) => $categories->whereIn('categories.id', $categoryIds));
+    }
+
+    /**
      * @param  Builder<static>  $query
      */
     public function scopeVisible(Builder $query): void

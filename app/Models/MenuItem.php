@@ -193,11 +193,9 @@ class MenuItem extends TranslatableModel
      */
     public function effectiveAddons(bool $visibleOnly = true): Collection
     {
-        $categoryIds = array_filter([$this->category_id, $this->category->parent_id]);
-
         return Addon::query()
             ->where(fn (Builder $query) => $query
-                ->whereHas('categories', fn (Builder $categories) => $categories->whereIn('categories.id', $categoryIds))
+                ->forCategory($this->category_id)
                 ->orWhereIn('addons.id', $this->extraAddons()->select('addons.id')))
             ->whereNotIn('addons.id', $this->excludedAddons()->select('addons.id'))
             ->when($visibleOnly, fn (Builder $query) => $query->visible())
