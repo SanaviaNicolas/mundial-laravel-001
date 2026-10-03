@@ -103,16 +103,21 @@ Elenco di ciò che serve, non un design system: si creano solo quando la prima p
 
 ### Linguaggio visivo
 
-Dopo i primi tentativi (blocchi di colore, foto a cerchio, bollino rotante, fascia inclinata, mosaico colorato) la direzione è stata **riportata a qualcosa di adatto a una pizzeria**: moderno ma caldo e appetitoso, senza effetti da "sito creativo". Le scelte attuali:
+Dopo i primi tentativi (blocchi di colore, foto a cerchio, bollino rotante, fascia inclinata, mosaico colorato: troppo "da sito creativo" per una pizzeria) e una versione sobria ma banale, la direzione attuale è **cinematografica ed editoriale**: foto grandi, tipografia enorme, pochi colori, movimento al servizio del racconto. Scelte:
 
-- **Home con immagine a tutto schermo** (`min-height: 100svh`): foto in cover, menu **trasparente** sovrapposto in alto (testo bianco), titolo, testo e pulsanti **sopra l'immagine** in basso a sinistra, con un gradiente scuro per la leggibilità. Sulle pagine interne l'header è pieno (crema, testo nero).
-- **Ritmo a strisce di sfondo**: hero scuro con foto → crema (menù) → crema scuro (impasto) → nero inchiostro (contatti e footer). Il blu resta solo nel logo ("82"); il rosso pomodoro è riservato alle azioni (pulsante "Chiama") e alla voce di menu corrente.
-- **Titoli** in Bricolage Grotesque extrabold, ma di dimensioni moderate (hero fino a 72 px, sezioni fino a 48 px); testo in Inter 17 px.
-- **Menù della home**: nove riquadri bianchi con nome e descrizione della categoria, che diventano neri all'hover; a una colonna su mobile, due su tablet, tre su desktop.
-- **Impasto**: foto 4:3 a bordi arrotondati e tre punti (lievitazione, idratazione, digeribilità) separati da filetti.
-- **Un solo raggio** (`rounded-2xl`) per foto e riquadri; pulsanti a pillola.
-- **Niente animazioni** decorative. Scartati: cerchi, bollino rotante, fascia scorrevole, scritta gigante nel footer, blocchi blu/rossi a tutta larghezza.
-- **Foto provvisorie**: scure e calde nell'hero, beige altrove; etichetta "Foto provvisoria" sempre visibile (nell'hero in alto a destra, per non coprire il testo). Quando arriveranno le foto reali va scelta con cura la prima (hero): scatto orizzontale e verticale con il soggetto al centro, perché su mobile viene ritagliato in portrait.
+- **Hero a tutto schermo** (`min-height: 100svh`): foto in cover con **lento zoom iniziale** (Ken Burns) e **parallasse allo scroll**, menu **trasparente** sopra l'immagine, titolo gigante (fino a 120 px) rivelato **riga per riga** all'apertura, poi testo e pulsanti in dissolvenza. Il gradiente finale sfuma nel nero della sezione successiva, senza stacco.
+- **Frase d'impatto a parole che si accendono**: "Almeno 2 giorni di lievitazione. Alta idratazione. Alta digeribilità…" in testo enorme su nero; ogni parola passa da opaca a piena mentre entra nello schermo (CSS `animation-timeline: view()`).
+- **Menù come indice tipografico**: le nove categorie sono righe giganti separate da filetti; all'hover/focus una **fascia rosso pomodoro** scorre da sinistra e il testo diventa bianco; a destra il numero di voci.
+- **Banda fotografica** a tutta altezza con parallasse ("Una famiglia di pizzaioli") che rimanda alla storia.
+- **Contatti** su nero con un **bagliore rosso dal basso** (il forno acceso) e il numero di telefono gigante.
+- **Header**: trasparente sopra l'hero; dopo 40 px di scroll diventa crema semi-trasparente con sfocatura e resta fisso (piccolo JS). Sulle pagine interne è sempre pieno.
+- **Transizioni tra pagine** con la View Transitions API (`@view-transition`), dove supportata.
+- **Menù (`/menu`)**: la categoria che si sta leggendo si evidenzia nella barra delle categorie (IntersectionObserver).
+- **Palette**: nero inchiostro e crema dominano; il rosso pomodoro è per azioni, hover e bagliore; il blu resta solo nel logo ("82").
+- **Titoli** in Bricolage Grotesque extrabold con scale fluide (`clamp`), testo in Inter 17 px; un solo raggio (`rounded-2xl`), pulsanti a pillola.
+- **Regole sul movimento**: solo miglioramento progressivo. Senza supporto a `animation-timeline` tutto è visibile e statico; con `prefers-reduced-motion: reduce` non si muove nulla (animazioni dentro `@media (prefers-reduced-motion: no-preference)`). Niente animazioni "a ogni sezione": il movimento è nell'hero, nella frase d'impatto, nelle bande fotografiche e nell'indice del menù.
+- **JS**: circa 1 KB (`resources/js/app.js`): classe `js`, header allo scroll, evidenziazione delle categorie. Il sito funziona senza.
+- **Foto provvisorie**: l'hero e la banda "famiglia" usano due ritagli della stessa foto di prova (vedi sotto); le altre foto sono ancora segnaposto. Le foto reali dovranno avere soggetto centrale e zone scure o sfocate dove va il testo.
 
 ### Pagina menù
 

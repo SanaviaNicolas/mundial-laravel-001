@@ -46,9 +46,25 @@ class HomePageTest extends TestCase
         $this->get('/')->assertSee('href="tel:0811234567"', false);
     }
 
-    public function test_home_marks_placeholder_photos_as_provisional(): void
+    public function test_home_states_the_dough_qualities_in_readable_text(): void
     {
-        $this->get('/')->assertSee('Foto provvisoria');
+        $this->get('/')
+            ->assertSeeText('Almeno 2 giorni di lievitazione')
+            ->assertSeeText('Alta digeribilità');
+    }
+
+    public function test_home_shows_how_many_items_each_menu_category_has(): void
+    {
+        config(['menu' => ['prova' => [
+            'nome' => 'Categoria prova',
+            'descrizione' => 'Descrizione',
+            'voci' => [
+                ['nome' => 'Uno', 'ingredienti' => 'a', 'prezzo' => '€ 1,00'],
+                ['nome' => 'Due', 'ingredienti' => 'b', 'prezzo' => '€ 2,00'],
+            ],
+        ]]]);
+
+        $this->get('/')->assertSeeText('Categoria prova')->assertSeeText('2 voci');
     }
 
     public function test_home_does_not_show_todo_markers(): void

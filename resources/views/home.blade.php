@@ -6,57 +6,72 @@
 
 @section('content')
     <section class="relative flex min-h-[100svh] flex-col justify-end overflow-hidden bg-ink text-white">
-        <x-foto name="hero" ratio="" alt="Primo piano di una pizza napoletana con basilico e pomodorini" :eager="true" :dark="true" label-class="self-start justify-self-end mr-4 mt-32 md:mt-28" class="absolute inset-0 h-full object-[55%_50%]" sizes="(orientation: portrait) 178vh, 100vw" />
-        <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/25 to-black/80" aria-hidden="true"></div>
+        <div class="parallax absolute inset-x-0 -bottom-[9%] -top-[9%]">
+            <x-foto name="hero" ratio="" alt="Primo piano di una pizza napoletana con basilico e pomodorini" :eager="true" :dark="true" label-class="self-start justify-self-end mr-4 mt-32 md:mt-28" class="kenburns absolute inset-0 h-full object-[55%_50%]" sizes="(orientation: portrait) 178vh, 100vw" />
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-ink" aria-hidden="true"></div>
         <div class="relative mx-auto w-full max-w-6xl px-4 pb-28 pt-40 md:pb-24">
-            <h1 class="max-w-3xl text-5xl text-white sm:text-6xl md:text-7xl">Pizza napoletana, fatta come si deve.</h1>
-            <p class="mb-8 mt-5 max-w-lg text-lg text-white">{{ config('app.name') }}, pizzeria e ristorante a Vigonovo. Impasto lavorato con cura, cucina di casa, forno acceso ogni sera.</p>
-            <div class="flex flex-wrap gap-3">
+            <h1 class="max-w-4xl text-[clamp(3rem,9vw,7.5rem)] leading-[0.95] text-white">
+                <span class="line"><span>Pizza napoletana,</span></span>
+                <span class="line"><span style="--i: 1">fatta come si deve.</span></span>
+            </h1>
+            <p class="fade-in mb-8 mt-6 max-w-lg text-lg text-white" style="--i: 3">{{ config('app.name') }}, pizzeria e ristorante a Vigonovo. Impasto lavorato con cura, cucina di casa, forno acceso ogni sera.</p>
+            <div class="fade-in flex flex-wrap gap-3" style="--i: 4">
                 <x-button :href="$tel">Chiama</x-button>
                 <x-button href="/menu" variant="outline-light">Guarda il menù</x-button>
             </div>
         </div>
     </section>
 
-    <section class="py-20">
+    <section class="bg-ink pb-28 pt-12 text-white md:pb-40 md:pt-20">
         <div class="mx-auto max-w-6xl px-4">
-            <h2 class="text-4xl md:text-5xl">Il menù</h2>
-            <p class="mt-4 max-w-xl text-lg text-ink-soft">Nove categorie, dalla tradizione napoletana ai tegamini. Scegli da dove iniziare.</p>
-            <ul class="mt-10 grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-2 md:grid-cols-3 md:gap-4">
-                @foreach (config('menu') as $slug => $categoria)
-                    <li>
-                        <a href="/menu#{{ $slug }}" class="group flex h-full min-h-32 flex-col justify-end rounded-2xl bg-white p-5 text-ink no-underline ring-1 ring-sabbia hover:bg-ink hover:text-white">
-                            <span class="font-display text-2xl font-bold leading-tight tracking-tight">{{ $categoria['nome'] }}</span>
-                            <span class="mt-1 text-ink-soft group-hover:text-stone-300">{{ $categoria['descrizione'] }}</span>
-                        </a>
-                    </li>
+            <p class="max-w-5xl font-display text-[clamp(2rem,6vw,4.75rem)] font-extrabold leading-[1.08] tracking-tight">
+                @foreach (explode(' ', 'Almeno 2 giorni di lievitazione. Alta idratazione. Alta digeribilità. Una pizza napoletana che pesa poco e sa di tutto.') as $parola)
+                    <span class="lit-word">{{ $parola }}</span>
                 @endforeach
-            </ul>
+            </p>
         </div>
     </section>
 
-    <section class="bg-crema-scuro py-20">
-        <div class="mx-auto grid max-w-6xl gap-12 px-4 md:grid-cols-2 md:items-center md:gap-16">
-            <x-foto alt="L'impasto lievitato, pronto da stendere" class="rounded-2xl" />
-            <div>
-                <h2 class="text-4xl md:text-5xl">Impasto lungo, pizza leggera.</h2>
-                <ul class="mt-8 list-none divide-y divide-sabbia border-y border-sabbia p-0">
-                    @foreach (['Almeno 2 giorni di lievitazione', 'Alta idratazione', 'Alta digeribilità'] as $punto)
-                        <li class="py-4 font-display text-xl font-semibold md:text-2xl">{{ $punto }}</li>
-                    @endforeach
-                </ul>
-                <p class="mb-8 mt-6 max-w-md text-lg text-ink-soft">Una famiglia di pizzaioli, la tradizione napoletana portata in Veneto.</p>
-                <x-button href="/la-nostra-storia" variant="secondary">Leggi la nostra storia</x-button>
-            </div>
-        </div>
-    </section>
-
-    <section class="bg-ink py-20 text-white">
+    <section class="py-20 md:py-28">
         <div class="mx-auto max-w-6xl px-4">
-            <h2 class="text-4xl text-white md:text-5xl">Vieni a trovarci</h2>
+            <h2 class="text-4xl md:text-6xl">Il menù</h2>
+            <p class="mt-4 max-w-xl text-lg text-ink-soft">Nove categorie, dalla tradizione napoletana ai tegamini. Scegli da dove iniziare.</p>
+        </div>
+        <ul class="mx-auto mt-10 max-w-6xl list-none border-t border-ink/15 p-0 md:mt-14">
+            @foreach (config('menu') as $slug => $categoria)
+                <li class="border-b border-ink/15">
+                    <a href="/menu#{{ $slug }}" class="group relative block overflow-hidden px-4 py-5 text-ink no-underline transition-colors duration-300 hover:text-white focus-visible:text-white md:py-7">
+                        <span class="absolute inset-0 -translate-x-full bg-pomodoro transition-transform duration-500 ease-out group-hover:translate-x-0 group-focus-visible:translate-x-0" aria-hidden="true"></span>
+                        <span class="relative flex items-baseline justify-between gap-6">
+                            <span class="font-display text-[clamp(1.9rem,5.5vw,4.5rem)] font-extrabold leading-none tracking-tight">{{ $categoria['nome'] }}</span>
+                            <span class="shrink-0 text-sm opacity-70 md:text-base">{{ count($categoria['voci']) }} {{ count($categoria['voci']) === 1 ? 'voce' : 'voci' }}</span>
+                        </span>
+                    </a>
+                </li>
+            @endforeach
+        </ul>
+    </section>
+
+    <section class="relative flex min-h-[85svh] items-end overflow-hidden bg-ink text-white">
+        <div class="parallax absolute inset-x-0 -bottom-[9%] -top-[9%]">
+            <x-foto name="impasto" ratio="" alt="La crosta alta e alveolata di una pizza napoletana" :dark="true" class="absolute inset-0 h-full" sizes="100vw" />
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/10" aria-hidden="true"></div>
+        <div class="relative mx-auto w-full max-w-6xl px-4 pb-16 pt-32 md:pb-24">
+            <h2 class="max-w-3xl text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.98] text-white">Una famiglia di pizzaioli.</h2>
+            <p class="mb-8 mt-5 max-w-md text-lg text-white">La tradizione napoletana portata in Veneto, con ingredienti originali, ricercati e di qualità.</p>
+            <x-button href="/la-nostra-storia" variant="outline-light">Leggi la nostra storia</x-button>
+        </div>
+    </section>
+
+    <section class="relative overflow-hidden bg-ink py-24 text-white md:py-36">
+        <div class="absolute inset-0 bg-[radial-gradient(70%_90%_at_50%_130%,rgba(199,58,31,0.6),transparent)]" aria-hidden="true"></div>
+        <div class="relative mx-auto max-w-6xl px-4">
+            <h2 class="text-4xl text-white md:text-6xl">Vieni a trovarci</h2>
             <p class="mt-5 text-lg">{{ config('site.address') }}</p>
-            <a href="{{ $tel }}" class="mt-1 inline-block font-display text-4xl font-extrabold tracking-tight text-white no-underline hover:underline md:text-6xl">{{ config('site.phone') }}</a>
-            <div class="mt-8 flex flex-wrap gap-3">
+            <a href="{{ $tel }}" class="mt-2 inline-block font-display text-[clamp(2.5rem,9vw,7rem)] font-extrabold leading-none tracking-tight text-white no-underline hover:underline">{{ config('site.phone') }}</a>
+            <div class="mt-10 flex flex-wrap gap-3">
                 <x-button :href="$tel">Chiama</x-button>
                 <x-button href="/contatti" variant="outline-light">Orari e come arrivare</x-button>
             </div>

@@ -15,7 +15,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="min-h-screen">
-        <header @class(['z-30', 'absolute inset-x-0 top-0 text-white' => $overlay, 'bg-crema text-ink' => ! $overlay])>
+        <header @class(['z-30', 'absolute inset-x-0 top-0 text-white transition-colors duration-300 js:fixed data-[scrolled]:bg-crema/90 data-[scrolled]:text-ink data-[scrolled]:shadow-sm data-[scrolled]:backdrop-blur' => $overlay, 'bg-crema text-ink' => ! $overlay]) @if ($overlay) data-overlay @endif>
             <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 px-4 py-3">
                 <x-logo />
                 <x-button :href="$tel" class="max-md:hidden md:order-3">Chiama</x-button>
@@ -33,7 +33,7 @@
             @yield('content')
         </main>
 
-        <footer class="bg-ink pb-24 pt-12 text-stone-200 md:pb-12">
+        <footer class="border-t border-white/10 bg-ink pb-24 pt-12 text-stone-200 md:pb-12">
             <div class="mx-auto max-w-6xl px-4">
                 <p class="font-display text-xl font-bold text-white">{{ config('app.name') }}</p>
                 <ul class="mt-4 flex list-none flex-wrap gap-x-5 p-0">
