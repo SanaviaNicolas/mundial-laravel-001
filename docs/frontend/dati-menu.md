@@ -48,6 +48,10 @@ Bibite
 | **Aggiunte** | v. sotto. |
 | **Allergeni** | v. sezione 3 — regola fondamentale. |
 
+### Immagini: nessuna foto per singolo piatto
+
+Il ristorante **non vuole foto per i singoli piatti**, almeno inizialmente: **il design non deve prevederle sulle voci** (niente miniature, niente card con immagine, niente segnaposto). Il modello dati **non ha campi immagine**. Eventuali immagini **decorative** del sito (testata, sfondi, atmosfera del locale) sono **statiche** e le decide il frontend: non vengono dall'admin. Resta valido il principio SEO: il contenuto del menù è sempre testo in HTML, mai affidato a immagini.
+
 ### Ingredienti
 
 Ogni ingrediente di una voce ha:
@@ -115,7 +119,13 @@ Gli allergeni di una voce sono già **calcolati** dal backend: l'unione di quell
 
 ### Allergeni delle aggiunte
 
-Sono **separati**: ogni aggiunta può portare propri allergeni (es. latte per una "aggiunta formaggio"). Non vanno uniti a quelli della voce: si mostrano come **"con questa aggiunta contiene: …"**, accanto all'aggiunta. Le aggiunte **non** hanno uno stato di verifica: se per un'aggiunta non c'è nessun allergene indicato, non scrivere "senza allergeni", semplicemente non mostrare nulla.
+Sono **separati**: ogni aggiunta può portare propri allergeni (es. latte per una "aggiunta formaggio"). Non vanno uniti a quelli della voce: si mostrano come **"con questa aggiunta contiene: …"**, accanto all'aggiunta, quando sono indicati.
+
+**Finché le aggiunte non hanno uno stato di verifica** (oggi manca, è tra le voci della [checklist prima del lancio](../sviluppo/prima-del-lancio.md)):
+- accanto alle aggiunte il frontend mostra sempre una **nota generica**, tradotta, tipo "per le aggiunte chiedi al personale" (una volta per voce o per sezione di aggiunte, non ripetuta a ogni riga);
+- **l'assenza di allergeni indicati su un'aggiunta NON significa che non ne contenga**: non scrivere mai "senza allergeni" per un'aggiunta e non dedurlo da un elenco vuoto.
+
+Quando le aggiunte avranno la verifica, questa regola sarà allineata a quella delle voci (sezione 3) e la guida aggiornata.
 
 ### I 14 allergeni UE (Reg. 1169/2011)
 

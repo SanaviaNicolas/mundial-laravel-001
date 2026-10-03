@@ -4,6 +4,7 @@ Indice della documentazione di Visciano 82. Va aggiornata nello stesso commit di
 
 ## Sviluppo
 - [Setup e comandi](sviluppo/setup.md) — ambiente locale, database, test, qualità, CI
+- [Checklist prima del lancio](sviluppo/prima-del-lancio.md) — cosa completare o controllare prima della produzione
 
 ## Decisioni tecniche (ADR)
 - [0001 — Stack e identificativi](decisioni/0001-stack.md)
