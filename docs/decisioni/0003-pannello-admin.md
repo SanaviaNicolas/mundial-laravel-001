@@ -14,4 +14,4 @@
 
 ## Conseguenze
 - Il prefisso va comunicato fuori dal repository e impostato in `.env` in ogni ambiente (locale, staging, produzione).
-- Un prefisso nascosto riduce gli attacchi automatici ma non sostituisce l'autenticazione: restano obbligatorie password robuste e, quando serve, 2FA/rate limiting.
+- Un prefisso nascosto riduce gli attacchi automatici ma non sostituisce l'autenticazione: restano obbligatorie password robuste. **Decisione attuale: per ora niente 2FA**, solo password sicure (da rivalutare); il rate limit sul login è da sistemare prima del lancio ([checklist](../sviluppo/prima-del-lancio.md)).

@@ -16,7 +16,7 @@ Elenco delle cose **reali, già emerse**, da completare o controllare prima di m
 
 | Voce | Stato | Note |
 |---|---|---|
-| **`AllergenSeeder` nello script di deploy** | ⬜ | `php artisan db:seed --class=AllergenSeeder --force`, dopo `php artisan migrate --force`, a ogni deploy (è idempotente) |
+| **`AllergenSeeder` nello script di deploy** | ⬜ | `php artisan db:seed --class=AllergenSeeder --force`, dopo `php artisan migrate --force`, a ogni deploy (è idempotente), quindi nello script di deploy di Laravel Forge |
 | `noindex` solo fuori production e `robots.txt` di production | 🟡 | Implementato e testato (ADR 0004): controllare in produzione che `APP_ENV=production` e che `robots.txt` indichi la sitemap e non blocchi il sito |
 | **`ADMIN_PATH` reale** impostato solo nell'ambiente | ⬜ | Mai nel repository né nei documenti (ADR 0003); se vuoto il pannello è disattivato |
 | Creazione degli **utenti admin** con password sicure | ⬜ | `php artisan make:filament-user` sul server; password lunghe e uniche, gestite in un password manager |

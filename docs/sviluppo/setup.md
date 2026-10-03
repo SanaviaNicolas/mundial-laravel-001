@@ -8,7 +8,7 @@ Il sito si serve con [Laravel Herd](https://herd.laravel.com), non con `php arti
 
 ## Workflow Git
 
-Si lavora direttamente su `main`, con commit piccole. Prima di pushare si esegue `git pull --rebase` e `composer check` deve essere verde; dopo il push la CI deve diventare verde. `composer check` va provato anche su una clone pulita (`git clone` in una cartella temporanea, copia di `.env`, `composer install`, `composer check`): la CI parte solo dai file tracciati da git, quindi file o cartelle vuote presenti solo in locale non ci sono.
+Si lavora direttamente su `main`, con commit piccole (Nicolas sul backend, Francesco sul frontend: [contesto](../progetto/contesto-e-decisioni.md#team-e-metodo)). `git pull --rebase` prima di iniziare e prima di pushare; `composer check` deve essere verde; dopo il push la CI deve diventare verde. **Il push lo fa sempre la persona, mai Claude Code.** `composer check` va provato anche su una clone pulita (`git clone` in una cartella temporanea, copia di `.env`, `composer install`, `composer check`): la CI parte solo dai file tracciati da git, quindi file o cartelle vuote presenti solo in locale non ci sono.
 
 ## Pannello admin
 

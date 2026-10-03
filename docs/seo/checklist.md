@@ -23,6 +23,7 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 | Immagini ottimizzate con `alt` | ⬜ | |
 | Core Web Vitals | ⬜ | Da misurare (Lighthouse) con le pagine vere |
 | Lingua del documento (`lang="it"`) | ✅ | Testato |
+| Nome precedente "Mundial 82" visibile nei contenuti, nella forma "ex Mundial 82" | ⬜ | Molti cercano ancora il vecchio nome. Da applicare a titoli, testi e dati strutturati con le pagine vere. Vedi [contesto](../progetto/contesto-e-decisioni.md#il-progetto) |
 
 ## AI-friendly
 
@@ -38,7 +39,7 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 
 | Voce | Stato | Note |
 |---|---|---|
-| Mobile-first | 🟡 | Layout base fluido (`max-w` + padding); framework frontend da scegliere allo step 2 |
+| Mobile-first | 🟡 | Layout base fluido (`max-w` + padding); framework frontend da scegliere in uno step dedicato |
 | Viewport meta corretto | ✅ | Testato |
 | Target touch adeguati (≥ 44×44 px) | ⬜ | |
 | Nessuno scroll orizzontale | ⬜ | Da verificare con le pagine vere |

@@ -57,4 +57,4 @@ Il sito si serve con Laravel Herd: dalla cartella del progetto lancia `herd link
 
 ## Documentazione
 
-Tutta la documentazione è in [`docs/`](docs/README.md). Le regole di lavoro per gli agenti sono in [`CLAUDE.md`](CLAUDE.md).
+Tutta la documentazione è in [`docs/`](docs/README.md); per il contesto del progetto (team, infrastruttura, scelte di prodotto) parti da [Contesto e decisioni](docs/progetto/contesto-e-decisioni.md). Le regole di lavoro per gli agenti sono in [`CLAUDE.md`](CLAUDE.md).

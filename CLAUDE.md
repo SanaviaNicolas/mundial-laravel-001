@@ -5,7 +5,7 @@ Technical identifier: `mundial` (repo, database, slugs, service names). Public n
 Stack: PHP 8.5, Laravel 13, Filament 5, PostgreSQL, PHPUnit, Pint, Larastan, Vite + Tailwind.
 
 ## Read first
-- **At the start of EVERY prompt, read `CLAUDE.md` and `README.md`** (then the relevant pages in `docs/`).
+- **At the start of EVERY prompt, read `CLAUDE.md` and `README.md`** (then the relevant pages in `docs/`; project context and non-technical decisions: `docs/progetto/contesto-e-decisioni.md`).
 
 ## Workflow rules
 - ALWAYS use the superpowers skills: brainstorming/planning before implementing, TDD, verification before declaring work done.
@@ -46,9 +46,14 @@ Stack: PHP 8.5, Laravel 13, Filament 5, PostgreSQL, PHPUnit, Pint, Larastan, Vit
 - `docs/frontend/dati-menu.md` (guide for the frontend) and `docs/contenuti/menu.md` (guide for the people who manage the menu) must be updated in every step that changes the menu data or admin.
 - Implementation plans are NOT committed in `/docs/`.
 
+## Decisions are documentation
+- Every decision received in a prompt or emerging during the work (technical, product, content, organizational, infrastructure or design) is recorded in the docs in the SAME commit: an ADR when it is a technical choice with alternatives, otherwise the relevant page in `/docs/` (project/product/organization/infrastructure decisions: `docs/progetto/contesto-e-decisioni.md`). If no page fits, propose one in the final summary.
+- The final summary of every task ALWAYS lists the docs created or updated (or states explicitly that no doc changed and why).
+- Before declaring a task done, re-read the prompt and check that every decision it contains has been recorded.
+
 ## Priorities
 - **SEO and indexing** are fundamental, including "AI friendly" practices. Semantic HTML, correct heading hierarchy, exactly one H1 per page, server-side rendering (content readable without JS), title/meta description/canonical per page, Open Graph, sitemap.xml, robots.txt, JSON-LD (Restaurant/Pizzeria, Menu, opening hours), clean URLs, optimized images with alt, Core Web Vitals. AI-friendly: clear textual content (menu, hours, address in HTML, never only in images), structured data, evaluate `llms.txt`, explicit AI-crawler policy in robots.txt. Non-production environments must be `noindex`. Status of each item: `docs/seo/checklist.md`.
 - **Mobile first**: correct viewport meta, adequate touch targets, no horizontal scroll, test layouts at mobile viewport.
 
 ## Task wrap-up
-Every task ends with a short, structured summary (max ~15 lines): done, decisions, open problems, what the user must do, files to paste into the chat.
+Every task ends with a short, structured summary (max ~15 lines): done, decisions, open problems, docs created/updated, what the user must do, files to paste into the chat.

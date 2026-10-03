@@ -2,6 +2,9 @@
 
 Indice della documentazione di Visciano 82. Va aggiornata nello stesso commit di ogni modifica rilevante. È pubblica: niente dati sensibili.
 
+## Progetto
+- [Contesto e decisioni di progetto](progetto/contesto-e-decisioni.md) — nome, team e metodo, infrastruttura, sicurezza, scelte di prodotto, frontend
+
 ## Sviluppo
 - [Setup e comandi](sviluppo/setup.md) — ambiente locale, database, test, qualità, CI
 - [Checklist prima del lancio](sviluppo/prima-del-lancio.md) — cosa completare o controllare prima della produzione
@@ -24,4 +27,4 @@ Indice della documentazione di Visciano 82. Va aggiornata nello stesso commit di
 ## Contenuti
 - [Il menù nel pannello di amministrazione](contenuti/menu.md) — guida per chi gestisce il menù
 
-Le sezioni su contenuti e design verranno aggiunte insieme alle prime pagine reali.
+La sezione sul design verrà aggiunta insieme alle prime pagine reali.
