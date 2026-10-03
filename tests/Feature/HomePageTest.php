@@ -88,4 +88,14 @@ class HomePageTest extends TestCase
             ->assertSee('049 983 0186')
             ->assertSee('href="tel:0499830186"', false);
     }
+
+    public function test_header_has_an_accessible_mobile_menu_button_and_panel(): void
+    {
+        $this->get('/')
+            ->assertSee('popovertarget="menu-principale"', false)
+            ->assertSee('aria-label="Apri il menu"', false)
+            ->assertSee('id="menu-principale" popover', false)
+            ->assertSee('aria-label="Chiudi il menu"', false)
+            ->assertSee('<nav aria-label="Menu"', false);
+    }
 }

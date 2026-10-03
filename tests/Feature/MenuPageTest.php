@@ -88,4 +88,15 @@ class MenuPageTest extends TestCase
 
         $this->get('/menu')->assertSeeText('La più scelta')->assertDontSeeText('Pizza del mese');
     }
+
+    public function test_menu_has_a_category_switcher_panel_listing_every_category(): void
+    {
+        $response = $this->get('/menu')
+            ->assertSee('popovertarget="categorie-menu"', false)
+            ->assertSee('id="categorie-menu" popover', false);
+
+        foreach (config('menu') as $slug => $categoria) {
+            $response->assertSee('href="#'.$slug.'" data-name="'.$categoria['nome'].'"', false);
+        }
+    }
 }

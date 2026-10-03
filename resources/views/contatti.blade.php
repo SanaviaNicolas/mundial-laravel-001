@@ -6,7 +6,7 @@
 
 @section('content')
     <x-hero name="forno" alt="Una pizza napoletana appena uscita dal forno" height="min-h-[65svh]" :eager="true" position="object-[50%_60%]">
-        <h1 class="text-[clamp(3.5rem,12vw,9.5rem)] leading-[0.92] text-white">
+        <h1 class="type-page text-white">
             <span class="line"><span>Dove siamo</span></span>
         </h1>
         <p class="fade-in mt-6 text-xl text-white" style="--i: 2">{{ config('site.address') }}</p>
@@ -15,16 +15,16 @@
     <section class="py-20 md:py-28">
         <div class="mx-auto grid max-w-6xl gap-14 px-4 md:grid-cols-2 md:gap-16">
             <div>
-                <h2 class="text-4xl md:text-6xl">Chiamaci</h2>
+                <h2 class="type-section">Chiamaci</h2>
                 <p class="mt-4 max-w-md text-lg text-ink-soft">Per qualsiasi informazione: rispondiamo volentieri.</p>
-                <a href="{{ $tel }}" class="mt-6 inline-block font-display text-[clamp(2.25rem,7vw,4.5rem)] font-extrabold leading-none tracking-tight text-ink no-underline hover:underline">{{ config('site.phone') }}</a>
+                <a href="{{ $tel }}" class="mt-6 inline-block font-display type-phone font-extrabold tracking-tight text-ink no-underline hover:underline">{{ config('site.phone') }}</a>
                 <div class="mt-8 flex flex-wrap gap-3">
                     <x-button :href="$tel">Chiama</x-button>
                     <x-button :href="'https://www.google.com/maps/search/?api=1&query='.urlencode(config('site.address'))" variant="secondary" rel="noopener">Apri la mappa</x-button>
                 </div>
             </div>
             <div>
-                <h2 class="text-4xl md:text-6xl">Orari</h2>
+                <h2 class="type-section">Orari</h2>
                 <table class="mt-6 w-full border-collapse text-left">
                     <caption class="sr-only">Orari di apertura</caption>
                     @foreach (config('site.hours') as $giorni => $orario)

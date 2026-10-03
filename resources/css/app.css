@@ -39,6 +39,42 @@
     --color-sabbia: #d9d0be;
 }
 
+/* Type scale for display text (fluid, capped for desktop). */
+@utility type-hero {
+    font-size: clamp(2.75rem, 5.5vw, 4.75rem);
+    line-height: 0.98;
+}
+
+@utility type-page {
+    font-size: clamp(2.75rem, 6vw, 5rem);
+    line-height: 0.95;
+}
+
+@utility type-band {
+    font-size: clamp(2.25rem, 4.5vw, 3.75rem);
+    line-height: 1;
+}
+
+@utility type-section {
+    font-size: clamp(2rem, 3.6vw, 3rem);
+    line-height: 1.05;
+}
+
+@utility type-list {
+    font-size: clamp(1.75rem, 3.6vw, 3rem);
+    line-height: 1;
+}
+
+@utility type-statement {
+    font-size: clamp(1.75rem, 3.8vw, 3rem);
+    line-height: 1.12;
+}
+
+@utility type-phone {
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    line-height: 1;
+}
+
 @layer base {
     body {
         @apply overflow-x-clip bg-crema font-sans text-[1.0625rem] text-ink antialiased;
@@ -138,4 +174,59 @@
     to {
         opacity: 1;
     }
+}
+
+/* Full-screen panels (mobile menu, menu categories) built on the Popover API: no JS needed. */
+@layer components {
+    .pannello {
+        margin: 0;
+        border: 0;
+        padding: 0;
+        width: 100vw;
+        max-width: none;
+        height: 100dvh;
+        max-height: none;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        background: var(--color-ink);
+        color: #fff;
+    }
+
+    .pannello::backdrop {
+        background: transparent;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .pannello {
+            opacity: 0;
+            transform: translateY(-1.5rem);
+            transition:
+                opacity 0.35s ease,
+                transform 0.35s ease,
+                overlay 0.35s allow-discrete,
+                display 0.35s allow-discrete;
+        }
+
+        .pannello:popover-open {
+            opacity: 1;
+            transform: none;
+        }
+
+        @starting-style {
+            .pannello:popover-open {
+                opacity: 0;
+                transform: translateY(-1.5rem);
+            }
+        }
+    }
+
+    @supports not selector(:popover-open) {
+        .pannello {
+            display: none;
+        }
+    }
+}
+
+html:has(:popover-open) {
+    overflow: hidden;
 }
