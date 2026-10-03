@@ -10,7 +10,7 @@ Sito multipagina per una pizzeria-ristorante, con pannello per gestire contenuti
 - Identificativo tecnico `mundial` (repo, database); nome pubblico "Visciano 82" (`APP_NAME`, titoli, contenuti).
 - Locale `it`, timezone `Europe/Rome`.
 - Filament 5 richiede `php ^8.2` e `illuminate ^11.28|^12|^13`: compatibile con PHP 8.5 e Laravel 13.
-- Il framework frontend non è ancora scelto (decisione allo step 2): per ora Vite + Tailwind di default.
+- Il framework frontend non è ancora scelto: per ora Vite + Tailwind di default. Proposta e confronto in [ADR 0005](0005-framework-frontend.md).
 - Non si installa Laravel Boost (lo skeleton ne suggerisce l'uso in `CLAUDE.md`/`AGENTS.md`): dipendenza non necessaria; quei file sono stati sostituiti.
 
 ## Conseguenze
