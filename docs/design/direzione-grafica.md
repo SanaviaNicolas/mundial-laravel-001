@@ -82,7 +82,7 @@ Elenco di ciò che serve, non un design system: si creano solo quando la prima p
 ## Immagini
 
 - **Formati**: AVIF con fallback WebP (e JPEG dove serve), generati dalla sorgente; mai solo in immagine le informazioni (menù, orari, indirizzo).
-- **Rapporti fissi** per tipo, per evitare layout shift: hero e pizze **1:1 ritagliate a cerchio** (foto dall'alto: il cerchio è la firma visiva del sito), locale **3:2**, altre foto **3:2**, anteprima social Open Graph **1200×630**. `width`/`height` sempre presenti (o `aspect-ratio`).
+- **Rapporti fissi** per tipo, per evitare layout shift: hero **a tutto schermo** (cover, soggetto al centro), foto di sezione **4:3** con bordi arrotondati, anteprima social Open Graph **1200×630**. `width`/`height` sempre presenti (o `aspect-ratio`).
 - **Responsive**: `srcset`/`sizes` con larghezze ~ 480 / 800 / 1200 / 1600 px; non servire più pixel del necessario.
 - **Caricamento**: `loading="lazy"` e `decoding="async"` ovunque **tranne** l'immagine LCP (hero), che ha `fetchpriority="high"` ed è `preload`-ata se serve.
 - **`alt`** descrittivo e in italiano per ogni immagine di contenuto; vuoto (`alt=""`) per le decorative.
@@ -98,25 +98,25 @@ Elenco di ciò che serve, non un design system: si creano solo quando la prima p
 ## Stato di implementazione
 
 - Palette e font sono definiti come token Tailwind in `resources/css/app.css` (`@theme`): `crema`, `ink`, `blu`, `blu-scuro`, `pomodoro`, ecc.
-- Componenti Blade in `resources/views/components/`: `logo` (segnaposto testuale), `button` (primario/secondario), `foto` (immagine o segnaposto "Foto provvisoria").
+- Componenti Blade in `resources/views/components/`: `logo` (segnaposto testuale che eredita il colore del testo), `button` (primario, secondario, `outline-light` per fondi scuri), `foto` (immagine o segnaposto "Foto provvisoria", chiaro o scuro, a tutto riquadro o con rapporto fisso).
 - **Dati segnaposto**: i dati reali mancanti sono testo di esempio riconoscibile (`Via Esempio 1`, `000 000 0000`, `€ 00,00`, testi "di esempio"), centralizzati in `config/site.php`. Telefono, indirizzo e orari sono ora **reali** (forniti dal committente); la P.IVA manca ed è nascosta finché `site.vat` è nullo. I prezzi del menù sono **indicativi, non forniti dal committente**. Nei contenuti visibili non compare più la dicitura `TODO-DATO` (sostituita da questa scelta); nelle schede pagina resta come elenco di ciò che manca. Prima del rilascio vanno sostituiti tutti.
 
-### Linguaggio visivo (terzo passaggio)
+### Linguaggio visivo
 
-Obiettivo: un sito moderno e con carattere, non una vetrina neutra. Una sola idea guida, il **cerchio** (la pizza vista dall'alto), declinata in pochi gesti:
+Dopo i primi tentativi (blocchi di colore, foto a cerchio, bollino rotante, fascia inclinata, mosaico colorato) la direzione è stata **riportata a qualcosa di adatto a una pizzeria**: moderno ma caldo e appetitoso, senza effetti da "sito creativo". Le scelte attuali:
 
-- **Titoli oversize** in Bricolage Grotesque extrabold: nell'hero la parola "Pizza" a 96–176 px, il resto molto più piccolo, per creare gerarchia con la sola scala.
-- **Foto a cerchio** (1:1) sopra un cerchio blu sfalsato; **bollino rotante** "82" (SVG, decorativo, `aria-hidden`) sovrapposto alla foto.
-- **Fascia scorrevole inclinata** in rosso pomodoro con le categorie del menù (decorativa, `aria-hidden`; ferma con `prefers-reduced-motion`).
-- **Mosaico (bento)** per le 9 categorie: riquadri colorati di dimensioni diverse (blu scuro, pomodoro, bianco, blu logo, crema scuro, nero) con titolo grande; il primo, 2×2, mostra una foto a cerchio. Testo bianco su blu scuro/pomodoro/nero e nero su blu logo (4,89:1, AA).
-- **Blocchi di colore a tutta larghezza** per dare ritmo (crema, blu scuro, pomodoro, nero) e **foto inclinate/sovrapposte** nella sezione del ristorante.
-- **Numero di telefono gigante** come azione principale nei contatti, **scritta "Visciano 82" gigante** nel footer (decorativa).
-- **Movimento**, tutto disattivato con `prefers-reduced-motion`: ingresso dell'hero (una volta), rotazione lenta del bollino, scorrimento della fascia, lieve inclinazione dei riquadri all'hover (solo desktop).
-- Scartati: etichette in maiuscolo sopra i titoli, filetti decorativi, card tutte uguali.
+- **Home con immagine a tutto schermo** (`min-height: 100svh`): foto in cover, menu **trasparente** sovrapposto in alto (testo bianco), titolo, testo e pulsanti **sopra l'immagine** in basso a sinistra, con un gradiente scuro per la leggibilità. Sulle pagine interne l'header è pieno (crema, testo nero).
+- **Ritmo a strisce di sfondo**: hero scuro con foto → crema (menù) → crema scuro (impasto) → nero inchiostro (contatti e footer). Il blu resta solo nel logo ("82"); il rosso pomodoro è riservato alle azioni (pulsante "Chiama") e alla voce di menu corrente.
+- **Titoli** in Bricolage Grotesque extrabold, ma di dimensioni moderate (hero fino a 72 px, sezioni fino a 48 px); testo in Inter 17 px.
+- **Menù della home**: nove riquadri bianchi con nome e descrizione della categoria, che diventano neri all'hover; a una colonna su mobile, due su tablet, tre su desktop.
+- **Impasto**: foto 4:3 a bordi arrotondati e tre punti (lievitazione, idratazione, digeribilità) separati da filetti.
+- **Un solo raggio** (`rounded-2xl`) per foto e riquadri; pulsanti a pillola.
+- **Niente animazioni** decorative. Scartati: cerchi, bollino rotante, fascia scorrevole, scritta gigante nel footer, blocchi blu/rossi a tutta larghezza.
+- **Foto provvisorie**: scure e calde nell'hero, beige altrove; etichetta "Foto provvisoria" sempre visibile (nell'hero in alto a destra, per non coprire il testo). Quando arriveranno le foto reali va scelta con cura la prima (hero): scatto orizzontale e verticale con il soggetto al centro, perché su mobile viene ritagliato in portrait.
 
 ### Pagina menù
 
-`/menu` ha un'intestazione blu con titolo enorme, una barra di categorie **sticky** a scorrimento orizzontale (link ad ancora, target ≥ 44 px) e una sezione per categoria con voci in due colonne su desktop: nome, prezzo, ingredienti e un'eventuale nota ("A fine cottura", "Servito con"). Sfondi alternati crema/crema scuro. Il contenuto viene da `config/menu.php` (dati **statici di esempio**, prezzi `€ 00,00`): sarà sostituito dal menù dinamico gestito in Filament; la struttura dei dati (`nome`, `descrizione`, `voci` con `nome`, `ingredienti`, `nota`, `prezzo`) è la base proposta per il modello.
+`/menu` ha titolo e introduzione su fondo crema, una barra di categorie (pillole con bordo nero, a capo su mobile, **fissa in alto da tablet in su**) e una sezione per categoria con voci in due colonne su desktop: nome, prezzo, ingredienti e un'eventuale nota ("A fine cottura", "Servito con"). Sfondi alternati crema/crema scuro e chiusura nera con "Chiama". Il contenuto viene da `config/menu.php` (dati **statici di esempio**, prezzi indicativi): sarà sostituito dal menù dinamico gestito in Filament; la struttura dei dati (`nome`, `descrizione`, `voci` con `nome`, `ingredienti`, `nota`, `prezzo`) è la base proposta per il modello.
 
 ### Nessuno scroll orizzontale
 
@@ -124,4 +124,4 @@ Regola di progetto: mai scroll orizzontale della pagina, né a mobile né a desk
 
 ### Sito multipagina
 
-Il sito non è una one page: Home, Menù (`/menu`), La storia (`/la-nostra-storia`) e Contatti (`/contatti`), con la stessa navigazione in header e footer (voce corrente evidenziata e con `aria-current`). La home è un'anteprima che rimanda alle pagine, non contiene i contenuti completi. Le pagine interne riusano lo stesso linguaggio (titolo enorme su blocco colorato, riquadri colorati, foto a cerchio).
+Il sito non è una one page: Home, Menù (`/menu`), La storia (`/la-nostra-storia`) e Contatti (`/contatti`), con la stessa navigazione in header e footer (voce corrente evidenziata e con `aria-current`). La home è un'anteprima che rimanda alle pagine, non contiene i contenuti completi. Le pagine interne riusano lo stesso linguaggio (titolo grande su fondo crema, strisce di sfondo alternate, foto 4:3 arrotondate, chiusura nera con invito a chiamare).

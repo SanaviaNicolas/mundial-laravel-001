@@ -4,17 +4,17 @@
 @section('description', 'Il menù di '.config('app.name').': pizze napoletane, classiche, speciali, bianche, calzoni, baguette, panuozzi e tegamini.')
 
 @section('content')
-    <section class="overflow-hidden bg-blu-scuro text-white">
-        <div class="mx-auto max-w-6xl px-4 pb-14 pt-12 md:pb-20 md:pt-20">
-            <h1 class="text-[4.5rem] md:text-[9rem]">Il menù</h1>
-            <p class="mt-4 max-w-md text-lg text-white">Nove categorie, dalla tradizione napoletana ai tegamini. Tutto fatto al momento, dal forno al tavolo.</p>
+    <section class="pb-10 pt-8 md:pb-14 md:pt-14">
+        <div class="mx-auto max-w-6xl px-4">
+            <h1 class="text-5xl md:text-7xl">Il menù</h1>
+            <p class="mt-4 max-w-lg text-lg text-ink-soft">Nove categorie, dalla tradizione napoletana ai tegamini. Tutto fatto al momento, dal forno al tavolo.</p>
         </div>
     </section>
 
     <nav aria-label="Categorie del menù" class="border-b border-sabbia bg-crema/90 md:sticky md:top-0 md:z-20 md:backdrop-blur">
         <ul class="mx-auto flex max-w-6xl list-none flex-wrap gap-2 px-4 py-3">
             @foreach (config('menu') as $slug => $categoria)
-                <li><a href="#{{ $slug }}" class="inline-flex min-h-11 items-center rounded-full border-2 border-blu-scuro px-4 font-display font-semibold text-blu-scuro no-underline hover:bg-blu-scuro hover:text-white">{{ $categoria['nome'] }}</a></li>
+                <li><a href="#{{ $slug }}" class="inline-flex min-h-11 items-center rounded-full border-2 border-ink px-4 font-display font-semibold text-ink no-underline hover:bg-ink hover:text-white">{{ $categoria['nome'] }}</a></li>
             @endforeach
         </ul>
     </nav>
@@ -22,7 +22,7 @@
     @foreach (config('menu') as $slug => $categoria)
         <section id="{{ $slug }}" class="scroll-mt-16 py-14 {{ $loop->even ? 'bg-crema-scuro' : '' }}">
             <div class="mx-auto max-w-6xl px-4">
-                <h2 class="text-4xl md:text-6xl">{{ $categoria['nome'] }}</h2>
+                <h2 class="text-3xl md:text-5xl">{{ $categoria['nome'] }}</h2>
                 @isset($categoria['descrizione'])
                     <p class="mt-3 text-lg text-ink-soft">{{ $categoria['descrizione'] }}</p>
                 @endisset
@@ -35,7 +35,7 @@
                             </div>
                             <p class="mt-1.5 text-ink-soft">{{ $voce['ingredienti'] }}</p>
                             @isset($voce['nota'])
-                                <p class="mt-2 inline-block rounded-full bg-white px-3 py-1 text-sm font-medium text-pomodoro-scuro">{{ $voce['nota'] }}</p>
+                                <p class="mt-2 inline-block rounded-full bg-white px-3 py-1 text-sm font-medium text-ink-soft">{{ $voce['nota'] }}</p>
                             @endisset
                         </li>
                     @endforeach
@@ -44,13 +44,13 @@
         </section>
     @endforeach
 
-    <section class="bg-pomodoro py-14 text-white">
+    <section class="bg-ink py-14 text-white">
         <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 md:flex-row md:items-center md:justify-between">
             <div>
-                <p class="font-display text-3xl font-extrabold leading-none tracking-tight md:text-5xl">Hai scelto?</p>
+                <p class="font-display text-3xl font-extrabold leading-none tracking-tight md:text-4xl">Hai scelto?</p>
                 <p class="mt-2 text-lg">* Nota sull'asterisco: testo di esempio. Allergeni: informazioni disponibili in sala.</p>
             </div>
-            <x-button :href="$tel" variant="light">Chiama {{ config('site.phone') }}</x-button>
+            <x-button :href="$tel">Chiama {{ config('site.phone') }}</x-button>
         </div>
     </section>
 @endsection
