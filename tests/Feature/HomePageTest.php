@@ -34,8 +34,8 @@ class HomePageTest extends TestCase
             ->assertSee('<nav aria-label="Principale"', false)
             ->assertSee('<main', false)
             ->assertSee('<footer', false)
-            ->assertSee('href="#menu"', false)
-            ->assertSee('href="#contatti"', false);
+            ->assertSee('href="/menu"', false)
+            ->assertSee('href="/#contatti"', false);
     }
 
     public function test_home_shows_call_button_from_site_config(): void
@@ -62,5 +62,14 @@ class HomePageTest extends TestCase
     public function test_home_does_not_show_todo_markers(): void
     {
         $this->get('/')->assertDontSee('TODO');
+    }
+
+    public function test_home_links_every_menu_category_to_the_menu_page(): void
+    {
+        $response = $this->get('/');
+
+        foreach (array_keys(config('menu')) as $slug) {
+            $response->assertSee('href="/menu#'.$slug.'"', false);
+        }
     }
 }

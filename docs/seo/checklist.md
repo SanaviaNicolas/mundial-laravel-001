@@ -64,7 +64,7 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 
 | Voce | Stato | Note |
 |---|---|---|
-| Menù, orari e indirizzo in HTML (mai solo in immagini) | ⬜ | Principio nelle schede pagina; dati del menù pronti nel backend, pagine pubbliche da collegare |
+| Menù, orari e indirizzo in HTML (mai solo in immagini) | 🟡 | Menù (`/menu`), orari e indirizzo sono HTML server-side; dati ancora segnaposto |
 | Allergeni mostrati solo se verificati dal ristorante | 🟡 | Regola e metodi nel dominio, con test; la visualizzazione arriverà con il frontend. Vedi [guida frontend](../frontend/dati-menu.md) |
 | Dati strutturati leggibili dai motori generativi | ⬜ | Come JSON-LD sopra |
 | Heading descrittivi e testi chiari, senza dipendere dal JS | ⬜ | |

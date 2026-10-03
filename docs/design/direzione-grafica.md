@@ -101,11 +101,19 @@ Elenco di ciò che serve, non un design system: si creano solo quando la prima p
 - Componenti Blade in `resources/views/components/`: `logo` (segnaposto testuale), `button` (primario/secondario), `foto` (immagine o segnaposto "Foto provvisoria").
 - **Dati segnaposto**: i dati reali mancanti sono testo di esempio riconoscibile (`Via Esempio 1`, `000 000 0000`, `€ 00,00`, testi "di esempio"), centralizzati in `config/site.php` per telefono, indirizzo, P.IVA e orari. Nei contenuti visibili non compare più la dicitura `TODO-DATO` (sostituita da questa scelta); nelle schede pagina resta come elenco di ciò che manca. Prima del rilascio vanno sostituiti tutti.
 
-### Vivacità (secondo passaggio)
+### Linguaggio visivo (terzo passaggio)
 
-- **Firma visiva**: le pizze sono cerchi (foto dall'alto ritagliate a cerchio), nell'hero sopra un grande cerchio blu sfalsato e nelle card sovrapposte al bordo superiore. Quando arriveranno le foto reali vanno scattate dall'alto, con la pizza centrata.
-- **Blocchi di colore a tutta larghezza** per dare ritmo: crema (hero, menù, contatti), blu scuro (pizze), rosso pomodoro (il ristorante), nero inchiostro (footer). Su blu scuro e rosso il testo è bianco (5,49:1 e 5,18:1, AA).
-- **Titoli grandi** (fino a 72 px su desktop) in Bricolage Grotesque extrabold, interlinea stretta; testo in Inter 17 px.
-- **Categorie del menù** come pillole con bordo blu (per ora non cliccabili).
-- **Movimento**: una sola animazione, all'apertura della pagina (l'hero si ingrandisce con dissolvenza), disattivata con `prefers-reduced-motion`.
-- Rimosse le etichette in maiuscolo sopra i titoli e i filetti decorativi: non portavano informazione.
+Obiettivo: un sito moderno e con carattere, non una vetrina neutra. Una sola idea guida, il **cerchio** (la pizza vista dall'alto), declinata in pochi gesti:
+
+- **Titoli oversize** in Bricolage Grotesque extrabold: nell'hero la parola "Pizza" a 96–176 px, il resto molto più piccolo, per creare gerarchia con la sola scala.
+- **Foto a cerchio** (1:1) sopra un cerchio blu sfalsato; **bollino rotante** "82" (SVG, decorativo, `aria-hidden`) sovrapposto alla foto.
+- **Fascia scorrevole inclinata** in rosso pomodoro con le categorie del menù (decorativa, `aria-hidden`; ferma con `prefers-reduced-motion`).
+- **Mosaico (bento)** per le 9 categorie: riquadri colorati di dimensioni diverse (blu scuro, pomodoro, bianco, blu logo, crema scuro, nero) con titolo grande; il primo, 2×2, mostra una foto a cerchio. Testo bianco su blu scuro/pomodoro/nero e nero su blu logo (4,89:1, AA).
+- **Blocchi di colore a tutta larghezza** per dare ritmo (crema, blu scuro, pomodoro, nero) e **foto inclinate/sovrapposte** nella sezione del ristorante.
+- **Numero di telefono gigante** come azione principale nei contatti, **scritta "Visciano 82" gigante** nel footer (decorativa).
+- **Movimento**, tutto disattivato con `prefers-reduced-motion`: ingresso dell'hero (una volta), rotazione lenta del bollino, scorrimento della fascia, lieve inclinazione dei riquadri all'hover (solo desktop).
+- Scartati: etichette in maiuscolo sopra i titoli, filetti decorativi, card tutte uguali.
+
+### Pagina menù
+
+`/menu` ha un'intestazione blu con titolo enorme, una barra di categorie **sticky** a scorrimento orizzontale (link ad ancora, target ≥ 44 px) e una sezione per categoria con voci in due colonne su desktop: nome, prezzo, ingredienti e un'eventuale nota ("A fine cottura", "Servito con"). Sfondi alternati crema/crema scuro. Il contenuto viene da `config/menu.php` (dati **statici di esempio**, prezzi `€ 00,00`): sarà sostituito dal menù dinamico gestito in Filament; la struttura dei dati (`nome`, `descrizione`, `voci` con `nome`, `ingredienti`, `nota`, `prezzo`) è la base proposta per il modello.
