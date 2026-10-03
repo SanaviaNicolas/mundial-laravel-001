@@ -27,7 +27,7 @@ class Pages
     {
         $page = self::current();
 
-        return $page === null ? [] : collect(config('site.locales'))
+        return $page === null ? [] : collect(config('app.locales'))
             ->mapWithKeys(fn (string $locale) => [$locale => self::url($page, $locale)])
             ->all();
     }

@@ -16,11 +16,10 @@ return [
     ],
 
     /*
-     * Languages (the first one is the default, served without prefix) and pages:
-     * page key => Blade view and localized URI. Add a page here to get its routes,
+     * Pages: page key => Blade view and localized URI (languages are in config/app.php, the
+     * first one is the default, served without prefix). Add a page here to get its routes,
      * navigation entry and hreflang alternates.
      */
-    'locales' => ['it', 'en'],
     'pages' => [
         'home' => ['view' => 'home', 'uri' => ['it' => '/', 'en' => '/en']],
         'menu' => ['view' => 'menu', 'uri' => ['it' => '/menu', 'en' => '/en/menu']],

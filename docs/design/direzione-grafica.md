@@ -1,6 +1,6 @@
 # Direzione grafica
 
-**Stato:** proposta iniziale del frontend, da raffinare con le prime pagine reali. Le scelte tecniche collegate (framework, font, immagini) sono nell'[ADR 0005](../decisioni/0005-framework-frontend.md).
+**Stato:** proposta iniziale del frontend, da raffinare con le prime pagine reali. Le scelte tecniche collegate (framework, font, immagini) sono nell'[ADR 0008](../decisioni/0008-framework-frontend.md).
 
 ## Principi
 

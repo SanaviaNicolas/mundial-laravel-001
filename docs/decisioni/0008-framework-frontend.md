@@ -1,4 +1,4 @@
-# 0005 — Framework frontend
+# 0008 — Framework frontend
 
 **Stato:** proposta — **da decidere con Nicolas**. Non è stato installato né configurato nulla di questo stack: oggi il progetto ha solo Vite + Tailwind 4 di default e un layout Blade.
 

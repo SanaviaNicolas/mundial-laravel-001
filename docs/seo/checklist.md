@@ -26,7 +26,7 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 | Favicon e icone (da logo SVG) | ⬜ | Dipende dal file vettoriale |
 | Core Web Vitals sotto soglia | ⬜ | Target e metodo in [mobile e performance](../sviluppo/mobile-e-performance.md) |
 | Lingua del documento (`lang="it"`) | ✅ | Testato |
-| `hreflang` e alternate tra le lingue (`it`, `en`, `x-default`) | ✅ | Testato; vedi [ADR 0006](../decisioni/0006-multilingua.md) |
+| `hreflang` e alternate tra le lingue (`it`, `en`, `x-default`) | ✅ | Testato; vedi [ADR 0009](../decisioni/0009-multilingua.md) |
 
 ## SEO on-page
 

@@ -29,7 +29,7 @@ Nome locale: **Visciano 82**. Il vecchio nome "Mundial 82" non compare nei conte
 
 URL minuscoli, italiani, senza estensione né parametri, senza slash finale. Eventuali pagine legali (privacy/cookie, note legali) servono solo se il sito usa cookie non tecnici o servizi di terzi: da decidere con il committente (domanda aperta).
 
-Il sito è **multilingua** (italiano e inglese, vedi [ADR 0006](../decisioni/0006-multilingua.md)): ogni pagina ha l'URL italiano e quello inglese (`/` ↔ `/en`, `/menu` ↔ `/en/menu`, `/la-nostra-storia` ↔ `/en/our-story`, `/contatti` ↔ `/en/contact`). I testi inglesi sono bozze da validare con il cliente. Il sito è **multipagina**: ogni contenuto ha la sua pagina e la sua URL (niente one page). Navigazione principale: Menù · La storia · Contatti, più il pulsante **Chiama** (e logo → Home); gli stessi link sono nel footer.
+Il sito è **multilingua** (italiano e inglese, vedi [ADR 0009](../decisioni/0009-multilingua.md)): ogni pagina ha l'URL italiano e quello inglese (`/` ↔ `/en`, `/menu` ↔ `/en/menu`, `/la-nostra-storia` ↔ `/en/our-story`, `/contatti` ↔ `/en/contact`). I testi inglesi sono bozze da validare con il cliente. Il sito è **multipagina**: ogni contenuto ha la sua pagina e la sua URL (niente one page). Navigazione principale: Menù · La storia · Contatti, più il pulsante **Chiama** (e logo → Home); gli stessi link sono nel footer.
 
 ## Home — `/`
 

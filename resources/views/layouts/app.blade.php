@@ -16,7 +16,7 @@
             @foreach ($alternates as $locale => $path)
                 <link rel="alternate" hreflang="{{ $locale }}" href="{{ url($path) }}">
             @endforeach
-            <link rel="alternate" hreflang="x-default" href="{{ url($alternates[config('site.locales')[0]]) }}">
+            <link rel="alternate" hreflang="x-default" href="{{ url($alternates[config('app.locales')[0]]) }}">
         @endif
         @unless (app()->isProduction())
             <meta name="robots" content="noindex, nofollow">
