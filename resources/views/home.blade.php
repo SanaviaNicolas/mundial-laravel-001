@@ -77,33 +77,33 @@
         </div>
     </section>
 
-    <section id="ristorante" class="overflow-hidden bg-blu-scuro py-20 text-white">
+    <section class="overflow-hidden bg-blu-scuro py-20 text-white">
         <div class="mx-auto grid max-w-6xl gap-12 px-4 md:grid-cols-2 md:items-center md:gap-16">
-            <div class="relative">
-                <x-foto ratio="aspect-[3/2]" alt="Il locale" class="-rotate-3 rounded-[2rem] ring-8 ring-blu-scuro" />
-                <div class="absolute -bottom-8 -right-2 w-32 rotate-6 md:-right-8 md:w-44">
-                    <x-foto ratio="aspect-square" alt="Un dettaglio del forno" class="rounded-full ring-8 ring-blu-scuro" />
-                </div>
+            <div class="relative mx-auto w-4/5 max-w-sm md:w-full">
+                <x-foto ratio="aspect-square" alt="L'impasto lievitato, pronto da stendere" class="rounded-full ring-8 ring-blu-scuro" />
             </div>
             <div>
-                <h2 class="text-5xl md:text-7xl">Il ristorante</h2>
-                <p class="mb-8 mt-5 max-w-md text-lg">Testo di presentazione del locale: la storia, l'impasto e la cucina. Contenuto di esempio da sostituire.</p>
-                <x-button href="/#contatti" variant="light">Come arrivare</x-button>
+                <h2 class="text-5xl md:text-7xl">Impasto lungo, pizza leggera.</h2>
+                <ul class="my-8 flex list-none flex-wrap gap-2 p-0">
+                    @foreach (['Almeno 2 giorni di lievitazione', 'Alta idratazione', 'Alta digeribilità'] as $punto)
+                        <li class="rounded-full bg-white px-4 py-2 font-display font-semibold text-blu-scuro">{{ $punto }}</li>
+                    @endforeach
+                </ul>
+                <p class="mb-8 max-w-md text-lg">Una famiglia di pizzaioli, la tradizione napoletana portata in Veneto.</p>
+                <x-button href="/la-nostra-storia" variant="light">Leggi la nostra storia</x-button>
             </div>
         </div>
     </section>
 
-    <section id="contatti" class="py-20">
+    <section class="bg-pomodoro py-20 text-white">
         <div class="mx-auto max-w-6xl px-4">
-            <h2 class="text-5xl md:text-7xl">Dove siamo</h2>
+            <h2 class="text-5xl md:text-7xl">Vieni a trovarci</h2>
             <p class="mt-6 text-lg">{{ config('site.address') }}</p>
-            <a href="{{ $tel }}" class="mt-2 inline-block font-display text-[2.6rem] font-extrabold leading-none tracking-tight text-pomodoro-scuro no-underline hover:underline md:text-8xl">{{ config('site.phone') }}</a>
-            <table class="mt-10 w-full max-w-2xl border-collapse overflow-hidden rounded-2xl bg-white text-left">
-                <caption class="mb-2 text-left text-sm text-muted">Orari di apertura</caption>
-                @foreach (config('site.hours') as $giorni => $orario)
-                    <tr class="border-b border-sabbia last:border-0"><th scope="row" class="p-3 font-semibold">{{ $giorni }}</th><td class="p-3">{{ $orario }}</td></tr>
-                @endforeach
-            </table>
+            <a href="{{ $tel }}" class="mt-2 inline-block font-display text-[2.6rem] font-extrabold leading-none tracking-tight text-white no-underline hover:underline md:text-8xl">{{ config('site.phone') }}</a>
+            <div class="mt-8 flex flex-wrap gap-3">
+                <x-button :href="$tel" variant="light">Chiama</x-button>
+                <x-button href="/contatti" variant="outline-light">Orari e come arrivare</x-button>
+            </div>
         </div>
     </section>
 @endsection

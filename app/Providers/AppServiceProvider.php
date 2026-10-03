@@ -20,6 +20,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer(['layouts.app', 'home', 'menu'], fn ($view) => $view->with('tel', 'tel:'.preg_replace('/\D/', '', config('site.phone'))));
+        View::composer(['layouts.app', 'home', 'menu', 'storia', 'contatti'], fn ($view) => $view->with('tel', 'tel:'.preg_replace('/\D/', '', config('site.phone'))));
     }
 }

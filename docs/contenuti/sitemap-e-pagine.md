@@ -14,7 +14,7 @@
 | Profili social (URL) | `TODO-DATO` |
 | Fascia di prezzo (`priceRange`) | `TODO-DATO` |
 | Prezzi, allergeni, bevande, dolci del menù | Prezzi **indicativi inseriti come segnaposto** (non forniti dal committente: da confermare); allergeni, bevande, dolci `TODO-DATO` |
-| Testi ("storia", descrizione del locale) e foto reali | `TODO-DATO` |
+| Testi definitivi (storia, descrizione) e foto reali | Bozza della pagina storia scritta dai punti del cliente (vedi sotto); testi definitivi e foto `TODO-DATO` |
 
 Nome locale: **Visciano 82**. Il vecchio nome "Mundial 82" non compare nei contenuti, salvo decisione contraria del committente.
 
@@ -24,19 +24,18 @@ Nome locale: **Visciano 82**. Il vecchio nome "Mundial 82" non compare nei conte
 |---|---|---|
 | Home | `/` | Alta |
 | Menù | `/menu` | Alta (unica parte dinamica) |
-| Il ristorante | `/il-ristorante` | Media |
+| La storia | `/la-nostra-storia` | Alta (identità e fiducia) |
 | Contatti | `/contatti` | Alta (SEO locale) |
-| Chi siamo | `/chi-siamo` | Opzionale: da valutare se confluire in "Il ristorante" |
 
 URL minuscoli, italiani, senza estensione né parametri, senza slash finale. Eventuali pagine legali (privacy/cookie, note legali) servono solo se il sito usa cookie non tecnici o servizi di terzi: da decidere con il committente (domanda aperta).
 
-Navigazione principale: Menù · Il ristorante · Contatti, più il pulsante **Chiama** (e logo → Home).
+Il sito è **multipagina**: ogni contenuto ha la sua pagina e la sua URL (niente one page). Navigazione principale: Menù · La storia · Contatti, più il pulsante **Chiama** (e logo → Home); gli stessi link sono nel footer.
 
 ## Home — `/`
 
 - **Obiettivo**: far capire in 3 secondi cos'è (pizzeria-ristorante), dove si trova, e portare a Menù o telefonata.
-- **Sezioni**: hero (foto 16:9 + H1 + pulsante Chiama / link al menù) · specialità in evidenza (3–4 card) · il locale in breve (testo + foto) · orari e indirizzo (HTML, non immagine) · footer.
-- **SEO**: title indicativo `Visciano 82 — Pizzeria e ristorante a Vigonovo`; meta description `Pizzeria e ristorante Visciano 82 a TODO-DATO: pizza napoletana, cucina, menù, orari e contatti.` (≤ 155 caratteri); H1 `Visciano 82 — pizzeria e ristorante a TODO-DATO` (un solo H1).
+- **Sezioni**: hero (foto + H1 + pulsante Chiama / link al menù) · fascia con le categorie · mosaico delle 9 categorie (link a `/menu#categoria`) · impasto (lievitazione, idratazione, digeribilità, link alla storia) · "Vieni a trovarci" (indirizzo, telefono, link a Contatti) · footer.
+- **SEO**: title indicativo `Visciano 82 — Pizzeria e ristorante a Vigonovo`; meta description `Visciano 82, pizzeria e ristorante: pizza napoletana, cucina, menù, orari e contatti.` (≤ 155 caratteri). H1 attuale: `Pizza napoletana, fatta come si deve.`; da valutare un H1 con nome e città (SEO locale) con il testo definitivo.
 - **Dati strutturati**: `Pizzeria`/`Restaurant` (sottotipo `LocalBusiness`): `name`, `url`, `image`, `telephone`, `address` (`PostalAddress`), `geo`, `openingHoursSpecification`, `servesCuisine`, `priceRange`, `sameAs`, `hasMenu` → URL del menù.
 - **SEO locale**: città/zona nell'H1 e nel primo paragrafo; NAP (nome, indirizzo, telefono) identico ovunque; profilo Google Business collegato al sito (azione del committente).
 
@@ -53,19 +52,29 @@ Navigazione principale: Menù · Il ristorante · Contatti, più il pulsante **C
 - **Dati strutturati**: `Menu` → `MenuSection` (una per categoria) → `MenuItem` (`name`, `description`, `offers`/prezzo solo quando disponibile). Generati dai dati di Filament, non scritti a mano. Il JSON-LD deve riflettere solo contenuto visibile in pagina.
 - **Contenuto dinamico**: unica parte gestita da Filament (categorie, voci, ordine, visibilità, asterisco, note). Dettagli del modello dati: step backend, da concordare con Nicolas.
 
-## Il ristorante — `/il-ristorante`
+## La storia — `/la-nostra-storia`
 
-- **Obiettivo**: dare identità e fiducia: ambiente, impasto/lavorazione, ingredienti, la storia (incl. il riconoscimento "1° premio oscar della pizza '73", da confermare con il committente).
-- **Sezioni**: H1 · presentazione del locale (testo + foto 3:2) · la nostra pizza (impasto, cottura, ingredienti) · la cucina · invito al menù e a venire a trovarci.
-- **SEO**: title `Il ristorante — la nostra storia e la nostra pizza | Visciano 82`; meta description sul tipo di cucina e il locale; H1 `Il ristorante Visciano 82`.
-- **Dati strutturati**: riferimenti alla stessa entità `Pizzeria`/`Restaurant` della home (stesso `@id`); `AboutPage` opzionale. Niente dati inventati su premi o storia finché non confermati.
-- **Contenuti**: testi e foto `TODO-DATO`.
+**Stato:** implementata con **testo abbozzato** a partire dai punti del cliente; da rivedere e sostituire con i testi definitivi.
+
+**Informazioni ricevute dal cliente** (fonte dei contenuti, da non arricchire con dettagli inventati):
+- Famiglia di pizzaioli; il titolare si è trasferito in Veneto da piccolo e ha aperto presto la pizzeria.
+- Tradizione napoletana originale, "vero napoletano", attaccamento alla tradizione.
+- Ingredienti originali, ricercati e di qualità.
+- Dopo 50 anni hanno trovato la farina e il metodo giusti (**da chiarire**: 50 anni di cosa? attività, ricerca, esperienza di famiglia?).
+- Impasto: almeno 2 giorni di lievitazione, alta idratazione, alta digeribilità.
+
+- **Obiettivo**: dare identità e fiducia, spiegare perché la pizza è diversa (impasto, tradizione).
+- **Sezioni** (un H2 ciascuna): Una famiglia di pizzaioli · La tradizione, quella vera · La farina e il metodo giusti (tre riquadri: lievitazione, idratazione, digeribilità) · invito a guardare il menù o chiamare.
+- **SEO**: title `La nostra storia — pizza napoletana di famiglia | Visciano 82`; H1 `La nostra storia`; description sulla famiglia, la tradizione e l'impasto.
+- **Dati strutturati** (da fare): stessa entità `Pizzeria`/`Restaurant` della home; eventuale `AboutPage`. Niente date, premi o nomi finché non confermati.
+- **Domande al cliente**: nome del titolare e della famiglia (se pubblicabili), anno di apertura, da quale zona di Napoli arriva la famiglia, il riconoscimento "1° premio oscar della pizza '73" (se è del locale, dove va citato), foto della famiglia e del forno.
 
 ## Contatti — `/contatti`
 
 - **Obiettivo**: far arrivare le persone al locale o farle telefonare.
-- **Sezioni**: H1 · indirizzo · telefono (link `tel:`, pulsante Chiama) · orari (tabella semantica) · mappa · come arrivare/parcheggio · social.
-- **SEO**: title `Contatti, orari e dove siamo | Visciano 82`; meta description con città, telefono e orari sintetici; H1 `Contatti e orari di Visciano 82`.
+- **Stato**: implementata con i dati reali (indirizzo, telefono, orari).
+- **Sezioni**: H1 · indirizzo · telefono (link `tel:`, pulsante Chiama) · link alla mappa (Google Maps) · orari (tabella semantica) · (da aggiungere: come arrivare/parcheggio, social).
+- **SEO**: title `Contatti, orari e dove siamo | Visciano 82`; meta description con città, telefono e orari sintetici; H1 `Dove siamo`.
 - **Dati strutturati**: stesso `Pizzeria`/`Restaurant` della home con `address`, `geo`, `telephone`, `openingHoursSpecification` completi (la pagina di riferimento per il NAP).
 - **SEO locale**: NAP identico a footer e profilo Google; mappa con link a Google Maps/Apple Maps. Un embed di mappa terza parte comporta cookie/tracciamento: preferire un link o un'immagine statica finché non si decide il consenso (domanda aperta).
 - Nessun modulo di contatto in questa fase.

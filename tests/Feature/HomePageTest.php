@@ -35,7 +35,8 @@ class HomePageTest extends TestCase
             ->assertSee('<main', false)
             ->assertSee('<footer', false)
             ->assertSee('href="/menu"', false)
-            ->assertSee('href="/#contatti"', false);
+            ->assertSee('href="/la-nostra-storia"', false)
+            ->assertSee('href="/contatti"', false);
     }
 
     public function test_home_shows_call_button_from_site_config(): void
@@ -43,15 +44,6 @@ class HomePageTest extends TestCase
         config(['site.phone' => '081 123 4567']);
 
         $this->get('/')->assertSee('href="tel:0811234567"', false);
-    }
-
-    public function test_home_shows_address_and_hours_in_html(): void
-    {
-        config(['site.address' => 'Via Prova 9, 00100 Città']);
-
-        $this->get('/')
-            ->assertSee('Via Prova 9, 00100 Città')
-            ->assertSee('<table', false);
     }
 
     public function test_home_marks_placeholder_photos_as_provisional(): void
@@ -78,7 +70,6 @@ class HomePageTest extends TestCase
         $this->get('/')
             ->assertSee('Via Cadiceto, 30030 Vigonovo VE')
             ->assertSee('049 983 0186')
-            ->assertSee('href="tel:0499830186"', false)
-            ->assertSee('18:30');
+            ->assertSee('href="tel:0499830186"', false);
     }
 }

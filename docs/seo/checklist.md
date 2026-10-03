@@ -19,7 +19,8 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 | Panel admin non indicizzabile, URL non di default | ✅ | `X-Robots-Tag` sempre attivo; percorso segreto da `ADMIN_PATH`, non in `robots.txt` né nel repo |
 | Dati strutturati JSON-LD (Restaurant/Pizzeria, orari) | ⬜ | Orari e contatti arriveranno con la pagina Impostazioni |
 | Dati strutturati JSON-LD del menù (Menu, MenuSection, MenuItem) | ⬜ | Il modello dati è pronto; si genera dagli stessi dati della pagina. Vedi [guida frontend](../frontend/dati-menu.md) |
-| URL puliti (minuscoli, italiani, senza parametri/slash finale) | ✅ | Route Laravel; da rispettare nelle nuove pagine |
+| URL puliti (minuscoli, italiani, senza parametri/slash finale) | ✅ | `/menu`, `/la-nostra-storia`, `/contatti`; da rispettare nelle nuove pagine |
+| Link interni tra le pagine (nav header/footer, rimandi dalla home) | ✅ | Testati |
 | HTTPS e reindirizzamento unico (http→https, www/non-www) | ⬜ | Sistemistica (Nicolas) |
 | Pagina 404 personalizzata con status 404 | ⬜ | |
 | Favicon e icone (da logo SVG) | ⬜ | Dipende dal file vettoriale |
