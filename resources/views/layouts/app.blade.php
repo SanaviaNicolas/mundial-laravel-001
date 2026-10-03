@@ -9,6 +9,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>@yield('title')</title>
+        <link rel="icon" type="image/svg+xml" href="{{ asset('brand/logo.svg') }}">
         <meta name="description" content="@yield('description')">
         @if ($alternates)
             <link rel="canonical" href="{{ url($alternates[app()->getLocale()]) }}">
@@ -25,11 +26,11 @@
     </head>
     <body class="min-h-screen">
         <div class="progress" aria-hidden="true"></div>
-        <div class="curtain" aria-hidden="true"><span class="font-display text-5xl font-extrabold tracking-tight md:text-7xl">Visciano <b class="text-blu">82</b></span></div>
+        <div class="curtain" aria-hidden="true"><span><x-logo-mark class="h-[min(55svh,22rem)]" /></span></div>
         <a href="#contenuto" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-3 focus:text-ink">{{ __('site.ui.skip') }}</a>
-        <header @class(['z-30', 'absolute inset-x-0 top-0 text-white transition-colors duration-300 js:fixed data-[scrolled]:bg-crema/90 data-[scrolled]:text-ink data-[scrolled]:shadow-sm data-[scrolled]:backdrop-blur' => $overlay, 'bg-crema text-ink' => ! $overlay]) @if ($overlay) data-overlay @endif>
-            <div class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 md:h-[4.5rem]">
-                <x-logo />
+        <header @class(['group/h z-30', 'absolute inset-x-0 top-0 text-white transition-colors duration-300 js:fixed data-[scrolled]:bg-crema/90 data-[scrolled]:text-ink data-[scrolled]:shadow-sm data-[scrolled]:backdrop-blur' => $overlay, 'bg-crema text-ink' => ! $overlay]) @if ($overlay) data-overlay @endif>
+            <div class="mx-auto flex h-[5.25rem] max-w-6xl items-center justify-between gap-4 px-4 transition-[height] duration-300 group-data-[scrolled]/h:h-16 md:h-24 md:group-data-[scrolled]/h:h-[4.5rem]">
+                <x-logo size="header" />
                 <nav aria-label="{{ __('site.ui.main_nav') }}" class="max-md:hidden">
                     <ul class="flex list-none gap-1 p-0">
                         @foreach ($pagine as $nome => $url)
@@ -75,7 +76,7 @@
 
         <footer class="overflow-hidden border-t border-white/10 bg-ink pb-24 pt-12 text-stone-200 md:pb-0">
             <div class="mx-auto max-w-6xl px-4">
-                <p class="font-display text-xl font-bold text-white">{{ config('app.name') }}</p>
+                <x-logo-mark class="h-24 text-white" />
                 <ul class="mt-4 flex list-none flex-wrap gap-x-5 p-0">
                     @foreach ($pagine as $nome => $url)
                         <li><a href="{{ $url }}" class="inline-flex min-h-11 items-center text-white">{{ $nome }}</a></li>

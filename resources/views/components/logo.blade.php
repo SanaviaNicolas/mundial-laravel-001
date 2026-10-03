@@ -1,5 +1,6 @@
-{{-- Placeholder wordmark: replace with the SVG logo when available. Inherits the text color. --}}
-<a href="/" class="font-display text-3xl font-extrabold leading-none tracking-tight text-current no-underline" aria-label="{{ config('app.name') }} — Home">
-    Visciano <span class="text-blu">82</span>
-    <span class="mt-1 block font-sans text-[0.6rem] font-normal tracking-[0.3em] opacity-80">PIZZA • CUCINA</span>
+{{-- Logo linking to the home page; inherits the text color (white over photos, black on light). `header` size shrinks once the page is scrolled. --}}
+@props(['size' => 'panel'])
+
+<a href="{{ \App\Support\Pages::url('home') }}" class="inline-flex text-current" aria-label="{{ config('app.name') }} — Home">
+    <x-logo-mark @class(['h-14' => $size === 'panel', 'h-16 transition-[height] duration-300 md:h-20 group-data-[scrolled]/h:h-12 md:group-data-[scrolled]/h:h-14' => $size === 'header']) aria-hidden="true" role="presentation" />
 </a>

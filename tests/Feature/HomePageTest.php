@@ -98,4 +98,22 @@ class HomePageTest extends TestCase
             ->assertSee('aria-label="Chiudi il menu"', false)
             ->assertSee('<nav aria-label="Menu"', false);
     }
+
+    public function test_header_uses_the_vector_logo_linking_to_the_home_of_the_current_language(): void
+    {
+        $this->get('/menu')
+            ->assertSee('brand/logo.svg#logo', false)
+            ->assertSee('<a href="/" class="inline-flex text-current" aria-label="Visciano 82 — Home">', false);
+
+        $this->get('/en/menu')->assertSee('<a href="/en" class="inline-flex text-current" aria-label="Visciano 82 — Home">', false);
+    }
+
+    public function test_logo_asset_exists_and_follows_the_text_color(): void
+    {
+        $svg = file_get_contents(public_path('brand/logo.svg'));
+
+        $this->assertStringContainsString('id="logo"', $svg);
+        $this->assertStringContainsString('fill="currentColor"', $svg);
+        $this->assertStringContainsString('fill="#0090d0"', $svg);
+    }
 }
