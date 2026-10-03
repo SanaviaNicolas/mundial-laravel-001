@@ -17,7 +17,8 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 | `robots.txt` | ✅ | Dinamico (`RobotsController`): in production `Sitemap:` senza esporre il percorso admin; fuori production `Disallow: /` |
 | Ambienti non production `noindex` | ✅ | Header `X-Robots-Tag` + meta robots, testati |
 | Panel admin non indicizzabile, URL non di default | ✅ | `X-Robots-Tag` sempre attivo; percorso segreto da `ADMIN_PATH`, non in `robots.txt` né nel repo |
-| Dati strutturati JSON-LD (Restaurant/Pizzeria, Menu, orari) | ⬜ | |
+| Dati strutturati JSON-LD (Restaurant/Pizzeria, orari) | ⬜ | Orari e contatti arriveranno con la pagina Impostazioni |
+| Dati strutturati JSON-LD del menù (Menu, MenuSection, MenuItem) | ⬜ | Il modello dati (step 2) è pronto; si genera dagli stessi dati della pagina. Vedi [guida frontend](../frontend/dati-menu.md) |
 | URL puliti | ✅ | Route Laravel senza parametri inutili |
 | Immagini ottimizzate con `alt` | ⬜ | |
 | Core Web Vitals | ⬜ | Da misurare (Lighthouse) con le pagine vere |
@@ -27,7 +28,8 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 
 | Voce | Stato | Note |
 |---|---|---|
-| Menù, orari e indirizzo in HTML (mai solo in immagini) | ⬜ | |
+| Menù, orari e indirizzo in HTML (mai solo in immagini) | ⬜ | Dati del menù pronti (step 2), pagine pubbliche da fare |
+| Allergeni mostrati solo se verificati dal ristorante | 🟡 | Regola e metodi nel dominio, con test; la visualizzazione arriverà con il frontend |
 | Dati strutturati leggibili dai motori generativi | ⬜ | Come JSON-LD sopra |
 | `llms.txt` | ⬜ | Da valutare |
 | Politica esplicita sui crawler AI in `robots.txt` | ⬜ | Da decidere con il committente |

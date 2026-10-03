@@ -36,4 +36,12 @@ class AdminPanelTest extends TestCase
             ->assertOk()
             ->assertHeader('X-Robots-Tag', 'noindex, nofollow');
     }
+
+    public function test_admin_interface_is_in_italian(): void
+    {
+        $this->get($this->adminPath().'/accesso')
+            ->assertOk()
+            ->assertSee('Accedi')
+            ->assertSee('lang="it"', false);
+    }
 }

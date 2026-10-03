@@ -43,6 +43,7 @@ Stack: PHP 8.5, Laravel 13, Filament 5, PostgreSQL, PHPUnit, Pint, Larastan, Vit
 - `/docs/` is public: no sensitive data.
 - README.md and `/docs/` in Italian; code, comments and commits in English; site content in Italian (locale `it`, timezone `Europe/Rome`).
 - Technical decisions are recorded as ADRs in `docs/decisioni/`.
+- `docs/frontend/dati-menu.md` (guide for the frontend) and `docs/contenuti/menu.md` (guide for the people who manage the menu) must be updated in every step that changes the menu data or admin.
 - Implementation plans are NOT committed in `/docs/`.
 
 ## Priorities

@@ -1,6 +1,6 @@
 # 0006 — Modello dati del menù
 
-**Stato:** in costruzione (si completa con i blocchi dello step 2)
+**Stato:** accettata
 
 ## Categorie
 - Tabella `categories` autoreferenziale: `parent_id` nullo = macrocategoria, altrimenti sottocategoria. **Profondità massima 2**: lo impone il modello (`DomainException`) e, nell'admin, il form offre come genitore solo le macrocategorie.
@@ -37,3 +37,10 @@
 
 ## Dati di riferimento
 Le migration creano solo la struttura. Gli allergeni (14, Reg. UE 1169/2011) si caricano con `AllergenSeeder` (upsert per chiave, idempotente, eseguibile in production). Vedi [setup](../sviluppo/setup.md).
+
+## Non coperto (per ora)
+- Più prezzi per voce (taglie, formati, calice/bottiglia): c'è un solo prezzo standard.
+- Alternative strutturate negli ingredienti ("A o B"): si usano le note.
+- Verifica degli allergeni delle aggiunte e aggiornamento automatico delle verifiche quando si modifica un'aggiunta.
+- Slug tradotti per URL inglesi (da rivedere allo step frontend/i18n).
+- Dati reali del menù: arriveranno con un seeder dedicato, indipendente da `AllergenSeeder`.
