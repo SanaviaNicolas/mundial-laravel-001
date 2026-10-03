@@ -9,6 +9,16 @@ class FotoComponentTest extends TestCase
 {
     private const NAME = 'prova-foto-test';
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // public/images only holds git-ignored photos: it does not exist on a clean clone.
+        if (! is_dir(public_path('images'))) {
+            mkdir(public_path('images'), 0775, true);
+        }
+    }
+
     protected function tearDown(): void
     {
         array_map('unlink', glob(public_path('images/'.self::NAME.'-*')) ?: []);
