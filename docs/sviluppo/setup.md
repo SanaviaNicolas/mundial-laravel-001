@@ -20,6 +20,17 @@ Il prefisso del pannello è nella variabile `ADMIN_PATH` di `.env` (senza slash 
 - Le credenziali stanno solo in `.env` (ignorato da git). `.env.example` contiene solo segnaposto.
 - `phpunit.xml` forza `DB_CONNECTION=pgsql` e `DB_DATABASE=mundial_testing`: i test non toccano mai il database di sviluppo. Host, utente e password arrivano da `.env` (in CI dalle variabili d'ambiente).
 
+## Dati di riferimento
+
+Le migration creano solo la struttura, mai dati. I dati di riferimento si caricano con seeder idempotenti (si possono rilanciare senza creare duplicati), da eseguire **dopo `migrate`** in locale e a ogni deploy (anche in production):
+
+```bash
+php artisan db:seed --class=AllergenSeeder --force
+```
+
+- `AllergenSeeder`: i 14 allergeni del Reg. UE 1169/2011 (elenco fisso, non modificabile dall'admin). È indipendente dal futuro seeder del menù.
+- CI: il workflow esegue solo `composer check`; i test che hanno bisogno degli allergeni li caricano esplicitamente.
+
 ## Test e qualità
 
 - Test: PHPUnit con `RefreshDatabase` attivo nel `TestCase` base.

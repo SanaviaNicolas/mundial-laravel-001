@@ -39,6 +39,7 @@ Poi:
 
 ```bash
 php artisan migrate
+php artisan db:seed --class=AllergenSeeder --force   # i 14 allergeni UE (idempotente)
 npm install
 npm run dev
 ```
