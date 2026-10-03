@@ -27,7 +27,7 @@
                     <span class="block text-[6rem] leading-[0.82] sm:text-[8rem] md:text-[11rem]">Pizza</span>
                     <span class="mt-3 block text-[2rem] leading-[1.05] md:mt-5 md:text-5xl">napoletana, fatta<br>come si deve.</span>
                 </h1>
-                <p class="mb-8 mt-6 max-w-md text-lg text-ink-soft">{{ config('app.name') }}, pizzeria e ristorante a Città. Impasto lavorato con cura, cucina di casa, forno acceso ogni sera.</p>
+                <p class="mb-8 mt-6 max-w-md text-lg text-ink-soft">{{ config('app.name') }}, pizzeria e ristorante a Vigonovo. Impasto lavorato con cura, cucina di casa, forno acceso ogni sera.</p>
                 <div class="flex flex-wrap gap-3">
                     <x-button :href="$tel">Chiama</x-button>
                     <x-button href="/menu" variant="secondary">Guarda il menù</x-button>
@@ -41,13 +41,15 @@
         </div>
     </section>
 
-    <div class="-mt-10 -rotate-2 overflow-hidden bg-pomodoro py-4 text-white" aria-hidden="true">
+    <div class="-mt-10 overflow-hidden py-6" aria-hidden="true">
+        <div class="-mx-6 -rotate-2 overflow-hidden bg-pomodoro py-4 text-white">
         <div class="flex w-max gap-8 font-display text-3xl font-extrabold tracking-tight motion-safe:animate-marquee md:text-5xl">
             @foreach (range(1, 2) as $_)
                 @foreach ($categorie as $categoria)
                     <span class="flex items-center gap-8 whitespace-nowrap">{{ $categoria['nome'] }}<span class="size-3 rounded-full bg-white md:size-4"></span></span>
                 @endforeach
             @endforeach
+        </div>
         </div>
     </div>
 

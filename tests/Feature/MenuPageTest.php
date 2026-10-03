@@ -51,4 +51,9 @@ class MenuPageTest extends TestCase
     {
         $this->get('/menu')->assertDontSee('TODO');
     }
+
+    public function test_menu_has_no_zero_prices(): void
+    {
+        $this->get('/menu')->assertDontSee('00,00');
+    }
 }

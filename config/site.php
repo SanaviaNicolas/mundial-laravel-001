@@ -1,16 +1,16 @@
 <?php
 
 /*
- * Placeholder business data shown on the public pages.
- * Replace with the real values when the client provides them.
+ * Business data shown on the public pages.
+ * `vat` is still missing from the client: it is hidden while null.
  */
 return [
-    'phone' => '000 000 0000',
-    'address' => 'Via Esempio 1, 00000 Città (XX)',
-    'vat' => '00000000000',
+    'phone' => '049 983 0186',
+    'address' => 'Via Cadiceto, 30030 Vigonovo VE',
+    'vat' => null,
     'hours' => [
         'Lunedì' => 'Chiuso',
-        'Martedì – Venerdì' => '19:00 – 23:00',
-        'Sabato e domenica' => '12:00 – 15:00 · 19:00 – 23:30',
+        'Martedì – Sabato' => '18:00 – 00:00',
+        'Domenica' => '18:30 – 00:00',
     ],
 ];

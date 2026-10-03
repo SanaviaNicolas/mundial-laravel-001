@@ -11,10 +11,10 @@
         </div>
     </section>
 
-    <nav aria-label="Categorie del menù" class="sticky top-0 z-20 border-b border-sabbia bg-crema/90 backdrop-blur">
-        <ul class="mx-auto flex max-w-6xl list-none gap-2 overflow-x-auto px-4 py-3 [scrollbar-width:none]">
+    <nav aria-label="Categorie del menù" class="border-b border-sabbia bg-crema/90 md:sticky md:top-0 md:z-20 md:backdrop-blur">
+        <ul class="mx-auto flex max-w-6xl list-none flex-wrap gap-2 px-4 py-3">
             @foreach (config('menu') as $slug => $categoria)
-                <li class="shrink-0"><a href="#{{ $slug }}" class="inline-flex min-h-11 items-center rounded-full border-2 border-blu-scuro px-4 font-display font-semibold text-blu-scuro no-underline hover:bg-blu-scuro hover:text-white">{{ $categoria['nome'] }}</a></li>
+                <li><a href="#{{ $slug }}" class="inline-flex min-h-11 items-center rounded-full border-2 border-blu-scuro px-4 font-display font-semibold text-blu-scuro no-underline hover:bg-blu-scuro hover:text-white">{{ $categoria['nome'] }}</a></li>
             @endforeach
         </ul>
     </nav>

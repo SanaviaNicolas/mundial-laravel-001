@@ -32,7 +32,7 @@
         <footer class="overflow-hidden bg-ink pt-12 text-stone-200">
             <div class="mx-auto max-w-6xl px-4">
                 <p class="font-display text-lg font-bold text-white">{{ config('app.name') }}</p>
-                <p class="mt-2">{{ config('site.address') }} · Tel. {{ config('site.phone') }} · P.IVA {{ config('site.vat') }}</p>
+                <p class="mt-2">{{ config('site.address') }} · Tel. {{ config('site.phone') }}@if (config('site.vat')) · P.IVA {{ config('site.vat') }}@endif</p>
             </div>
             <p class="mt-6 select-none whitespace-nowrap text-center font-display text-[15.5vw] font-extrabold leading-[0.8] tracking-tighter text-white/10 md:text-[14rem]" aria-hidden="true">Visciano 82</p>
         </footer>

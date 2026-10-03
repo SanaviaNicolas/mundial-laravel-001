@@ -42,12 +42,12 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 
 | Voce | Stato | Note |
 |---|---|---|
-| NAP (nome, indirizzo, telefono) identico in footer, contatti e JSON-LD | ⬜ | Dati `TODO-DATO` |
-| Città/zona in H1/title/primo paragrafo della home | ⬜ | |
-| Orari in HTML (tabella) e in `openingHoursSpecification` | ⬜ | |
+| NAP (nome, indirizzo, telefono) identico in footer, contatti e JSON-LD | 🟡 | Dati reali in `config/site.php`, usati da footer e contatti; JSON-LD da fare |
+| Città/zona in H1/title/primo paragrafo della home | 🟡 | "Vigonovo" nel primo paragrafo; da portare in H1/title con il testo definitivo |
+| Orari in HTML (tabella) e in `openingHoursSpecification` | 🟡 | Tabella HTML con orari reali; JSON-LD da fare |
 | Mappa/indicazioni (link a mappe) nella pagina Contatti | ⬜ | Embed di terze parti da decidere (cookie) |
 | Profilo Google Business collegato al sito e coerente | ⬜ | Azione del committente |
-| Link `tel:` per il telefono | ⬜ | |
+| Link `tel:` per il telefono | ✅ | Testato |
 
 ## Dati strutturati (JSON-LD)
 
@@ -78,7 +78,7 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 | Mobile-first | 🟡 | Layout base fluido (`max-w` + padding); stile vero con le prime pagine |
 | Viewport meta corretto | ✅ | Testato |
 | Target touch adeguati (≥ 44×44 px, distanza ≥ 8 px) | ⬜ | |
-| Nessuno scroll orizzontale (320–768 px) | ⬜ | Da verificare con le pagine vere |
+| Nessuno scroll orizzontale (320–1920 px) | ✅ | Verificato su `/` e `/menu` con Playwright; da rifare per ogni nuova pagina |
 | Test del layout a viewport mobile (320, 360, 390, 768) | ⬜ | Metodo in [mobile e performance](../sviluppo/mobile-e-performance.md) |
 | Pulsante "Chiama" sempre raggiungibile | ✅ | Nell'header (desktop) e fisso in basso su mobile; testato |
 | Contrasti WCAG AA | 🟡 | Palette verificata in [direzione grafica](../design/direzione-grafica.md); da riverificare sulle pagine reali |

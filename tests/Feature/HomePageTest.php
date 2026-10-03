@@ -72,4 +72,13 @@ class HomePageTest extends TestCase
             $response->assertSee('href="/menu#'.$slug.'"', false);
         }
     }
+
+    public function test_home_shows_the_real_contact_details(): void
+    {
+        $this->get('/')
+            ->assertSee('Via Cadiceto, 30030 Vigonovo VE')
+            ->assertSee('049 983 0186')
+            ->assertSee('href="tel:0499830186"', false)
+            ->assertSee('18:30');
+    }
 }

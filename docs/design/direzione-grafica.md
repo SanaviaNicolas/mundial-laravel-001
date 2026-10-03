@@ -99,7 +99,7 @@ Elenco di ciò che serve, non un design system: si creano solo quando la prima p
 
 - Palette e font sono definiti come token Tailwind in `resources/css/app.css` (`@theme`): `crema`, `ink`, `blu`, `blu-scuro`, `pomodoro`, ecc.
 - Componenti Blade in `resources/views/components/`: `logo` (segnaposto testuale), `button` (primario/secondario), `foto` (immagine o segnaposto "Foto provvisoria").
-- **Dati segnaposto**: i dati reali mancanti sono testo di esempio riconoscibile (`Via Esempio 1`, `000 000 0000`, `€ 00,00`, testi "di esempio"), centralizzati in `config/site.php` per telefono, indirizzo, P.IVA e orari. Nei contenuti visibili non compare più la dicitura `TODO-DATO` (sostituita da questa scelta); nelle schede pagina resta come elenco di ciò che manca. Prima del rilascio vanno sostituiti tutti.
+- **Dati segnaposto**: i dati reali mancanti sono testo di esempio riconoscibile (`Via Esempio 1`, `000 000 0000`, `€ 00,00`, testi "di esempio"), centralizzati in `config/site.php`. Telefono, indirizzo e orari sono ora **reali** (forniti dal committente); la P.IVA manca ed è nascosta finché `site.vat` è nullo. I prezzi del menù sono **indicativi, non forniti dal committente**. Nei contenuti visibili non compare più la dicitura `TODO-DATO` (sostituita da questa scelta); nelle schede pagina resta come elenco di ciò che manca. Prima del rilascio vanno sostituiti tutti.
 
 ### Linguaggio visivo (terzo passaggio)
 
@@ -117,3 +117,7 @@ Obiettivo: un sito moderno e con carattere, non una vetrina neutra. Una sola ide
 ### Pagina menù
 
 `/menu` ha un'intestazione blu con titolo enorme, una barra di categorie **sticky** a scorrimento orizzontale (link ad ancora, target ≥ 44 px) e una sezione per categoria con voci in due colonne su desktop: nome, prezzo, ingredienti e un'eventuale nota ("A fine cottura", "Servito con"). Sfondi alternati crema/crema scuro. Il contenuto viene da `config/menu.php` (dati **statici di esempio**, prezzi `€ 00,00`): sarà sostituito dal menù dinamico gestito in Filament; la struttura dei dati (`nome`, `descrizione`, `voci` con `nome`, `ingredienti`, `nota`, `prezzo`) è la base proposta per il modello.
+
+### Nessuno scroll orizzontale
+
+Regola di progetto: mai scroll orizzontale della pagina, né a mobile né a desktop. Accorgimenti: `overflow-x: clip` su `body`; elementi decorativi che sporgono (cerchi, fascia inclinata, scritta del footer) sono contenuti in un wrapper `overflow-hidden`; le categorie del menù vanno **a capo** su mobile (sticky solo da `md` in su) invece di scorrere. Verifica fatta con Playwright a 320, 360, 390, 414, 568, 768, 1024, 1280, 1440 e 1920 px su `/` e `/menu`, provando a forzare lo scroll (`scrollTo`) e cercando contenitori scrollabili.

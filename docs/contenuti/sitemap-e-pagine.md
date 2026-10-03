@@ -6,14 +6,14 @@
 
 | Dato | Stato |
 |---|---|
-| Indirizzo completo (via, civico, CAP, comune, provincia) | `TODO-DATO` |
-| Telefono | `TODO-DATO` |
-| Orari di apertura (per giorno, eventuali chiusure/pause) | `TODO-DATO` |
+| Indirizzo completo | Ricevuto: Via Cadiceto, 30030 Vigonovo VE (manca il numero civico, se esiste) |
+| Telefono | Ricevuto: 049 983 0186 |
+| Orari di apertura | Ricevuti: lun chiuso; mar–sab 18:00–00:00; dom 18:30–00:00 |
 | Coordinate geografiche (per mappa e JSON-LD) | `TODO-DATO` |
 | P.IVA / ragione sociale (per il footer) | `TODO-DATO` |
 | Profili social (URL) | `TODO-DATO` |
 | Fascia di prezzo (`priceRange`) | `TODO-DATO` |
-| Prezzi, allergeni, bevande, dolci del menù | `TODO-DATO` (struttura prevista) |
+| Prezzi, allergeni, bevande, dolci del menù | Prezzi **indicativi inseriti come segnaposto** (non forniti dal committente: da confermare); allergeni, bevande, dolci `TODO-DATO` |
 | Testi ("storia", descrizione del locale) e foto reali | `TODO-DATO` |
 
 Nome locale: **Visciano 82**. Il vecchio nome "Mundial 82" non compare nei contenuti, salvo decisione contraria del committente.
@@ -36,7 +36,7 @@ Navigazione principale: Menù · Il ristorante · Contatti, più il pulsante **C
 
 - **Obiettivo**: far capire in 3 secondi cos'è (pizzeria-ristorante), dove si trova, e portare a Menù o telefonata.
 - **Sezioni**: hero (foto 16:9 + H1 + pulsante Chiama / link al menù) · specialità in evidenza (3–4 card) · il locale in breve (testo + foto) · orari e indirizzo (HTML, non immagine) · footer.
-- **SEO**: title indicativo `Visciano 82 — Pizzeria e ristorante a TODO-DATO (città)`; meta description `Pizzeria e ristorante Visciano 82 a TODO-DATO: pizza napoletana, cucina, menù, orari e contatti.` (≤ 155 caratteri); H1 `Visciano 82 — pizzeria e ristorante a TODO-DATO` (un solo H1).
+- **SEO**: title indicativo `Visciano 82 — Pizzeria e ristorante a Vigonovo`; meta description `Pizzeria e ristorante Visciano 82 a TODO-DATO: pizza napoletana, cucina, menù, orari e contatti.` (≤ 155 caratteri); H1 `Visciano 82 — pizzeria e ristorante a TODO-DATO` (un solo H1).
 - **Dati strutturati**: `Pizzeria`/`Restaurant` (sottotipo `LocalBusiness`): `name`, `url`, `image`, `telephone`, `address` (`PostalAddress`), `geo`, `openingHoursSpecification`, `servesCuisine`, `priceRange`, `sameAs`, `hasMenu` → URL del menù.
 - **SEO locale**: città/zona nell'H1 e nel primo paragrafo; NAP (nome, indirizzo, telefono) identico ovunque; profilo Google Business collegato al sito (azione del committente).
 

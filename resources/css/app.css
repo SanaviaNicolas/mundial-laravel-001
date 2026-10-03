@@ -52,7 +52,7 @@
 
 @layer base {
     body {
-        @apply bg-crema font-sans text-[1.0625rem] text-ink antialiased;
+        @apply overflow-x-clip bg-crema font-sans text-[1.0625rem] text-ink antialiased;
     }
 
     h1,
