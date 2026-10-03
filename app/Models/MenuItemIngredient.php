@@ -26,6 +26,19 @@ class MenuItemIngredient extends Model
 
     protected array $translatable = ['section'];
 
+    protected static function booted(): void
+    {
+        static::saved(function (MenuItemIngredient $line) {
+            if ($line->wasRecentlyCreated || $line->wasChanged('ingredient_id')) {
+                MenuItem::unverifyAllergensWhere(fn ($query) => $query->whereKey($line->menu_item_id));
+            }
+        });
+
+        static::deleted(function (MenuItemIngredient $line) {
+            MenuItem::unverifyAllergensWhere(fn ($query) => $query->whereKey($line->menu_item_id));
+        });
+    }
+
     protected function casts(): array
     {
         return [

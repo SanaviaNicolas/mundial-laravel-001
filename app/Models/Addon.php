@@ -43,6 +43,16 @@ class Addon extends Model
     }
 
     /**
+     * Allergens the addon brings in; shown separately from the item allergens.
+     *
+     * @return BelongsToMany<Allergen, $this>
+     */
+    public function allergens(): BelongsToMany
+    {
+        return $this->belongsToMany(Allergen::class, 'allergen_addon')->orderBy('allergens.sort_order');
+    }
+
+    /**
      * @param  Builder<static>  $query
      */
     public function scopeOrdered(Builder $query): void

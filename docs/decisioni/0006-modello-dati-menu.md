@@ -27,5 +27,13 @@
 - **Esclusioni**: la stessa tabella `addon_menu_item` ha il flag `is_excluded`: `true` = quell'aggiunta, anche se ereditata dalla categoria, non vale per quella voce (es. "cornicione ripieno" su tutte le pizze tranne le calzoni). È la rappresentazione più semplice: una sola tabella, nessun caso particolare.
 - `MenuItem::effectiveAddons()` = (aggiunte della categoria e della macro + collegate alla voce) − esclusioni, senza duplicati, in ordine, solo visibili (con `visibleOnly: false` anche le nascoste, per l'admin).
 
+## Allergeni e sicurezza alimentare
+- `allergens`: i 14 allergeni UE (`key` stabile, nome it/en), elenco fisso caricato da `AllergenSeeder`, non modificabile dall'admin.
+- Collegati agli **ingredienti** (`allergen_ingredient`), direttamente alla **voce** (`allergen_menu_item`: bevande, extra come il glutine dell'impasto) e alle **aggiunte** (`allergen_addon`).
+- `MenuItem::effectiveAllergens()` = unione di ingredienti e allergeni diretti (senza duplicati, in ordine). Gli allergeni delle aggiunte **non** vi entrano: `MenuItem::addonAllergens()` li restituisce a parte, per aggiunta ("con questa aggiunta contiene…").
+- **Un elenco vuoto non significa "nessun allergene".** La voce ha `allergens_verified_at` (null = non verificato): il ristorante, verificando, conferma che l'elenco effettivo è completo. `publicAllergens()` restituisce `null` se non verificato, una collezione (anche vuota = nessun allergene) se verificato; il frontend mostra gli allergeni solo in questo secondo caso.
+- **Reset automatico della verifica** (`allergens_verified_at = null`): sulla voce quando cambiano le sue righe ingrediente (aggiunta, rimozione, cambio di ingrediente; non il solo riordino o il flag "a fine cottura") o i suoi allergeni diretti; su **tutte** le voci che usano un ingrediente quando cambiano gli allergeni di quell'ingrediente (una sola query `UPDATE`). Implementato con eventi sui modelli pivot e su `MenuItemIngredient`.
+- **Limite noto**: le aggiunte non hanno un flag di verifica. Un'aggiunta senza allergeni elencati non va presentata come "senza allergeni".
+
 ## Dati di riferimento
 Le migration creano solo la struttura. Gli allergeni (14, Reg. UE 1169/2011) si caricano con `AllergenSeeder` (upsert per chiave, idempotente, eseguibile in production). Vedi [setup](../sviluppo/setup.md).

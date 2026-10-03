@@ -7,6 +7,7 @@ use Database\Factories\IngredientFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Reusable ingredient. Frozen ones are marked with an asterisk on the public site.
@@ -27,5 +28,13 @@ class Ingredient extends Model
         return [
             'is_frozen' => 'boolean',
         ];
+    }
+
+    /**
+     * @return BelongsToMany<Allergen, $this, AllergenIngredient>
+     */
+    public function allergens(): BelongsToMany
+    {
+        return $this->belongsToMany(Allergen::class)->using(AllergenIngredient::class);
     }
 }
