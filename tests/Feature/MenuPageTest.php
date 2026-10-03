@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Support\Menu;
 use Tests\TestCase;
 
 class MenuPageTest extends TestCase
@@ -22,7 +23,7 @@ class MenuPageTest extends TestCase
     public function test_menu_lists_every_category_with_an_h2_and_an_anchor(): void
     {
         $response = $this->get('/menu');
-        $categories = config('menu');
+        $categories = Menu::categories();
 
         $this->assertCount(9, $categories);
         // One h2 per category plus "In evidenza" for the highlighted pizzas.
@@ -95,7 +96,7 @@ class MenuPageTest extends TestCase
             ->assertSee('popovertarget="categorie-menu"', false)
             ->assertSee('id="categorie-menu" popover', false);
 
-        foreach (config('menu') as $slug => $categoria) {
+        foreach (Menu::categories() as $slug => $categoria) {
             $response->assertSee('href="#'.$slug.'" data-name="'.$categoria['nome'].'"', false);
         }
     }

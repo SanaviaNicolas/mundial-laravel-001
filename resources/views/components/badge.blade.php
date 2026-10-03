@@ -2,11 +2,8 @@
 @props(['tipo'])
 
 @php
-    $tipi = [
-        'mese' => ['Pizza del mese', 'bg-pomodoro text-white'],
-        'scelta' => ['La più scelta', 'bg-blu text-ink'],
-    ];
-    [$etichetta, $classi] = $tipi[$tipo];
+    $classi = ['mese' => 'bg-pomodoro text-white', 'scelta' => 'bg-blu text-ink'][$tipo];
+    $etichetta = __('site.badge.'.$tipo);
 @endphp
 
 <span {{ $attributes->class(['inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold tracking-wide', $classi]) }}>

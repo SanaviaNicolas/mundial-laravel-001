@@ -11,7 +11,7 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 | Rendering lato server (contenuto leggibile senza JS) | ✅ | Pagine Blade, nessun rendering client |
 | `<title>` per pagina, univoco | 🟡 | Home ok, testato; layout con `@yield('title')` |
 | Meta description per pagina, univoca (≤ 155 caratteri) | 🟡 | Home ok, testata |
-| Canonical per pagina (URL assoluto, senza parametri) | ⬜ | |
+| Canonical per pagina (URL assoluto, senza parametri) | ✅ | Testato, per ogni lingua |
 | Open Graph / Twitter card (`og:title`, `og:description`, `og:image` 1200×630, `og:type`, `og:locale`) | ⬜ | |
 | `sitemap.xml` (solo URL canonici, `lastmod`) | ⬜ | Già referenziata da `robots.txt` in production |
 | `robots.txt` | ✅ | Dinamico (`RobotsController`): in production `Sitemap:` senza esporre il percorso admin; fuori production `Disallow: /` |
@@ -26,7 +26,7 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 | Favicon e icone (da logo SVG) | ⬜ | Dipende dal file vettoriale |
 | Core Web Vitals sotto soglia | ⬜ | Target e metodo in [mobile e performance](../sviluppo/mobile-e-performance.md) |
 | Lingua del documento (`lang="it"`) | ✅ | Testato |
-| `hreflang` | ⬜ | Non necessario: sito monolingua |
+| `hreflang` e alternate tra le lingue (`it`, `en`, `x-default`) | ✅ | Testato; vedi [ADR 0006](../decisioni/0006-multilingua.md) |
 
 ## SEO on-page
 

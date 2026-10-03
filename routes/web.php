@@ -3,8 +3,12 @@
 use App\Http\Controllers\RobotsController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'home');
-Route::view('/menu', 'menu');
-Route::view('/la-nostra-storia', 'storia');
-Route::view('/contatti', 'contatti');
+foreach (config('site.locales') as $locale) {
+    Route::middleware('locale:'.$locale)->group(function () use ($locale): void {
+        foreach (config('site.pages') as $page => $definition) {
+            Route::view($definition['uri'][$locale], $definition['view'])->name($locale.'.'.$page);
+        }
+    });
+}
+
 Route::get('/robots.txt', RobotsController::class);
