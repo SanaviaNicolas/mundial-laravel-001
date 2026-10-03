@@ -36,6 +36,7 @@ php artisan db:seed --class=AllergenSeeder --force
 - Test: PHPUnit con `RefreshDatabase` attivo nel `TestCase` base.
 - Lint: Laravel Pint (preset `laravel`, di default).
 - Analisi statica: Larastan livello 5 su `app`, `routes`, `database`, `tests` (`phpstan.neon`).
+- `tests/Feature/DocsTest.php` controlla che i link interni dei file Markdown (README e `docs/`) non siano rotti e che ogni documento sia elencato in `docs/README.md`.
 - `composer check` esegue tutto ed è il requisito per ogni commit.
 
 ## Locale

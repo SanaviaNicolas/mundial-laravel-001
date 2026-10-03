@@ -3,7 +3,511 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+@font-face {
+    font-family: 'Bricolage Grotesque';
+    src: url('../fonts/bricolage-grotesque-latin-wght-normal.woff2') format('woff2');
+    font-weight: 100 900;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/inter-latin-wght-normal.woff2') format('woff2');
+    font-weight: 100 900;
+    font-display: swap;
+}
+
+@custom-variant js (:where(.js) &);
+
+@view-transition {
+    navigation: auto;
+}
+
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+
+    --color-crema: #faf6ee;
+    --color-crema-scuro: #f1eadb;
+    --color-ink: #1a1a1a;
+    --color-ink-soft: #4a4640;
+    --color-muted: #6b655c;
+    --color-blu: #0090d0;
+    --color-blu-scuro: #006fa6;
+    --color-pomodoro: #c73a1f;
+    --color-pomodoro-scuro: #a92e16;
+    --color-sabbia: #d9d0be;
+}
+
+/* Type scale for display text (fluid, capped for desktop). */
+@utility type-hero {
+    font-size: clamp(2.75rem, 5.5vw, 4.75rem);
+    line-height: 0.98;
+}
+
+@utility type-page {
+    font-size: clamp(2.75rem, 6vw, 5rem);
+    line-height: 0.95;
+}
+
+@utility type-band {
+    font-size: clamp(2.25rem, 4.5vw, 3.75rem);
+    line-height: 1;
+}
+
+@utility type-section {
+    font-size: clamp(2rem, 3.6vw, 3rem);
+    line-height: 1.05;
+}
+
+@utility type-list {
+    font-size: clamp(1.75rem, 3.6vw, 3rem);
+    line-height: 1;
+}
+
+@utility type-statement {
+    font-size: clamp(1.75rem, 3.8vw, 3rem);
+    line-height: 1.12;
+}
+
+@utility type-phone {
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    line-height: 1;
+}
+
+@layer base {
+    body {
+        @apply overflow-x-clip bg-crema font-sans text-[1.0625rem] text-ink antialiased;
+    }
+
+    h1,
+    h2,
+    h3 {
+        @apply font-display font-extrabold leading-[1.05] tracking-tight;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+        @apply outline-2 outline-offset-2 outline-current;
+    }
+}
+
+/*
+ * Motion: progressive enhancement only. Everything is visible and static without support
+ * for scroll-driven animations / the Popover API, and nothing moves with
+ * prefers-reduced-motion. Decorative elements are aria-hidden.
+ */
+@layer components {
+    /* Words that rise out of a mask, one after the other (see x-parole). */
+    .parola {
+        display: inline-block;
+        overflow: hidden;
+        vertical-align: top;
+        padding: 0 0.04em 0.14em;
+        margin-bottom: -0.14em;
+    }
+
+    .parola > span {
+        display: inline-block;
+    }
+
+    .ghost-text {
+        color: var(--ghost, currentColor);
+    }
+
+    .mouse {
+        transform: translate3d(calc(var(--mx, 0) * 1px), calc(var(--my, 0) * 1px), 0) scale(1.05);
+        transition: transform 0.7s ease-out;
+    }
+
+    .zoom-hover img,
+    .zoom-hover > div {
+        transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .zoom-hover:hover img,
+    .zoom-hover:hover > div {
+        transform: scale(1.05);
+    }
+
+    .progress,
+    .curtain {
+        display: none;
+    }
+
+    .preview {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 40;
+        width: 18rem;
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+        border-radius: 1rem;
+        pointer-events: none;
+        visibility: hidden;
+        opacity: 0;
+        transform: translate3d(var(--px, 0), var(--py, 0), 0) rotate(var(--pr, 0deg)) scale(0.8);
+        transition:
+            opacity 0.25s ease,
+            scale 0.25s ease;
+    }
+
+    .preview[data-on] {
+        visibility: visible;
+        opacity: 1;
+        transform: translate3d(var(--px, 0), var(--py, 0), 0) rotate(var(--pr, 0deg)) scale(1);
+    }
+
+    .preview img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .cursor {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 60;
+        width: 1.25rem;
+        height: 1.25rem;
+        border-radius: 9999px;
+        background: #fff;
+        mix-blend-mode: difference;
+        pointer-events: none;
+        opacity: 0;
+        transform: translate3d(var(--cx, 0), var(--cy, 0), 0) translate(-50%, -50%) scale(var(--cs, 1));
+        transition:
+            opacity 0.3s ease,
+            scale 0.3s ease;
+    }
+
+    .cursor[data-on] {
+        opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .parola > span {
+            animation: rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+            animation-delay: calc(var(--i, 0) * 90ms + var(--base, 200ms));
+        }
+
+        .fade-in {
+            animation: fade-in 1s ease-out both;
+            animation-delay: calc(var(--i, 0) * 140ms + var(--base, 200ms));
+        }
+
+        .kenburns {
+            animation: kenburns 16s ease-out both;
+            animation-delay: var(--base, 0ms);
+        }
+
+        /* First visit of the session: a curtain with the wordmark lifts to reveal the home. */
+        html.intro {
+            --base: 1900ms;
+        }
+
+        html.intro .curtain {
+            position: fixed;
+            inset: 0;
+            z-index: 70;
+            display: grid;
+            place-items: center;
+            background: var(--color-ink);
+            color: #fff;
+            animation: curtain 0.9s cubic-bezier(0.7, 0, 0.2, 1) 1.3s forwards;
+        }
+
+        html.intro .curtain span {
+            animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s both;
+        }
+
+        ::view-transition-old(root) {
+            animation: 0.35s ease both page-out;
+        }
+
+        ::view-transition-new(root) {
+            animation: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both page-in;
+        }
+    }
+
+    @supports (animation-timeline: view()) {
+        @media (prefers-reduced-motion: no-preference) {
+            .progress {
+                position: fixed;
+                inset: 0 0 auto;
+                z-index: 60;
+                display: block;
+                height: 3px;
+                background: var(--color-pomodoro);
+                transform-origin: left;
+                animation: grow linear both;
+                animation-timeline: scroll(root);
+            }
+
+            .parallax {
+                animation: parallax linear both;
+                animation-timeline: view();
+                animation-range: cover;
+            }
+
+            .lit-word {
+                opacity: 0.2;
+                animation: lit linear both;
+                animation-timeline: view();
+                animation-range: entry 30% cover 42%;
+            }
+
+            /* Photo band that opens up as it enters the screen. */
+            .unveil {
+                animation: unveil linear both;
+                animation-timeline: view();
+                animation-range: entry 0% entry 90%;
+            }
+
+            /* Big outlined words whose position follows the scroll. */
+            .marquee-track {
+                animation: marquee-slide linear both;
+                animation-timeline: view();
+                animation-range: entry 0% exit 100%;
+            }
+
+            .marquee-rev .marquee-track {
+                animation-direction: reverse;
+            }
+
+            .row-reveal {
+                animation: row-reveal linear both;
+                animation-timeline: view();
+                animation-range: entry 0% entry 55%;
+            }
+        }
+    }
+
+    /* Pinned storytelling (JS sets --p and data-active): the stage sticks while the facts change. */
+    @media (prefers-reduced-motion: no-preference) {
+        .js .pin-track {
+            height: 420svh;
+        }
+
+        .js .pin-stage {
+            position: sticky;
+            top: 0;
+            display: flex;
+            height: 100svh;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .js .pin-facts {
+            position: relative;
+            height: 36svh;
+            border: 0;
+        }
+
+        .js .pin-fact {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.5rem;
+            border: 0;
+            padding: 0;
+            opacity: 0;
+            transform: translateY(3rem);
+            transition:
+                opacity 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .js .pin-fact[data-past] {
+            transform: translateY(-3rem);
+        }
+
+        .js .pin-fact[data-active] {
+            opacity: 1;
+            transform: none;
+            transition:
+                opacity 0.6s ease 0.25s,
+                transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.25s;
+        }
+
+        .js .pin-bar {
+            display: block;
+            transform: scaleX(var(--p, 0));
+        }
+    }
+
+    .pin-bar {
+        display: none;
+    }
+}
+
+@keyframes rise {
+    from {
+        transform: translateY(110%);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+}
+
+@keyframes kenburns {
+    from {
+        transform: scale(1.12);
+    }
+}
+
+@keyframes parallax {
+    from {
+        transform: translateY(-9%);
+    }
+    to {
+        transform: translateY(9%);
+    }
+}
+
+@keyframes lit {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes grow {
+    from {
+        transform: scaleX(0);
+    }
+}
+
+@keyframes unveil {
+    from {
+        clip-path: inset(12% 7% round 2.5rem);
+    }
+    to {
+        clip-path: inset(0 0 round 0);
+    }
+}
+
+@keyframes marquee-slide {
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes row-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(1.5rem);
+    }
+}
+
+@keyframes curtain {
+    to {
+        transform: translateY(-100%);
+        visibility: hidden;
+    }
+}
+
+@keyframes page-out {
+    to {
+        opacity: 0;
+        transform: translateY(-2rem);
+    }
+}
+
+@keyframes page-in {
+    from {
+        clip-path: circle(0% at 50% 100%);
+    }
+    to {
+        clip-path: circle(150% at 50% 100%);
+    }
+}
+
+/* Full-screen panels (mobile menu, menu categories) built on the Popover API: no JS needed. */
+@layer components {
+    .pannello {
+        margin: 0;
+        border: 0;
+        padding: 0;
+        width: 100vw;
+        max-width: none;
+        height: 100dvh;
+        max-height: none;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        background: var(--color-ink);
+        color: #fff;
+    }
+
+    .pannello::backdrop {
+        background: transparent;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .pannello {
+            opacity: 0;
+            transform: translateY(-1.5rem);
+            transition:
+                opacity 0.35s ease,
+                transform 0.35s ease,
+                overlay 0.35s allow-discrete,
+                display 0.35s allow-discrete;
+        }
+
+        .pannello:popover-open {
+            opacity: 1;
+            transform: none;
+        }
+
+        @starting-style {
+            .pannello:popover-open {
+                opacity: 0;
+                transform: translateY(-1.5rem);
+            }
+        }
+    }
+
+    .pannello li {
+        opacity: 0;
+        transform: translateY(1rem);
+        transition:
+            opacity 0.5s ease,
+            transform 0.5s ease;
+        transition-delay: calc(var(--i, 0) * 70ms + 150ms);
+    }
+
+    .pannello:popover-open li {
+        opacity: 1;
+        transform: none;
+    }
+
+    @starting-style {
+        .pannello:popover-open li {
+            opacity: 0;
+            transform: translateY(1rem);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .pannello li {
+            transition: none;
+        }
+    }
+
+    @supports not selector(:popover-open) {
+        .pannello {
+            display: none;
+        }
+    }
+}
+
+html:has(:popover-open) {
+    overflow: hidden;
 }
