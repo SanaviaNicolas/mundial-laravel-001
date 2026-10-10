@@ -114,10 +114,6 @@
         display: inline-block;
     }
 
-    .ghost-text {
-        color: var(--ghost, currentColor);
-    }
-
     .mouse {
         transform: translate3d(calc(var(--mx, 0) * 1px), calc(var(--my, 0) * 1px), 0) scale(1.05);
         transition: transform 0.7s ease-out;

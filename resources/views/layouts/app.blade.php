@@ -74,12 +74,11 @@
             @yield('content')
         </main>
 
-        <footer class="overflow-hidden border-t border-white/10 bg-ink pb-24 pt-16 text-stone-300 md:pb-0 md:pt-24">
+        <footer class="border-t border-white/10 bg-ink pb-24 pt-12 text-stone-300 md:pb-0 md:pt-16">
             <div class="mx-auto max-w-6xl px-4">
-                <div class="grid gap-12 md:grid-cols-12 md:gap-8">
+                <div class="grid gap-10 md:grid-cols-12 md:gap-8">
                     <div class="md:col-span-3">
-                        <x-logo-mark class="h-24 text-white" />
-                        <p class="mt-6 max-w-xs">{{ __('site.home.band_text') }}</p>
+                        <x-logo-mark class="h-16 text-white md:h-20" />
                     </div>
                     <div class="md:col-span-3">
                         <p class="font-display text-sm font-bold uppercase tracking-widest text-white">{{ __('site.footer.where') }}</p>
@@ -108,7 +107,7 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="mt-16 flex flex-col gap-2 border-t border-white/10 py-6 text-sm md:flex-row md:items-center md:justify-between">
+                <div class="mt-12 flex flex-col gap-2 border-t border-white/10 py-5 text-sm md:flex-row md:items-center md:justify-between">
                     <p>© {{ now()->year }} {{ config('site.company') ?? config('app.name') }}@if (config('site.vat')) · {{ __('site.footer.vat') }} {{ config('site.vat') }}@endif · {{ __('site.footer.rights') }}</p>
                     <ul class="flex list-none flex-wrap gap-x-6 p-0">
                         @foreach (['privacy', 'cookie'] as $legale)
@@ -117,7 +116,6 @@
                     </ul>
                 </div>
             </div>
-            <p class="ghost-text mt-6 select-none whitespace-nowrap text-center font-display text-[15.5vw] font-extrabold leading-[0.78] tracking-tighter [--ghost:rgb(255_255_255/0.08)] md:text-[13rem]" aria-hidden="true">Visciano 82</p>
         </footer>
 
         <div class="fixed inset-x-4 bottom-4 z-10 md:hidden">

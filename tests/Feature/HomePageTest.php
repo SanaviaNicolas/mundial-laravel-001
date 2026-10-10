@@ -137,6 +137,7 @@ class HomePageTest extends TestCase
         $this->assertStringContainsString('href="/cookie"', $footer);
         $this->assertStringContainsString('Martedì – Sabato', $footer);
         $this->assertStringContainsString('href="tel:0499830186"', $footer);
+        $this->assertStringNotContainsString('aria-hidden="true">Visciano 82</p>', $footer);
 
         $this->assertStringContainsString('href="/en/cookies"', str($this->get('/en')->getContent())->after('<footer'));
     }

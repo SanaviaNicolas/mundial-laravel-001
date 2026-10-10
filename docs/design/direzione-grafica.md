@@ -71,7 +71,7 @@ Regole: il blu logo non si usa mai per testo sotto i 24 px; il colore non è mai
 Elenco di ciò che serve, non un design system: si creano solo quando la prima pagina li usa.
 
 - Header con logo + navigazione (su mobile: menu compatto, raggiungibile e utilizzabile anche senza JS dove possibile) e pulsante **Chiama** sempre accessibile.
-- Footer (implementato): logo e frase, "Dove siamo" (indirizzo e link alla mappa), "Chiamaci" (telefono), orari, pagine; sotto, una barra con © anno, ragione sociale (o nome del locale finché manca), P.IVA (nascosta finché manca), "Tutti i diritti riservati" e i link a privacy e cookie policy. Social da aggiungere quando arrivano gli URL.
+- Footer (implementato, alleggerito): logo (64–80 px), senza frase né scritta gigante "Visciano 82" in fondo (tolta: appesantiva la chiusura), "Dove siamo" (indirizzo e link alla mappa), "Chiamaci" (telefono), orari, pagine; sotto, una barra con © anno, ragione sociale (o nome del locale finché manca), P.IVA (nascosta finché manca), "Tutti i diritti riservati" e i link a privacy e cookie policy. Social da aggiungere quando arrivano gli URL.
 - Pulsante primario (azione, pomodoro) e secondario (contorno blu scuro); link testuale (blu scuro, sottolineato).
 - Hero (immagine 16:9 + H1 + una sola azione).
 - Card pizza / voce di menù: nome, ingredienti, riga "A fine cottura"/"Servito con", nota, prezzo (segnaposto), eventuale foto.
@@ -93,7 +93,7 @@ Elenco di ciò che serve, non un design system: si creano solo quando la prima p
 
 - **Vettoriale**: `public/brand/logo.svg`, ottenuto vettorializzando il JPG fornito dal cliente (non è il file originale: va sostituito con l'SVG ufficiale quando arriva, mantenendo `id="logo"` sull'elemento radice e `fill="currentColor"` per le parti nere). Due livelli: **inchiostro nero** (`currentColor`) e **blu** `#0090d0` fisso.
 - **Colore**: le parti nere seguono il colore del testo del contesto, quindi il logo diventa **bianco** sulle foto e sui fondi scuri (header trasparente, sipario, menu mobile, footer) e **nero** su fondo chiaro (header scrollato); il blu resta sempre blu (contrasto ~4,9:1 su nero inchiostro).
-- **Componenti**: `x-logo-mark` (solo SVG, riferisce il file con `<use>`, cacheabile) e `x-logo` (link alla home della lingua corrente). Dimensioni: header 64–80 px di altezza che si riduce a 48–56 px dopo lo scroll; menu mobile 56 px; footer 96 px; sipario fino a 352 px.
+- **Componenti**: `x-logo-mark` (solo SVG, riferisce il file con `<use>`, cacheabile) e `x-logo` (link alla home della lingua corrente). Dimensioni: header 64–80 px di altezza che si riduce a 48–56 px dopo lo scroll; menu mobile 56 px; footer 64–80 px; sipario fino a 352 px.
 - **Favicon**: lo stesso SVG (`<link rel="icon" type="image/svg+xml">`); icone per social e PWA da produrre con il file ufficiale.
 
 ## Stato di implementazione
@@ -139,7 +139,7 @@ Il contenuto del menù viene da `config/menu.php` (dati **statici di esempio**, 
 
 ### Nessuno scroll orizzontale
 
-Regola di progetto: mai scroll orizzontale della pagina, né a mobile né a desktop. Accorgimenti: `overflow-x: clip` su `body`; elementi decorativi che sporgono (cerchi, fascia inclinata, scritta del footer) sono contenuti in un wrapper `overflow-hidden`; le categorie del menù vanno **a capo** su mobile (sticky solo da `md` in su) invece di scorrere. Verifica fatta con Playwright a 320, 360, 390, 414, 568, 768, 1024, 1280, 1440 e 1920 px su `/` e `/menu`, provando a forzare lo scroll (`scrollTo`) e cercando contenitori scrollabili.
+Regola di progetto: mai scroll orizzontale della pagina, né a mobile né a desktop. Accorgimenti: `overflow-x: clip` su `body`; elementi decorativi che sporgono (cerchi, fascia inclinata) sono contenuti in un wrapper `overflow-hidden`; le categorie del menù vanno **a capo** su mobile (sticky solo da `md` in su) invece di scorrere. Verifica fatta con Playwright a 320, 360, 390, 414, 568, 768, 1024, 1280, 1440 e 1920 px su `/` e `/menu`, provando a forzare lo scroll (`scrollTo`) e cercando contenitori scrollabili.
 
 ### Sito multipagina
 
@@ -172,7 +172,6 @@ Tutti sono **miglioramento progressivo**: senza supporto o con `prefers-reduced-
 | **Barra di avanzamento** di lettura | Tutte le pagine | scroll-driven CSS |
 | **Transizione tra pagine** a cerchio che si espande | Tutte (browser con View Transitions) | CSS `@view-transition` |
 | **Voci dei pannelli** (menu mobile, categorie) che entrano a cascata | Menu mobile, categorie | CSS, `@starting-style` |
-| **Scritta gigante "Visciano 82"** tenue nel footer | Tutte le pagine | CSS |
 
 **Movimento coerente** (revisione dopo il quarto passaggio): un'unica curva per tutto il sito, il token `--ease-brand` (`cubic-bezier(0.2, 0.8, 0.2, 1)`, classe Tailwind `ease-brand`), e durate da 0,3 s (colori) a 0,5 s (pulsanti, sottolineature, fasce) fino a 0,9–1 s (titoli, foto). Tolti il **cursore personalizzato** (con `mix-blend-mode: difference` invertiva i colori di ciò che stava sotto, ad esempio le bandiere del selettore di lingua), i **pulsanti magnetici** e le **card inclinate in 3D**: effetti "da sito creativo" che non aggiungevano nulla.
 
