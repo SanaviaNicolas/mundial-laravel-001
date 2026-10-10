@@ -300,4 +300,15 @@ class MenuPageTest extends TestCase
             ->assertSeeText('Tè al limone');
         $this->get('/en/menu')->assertDontSeeText('Sample');
     }
+
+    public function test_on_mobile_category_photos_are_hidden_and_featured_cards_scroll_sideways(): void
+    {
+        $this->fakePhoto('categoria-prova');
+        $this->oneItem(['tags' => ['pizza-del-mese']]);
+
+        $html = $this->get('/menu')->getContent();
+
+        $this->assertMatchesRegularExpression('/<picture>\s*<source[^>]*categoria-prova[^>]*>.*?<img[^>]*class="[^"]*max-md:hidden/s', $html);
+        $this->assertStringContainsString('snap-x snap-mandatory', str($html)->after('In evidenza')->before('categorie-menu'));
+    }
 }

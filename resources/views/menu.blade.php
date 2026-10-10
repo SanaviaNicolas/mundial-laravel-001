@@ -24,7 +24,7 @@
 @endpush
 
 @section('content')
-    <x-hero name="ingredienti" :alt="__('site.menu.hero_alt')" height="min-h-[75svh]" position="object-[60%_50%]">
+    <x-hero name="ingredienti" :alt="__('site.menu.hero_alt')" height="min-h-[60svh] md:min-h-[75svh]" position="object-[60%_50%]">
         <h1 class="type-page text-white">
             <x-parole :text="__('site.menu.h1')" />
         </h1>
@@ -33,7 +33,7 @@
 
     <ul class="mx-auto grid max-w-6xl list-none p-0 px-4 md:grid-cols-3">
         @foreach (__('site.dough') as [$titolo, $testo])
-            <li class="border-b border-sabbia py-6 md:border-b-0 md:border-l md:px-8 md:py-10 md:first:border-l-0 md:first:pl-0">
+            <li class="border-b border-sabbia py-4 md:border-b-0 md:border-l md:px-8 md:py-10 md:first:border-l-0 md:first:pl-0">
                 <p class="font-display text-2xl font-extrabold tracking-tight">{{ $titolo }}</p>
                 <p class="mt-1 text-ink-soft">{{ $testo }}</p>
             </li>
@@ -41,13 +41,13 @@
     </ul>
 
     @if ($evidenza->isNotEmpty())
-        <section class="bg-crema-scuro py-16 md:py-24">
+        <section class="bg-crema-scuro py-12 md:py-24">
             <div class="mx-auto max-w-6xl px-4">
                 <h2 class="type-section">{{ __('site.menu.featured') }}</h2>
-                <ul class="mt-10 grid list-none gap-4 p-0 md:grid-cols-2 md:gap-6">
+                <ul class="-mx-4 mt-8 flex list-none snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:mt-10 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:p-0">
                     @foreach ($evidenza as [$voce, $sezione])
                         @php($badge = $voce->highlights())
-                        <li @class(['row-reveal group relative flex flex-col overflow-hidden rounded-2xl bg-white p-7 transition-transform duration-500 ease-brand hover:-translate-y-1 md:p-10', 'md:col-span-2' => $loop->first && $loop->count % 2 === 1])>
+                        <li @class(['row-reveal group relative flex w-[85%] shrink-0 snap-start flex-col overflow-hidden rounded-2xl bg-white p-6 transition-transform duration-500 ease-brand hover:-translate-y-1 md:w-auto md:p-10', 'md:col-span-2' => $loop->first && $loop->count % 2 === 1])>
                             <span class="absolute inset-x-0 top-0 h-1.5 {{ $accento[array_key_first($badge)] }}" aria-hidden="true"></span>
                             <div class="flex flex-wrap items-center justify-between gap-3">
                                 <div class="flex flex-wrap gap-2">
@@ -57,13 +57,13 @@
                                 </div>
                                 <p class="text-xs font-bold uppercase tracking-widest text-muted">{{ $sezione->name }}</p>
                             </div>
-                            <h3 class="mt-8 text-4xl md:text-5xl">{{ $voce->name }}</h3>
+                            <h3 class="mt-6 text-3xl md:mt-8 md:text-5xl">{{ $voce->name }}</h3>
                             <p class="mt-4 max-w-xl flex-1 text-lg italic text-ink-soft">{{ collect($voce->ingredients)->map(fn ($ingrediente) => $ingrediente->name.($ingrediente->frozen ? '*' : ''))->implode(', ') }}</p>
-                            <div class="mt-10 flex items-end justify-between gap-6 border-t border-ink/10 pt-6">
+                            <div class="mt-8 flex items-end justify-between gap-6 border-t border-ink/10 pt-5 md:mt-10 md:pt-6">
                                 @if ($voce->price !== null)
-                                    <p class="font-display text-4xl font-extrabold text-pomodoro-scuro">{{ \App\Menu\Price::format($voce->price) }}</p>
+                                    <p class="whitespace-nowrap font-display text-2xl font-extrabold text-pomodoro-scuro md:text-4xl">{{ \App\Menu\Price::format($voce->price) }}</p>
                                 @endif
-                                <a href="#{{ $sezione->slug }}" class="ml-auto inline-flex min-h-11 items-center gap-2 font-semibold text-ink no-underline after:absolute after:inset-0">
+                                <a href="#{{ $sezione->slug }}" class="ml-auto inline-flex min-h-11 items-center gap-2 whitespace-nowrap text-sm font-semibold text-ink no-underline after:absolute after:inset-0 md:text-base">
                                     <span>{{ __('site.menu.in_menu') }}</span>
                                     <svg class="size-4 transition-transform duration-500 ease-brand group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
                                 </a>
@@ -121,7 +121,7 @@
     @foreach ($menu as $sezione)
         @if ($sezione->children)
             <section id="{{ $sezione->slug }}" class="scroll-mt-36">
-                <div class="bg-ink py-14 text-white md:py-20">
+                <div class="bg-ink py-10 text-white md:py-20">
                     <div class="mx-auto max-w-6xl px-4">
                         <h2 class="type-page text-white">{{ $sezione->name }}</h2>
                         @if ($sezione->description)
