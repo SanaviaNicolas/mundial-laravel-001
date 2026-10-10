@@ -49,6 +49,14 @@ class MenuContractTest extends TestCase
         $this->assertFalse((new Section('x', 'X', null, [$this->item(allergens: [])]))->allergensUnverified());
     }
 
+    public function test_highlight_tags_come_in_order_of_importance(): void
+    {
+        $item = new Item('Prova', null, null, 700, [], ['vegetariano' => 'Vegetariana', 'novita' => 'Novità', 'pizza-del-mese' => 'Pizza del mese'], [], null);
+
+        $this->assertSame(['pizza-del-mese' => 'Pizza del mese', 'novita' => 'Novità'], $item->highlights());
+        $this->assertSame([], $this->item()->highlights());
+    }
+
     public function test_prices_are_formatted_per_locale_and_missing_prices_stay_missing(): void
     {
         $this->assertSame('€ 8,50', Price::format(850));

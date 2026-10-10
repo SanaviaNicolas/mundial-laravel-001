@@ -6,6 +6,7 @@ use App\Menu\MenuSource;
 use App\Models\Allergen;
 use App\Models\Category;
 use App\Models\MenuItem;
+use Illuminate\Support\Facades\Blade;
 use Tests\Concerns\FakesPhotos;
 use Tests\TestCase;
 
@@ -205,5 +206,38 @@ class MenuPageTest extends TestCase
         $this->oneItem([]);
 
         $this->get('/menu')->assertSee('images/categoria-prova-640.webp 640w', false);
+    }
+
+    public function test_items_are_not_separated_by_dotted_leaders_or_rules(): void
+    {
+        $this->oneItem([]);
+
+        $this->get('/menu')->assertDontSee('border-dotted', false)->assertDontSee('divide-y', false);
+    }
+
+    public function test_featured_cards_name_their_category_link_to_it_and_put_the_pizza_of_the_month_first(): void
+    {
+        config(['menu.sections' => ['prova' => ['name' => 'Categoria prova', 'items' => [
+            ['name' => 'La scelta', 'price' => 700, 'ingredients' => [], 'tags' => ['la-piu-scelta']],
+            ['name' => 'Del mese', 'price' => 800, 'ingredients' => [], 'tags' => ['pizza-del-mese']],
+        ]]]]);
+
+        $featured = str($this->get('/menu')->getContent())->after('In evidenza')->before('categorie-menu');
+
+        $this->assertStringContainsString('href="#prova"', $featured);
+        $this->assertStringContainsString('Categoria prova', $featured);
+        $this->assertLessThan(strpos($featured, 'La scelta'), strpos($featured, 'Del mese'));
+    }
+
+    public function test_the_most_chosen_badge_has_white_text_on_dark_blue_for_contrast(): void
+    {
+        $html = Blade::render('<x-badge slug="la-piu-scelta" nome="La più scelta" />');
+
+        $this->assertStringContainsString('bg-blu-scuro text-white', $html);
+    }
+
+    public function test_categories_are_numbered_without_counting_their_dishes(): void
+    {
+        $this->get('/menu')->assertDontSeeText('proposte')->assertSeeText('01 / 09');
     }
 }

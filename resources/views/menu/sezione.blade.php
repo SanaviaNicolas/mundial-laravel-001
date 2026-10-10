@@ -13,7 +13,7 @@
     <div class="mx-auto grid max-w-6xl gap-8 px-4 md:grid-cols-12 md:gap-12">
         <div class="md:col-span-5">
             <div class="md:sticky md:top-40">
-                <p class="font-display text-sm font-bold tracking-widest"><span class="text-pomodoro">{{ sprintf('%02d', $numero) }}</span> <span class="text-muted">/ {{ sprintf('%02d', $totale) }} · {{ trans_choice('site.home.items', count($sezione->items)) }}</span></p>
+                <p class="font-display text-sm font-bold tracking-widest"><span class="text-pomodoro-scuro">{{ sprintf('%02d', $numero) }}</span> <span class="text-muted">/ {{ sprintf('%02d', $totale) }}</span></p>
                 @if ($titolo)
                     <h{{ $livello }} class="mt-3 type-section">{{ $sezione->name }}</h{{ $livello }}>
                     @if ($sezione->description)
@@ -24,16 +24,20 @@
             </div>
         </div>
         <div class="md:col-span-7">
-            <ul class="list-none divide-y divide-ink/15 border-y border-ink/15 p-0">
+            <ul class="list-none space-y-10 p-0 md:space-y-12">
                 @foreach ($sezione->items as $voce)
                     @include('menu.voce', ['livello' => $livello + 1, 'condivise' => $condivise !== [], 'verifica' => ! $nonVerificata])
                 @endforeach
             </ul>
-            @if ($condivise)
-                @include('menu.aggiunte', ['aggiunte' => $condivise])
-            @endif
-            @if ($nonVerificata)
-                <p class="mt-3 text-sm text-ink-soft">{{ __('site.menu.allergens_ask_section') }}</p>
+            @if ($condivise || $nonVerificata)
+                <div class="mt-12 rounded-2xl bg-ink/[0.04] p-5 md:p-6">
+                    @if ($condivise)
+                        @include('menu.aggiunte', ['aggiunte' => $condivise])
+                    @endif
+                    @if ($nonVerificata)
+                        <p @class(['text-sm italic text-ink-soft', 'mt-3' => $condivise])>{{ __('site.menu.allergens_ask_section') }}</p>
+                    @endif
+                </div>
             @endif
         </div>
     </div>

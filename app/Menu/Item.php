@@ -28,9 +28,22 @@ final readonly class Item
         public ?array $allergens,
     ) {}
 
-    public function isHighlighted(): bool
+    /**
+     * Highlight tags of the item (slug => name), most important first.
+     *
+     * @return array<string, string>
+     */
+    public function highlights(): array
     {
-        return array_intersect(array_keys($this->tags), self::HIGHLIGHTS) !== [];
+        $highlights = [];
+
+        foreach (self::HIGHLIGHTS as $slug) {
+            if (isset($this->tags[$slug])) {
+                $highlights[$slug] = $this->tags[$slug];
+            }
+        }
+
+        return $highlights;
     }
 
     /**

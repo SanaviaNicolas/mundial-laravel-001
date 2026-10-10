@@ -8,7 +8,12 @@
     $foglie = collect($menu)->flatMap(fn ($sezione) => $sezione->leaves())->values();
     $numero = $foglie->mapWithKeys(fn ($sezione, $i) => [$sezione->slug => $i + 1]);
     $voci = $foglie->flatMap(fn ($sezione) => $sezione->items);
-    $evidenza = $voci->filter(fn ($voce) => $voce->isHighlighted());
+    // Highlighted items with their category, the most important highlight (pizza of the month) first.
+    $evidenza = $foglie
+        ->flatMap(fn ($sezione) => collect($sezione->items)->filter(fn ($voce) => $voce->highlights())->map(fn ($voce) => [$voce, $sezione]))
+        ->sortBy(fn ($coppia) => array_search(array_key_first($coppia[0]->highlights()), \App\Menu\Item::HIGHLIGHTS, true))
+        ->values();
+    $accento = ['pizza-del-mese' => 'bg-pomodoro', 'la-piu-scelta' => 'bg-blu', 'novita' => 'bg-white', 'stagionale' => 'bg-crema-scuro'];
     $surgelati = $voci->contains(fn ($voce) => collect($voce->ingredients)->contains('frozen', true));
 @endphp
 
@@ -34,18 +39,29 @@
             <div class="mx-auto max-w-6xl px-4">
                 <h2 class="type-section">{{ __('site.menu.featured') }}</h2>
                 <ul class="mt-10 grid list-none gap-4 p-0 md:grid-cols-2 md:gap-6">
-                    @foreach ($evidenza as $voce)
-                        <li class="row-reveal flex flex-col rounded-2xl bg-white p-7 md:p-9">
-                            <div class="flex flex-wrap gap-2">
-                                @foreach (array_intersect_key($voce->tags, array_flip(\App\Menu\Item::HIGHLIGHTS)) as $slug => $nome)
-                                    <x-badge :slug="$slug" :nome="$nome" />
-                                @endforeach
+                    @foreach ($evidenza as [$voce, $sezione])
+                        @php($badge = $voce->highlights())
+                        <li @class(['row-reveal group relative flex flex-col overflow-hidden rounded-2xl bg-ink p-7 text-white transition-transform duration-500 ease-brand hover:-translate-y-1 md:p-10', 'md:col-span-2' => $loop->first && $loop->count % 2 === 1])>
+                            <span class="absolute inset-x-0 top-0 h-1.5 {{ $accento[array_key_first($badge)] }}" aria-hidden="true"></span>
+                            <div class="flex flex-wrap items-center justify-between gap-3">
+                                <div class="flex flex-wrap gap-2">
+                                    @foreach ($badge as $slug => $nome)
+                                        <x-badge :slug="$slug" :nome="$nome" />
+                                    @endforeach
+                                </div>
+                                <p class="text-xs font-bold uppercase tracking-widest text-stone-300">{{ $sezione->name }}</p>
                             </div>
-                            <h3 class="mt-6 text-3xl md:text-4xl">{{ $voce->name }}</h3>
-                            <p class="mt-3 flex-1 text-lg text-ink-soft">{{ collect($voce->ingredients)->map(fn ($ingrediente) => $ingrediente->name.($ingrediente->frozen ? '*' : ''))->implode(', ') }}</p>
-                            @if ($voce->price !== null)
-                                <p class="mt-6 font-display text-3xl font-extrabold text-pomodoro-scuro">{{ \App\Menu\Price::format($voce->price) }}</p>
-                            @endif
+                            <h3 class="mt-8 text-4xl text-white md:text-5xl">{{ $voce->name }}</h3>
+                            <p class="mt-4 max-w-xl flex-1 text-lg italic text-stone-300">{{ collect($voce->ingredients)->map(fn ($ingrediente) => $ingrediente->name.($ingrediente->frozen ? '*' : ''))->implode(', ') }}</p>
+                            <div class="mt-10 flex items-end justify-between gap-6 border-t border-white/15 pt-6">
+                                @if ($voce->price !== null)
+                                    <p class="font-display text-4xl font-extrabold">{{ \App\Menu\Price::format($voce->price) }}</p>
+                                @endif
+                                <a href="#{{ $sezione->slug }}" class="ml-auto inline-flex min-h-11 items-center gap-2 font-semibold text-white no-underline after:absolute after:inset-0">
+                                    <span class="link-line">{{ __('site.menu.in_menu') }}</span>
+                                    <svg class="size-4 transition-transform duration-500 ease-brand group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
+                                </a>
+                            </div>
                         </li>
                     @endforeach
                 </ul>

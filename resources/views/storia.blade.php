@@ -44,7 +44,7 @@
             <ol class="list-none border-t border-white/20 p-0 md:col-span-7">
                 @foreach (__('site.dough') as [$titolo, $testo])
                     <li class="row-reveal border-b border-white/20 py-10 md:py-14">
-                        <span class="font-display text-sm font-bold tracking-widest text-pomodoro">{{ sprintf('%02d', $loop->iteration) }}</span>
+                        <span class="font-display text-sm font-bold tracking-widest text-stone-300">{{ sprintf('%02d', $loop->iteration) }}</span>
                         <p class="mt-4 font-display type-list font-extrabold tracking-tight">{{ $titolo }}</p>
                         <p class="mt-3 text-lg text-stone-300 md:text-xl">{{ $testo }}</p>
                     </li>

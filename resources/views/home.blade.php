@@ -36,7 +36,9 @@
                         <span class="absolute inset-0 -translate-x-full bg-pomodoro transition-transform duration-500 ease-brand group-hover:translate-x-0 group-focus-visible:translate-x-0" aria-hidden="true"></span>
                         <span class="relative flex items-baseline justify-between gap-6">
                             <span class="font-display type-list font-extrabold tracking-tight">{{ $categoria->name }}</span>
-                            <span class="shrink-0 text-sm opacity-70 md:text-base">{{ trans_choice('site.home.items', count($categoria->items)) }}</span>
+                            @if ($categoria->description)
+                                <span class="max-w-xs text-right text-sm italic text-ink-soft group-hover:text-white group-focus-visible:text-white max-md:hidden md:text-base">{{ $categoria->description }}</span>
+                            @endif
                         </span>
                     </a>
                 </li>

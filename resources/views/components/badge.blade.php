@@ -4,8 +4,8 @@
 @php
     $classi = [
         'pizza-del-mese' => 'bg-pomodoro text-white',
-        'la-piu-scelta' => 'bg-blu text-ink',
-        'novita' => 'bg-ink text-white',
+        'la-piu-scelta' => 'bg-blu-scuro text-white',
+        'novita' => 'bg-white text-ink ring-1 ring-inset ring-ink/15',
         'stagionale' => 'bg-crema-scuro text-ink ring-1 ring-inset ring-ink/20',
     ][$slug];
 @endphp

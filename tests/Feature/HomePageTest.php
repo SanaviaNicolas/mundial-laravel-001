@@ -57,17 +57,15 @@ class HomePageTest extends TestCase
             ->assertSeeText('Alta digeribilità');
     }
 
-    public function test_home_shows_how_many_items_each_menu_category_has(): void
+    public function test_home_menu_index_shows_each_category_with_its_description_and_no_dish_count(): void
     {
         config(['menu.sections' => ['pizze' => ['name' => 'Pizze', 'children' => ['prova' => [
             'name' => 'Categoria prova',
-            'items' => [
-                ['name' => 'Uno', 'price' => 100, 'ingredients' => []],
-                ['name' => 'Due', 'price' => 200, 'ingredients' => []],
-            ],
+            'description' => 'Descrizione prova',
+            'items' => [['name' => 'Uno', 'price' => 100, 'ingredients' => []]],
         ]]]]]);
 
-        $this->get('/')->assertSeeText('Categoria prova')->assertSeeText('2 proposte');
+        $this->get('/')->assertSeeTextInOrder(['Categoria prova', 'Descrizione prova'])->assertDontSeeText('proposte');
     }
 
     public function test_home_does_not_show_todo_markers(): void
