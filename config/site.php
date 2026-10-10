@@ -20,6 +20,9 @@ return [
         'instagram' => ['name' => 'Instagram', 'url' => 'https://www.instagram.com/mundial82/'],
         'facebook' => ['name' => 'Facebook', 'url' => 'https://www.facebook.com/Mundial82'],
     ],
+    // Real customer reviews chosen by the client (never invented), shown on the home page:
+    // ['testo' => ['it' => ..., 'en' => ...], 'autore' => 'Maria R.', 'fonte' => 'Google']
+    'reviews' => [],
     // Extraordinary closures, announced on the site (App\Support\Closures); they will move to the admin Settings page.
     // Example: ['dal' => '2026-08-10', 'al' => '2026-08-20', 'motivo' => ['it' => 'Ferie', 'en' => 'Holidays']]
     'closures' => [],

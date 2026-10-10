@@ -50,6 +50,9 @@ return [
         'band_text' => 'La tradizione napoletana portata in Veneto, con ingredienti originali, ricercati e di qualità.',
         'read_story' => 'Leggi la nostra storia',
         'visit' => 'Vieni a trovarci',
+        'reviews_title' => 'Dicono di noi',
+        'reviews_text' => 'Le opinioni di chi è passato a trovarci, raccolte su Google.',
+        'reviews_link' => 'Leggi le recensioni su Google',
         'hours_how' => 'Orari e come arrivare',
     ],
     'menu' => [

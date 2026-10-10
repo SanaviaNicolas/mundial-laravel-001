@@ -50,6 +50,9 @@ return [
         'band_text' => 'Neapolitan tradition brought to the Veneto, with original, carefully sourced, quality ingredients.',
         'read_story' => 'Read our story',
         'visit' => 'Come and see us',
+        'reviews_title' => 'What people say',
+        'reviews_text' => 'What our guests think, collected on Google.',
+        'reviews_link' => 'Read the reviews on Google',
         'hours_how' => 'Opening hours and directions',
     ],
     'menu' => [

@@ -11,6 +11,7 @@
 | Orari di apertura | Ricevuti: lun chiuso; mar–sab 18:00–00:00; dom 18:30–00:00 |
 | Coordinate geografiche (per mappa e JSON-LD) | Ricevute dal luogo Google Maps indicato dal committente: 45.3770736, 12.0008935 (`site.geo`); il link esatto al luogo è `site.map_url` |
 | P.IVA / ragione sociale / email (footer, privacy e cookie policy) | `TODO-DATO`: nel footer la P.IVA è nascosta, nelle pagine legali compare "[dato da completare]" (`company`, `vat`, `email` in `config/site.php`) |
+| Recensioni da citare in home | `TODO-DATO`: 3–4 recensioni vere scelte dal cliente (testo, nome come appare, fonte), con il suo consenso; fino ad allora la sezione "Dicono di noi" mostra solo il link a Google |
 | Profili social (URL) | Ricevuti: Instagram `@mundial82` (instagram.com/mundial82), Facebook `Mundial82` (facebook.com/Mundial82): usano ancora il vecchio nome. In `config/site.php` (`social`); da usare anche come `sameAs` nel JSON-LD |
 | Fascia di prezzo (`priceRange`) | `TODO-DATO` |
 | Prezzi, allergeni, bevande, dolci del menù | Prezzi **indicativi inseriti come segnaposto** (non forniti dal committente: da confermare); allergeni, bevande, dolci `TODO-DATO` |
@@ -36,7 +37,7 @@ Il sito è **multilingua** (italiano e inglese, vedi [ADR 0009](../decisioni/000
 ## Home — `/`
 
 - **Obiettivo**: far capire in 3 secondi cos'è (pizzeria-ristorante), dove si trova, e portare a Menù o telefonata.
-- **Sezioni**: hero (foto + H1 + pulsante Chiama / link al menù) · fascia con le categorie · mosaico delle 9 categorie (link a `/menu#categoria`) · impasto (lievitazione, idratazione, digeribilità, link alla storia) · "Vieni a trovarci" (indirizzo, telefono, link a Contatti) · footer.
+- **Sezioni**: hero (foto + H1 + pulsante Chiama / link al menù) · fascia con le categorie · mosaico delle 9 categorie (link a `/menu#categoria`) · impasto (lievitazione, idratazione, digeribilità, link alla storia) · "Dicono di noi" (recensioni vere + link a Google) · "Vieni a trovarci" (indirizzo, telefono, asporto, mappa, link a Contatti) · footer.
 - **SEO**: title indicativo `Visciano 82 — Pizzeria e ristorante a Vigonovo`; meta description `Visciano 82, pizzeria e ristorante: pizza napoletana, cucina, menù, orari e contatti.` (≤ 155 caratteri). H1 attuale: `Pizza napoletana, fatta come si deve.`; da valutare un H1 con nome e città (SEO locale) con il testo definitivo.
 - **Dati strutturati**: `Pizzeria`/`Restaurant` (sottotipo `LocalBusiness`): `name`, `url`, `image`, `telephone`, `address` (`PostalAddress`), `geo`, `openingHoursSpecification`, `servesCuisine`, `priceRange`, `sameAs`, `hasMenu` → URL del menù.
 - **SEO locale**: città/zona nell'H1 e nel primo paragrafo; NAP (nome, indirizzo, telefono) identico ovunque; profilo Google Business collegato al sito (azione del committente).

@@ -52,6 +52,32 @@
         <x-button :href="$pageUrl('story')" variant="outline-light">{{ __('site.home.read_story') }}</x-button>
     </x-hero>
 
+    {{-- Reviews: real quotes chosen by the client (config/site.php), never invented; no rating without real data. --}}
+    <section class="pt-20 md:pt-28">
+        <div class="mx-auto max-w-6xl px-4">
+            <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+                <div>
+                    <h2 class="type-section">{{ __('site.home.reviews_title') }}</h2>
+                    <p class="mt-4 max-w-xl text-lg text-ink-soft">{{ __('site.home.reviews_text') }}</p>
+                </div>
+                <x-button :href="config('site.map_url')" variant="secondary" :external="true" class="self-start md:self-auto">{{ __('site.home.reviews_link') }}</x-button>
+            </div>
+            @if (config('site.reviews'))
+                <ul class="-mx-4 mt-10 flex list-none snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:p-0">
+                    @foreach (config('site.reviews') as $recensione)
+                        <li class="row-reveal w-[85%] shrink-0 snap-start md:w-auto">
+                            <figure class="flex h-full flex-col rounded-2xl bg-white p-7 md:p-8">
+                                <span class="block h-8 font-display text-6xl font-extrabold leading-[0.9] text-pomodoro" aria-hidden="true">&ldquo;</span>
+                                <blockquote class="mt-3 flex-1 text-lg italic text-ink">{{ is_array($recensione['testo']) ? ($recensione['testo'][app()->getLocale()] ?? $recensione['testo']['it']) : $recensione['testo'] }}</blockquote>
+                                <figcaption class="mt-6 text-sm"><span class="font-semibold">{{ $recensione['autore'] }}</span> <span class="text-muted">· {{ $recensione['fonte'] }}</span></figcaption>
+                            </figure>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
+    </section>
+
     <section class="py-20 md:py-28">
         <div class="mx-auto max-w-6xl px-4">
             <div class="grid items-center gap-10 rounded-2xl bg-crema-scuro p-6 sm:p-10 md:grid-cols-2 md:gap-12 md:p-12">
