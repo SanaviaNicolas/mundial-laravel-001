@@ -2,10 +2,13 @@
 
 namespace Tests\Feature;
 
+use Tests\Concerns\FakesPhotos;
 use Tests\TestCase;
 
 class HomePageTest extends TestCase
 {
+    use FakesPhotos;
+
     public function test_home_responds_ok(): void
     {
         $this->get('/')->assertOk();
@@ -115,5 +118,13 @@ class HomePageTest extends TestCase
         $this->assertStringContainsString('id="logo"', $svg);
         $this->assertStringContainsString('fill="currentColor"', $svg);
         $this->assertStringContainsString('fill="#0090d0"', $svg);
+    }
+
+    public function test_menu_index_previews_the_photo_of_each_category(): void
+    {
+        config(['menu' => ['prova' => ['nome' => 'Categoria prova', 'voci' => []]]]);
+        $this->fakePhoto('categoria-prova');
+
+        $this->get('/')->assertSee('data-img="'.asset('images/categoria-prova-640.webp').'"', false);
     }
 }

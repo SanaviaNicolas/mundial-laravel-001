@@ -3,28 +3,14 @@
 namespace Tests\Feature;
 
 use Illuminate\Support\Facades\Blade;
+use Tests\Concerns\FakesPhotos;
 use Tests\TestCase;
 
 class FotoComponentTest extends TestCase
 {
+    use FakesPhotos;
+
     private const NAME = 'prova-foto-test';
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        // public/images only holds git-ignored photos: it does not exist on a clean clone.
-        if (! is_dir(public_path('images'))) {
-            mkdir(public_path('images'), 0775, true);
-        }
-    }
-
-    protected function tearDown(): void
-    {
-        array_map('unlink', glob(public_path('images/'.self::NAME.'-*')) ?: []);
-
-        parent::tearDown();
-    }
 
     public function test_it_shows_a_labelled_placeholder_when_the_image_files_are_missing(): void
     {
@@ -36,10 +22,7 @@ class FotoComponentTest extends TestCase
 
     public function test_it_renders_a_responsive_picture_when_the_image_files_exist(): void
     {
-        foreach ([640, 1280, 1920, 2560] as $width) {
-            touch(public_path('images/'.self::NAME.'-'.$width.'.webp'));
-            touch(public_path('images/'.self::NAME.'-'.$width.'.avif'));
-        }
+        $this->fakePhoto(self::NAME);
 
         $html = Blade::render('<x-foto name="'.self::NAME.'" alt="Una pizza" :eager="true" />');
 
@@ -54,7 +37,7 @@ class FotoComponentTest extends TestCase
 
     public function test_it_lazy_loads_by_default(): void
     {
-        touch(public_path('images/'.self::NAME.'-640.webp'));
+        $this->fakePhoto(self::NAME, ['webp']);
 
         $this->assertStringContainsString('loading="lazy"', Blade::render('<x-foto name="'.self::NAME.'" alt="" />'));
     }

@@ -44,7 +44,7 @@ Il sito è **multilingua** (italiano e inglese, vedi [ADR 0009](../decisioni/000
 **Stato:** implementata con dati statici di esempio (`config/menu.php`), da rendere dinamica con Filament. Mancano ancora i dati strutturati JSON-LD e il contenuto reale.
 
 - **Obiettivo**: consultare velocemente tutte le pizze e i piatti da smartphone; trovare la pizza giusta.
-- **Sezioni**: H1 + indice delle 9 categorie (ancore) · una sezione `H2` per categoria con le voci (`H3` il nome o elemento lista) · note generali (allergeni, asterisco `*`, coperto) · invito a chiamare.
+- **Sezioni**: H1 · tre qualità dell'impasto · "In evidenza" (voci con badge) · indice delle 9 categorie (ancore) · una sezione `H2` per categoria, numerata e con foto, con le voci (`H3` il nome) · note generali (allergeni, asterisco `*`, coperto) · invito a chiamare.
 - **Categorie** (ordine proposto): Tradizione napoletana con bordo alto · Le classiche · Le speciali · Fiorfritta/Coccodrillo · Le bianche · Le chiuse · Baguette · Panuozzi · Tegamini. Struttura pronta per bevande e dolci (`TODO-DATO`).
 - **Badge**: alcune voci hanno un badge statico ("Pizza del mese", "La più scelta"), mostrato accanto alla voce e in una sezione "In evidenza" in testa alla pagina.
 - **Voce di menù**: nome (spesso dialettale), ingredienti (testo), riga "A fine cottura"/"Servito con", nota libera (es. "1° premio oscar della pizza '73"), asterisco su certi ingredienti, prezzo e allergeni (segnaposto), foto opzionale.

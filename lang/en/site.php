@@ -19,6 +19,11 @@ return [
     ],
     'closed' => 'Closed',
     'footer' => ['vat' => 'VAT no.', 'tel' => 'Tel.'],
+    'dough' => [
+        ['At least 2 days', 'of leavening'],
+        ['High hydration', 'for a soft dough'],
+        ['High digestibility', 'a pizza that does not weigh you down'],
+    ],
     'badge' => ['mese' => 'Pizza of the month', 'scelta' => 'Most ordered'],
     'home' => [
         'title' => 'Visciano 82 — Pizzeria and restaurant',
@@ -70,11 +75,6 @@ return [
         'tradition_2' => 'The ingredients are original, carefully sourced and of high quality.',
         'dough_title' => 'The right flour and the right method',
         'dough_text' => 'It took fifty years to find them. The result is a dough you can feel on the plate, and afterwards too.',
-        'facts' => [
-            ['At least 2 days', 'of leavening'],
-            ['High hydration', 'for a soft dough'],
-            ['High digestibility', 'a pizza that does not weigh you down'],
-        ],
         'end_alt' => 'Fresh basil and cherry tomatoes on a pizza',
         'end_title' => 'Taste the difference.',
         'see_menu' => 'See the menu',

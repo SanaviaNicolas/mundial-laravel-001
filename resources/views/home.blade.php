@@ -31,8 +31,7 @@
         </div>
         <ul class="mx-auto mt-10 max-w-6xl list-none border-t border-ink/15 p-0 md:mt-14" data-preview>
             @foreach ($menu as $slug => $categoria)
-                @php($immagine = ['hero', 'impasto', 'ingredienti', 'forno'][$loop->index % 4])
-                <li class="border-b border-ink/15" @if (file_exists(public_path("images/{$immagine}-640.webp"))) data-img="{{ asset("images/{$immagine}-640.webp") }}" @endif>
+                <li class="border-b border-ink/15" @if (file_exists(public_path("images/categoria-{$slug}-640.webp"))) data-img="{{ asset("images/categoria-{$slug}-640.webp") }}" @endif>
                     <a href="{{ $pageUrl('menu') }}#{{ $slug }}" class="group relative block overflow-hidden px-4 py-5 text-ink no-underline transition-colors duration-500 ease-brand hover:text-white focus-visible:text-white md:py-7">
                         <span class="absolute inset-0 -translate-x-full bg-pomodoro transition-transform duration-500 ease-brand group-hover:translate-x-0 group-focus-visible:translate-x-0" aria-hidden="true"></span>
                         <span class="relative flex items-baseline justify-between gap-6">

@@ -19,6 +19,11 @@ return [
     ],
     'closed' => 'Chiuso',
     'footer' => ['vat' => 'P.IVA', 'tel' => 'Tel.'],
+    'dough' => [
+        ['Almeno 2 giorni', 'di lievitazione'],
+        ['Alta idratazione', 'per un impasto morbido'],
+        ['Alta digeribilità', 'una pizza che non pesa'],
+    ],
     'badge' => ['mese' => 'Pizza del mese', 'scelta' => 'La più scelta'],
     'home' => [
         'title' => 'Visciano 82 — Pizzeria e ristorante',
@@ -70,11 +75,6 @@ return [
         'tradition_2' => 'Gli ingredienti sono originali, ricercati e di qualità.',
         'dough_title' => 'La farina e il metodo giusti',
         'dough_text' => "Ci sono voluti cinquant'anni per trovarli. Il risultato è un impasto che si sente nel piatto e anche dopo.",
-        'facts' => [
-            ['Almeno 2 giorni', 'di lievitazione'],
-            ['Alta idratazione', 'per un impasto morbido'],
-            ['Alta digeribilità', 'una pizza che non pesa'],
-        ],
         'end_alt' => 'Basilico e pomodorini freschi su una pizza',
         'end_title' => 'Assaggia la differenza.',
         'see_menu' => 'Guarda il menù',

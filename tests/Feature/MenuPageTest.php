@@ -3,10 +3,13 @@
 namespace Tests\Feature;
 
 use App\Support\Menu;
+use Tests\Concerns\FakesPhotos;
 use Tests\TestCase;
 
 class MenuPageTest extends TestCase
 {
+    use FakesPhotos;
+
     public function test_menu_responds_ok_with_title_and_description(): void
     {
         $this->get('/menu')
@@ -99,5 +102,29 @@ class MenuPageTest extends TestCase
         foreach (Menu::categories() as $slug => $categoria) {
             $response->assertSee('href="#'.$slug.'" data-name="'.$categoria['nome'].'"', false);
         }
+    }
+
+    public function test_each_category_is_illustrated_by_its_own_photo_and_featured_items_reuse_it(): void
+    {
+        config(['menu' => ['prova' => [
+            'nome' => 'Categoria prova',
+            'voci' => [['nome' => 'Pizza prova', 'ingredienti' => 'a, b', 'prezzo' => '€ 7,50', 'badge' => 'mese']],
+        ]]]);
+        $this->fakePhoto('categoria-prova');
+
+        $html = $this->get('/menu')->getContent();
+
+        // One in the featured card, one next to the category.
+        $this->assertSame(2, substr_count($html, 'images/categoria-prova-640.webp 640w'));
+    }
+
+    public function test_menu_numbers_the_categories(): void
+    {
+        $this->get('/menu')->assertSeeInOrder(['01', 'Tradizione napoletana', '02', 'Le classiche']);
+    }
+
+    public function test_menu_states_the_dough_qualities(): void
+    {
+        $this->get('/menu')->assertSeeTextInOrder(['Almeno 2 giorni', 'Alta idratazione', 'Alta digeribilità']);
     }
 }

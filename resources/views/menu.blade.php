@@ -5,7 +5,9 @@
 @section('header-overlay', true)
 
 @php
-    $evidenza = collect($menu)->flatMap(fn ($categoria) => $categoria['voci'])->filter(fn ($voce) => isset($voce['badge']));
+    $evidenza = collect($menu)
+        ->flatMap(fn ($categoria, $slug) => collect($categoria['voci'])->map(fn ($voce) => $voce + ['categoria' => $slug]))
+        ->filter(fn ($voce) => isset($voce['badge']));
 @endphp
 
 @section('content')
@@ -16,17 +18,31 @@
         <p class="fade-in mt-6 max-w-lg text-lg text-white" style="--i: 4">{{ __('site.menu.lead') }}</p>
     </x-hero>
 
+    <ul class="mx-auto grid max-w-6xl list-none p-0 px-4 md:grid-cols-3">
+        @foreach (__('site.dough') as [$titolo, $testo])
+            <li class="border-b border-sabbia py-6 md:border-b-0 md:border-l md:px-8 md:py-10 md:first:border-l-0 md:first:pl-0">
+                <p class="font-display text-2xl font-extrabold tracking-tight">{{ $titolo }}</p>
+                <p class="mt-1 text-ink-soft">{{ $testo }}</p>
+            </li>
+        @endforeach
+    </ul>
+
     @if ($evidenza->isNotEmpty())
         <section class="bg-crema-scuro py-16 md:py-24">
             <div class="mx-auto max-w-6xl px-4">
                 <h2 class="type-section">{{ __('site.menu.featured') }}</h2>
                 <ul class="mt-10 grid list-none gap-4 p-0 md:grid-cols-2 md:gap-6">
                     @foreach ($evidenza as $voce)
-                        <li class="row-reveal flex flex-col rounded-2xl bg-white p-7 md:p-10">
-                            <x-badge :tipo="$voce['badge']" class="self-start" />
-                            <h3 class="mt-6 text-3xl md:text-4xl">{{ $voce['nome'] }}</h3>
-                            <p class="mt-3 flex-1 text-lg text-ink-soft">{{ $voce['ingredienti'] }}</p>
-                            <p class="mt-6 font-display text-3xl font-extrabold text-pomodoro-scuro">{{ $voce['prezzo'] }}</p>
+                        <li class="row-reveal flex flex-col overflow-hidden rounded-2xl bg-white">
+                            <div class="zoom-hover relative overflow-hidden">
+                                <x-foto :name="'categoria-'.$voce['categoria']" :alt="$voce['nome']" ratio="aspect-[16/10]" sizes="(min-width: 768px) 50vw, 100vw" />
+                                <x-badge :tipo="$voce['badge']" class="absolute left-5 top-5" />
+                            </div>
+                            <div class="flex flex-1 flex-col p-7 md:p-9">
+                                <h3 class="text-3xl md:text-4xl">{{ $voce['nome'] }}</h3>
+                                <p class="mt-3 flex-1 text-lg text-ink-soft">{{ $voce['ingredienti'] }}</p>
+                                <p class="mt-6 font-display text-3xl font-extrabold text-pomodoro-scuro">{{ $voce['prezzo'] }}</p>
+                            </div>
                         </li>
                     @endforeach
                 </ul>
@@ -74,18 +90,21 @@
         <section id="{{ $slug }}" class="scroll-mt-36 py-16 md:py-24 {{ $loop->even ? 'bg-crema-scuro' : '' }}">
             <div class="mx-auto grid max-w-6xl gap-8 px-4 md:grid-cols-12 md:gap-12">
                 <div class="md:col-span-5">
-                    <div class="md:sticky md:top-48">
-                        <h2 class="type-section">{{ $categoria['nome'] }}</h2>
+                    <div class="md:sticky md:top-40">
+                        <p class="font-display text-sm font-bold tracking-widest"><span class="text-pomodoro">{{ sprintf('%02d', $loop->iteration) }}</span> <span class="text-muted">/ {{ sprintf('%02d', $loop->count) }} · {{ trans_choice('site.home.items', count($categoria['voci'])) }}</span></p>
+                        <h2 class="mt-3 type-section">{{ $categoria['nome'] }}</h2>
                         @if ($categoria['descrizione'])
                             <p class="mt-4 text-lg text-ink-soft">{{ $categoria['descrizione'] }}</p>
                         @endif
+                        <x-foto :name="'categoria-'.$slug" :alt="$categoria['nome']" ratio="aspect-[16/9] md:aspect-[4/3]" sizes="(min-width: 768px) 40vw, 100vw" class="mt-8 rounded-2xl" />
                     </div>
                 </div>
                 <ul class="list-none divide-y divide-ink/15 border-y border-ink/15 p-0 md:col-span-7">
                     @foreach ($categoria['voci'] as $voce)
                         <li class="row-reveal py-6">
-                            <div class="flex items-baseline justify-between gap-6">
+                            <div class="flex items-baseline gap-3">
                                 <h3 class="text-2xl">{{ $voce['nome'] }}</h3>
+                                <span class="min-w-6 flex-1 border-b-2 border-dotted border-ink/25" aria-hidden="true"></span>
                                 <span class="shrink-0 font-display text-xl font-extrabold text-pomodoro-scuro md:text-2xl">{{ $voce['prezzo'] }}</span>
                             </div>
                             @if ($voce['badge'])

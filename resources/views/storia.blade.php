@@ -38,7 +38,7 @@
                 <h2 class="max-w-3xl type-section text-white">{{ __('site.story.dough_title') }}</h2>
                 <p class="mt-5 max-w-xl text-lg text-stone-300">{{ __('site.story.dough_text') }}</p>
                 <ul class="pin-facts mt-12 list-none border-t border-white/20 p-0 md:mt-16">
-                    @foreach (__('site.story.facts') as [$titolo, $testo])
+                    @foreach (__('site.dough') as [$titolo, $testo])
                         <li class="pin-fact flex flex-col gap-1 border-b border-white/20 py-6 md:flex-row md:items-baseline md:justify-between md:py-9">
                             <span class="pin-title font-display type-list font-extrabold tracking-tight">{{ $titolo }}</span>
                             <span class="text-lg text-stone-300 md:text-xl">{{ $testo }}</span>
