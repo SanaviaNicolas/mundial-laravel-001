@@ -30,4 +30,13 @@ class ContattiPageTest extends TestCase
             ->assertSee('18:30')
             ->assertSee('https://www.google.com/maps/search/?api=1&amp;query='.urlencode('Via Prova 9, 00100 Città'), false);
     }
+
+    public function test_contatti_shows_the_social_profiles(): void
+    {
+        $main = str($this->get('/contatti')->getContent())->after('<main')->before('</main>');
+
+        $this->assertStringContainsString('href="https://www.instagram.com/mundial82/"', $main);
+        $this->assertStringContainsString('href="https://www.facebook.com/Mundial82"', $main);
+        $this->assertStringContainsString('@mundial82', $main);
+    }
 }

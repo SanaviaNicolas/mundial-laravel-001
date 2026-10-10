@@ -11,7 +11,7 @@
 | Orari di apertura | Ricevuti: lun chiuso; mar–sab 18:00–00:00; dom 18:30–00:00 |
 | Coordinate geografiche (per mappa e JSON-LD) | `TODO-DATO` |
 | P.IVA / ragione sociale / email (footer, privacy e cookie policy) | `TODO-DATO`: nel footer la P.IVA è nascosta, nelle pagine legali compare "[dato da completare]" (`company`, `vat`, `email` in `config/site.php`) |
-| Profili social (URL) | `TODO-DATO` |
+| Profili social (URL) | Ricevuti: Instagram `@mundial82` (instagram.com/mundial82), Facebook `Mundial82` (facebook.com/Mundial82): usano ancora il vecchio nome. In `config/site.php` (`social`); da usare anche come `sameAs` nel JSON-LD |
 | Fascia di prezzo (`priceRange`) | `TODO-DATO` |
 | Prezzi, allergeni, bevande, dolci del menù | Prezzi **indicativi inseriti come segnaposto** (non forniti dal committente: da confermare); allergeni, bevande, dolci `TODO-DATO` |
 | Testi definitivi (storia, descrizione) e foto reali | Bozza della pagina storia scritta dai punti del cliente (vedi sotto); testi definitivi e foto `TODO-DATO` |
@@ -76,7 +76,7 @@ Il sito è **multilingua** (italiano e inglese, vedi [ADR 0009](../decisioni/000
 
 - **Obiettivo**: far arrivare le persone al locale o farle telefonare.
 - **Stato**: implementata con i dati reali (indirizzo, telefono, orari).
-- **Sezioni**: H1 · indirizzo · telefono (link `tel:`, pulsante Chiama) · link alla mappa (Google Maps) · orari (tabella semantica) · (da aggiungere: come arrivare/parcheggio, social).
+- **Sezioni**: H1 · indirizzo · telefono (link `tel:`, pulsante Chiama) · link alla mappa (Google Maps) · orari (tabella semantica) · "Seguici" con icone e nomi dei profili Instagram e Facebook · (da aggiungere: come arrivare/parcheggio).
 - **SEO**: title `Contatti, orari e dove siamo | Visciano 82`; meta description con città, telefono e orari sintetici; H1 `Dove siamo`.
 - **Dati strutturati**: stesso `Pizzeria`/`Restaurant` della home con `address`, `geo`, `telephone`, `openingHoursSpecification` completi (la pagina di riferimento per il NAP).
 - **SEO locale**: NAP identico a footer e profilo Google; mappa con link a Google Maps/Apple Maps. Un embed di mappa terza parte comporta cookie/tracciamento: preferire un link o un'immagine statica finché non si decide il consenso (domanda aperta).

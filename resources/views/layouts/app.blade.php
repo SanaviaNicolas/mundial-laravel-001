@@ -79,6 +79,7 @@
                 <div class="grid gap-10 md:grid-cols-12 md:gap-8">
                     <div class="md:col-span-3">
                         <x-logo-mark class="h-16 text-white md:h-20" />
+                        <x-social class="mt-6 text-white" />
                     </div>
                     <div class="md:col-span-3">
                         <p class="font-display text-sm font-bold uppercase tracking-widest text-white">{{ __('site.footer.where') }}</p>

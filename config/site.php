@@ -12,6 +12,11 @@ return [
     'company' => null,
     'vat' => null,
     'email' => null,
+    // Social profiles (they still use the old name, Mundial 82): plain links, nothing embedded.
+    'social' => [
+        'instagram' => ['name' => 'Instagram', 'url' => 'https://www.instagram.com/mundial82/', 'handle' => '@mundial82'],
+        'facebook' => ['name' => 'Facebook', 'url' => 'https://www.facebook.com/Mundial82', 'handle' => 'Mundial82'],
+    ],
     'hours' => [
         ['days' => 'monday', 'open' => null],
         ['days' => 'tuesday-saturday', 'open' => '18:00 – 00:00'],

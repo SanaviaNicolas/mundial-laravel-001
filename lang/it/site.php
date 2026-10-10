@@ -98,6 +98,7 @@ return [
         'map' => 'Apri la mappa',
         'hours_title' => 'Orari',
         'hours_caption' => 'Orari di apertura',
+        'follow' => 'Seguici',
     ],
     'legal' => [
         'missing' => '[dato da completare]',

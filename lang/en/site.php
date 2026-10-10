@@ -98,6 +98,7 @@ return [
         'map' => 'Open the map',
         'hours_title' => 'Opening hours',
         'hours_caption' => 'Opening hours',
+        'follow' => 'Follow us',
     ],
     'legal' => [
         'missing' => '[to be completed]',

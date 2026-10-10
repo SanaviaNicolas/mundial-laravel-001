@@ -150,4 +150,14 @@ class HomePageTest extends TestCase
 
         $this->get('/')->assertSee('P.IVA 01234567890');
     }
+
+    public function test_footer_links_the_social_profiles_with_accessible_icons(): void
+    {
+        $footer = str($this->get('/')->getContent())->after('<footer')->before('</footer>');
+
+        $this->assertStringContainsString('href="https://www.instagram.com/mundial82/"', $footer);
+        $this->assertStringContainsString('href="https://www.facebook.com/Mundial82"', $footer);
+        $this->assertStringContainsString('aria-label="Instagram"', $footer);
+        $this->assertStringContainsString('aria-label="Facebook"', $footer);
+    }
 }
