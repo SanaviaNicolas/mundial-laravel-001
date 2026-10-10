@@ -128,15 +128,15 @@
         @endif
     @endforeach
 
-    <section class="bg-pomodoro py-16 text-white md:py-24">
+    <section class="bg-pomodoro-chiaro text-ink py-16 md:py-24">
         <div class="mx-auto flex max-w-6xl flex-col gap-8 px-4 md:flex-row md:items-end md:justify-between">
             <div>
                 <p class="font-display type-section font-extrabold tracking-tight">{{ __('site.menu.chosen') }}</p>
                 @if ($surgelati)
-                    <p class="mt-4 max-w-md text-white">{{ __('site.menu.frozen') }}</p>
+                    <p class="mt-4 max-w-md text-ink-soft">{{ __('site.menu.frozen') }}</p>
                 @endif
             </div>
-            <x-button :href="$tel" variant="light">{{ __('site.menu.call_phone', ['phone' => config('site.phone')]) }}</x-button>
+            <x-button :href="$tel">{{ __('site.menu.call_phone', ['phone' => config('site.phone')]) }}</x-button>
         </div>
     </section>
 @endsection

@@ -52,14 +52,14 @@
         <x-button :href="$pageUrl('story')" variant="outline-light">{{ __('site.home.read_story') }}</x-button>
     </x-hero>
 
-    <section class="bg-pomodoro py-24 text-white md:py-36">
+    <section class="bg-pomodoro-chiaro text-ink py-24 md:py-36">
         <div class="mx-auto max-w-6xl px-4">
-            <h2 class="type-section text-white">{{ __('site.home.visit') }}</h2>
+            <h2 class="type-section">{{ __('site.home.visit') }}</h2>
             <p class="mt-5 text-lg">{{ config('site.address') }}</p>
-            <a href="{{ $tel }}" class="mt-2 inline-block font-display type-phone font-extrabold tracking-tight text-white no-underline"><span class="link-line">{{ config('site.phone') }}</span></a>
+            <a href="{{ $tel }}" class="mt-2 inline-block font-display type-phone font-extrabold tracking-tight text-ink no-underline"><span class="link-line">{{ config('site.phone') }}</span></a>
             <div class="mt-10 flex flex-wrap gap-3">
-                <x-button :href="$tel" variant="light">{{ __('site.ui.call') }}</x-button>
-                <x-button :href="$pageUrl('contact')" variant="outline-light">{{ __('site.home.hours_how') }}</x-button>
+                <x-button :href="$tel">{{ __('site.ui.call') }}</x-button>
+                <x-button :href="$pageUrl('contact')" variant="secondary">{{ __('site.home.hours_how') }}</x-button>
             </div>
         </div>
     </section>
