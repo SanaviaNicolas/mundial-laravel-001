@@ -134,5 +134,43 @@ return [
                 ['name' => $t('Tegamino speciale', 'Special tegamino'), 'price' => 800, 'ingredients' => [$esempio, ['name' => $esempio, 'after' => true]]],
             ],
         ],
+        'dolci' => [
+            'name' => $t('Dolci', 'Desserts'),
+            'description' => $t('Per chiudere in dolcezza.', 'A sweet way to finish.'),
+            'items' => [
+                ['name' => $t('Dolce della casa di esempio', 'Sample house dessert'), 'description' => $t('Descrizione di esempio del dolce.', 'Sample dessert description.'), 'price' => 500],
+                ['name' => $t('Dolce napoletano di esempio', 'Sample Neapolitan dessert'), 'description' => $t('Descrizione di esempio.', 'Sample description.'), 'price' => 550],
+                ['name' => $t('Gelato di esempio', 'Sample ice cream'), 'description' => $t('Gusti di esempio.', 'Sample flavours.'), 'price' => 450],
+            ],
+        ],
+        'bevande' => [
+            'name' => $t('Bevande', 'Drinks'),
+            'children' => [
+                'bibite' => [
+                    'name' => $t('Bibite analcoliche', 'Soft drinks'),
+                    'items' => [
+                        ['name' => $t('Acqua naturale o frizzante', 'Still or sparkling water'), 'description' => $t('Bottiglia da 0,75 l (esempio).', '0.75 l bottle (sample).'), 'price' => 250],
+                        ['name' => $t('Bibita di esempio', 'Sample soft drink'), 'description' => $t('Lattina da 33 cl (esempio).', '33 cl can (sample).'), 'price' => 300],
+                        ['name' => $t('Succo di esempio', 'Sample juice'), 'description' => $t('Bottiglietta da 20 cl (esempio).', '20 cl bottle (sample).'), 'price' => 300],
+                    ],
+                ],
+                'birre' => [
+                    'name' => $t('Birre', 'Beers'),
+                    'items' => [
+                        ['name' => $t('Birra alla spina di esempio', 'Sample draught beer'), 'description' => $t('Piccola 0,2 l o media 0,4 l (esempio).', 'Small 0.2 l or medium 0.4 l (sample).'), 'price' => 350],
+                        ['name' => $t('Birra in bottiglia di esempio', 'Sample bottled beer'), 'description' => $t('Bottiglia da 33 cl (esempio).', '33 cl bottle (sample).'), 'price' => 450],
+                        ['name' => $t('Birra artigianale di esempio', 'Sample craft beer'), 'description' => $t('Bottiglia da 50 cl (esempio).', '50 cl bottle (sample).'), 'price' => 700],
+                    ],
+                ],
+                'vini' => [
+                    'name' => $t('Vini', 'Wines'),
+                    'items' => [
+                        ['name' => $t('Vino rosso di esempio', 'Sample red wine'), 'description' => $t('Calice o bottiglia (esempio).', 'Glass or bottle (sample).'), 'price' => 500],
+                        ['name' => $t('Vino bianco di esempio', 'Sample white wine'), 'description' => $t('Calice o bottiglia (esempio).', 'Glass or bottle (sample).'), 'price' => 500],
+                        ['name' => $t('Bollicine di esempio', 'Sample sparkling wine'), 'description' => $t('Calice o bottiglia (esempio).', 'Glass or bottle (sample).'), 'price' => 600],
+                    ],
+                ],
+            ],
+        ],
     ],
 ];

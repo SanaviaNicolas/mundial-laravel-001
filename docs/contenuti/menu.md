@@ -37,6 +37,10 @@ Dolci
 - **Slug**: l'identificativo usato negli indirizzi del sito (es. `tradizione-napoletana`); si propone dal nome.
 - Una categoria che contiene sottocategorie o voci non si può eliminare: prima vanno spostate o eliminate.
 
+## Dolci e bevande
+
+Sul sito il menù comprende anche **Dolci** (macrocategoria senza sottocategorie) e **Bevande** con tre sottocategorie: **Bibite analcoliche**, **Birre**, **Vini**. Nel pannello si creano come le altre categorie (slug consigliati: `dolci`, `bevande`, `bibite`, `birre`, `vini`). Per bevande e dolci di solito non servono ingredienti: il **formato** (es. "Bottiglia da 0,75 l", "Calice o bottiglia") va nella **descrizione** della voce. Gli allergeni (es. solfiti nel vino, glutine nella birra) si indicano direttamente sulla voce e vanno verificati come per le pizze.
+
 ## Tag
 
 I tag sono etichette da applicare alle voci: *vegano*, *vegetariano*, *senza glutine*, *piccante*, *novità*, *stagionale*… Servono anche per i piatti che nascono già senza glutine, senza lattosio o vegani.

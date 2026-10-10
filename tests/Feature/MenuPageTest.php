@@ -244,7 +244,9 @@ class MenuPageTest extends TestCase
 
     public function test_categories_are_numbered_without_counting_their_dishes(): void
     {
-        $this->get('/menu')->assertDontSeeText('proposte')->assertSeeText('01 / 09');
+        $leaves = collect(app(MenuSource::class)->sections())->flatMap(fn ($section) => $section->leaves())->count();
+
+        $this->get('/menu')->assertDontSeeText('proposte')->assertSeeText('01 / '.sprintf('%02d', $leaves));
     }
 
     public function test_featured_cards_are_light(): void
@@ -274,5 +276,17 @@ class MenuPageTest extends TestCase
         ]]]);
 
         $this->assertSame(1, substr_count($this->get('/menu')->getContent(), 'Bufala'));
+    }
+
+    public function test_the_static_menu_has_desserts_and_drinks_split_into_soft_drinks_beers_and_wines(): void
+    {
+        $sections = app(MenuSource::class)->sections();
+        $slugs = array_column($sections, 'slug');
+        $drinks = $sections[array_search('bevande', $slugs, true)];
+
+        $this->assertContains('dolci', $slugs);
+        $this->assertSame(['bibite', 'birre', 'vini'], array_column($drinks->children, 'slug'));
+        $this->get('/menu')->assertSeeTextInOrder(['Dolci', 'Bevande', 'Bibite analcoliche', 'Birre', 'Vini']);
+        $this->get('/en/menu')->assertSeeTextInOrder(['Desserts', 'Drinks', 'Soft drinks', 'Beers', 'Wines']);
     }
 }
