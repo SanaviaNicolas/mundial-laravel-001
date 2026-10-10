@@ -52,14 +52,19 @@
         <x-button :href="$pageUrl('story')" variant="outline-light">{{ __('site.home.read_story') }}</x-button>
     </x-hero>
 
-    <section class="bg-pomodoro-chiaro text-ink py-24 md:py-36">
+    <section class="py-20 md:py-28">
         <div class="mx-auto max-w-6xl px-4">
-            <h2 class="type-section">{{ __('site.home.visit') }}</h2>
-            <p class="mt-5 text-lg">{{ config('site.address') }}</p>
-            <a href="{{ $tel }}" class="mt-2 inline-block font-display type-phone font-extrabold tracking-tight text-ink no-underline"><span class="link-line">{{ config('site.phone') }}</span></a>
-            <div class="mt-10 flex flex-wrap gap-3">
-                <x-button :href="$tel">{{ __('site.ui.call') }}</x-button>
-                <x-button :href="$pageUrl('contact')" variant="secondary">{{ __('site.home.hours_how') }}</x-button>
+            <div class="grid items-center gap-10 rounded-2xl bg-crema-scuro p-6 sm:p-10 md:grid-cols-2 md:gap-12 md:p-12">
+                <div>
+                    <h2 class="type-section">{{ __('site.home.visit') }}</h2>
+                    <p class="mt-5 text-lg text-ink-soft">{{ config('site.address') }}</p>
+                    <a href="{{ $tel }}" class="mt-2 inline-block font-display type-phone font-extrabold tracking-tight text-ink no-underline"><span class="link-line">{{ config('site.phone') }}</span></a>
+                    <div class="mt-8 flex flex-wrap gap-3">
+                        <x-button :href="$tel">{{ __('site.ui.call') }}</x-button>
+                        <x-button :href="$pageUrl('contact')" variant="secondary">{{ __('site.home.hours_how') }}</x-button>
+                    </div>
+                </div>
+                <x-mappa :scheda="false" sizes="(min-width: 768px) 520px, 100vw" />
             </div>
         </div>
     </section>

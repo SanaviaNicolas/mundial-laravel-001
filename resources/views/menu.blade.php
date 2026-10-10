@@ -128,15 +128,17 @@
         @endif
     @endforeach
 
-    <section class="bg-pomodoro-chiaro text-ink py-16 md:py-24">
-        <div class="mx-auto flex max-w-6xl flex-col gap-8 px-4 md:flex-row md:items-end md:justify-between">
-            <div>
-                <p class="font-display type-section font-extrabold tracking-tight">{{ __('site.menu.chosen') }}</p>
-                @if ($surgelati)
-                    <p class="mt-4 max-w-md text-ink-soft">{{ __('site.menu.frozen') }}</p>
-                @endif
+    <section class="pb-16 pt-6 md:pb-24 md:pt-8">
+        <div class="mx-auto max-w-6xl px-4">
+            <div class="flex flex-col gap-8 rounded-2xl bg-crema-scuro p-8 md:flex-row md:items-end md:justify-between md:p-12">
+                <div>
+                    <p class="font-display type-section font-extrabold tracking-tight">{{ __('site.menu.chosen') }}</p>
+                    @if ($surgelati)
+                        <p class="mt-4 max-w-md text-ink-soft">{{ __('site.menu.frozen') }}</p>
+                    @endif
+                </div>
+                <x-button :href="$tel">{{ __('site.menu.call_phone', ['phone' => config('site.phone')]) }}</x-button>
             </div>
-            <x-button :href="$tel">{{ __('site.menu.call_phone', ['phone' => config('site.phone')]) }}</x-button>
         </div>
     </section>
 @endsection

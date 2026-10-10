@@ -22,6 +22,14 @@ class VisualRulesTest extends TestCase
         $this->assertDoesNotMatchRegularExpression('/box-shadow|drop-shadow/', file_get_contents(resource_path('css/app.css')));
     }
 
+    public function test_home_visit_panel_shows_the_static_map(): void
+    {
+        $html = $this->get('/')->getContent();
+        $panel = substr($html, strpos($html, 'Vieni a trovarci'));
+
+        $this->assertStringContainsString('mappa/mappa-800.avif 800w', substr($panel, 0, strpos($panel, '</section>')));
+    }
+
     /** @return array<string, array{string, string}> */
     public static function closingBands(): array
     {
@@ -32,13 +40,13 @@ class VisualRulesTest extends TestCase
     }
 
     #[DataProvider('closingBands')]
-    public function test_closing_bands_are_a_soft_tomato_tint_to_stand_apart_from_the_footer(string $uri, string $title): void
+    public function test_closing_blocks_are_rounded_panels_set_apart_from_the_footer(string $uri, string $title): void
     {
         $html = $this->get($uri)->getContent();
         $band = substr($html, strrpos(substr($html, 0, strpos($html, $title)), '<section'));
         $band = substr($band, 0, strpos($band, '</section>'));
 
-        $this->assertStringContainsString('bg-pomodoro-chiaro text-ink', $band);
+        $this->assertStringContainsString('rounded-2xl bg-crema-scuro', $band);
         $this->assertStringContainsString('bg-pomodoro text-white', $band, 'the call button keeps its primary style');
     }
 }
