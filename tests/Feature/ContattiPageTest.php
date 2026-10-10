@@ -37,6 +37,7 @@ class ContattiPageTest extends TestCase
 
         $this->assertStringContainsString('href="https://www.instagram.com/mundial82/"', $main);
         $this->assertStringContainsString('href="https://www.facebook.com/Mundial82"', $main);
-        $this->assertStringContainsString('@mundial82', $main);
+        $this->assertStringContainsString('aria-label="Instagram"', $main);
+        $this->assertStringNotContainsString('@mundial82', $main);
     }
 }
