@@ -236,6 +236,12 @@ class MenuPageTest extends TestCase
         $this->assertStringContainsString('bg-blu-scuro text-white', $html);
     }
 
+    public function test_new_and_seasonal_badges_use_gold_and_basil(): void
+    {
+        $this->assertStringContainsString('bg-oro text-ink', Blade::render('<x-badge slug="novita" nome="Novità" />'));
+        $this->assertStringContainsString('bg-basilico text-white', Blade::render('<x-badge slug="stagionale" nome="Di stagione" />'));
+    }
+
     public function test_categories_are_numbered_without_counting_their_dishes(): void
     {
         $this->get('/menu')->assertDontSeeText('proposte')->assertSeeText('01 / 09');

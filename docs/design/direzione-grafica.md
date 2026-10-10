@@ -27,6 +27,8 @@ Il blu del logo (da campionare sul file vettoriale quando arriva) è il colore i
 | Azione | Rosso pomodoro | `#C73A1F` | Pulsanti ("Chiama"), azioni primarie |
 | Azione (hover/focus) | Pomodoro scuro | `#A92E16` | Stato hover/active dell'azione |
 | Linee | Sabbia | `#D9D0BE` | Separatori (decorativi, non portano informazione) |
+| Badge "Novità" | Oro (crosta dorata) | `#E8A93A` | Solo sfondo di badge (testo inchiostro) e barre decorative |
+| Badge "Di stagione" | Basilico | `#3F7D3A` | Solo sfondo di badge (testo bianco) e barre decorative |
 
 ### Contrasti verificati
 
@@ -42,6 +44,8 @@ Il blu del logo (da campionare sul file vettoriale quando arriva) è il colore i
 | Blu scuro su crema scuro | 4,58:1 | AA (al limite: evitare per testo piccolo) |
 | Bianco su rosso pomodoro (pulsante, badge "Pizza del mese") | 5,18:1 | AA |
 | Bianco su blu scuro (badge "La più scelta") | 5,49:1 | AA |
+| Inchiostro su oro (badge "Novità") | 8,43:1 | AAA |
+| Bianco su basilico (badge "Di stagione") | 4,99:1 | AA |
 | **Bianco su blu logo** | **3,56:1** | Non per testo piccolo: per questo il badge "La più scelta" usa il blu scuro |
 | Bianco su pomodoro scuro (hover) | 6,80:1 | AA |
 | Rosso pomodoro su crema (testo) | 4,81:1 | AA (usare solo se serve, meglio come sfondo di pulsante) |
@@ -135,7 +139,7 @@ Tutte le pagine (menù, storia, contatti) condividono il linguaggio della home: 
 
 **Selettore delle categorie** (al posto delle pillole, scartate perché a capo su più righe e poco eleganti): una **barra fissa** sotto l'header mostra la categoria che si sta leggendo e la posizione ("Le classiche · 2/9"); toccandola si apre un **pannello a tutto schermo** (lo stesso del menu mobile) con le categorie che contengono voci (sottocategorie e macro senza sottocategorie), il numero di voci e la corrente in rosso. Scegliendo una categoria il pannello si chiude e la pagina scorre alla sezione. Funziona su mobile e desktop; senza JS il pannello si apre comunque (resta aperto dopo la scelta, si chiude con Esc o toccando fuori).
 
-**Badge** (tag con slug convenzionali, [ADR 0010](../decisioni/0010-contratto-dati-menu.md)): `pizza-del-mese` (rosso pomodoro, stella), `la-piu-scelta` (blu scuro con testo bianco, cuore), `novita` (bianco con filetto, scintilla) e `stagionale` (crema con filetto, foglia). L'etichetta è il nome del tag. Compaiono accanto alla voce e la fanno entrare in "In evidenza"; gli altri tag (es. vegetariana, piccante) sono piccole pillole a contorno.
+**Badge** (tag con slug convenzionali, [ADR 0010](../decisioni/0010-contratto-dati-menu.md)): `pizza-del-mese` (rosso pomodoro, stella), `la-piu-scelta` (blu scuro con testo bianco, cuore), `novita` (oro con testo nero, scintilla) e `stagionale` (verde basilico con testo bianco, foglia). Oro e basilico sono stati aggiunti alla palette apposta per questi due badge, presi dai colori della pizza (crosta e basilico): le versioni neutre (nero, bianco, crema) risultavano spente accanto al rosso e al blu. L'etichetta è il nome del tag. Compaiono accanto alla voce e la fanno entrare in "In evidenza"; gli altri tag (es. vegetariana, piccante) sono piccole pillole a contorno.
 
 **Storia (`/la-nostra-storia`)**: hero con titolo → frase a parole che si accendono → foto + testo sulla tradizione → **"La farina e il metodo giusti"** su nero in due colonne: a sinistra titolo, testo e foto verticale (fissi da tablet in su), a destra i tre punti dell'impasto come **elenco numerato** (01–03, numero in rosso, titolo grande, frase sotto) che entra allo scroll → banda fotografica con invito a guardare il menù o chiamare.
 

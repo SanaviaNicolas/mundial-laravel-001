@@ -37,6 +37,8 @@
     --color-pomodoro: #c73a1f;
     --color-pomodoro-scuro: #a92e16;
     --color-sabbia: #d9d0be;
+    --color-oro: #e8a93a;
+    --color-basilico: #3f7d3a;
 
     /* One motion curve for the whole site: quick start, long soft landing. */
     --ease-brand: cubic-bezier(0.2, 0.8, 0.2, 1);

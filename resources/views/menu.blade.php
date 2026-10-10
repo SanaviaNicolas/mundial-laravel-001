@@ -13,7 +13,7 @@
         ->flatMap(fn ($sezione) => collect($sezione->items)->filter(fn ($voce) => $voce->highlights())->map(fn ($voce) => [$voce, $sezione]))
         ->sortBy(fn ($coppia) => array_search(array_key_first($coppia[0]->highlights()), \App\Menu\Item::HIGHLIGHTS, true))
         ->values();
-    $accento = ['pizza-del-mese' => 'bg-pomodoro', 'la-piu-scelta' => 'bg-blu-scuro', 'novita' => 'bg-ink', 'stagionale' => 'bg-muted'];
+    $accento = ['pizza-del-mese' => 'bg-pomodoro', 'la-piu-scelta' => 'bg-blu-scuro', 'novita' => 'bg-oro', 'stagionale' => 'bg-basilico'];
     $surgelati = $voci->contains(fn ($voce) => collect($voce->ingredients)->contains('frozen', true));
 @endphp
 
