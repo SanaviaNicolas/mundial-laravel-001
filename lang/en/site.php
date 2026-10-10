@@ -115,6 +115,12 @@ return [
         'map_alt' => 'Map of the Via Cadiceto area in Vigonovo, with Visciano 82 in the centre',
         'map_open' => 'Open in Google Maps',
     ],
+    'not_found' => [
+        'title' => 'Page not found | Visciano 82',
+        'h1' => 'Page not found',
+        'text' => 'The page you are looking for does not exist or has moved. Go back to the home page or have a look at the menu.',
+        'home' => 'Back to the home page',
+    ],
     'legal' => [
         'missing' => '[to be completed]',
         'link_cookie' => 'cookie policy',

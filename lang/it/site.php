@@ -115,6 +115,12 @@ return [
         'map_alt' => 'Mappa della zona di Via Cadiceto a Vigonovo, con la posizione di Visciano 82 al centro',
         'map_open' => 'Apri in Google Maps',
     ],
+    'not_found' => [
+        'title' => 'Pagina non trovata | Visciano 82',
+        'h1' => 'Pagina non trovata',
+        'text' => 'La pagina che cerchi non esiste o è stata spostata. Torna alla home o dai un\'occhiata al menù.',
+        'home' => 'Torna alla home',
+    ],
     'legal' => [
         'missing' => '[dato da completare]',
         'link_cookie' => 'cookie policy',
