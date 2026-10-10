@@ -57,7 +57,7 @@ Il blu del logo (da campionare sul file vettoriale quando arriva) è il colore i
 | **Blu logo su bianco** | **3,56:1** | Solo testo grande / elementi grafici |
 | Sabbia su crema | 1,42:1 | Solo decorativo: nessuna informazione affidata al solo filetto |
 
-Regole: il blu logo non si usa mai per testo sotto i 24 px; il **testo piccolo rosso** su fondo chiaro è sempre **pomodoro scuro**, mai pomodoro; sul nero il rosso è solo per testo grande o elementi grafici; il colore non è mai l'unico veicolo di informazione; il focus da tastiera è sempre visibile (anello blu scuro, 2 px, con distanza dall'elemento). I valori vanno ricontrollati se la palette cambia (calcolo ripetibile: formula WCAG 2.x).
+Regole: i **link esterni** (mappa, social, ecc.) si aprono **sempre in una nuova scheda** (`target="_blank"` con `rel="noopener"`) e lo dicono agli screen reader ("si apre in una nuova scheda", testo nascosto o nell'`aria-label`; `x-button` lo fa con `:external="true"`), verificato da un test su tutte le pagine; il blu logo non si usa mai per testo sotto i 24 px; il **testo piccolo rosso** su fondo chiaro è sempre **pomodoro scuro**, mai pomodoro; sul nero il rosso è solo per testo grande o elementi grafici; il colore non è mai l'unico veicolo di informazione; il focus da tastiera è sempre visibile (anello blu scuro, 2 px, con distanza dall'elemento). I valori vanno ricontrollati se la palette cambia (calcolo ripetibile: formula WCAG 2.x).
 
 ## Tipografia
 

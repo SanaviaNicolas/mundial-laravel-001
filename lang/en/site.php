@@ -11,6 +11,7 @@ return [
         'main_nav' => 'Main',
         'language' => 'Language',
         'skip' => 'Skip to content',
+        'new_tab' => 'opens in a new tab',
     ],
     'days' => [
         'monday' => 'Monday',

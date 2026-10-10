@@ -11,6 +11,7 @@ return [
         'main_nav' => 'Principale',
         'language' => 'Lingua',
         'skip' => 'Vai al contenuto',
+        'new_tab' => 'si apre in una nuova scheda',
     ],
     'days' => [
         'monday' => 'Lunedì',

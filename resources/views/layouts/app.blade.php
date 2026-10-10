@@ -84,7 +84,7 @@
                     <div class="md:col-span-3">
                         <p class="font-display text-sm font-bold uppercase tracking-widest text-white">{{ __('site.footer.where') }}</p>
                         <p class="mt-4">{{ config('site.address') }}</p>
-                        <a href="{{ $mapUrl }}" rel="noopener" class="mt-1 inline-flex min-h-11 items-center text-white no-underline"><span class="link-line">{{ __('site.contact.map') }}</span></a>
+                        <a href="{{ $mapUrl }}" target="_blank" rel="noopener" class="mt-1 inline-flex min-h-11 items-center text-white no-underline"><span class="link-line">{{ __('site.contact.map') }}</span><span class="sr-only"> ({{ __('site.ui.new_tab') }})</span></a>
                         <p class="mt-6 font-display text-sm font-bold uppercase tracking-widest text-white">{{ __('site.footer.call') }}</p>
                         <a href="{{ $tel }}" class="mt-2 inline-flex min-h-11 items-center font-display text-2xl font-extrabold tracking-tight text-white no-underline"><span class="link-line">{{ config('site.phone') }}</span></a>
                     </div>

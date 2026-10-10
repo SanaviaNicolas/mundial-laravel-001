@@ -157,8 +157,8 @@ class HomePageTest extends TestCase
 
         $this->assertStringContainsString('href="https://www.instagram.com/mundial82/"', $footer);
         $this->assertStringContainsString('href="https://www.facebook.com/Mundial82"', $footer);
-        $this->assertStringContainsString('aria-label="Instagram"', $footer);
-        $this->assertStringContainsString('aria-label="Facebook"', $footer);
+        $this->assertStringContainsString('aria-label="Instagram (si apre in una nuova scheda)"', $footer);
+        $this->assertStringContainsString('aria-label="Facebook (si apre in una nuova scheda)"', $footer);
         $this->assertStringContainsString('viewBox="0 0 640 640"', $footer);
     }
 }
