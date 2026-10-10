@@ -12,7 +12,7 @@ class LocalizationTest extends TestCase
     public static function englishPages(): array
     {
         return [
-            'home' => ['/en', 'Visciano 82 — Pizzeria and restaurant', '/'],
+            'home' => ['/en', 'Visciano 82 (formerly Mundial 82) — Pizzeria in Vigonovo', '/'],
             'menu' => ['/en/menu', 'Menu — pizzas, panuozzi and kitchen | Visciano 82', '/menu'],
             'story' => ['/en/our-story', 'Our story — family-run Neapolitan pizza | Visciano 82', '/la-nostra-storia'],
             'contact' => ['/en/contact', 'Contact, opening hours and where to find us | Visciano 82', '/contatti'],
