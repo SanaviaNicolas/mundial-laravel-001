@@ -86,7 +86,7 @@ Elenco di ciò che serve, non un design system: si creano solo quando la prima p
 - Hero (immagine 16:9 + H1 + una sola azione).
 - Card pizza / voce di menù: nome, ingredienti, riga "A fine cottura"/"Servito con", nota, prezzo (segnaposto), eventuale foto.
 - Navigazione del menù per categoria: ancore a pagina intera su una sola pagina (indice sticky su mobile), per 9 categorie e ~80 voci.
-- Blocco orari (tabella semantica), blocco contatti, mappa (link a mappa esterna o embed solo dopo consenso: da decidere).
+- Blocco orari (tabella semantica), blocco contatti, **mappa statica** (vedi "Mappa dei contatti").
 - Etichette: asterisco `*` per gli ingredienti marcati, segnaposto allergeni.
 
 ## Immagini
@@ -143,7 +143,9 @@ Tutte le pagine (menù, storia, contatti) condividono il linguaggio della home: 
 
 **Storia (`/la-nostra-storia`)**: hero con titolo → frase a parole che si accendono → foto + testo sulla tradizione → **"La farina e il metodo giusti"** su nero in due colonne: a sinistra titolo, testo e foto verticale (fissi da tablet in su), a destra i tre punti dell'impasto come **elenco numerato** (01–03, numero in rosso, titolo grande, frase sotto) che entra allo scroll → banda fotografica con invito a guardare il menù o chiamare.
 
-**Contatti (`/contatti`)**: hero con indirizzo → "Chiamaci" (telefono gigante, pulsanti Chiama e mappa) accanto agli orari in tabella semantica a righe grandi.
+**Contatti (`/contatti`)**: hero con indirizzo → "Chiamaci" (telefono gigante, pulsanti Chiama e mappa) e "Seguici" accanto agli orari in tabella semantica a righe grandi → mappa statica a tutta larghezza.
+
+**Mappa dei contatti** (decisione: opzione statica, scelta tra statica, OpenStreetMap interattiva e Google Maps incorporata): immagine **ospitata da noi** in `public/mappa/` (`mappa-800` e `mappa-1600`, AVIF e WebP, versionata nel repository), quindi nessuna richiesta a terzi, nessun cookie, nessun banner e informative invariate. È stata creata **una volta** dalle tessere di OpenStreetMap (zoom 16, 35 tessere, ritaglio 1600×900 centrato su `site.geo`), resa in scala di grigi con contrasto ridotto e una fusione *multiply* crema per stare nei toni del sito. Sopra: **segnaposto rosso** al centro (SVG nell'HTML), scheda bianca con nome, indirizzo e "Apri in Google Maps →" (sovrapposta da tablet in su, sotto l'immagine su mobile), attribuzione obbligatoria "© OpenStreetMap" con link. Tutta la mappa apre il luogo esatto su Google Maps (`site.map_url`) in una nuova scheda. Se il locale si sposta o si vuole un altro zoom, va rigenerata con lo stesso procedimento (dati © OpenStreetMap contributors, licenza ODbL).
 
 Il contenuto del menù viene da `config/menu.php` (dati **statici di esempio**, prezzi indicativi), con la **stessa struttura del pannello**; passerà al database Filament cambiando `MENU_SOURCE`, senza toccare la pagina ([ADR 0010](../decisioni/0010-contratto-dati-menu.md)).
 

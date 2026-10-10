@@ -100,6 +100,8 @@ return [
         'hours_title' => 'Orari',
         'hours_caption' => 'Orari di apertura',
         'follow' => 'Seguici',
+        'map_alt' => 'Mappa della zona di Via Cadiceto a Vigonovo, con la posizione di Visciano 82 al centro',
+        'map_open' => 'Apri in Google Maps',
     ],
     'legal' => [
         'missing' => '[dato da completare]',

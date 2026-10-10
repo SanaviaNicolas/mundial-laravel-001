@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer(['layouts.app', 'home', 'menu', 'storia', 'contatti', 'legale'], fn ($view) => $view->with([
             'tel' => 'tel:'.preg_replace('/\D/', '', config('site.phone')),
-            'mapUrl' => 'https://www.google.com/maps/search/?api=1&query='.urlencode(config('site.address')),
+            'mapUrl' => config('site.map_url'),
             'pageUrl' => Pages::url(...),
         ]));
         View::composer(['home', 'menu'], fn ($view) => $view->with('menu', app(MenuSource::class)->sections()));

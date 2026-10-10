@@ -47,7 +47,7 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 | NAP (nome, indirizzo, telefono) identico in footer, contatti e JSON-LD | 🟡 | Dati reali in `config/site.php`, usati da footer e contatti; JSON-LD da fare |
 | Città/zona in H1/title/primo paragrafo della home | 🟡 | "Vigonovo" nel primo paragrafo; da portare in H1/title con il testo definitivo |
 | Orari in HTML (tabella) e in `openingHoursSpecification` | 🟡 | Tabella HTML con orari reali; JSON-LD da fare |
-| Mappa/indicazioni (link a mappe) nella pagina Contatti | ⬜ | Embed di terze parti da decidere (cookie) |
+| Mappa/indicazioni (link a mappe) nella pagina Contatti | ✅ | Mappa statica ospitata da noi (nessuna terza parte, nessun cookie) che apre il luogo esatto su Google Maps; testata |
 | Profilo Google Business collegato al sito e coerente | ⬜ | Azione del committente |
 | Link `tel:` per il telefono | ✅ | Testato |
 

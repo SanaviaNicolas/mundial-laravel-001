@@ -100,6 +100,8 @@ return [
         'hours_title' => 'Opening hours',
         'hours_caption' => 'Opening hours',
         'follow' => 'Follow us',
+        'map_alt' => 'Map of the Via Cadiceto area in Vigonovo, with Visciano 82 in the centre',
+        'map_open' => 'Open in Google Maps',
     ],
     'legal' => [
         'missing' => '[to be completed]',
