@@ -104,6 +104,7 @@ Elenco di ciò che serve, non un design system: si creano solo quando la prima p
 - **Vettoriale**: `public/brand/logo.svg`, ottenuto vettorializzando il JPG fornito dal cliente (non è il file originale: va sostituito con l'SVG ufficiale quando arriva, mantenendo `id="logo"` sull'elemento radice e `fill="currentColor"` per le parti nere). Due livelli: **inchiostro nero** (`currentColor`) e **blu** `#0090d0` fisso.
 - **Colore**: le parti nere seguono il colore del testo del contesto, quindi il logo diventa **bianco** sulle foto e sui fondi scuri (header trasparente, sipario, menu mobile, footer) e **nero** su fondo chiaro (header scrollato); il blu resta sempre blu (contrasto ~4,9:1 su nero inchiostro).
 - **Componenti**: `x-logo-mark` (solo SVG, riferisce il file con `<use>`, cacheabile) e `x-logo` (link alla home della lingua corrente). Dimensioni: header 64–80 px di altezza che si riduce a 48–56 px dopo lo scroll; menu mobile 56 px; footer 64–80 px; sipario fino a 352 px.
+- **Immagine di condivisione** (Open Graph, 1200×630): `public/brand/og-image.png`, logo bianco al centro su inchiostro con una barra pomodoro in basso; generata dal logo vettoriale (sharp), da rigenerare quando arriva il logo ufficiale (o sostituire con una foto vera del locale).
 - **Favicon**: lo stesso SVG (`<link rel="icon" type="image/svg+xml">`); icone per social e PWA da produrre con il file ufficiale.
 
 ## Stato di implementazione

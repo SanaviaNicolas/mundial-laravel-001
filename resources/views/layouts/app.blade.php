@@ -2,6 +2,7 @@
     $pagine = collect(['menu', 'story', 'contact'])->mapWithKeys(fn ($page) => [__('site.nav.'.$page) => $pageUrl($page)]);
     $overlay = View::hasSection('header-overlay');
     $alternates = \App\Support\Pages::alternates();
+    $ogLocales = ['it' => 'it_IT', 'en' => 'en_GB'];
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"@if (\App\Support\Pages::current() === 'home') data-home @endif>
@@ -18,6 +19,22 @@
             @endforeach
             <link rel="alternate" hreflang="x-default" href="{{ url($alternates[config('app.locales')[0]]) }}">
         @endif
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="{{ config('app.name') }}">
+        <meta property="og:title" content="@yield('title')">
+        <meta property="og:description" content="@yield('description')">
+        @if ($alternates)
+            <meta property="og:url" content="{{ url($alternates[app()->getLocale()]) }}">
+        @endif
+        <meta property="og:locale" content="{{ $ogLocales[app()->getLocale()] }}">
+        @foreach (array_diff_key($ogLocales, [app()->getLocale() => true]) as $ogLocale)
+            <meta property="og:locale:alternate" content="{{ $ogLocale }}">
+        @endforeach
+        <meta property="og:image" content="{{ asset('brand/og-image.png') }}">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:image:alt" content="{{ config('app.name') }} — Pizza • Cucina">
+        <meta name="twitter:card" content="summary_large_image">
         @unless (app()->isProduction())
             <meta name="robots" content="noindex, nofollow">
         @endunless

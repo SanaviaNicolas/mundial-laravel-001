@@ -12,7 +12,7 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 | `<title>` per pagina, univoco | 🟡 | Home ok, testato; layout con `@yield('title')` |
 | Meta description per pagina, univoca (≤ 155 caratteri) | 🟡 | Home ok, testata |
 | Canonical per pagina (URL assoluto, senza parametri) | ✅ | Testato, per ogni lingua |
-| Open Graph / Twitter card (`og:title`, `og:description`, `og:image` 1200×630, `og:type`, `og:locale`) | ⬜ | |
+| Open Graph / Twitter card (`og:title`, `og:description`, `og:image` 1200×630, `og:type`, `og:locale`) | ✅ | Nel layout, da title/description/canonical della pagina; `og:locale` it_IT/en_GB con l'alternativa; immagine `public/brand/og-image.png` (logo bianco su nero con barra pomodoro, generata dal logo vettoriale: da rifare col logo ufficiale o con una foto vera); testato |
 | `sitemap.xml` (solo URL canonici, `lastmod`) | ⬜ | Già referenziata da `robots.txt` in production |
 | `robots.txt` | ✅ | Dinamico (`RobotsController`): in production `Sitemap:` senza esporre il percorso admin; fuori production `Disallow: /` |
 | Ambienti non production `noindex` | ✅ | Header `X-Robots-Tag` + meta robots, testati |
