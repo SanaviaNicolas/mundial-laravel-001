@@ -66,10 +66,7 @@
             <div class="md:col-span-6 md:col-start-7">
                 <p class="text-xs font-bold uppercase tracking-widest text-muted">{{ __('site.story.name_eyebrow') }}</p>
                 <h2 class="mt-3 type-section">{{ __('site.story.name_title') }}</h2>
-                <div class="mt-6 space-y-5 text-lg text-ink-soft">
-                    <p>{{ __('site.story.name_1') }}</p>
-                    <p>{{ __('site.story.name_2') }}</p>
-                </div>
+                <p class="mt-6 text-lg text-ink-soft">{{ __('site.story.name_text') }}</p>
             </div>
         </div>
     </section>

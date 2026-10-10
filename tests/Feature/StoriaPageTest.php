@@ -35,7 +35,8 @@ class StoriaPageTest extends TestCase
     public function test_storia_pays_tribute_to_maradona_with_the_mural_photo_and_a_number_ten_patch(): void
     {
         $html = $this->get('/la-nostra-storia')
-            ->assertSeeText('Mondiale del 1982')
+            ->assertSeeText('Da Mundial 82 a Visciano 82')
+            ->assertSeeText('Una passione di casa')
             ->assertSeeText('Diego Armando Maradona')
             ->assertSee('alt="Il murale di Diego Armando Maradona con la maglia del Napoli a Largo Maradona, nei Quartieri Spagnoli di Napoli"', false)
             ->getContent();
