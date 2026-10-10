@@ -289,4 +289,15 @@ class MenuPageTest extends TestCase
         $this->get('/menu')->assertSeeTextInOrder(['Dolci', 'Bevande', 'Bibite analcoliche', 'Birre', 'Vini']);
         $this->get('/en/menu')->assertSeeTextInOrder(['Desserts', 'Drinks', 'Soft drinks', 'Beers', 'Wines']);
     }
+
+    public function test_the_provisional_menu_reads_like_a_real_one(): void
+    {
+        $this->get('/menu')
+            ->assertDontSeeText('di esempio')
+            ->assertSeeText('Tiramisù')
+            ->assertSeeText('Pastiera napoletana')
+            ->assertSeeText('Coca-Cola')
+            ->assertSeeText('Tè al limone');
+        $this->get('/en/menu')->assertDontSeeText('Sample');
+    }
 }

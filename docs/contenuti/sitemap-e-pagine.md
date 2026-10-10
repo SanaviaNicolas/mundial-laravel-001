@@ -14,7 +14,7 @@
 | Recensioni da citare in home | `TODO-DATO`: 3–4 recensioni vere scelte dal cliente (testo, nome come appare, fonte), con il suo consenso; fino ad allora la sezione "Dicono di noi" mostra solo il link a Google |
 | Profili social (URL) | Ricevuti: Instagram `@mundial82` (instagram.com/mundial82), Facebook `Mundial82` (facebook.com/Mundial82): usano ancora il vecchio nome. In `config/site.php` (`social`); da usare anche come `sameAs` nel JSON-LD |
 | Fascia di prezzo (`priceRange`) | `TODO-DATO` |
-| Prezzi, allergeni, bevande, dolci del menù | Prezzi **indicativi inseriti come segnaposto** (non forniti dal committente: da confermare); allergeni, bevande, dolci `TODO-DATO` |
+| Prezzi, allergeni, bevande, dolci del menù | Voci e prezzi **inventati come segnaposto** (non forniti dal committente: da sostituire con il listino reale); allergeni `TODO-DATO` |
 | Testi definitivi (storia, descrizione) e foto reali | Bozza della pagina storia scritta dai punti del cliente (vedi sotto); testi definitivi e foto `TODO-DATO` |
 
 Nome locale: **Visciano 82**. Il vecchio nome "Mundial 82" non compare nei contenuti, salvo decisione contraria del committente.
@@ -48,7 +48,7 @@ Il sito è **multilingua** (italiano e inglese, vedi [ADR 0009](../decisioni/000
 
 - **Obiettivo**: consultare velocemente tutte le pizze e i piatti da smartphone; trovare la pizza giusta.
 - **Sezioni**: H1 · tre qualità dell'impasto · "In evidenza" (voci con badge) · indice delle categorie (ancore) · macrocategorie `H2`, sottocategorie `H3` (numerate e con foto), voci un livello sotto (`H3` sotto una macro senza sottocategorie, `H4` sotto una sottocategoria) · legenda dei surgelati · invito a chiamare.
-- **Categorie** (ordine proposto): Tradizione napoletana con bordo alto · Le classiche · Le speciali · Fiorfritta/Coccodrillo · Le bianche · Le chiuse · Baguette · Panuozzi · Tegamini · **Dolci** · **Bevande** (Bibite analcoliche, Birre, Vini). Dolci e bevande ci sono già nei dati statici con voci di esempio (nome, formato nella descrizione, prezzo indicativo); il listino reale è `TODO-DATO`.
+- **Categorie** (ordine proposto): Tradizione napoletana con bordo alto · Le classiche · Le speciali · Fiorfritta/Coccodrillo · Le bianche · Le chiuse · Baguette · Panuozzi · Tegamini · **Dolci** · **Bevande** (Bibite analcoliche, Birre, Vini). Nei dati statici il menù è **provvisorio e in parte inventato** (voci, ingredienti, prezzi: es. Coca-Cola e tè al limone tra le bevande, tiramisù e pastiera tra i dolci) perché la pagina si legga come un menù vero; va sostituito con il listino reale (`TODO-DATO`).
 - **Badge**: i tag `pizza-del-mese`, `la-piu-scelta`, `novita` e `stagionale` diventano badge accanto alla voce e la portano nella sezione "In evidenza" in testa alla pagina (card senza foto).
 - **Voce di menù**: nome (spesso dialettale), ingredienti (testo), riga "A fine cottura"/"Servito con", nota libera (es. "1° premio oscar della pizza '73"), asterisco su certi ingredienti, prezzo e allergeni (segnaposto), foto opzionale.
 - **Pagina unica** con tutte le categorie in HTML server-side (leggibile da crawler e AI senza JS); l'eventuale filtro/ricerca è un miglioramento progressivo, non un requisito.
