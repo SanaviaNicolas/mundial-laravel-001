@@ -64,7 +64,7 @@ class HomePageTest extends TestCase
             ],
         ]]]);
 
-        $this->get('/')->assertSeeText('Categoria prova')->assertSeeText('2 voci');
+        $this->get('/')->assertSeeText('Categoria prova')->assertSeeText('2 proposte');
     }
 
     public function test_home_does_not_show_todo_markers(): void

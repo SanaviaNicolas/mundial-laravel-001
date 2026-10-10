@@ -32,7 +32,7 @@ return [
         'marquee' => ['Neapolitan pizza', 'Slow-rising dough', 'High digestibility', 'Original ingredients', 'Family tradition'],
         'menu_title' => 'The menu',
         'menu_text' => 'Nine categories, from Neapolitan tradition to tegamini. Pick where to start.',
-        'items' => '{1} :count item|[2,*] :count items',
+        'items' => '{1} :count dish|[2,*] :count dishes',
         'band_alt' => 'The tall, airy crust of a Neapolitan pizza',
         'band_title' => 'A family of pizza makers.',
         'band_text' => 'Neapolitan tradition brought to the Veneto, with original, carefully sourced, quality ingredients.',

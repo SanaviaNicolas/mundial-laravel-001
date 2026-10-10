@@ -32,7 +32,7 @@ return [
         'marquee' => ['Pizza napoletana', 'Impasto lungo', 'Alta digeribilità', 'Ingredienti originali', 'Tradizione di famiglia'],
         'menu_title' => 'Il menù',
         'menu_text' => 'Nove categorie, dalla tradizione napoletana ai tegamini. Scegli da dove iniziare.',
-        'items' => '{1} :count voce|[2,*] :count voci',
+        'items' => '{1} :count proposta|[2,*] :count proposte',
         'band_alt' => 'La crosta alta e alveolata di una pizza napoletana',
         'band_title' => 'Una famiglia di pizzaioli.',
         'band_text' => 'La tradizione napoletana portata in Veneto, con ingredienti originali, ricercati e di qualità.',
