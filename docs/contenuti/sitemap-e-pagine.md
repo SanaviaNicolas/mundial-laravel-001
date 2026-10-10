@@ -92,5 +92,5 @@ Il sito è **multilingua** (italiano e inglese, vedi [ADR 0009](../decisioni/000
 ## Pagine tecniche
 
 - `404` personalizzata in italiano, con link alla home e al menù (noindex per costruzione: status 404).
-- `/sitemap.xml` e `/robots.txt` (quest'ultimo già presente, vedi [ADR 0004](../decisioni/0004-seo-ambienti-non-production.md)).
+- `/sitemap.xml` (implementata: tutte le pagine nelle due lingue con `hreflang`) e `/robots.txt` (vedi [ADR 0004](../decisioni/0004-seo-ambienti-non-production.md)).
 - `/llms.txt`: da valutare (vedi [checklist SEO](../seo/checklist.md)).

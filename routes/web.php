@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RobotsController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 foreach (config('app.locales') as $locale) {
@@ -12,3 +13,4 @@ foreach (config('app.locales') as $locale) {
 }
 
 Route::get('/robots.txt', RobotsController::class);
+Route::get('/sitemap.xml', SitemapController::class);
