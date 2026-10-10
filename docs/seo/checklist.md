@@ -17,8 +17,8 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 | `robots.txt` | ✅ | Dinamico (`RobotsController`): in production `Sitemap:` senza esporre il percorso admin; fuori production `Disallow: /` |
 | Ambienti non production `noindex` | ✅ | Header `X-Robots-Tag` + meta robots, testati |
 | Panel admin non indicizzabile, URL non di default | ✅ | `X-Robots-Tag` sempre attivo; percorso segreto da `ADMIN_PATH`, non in `robots.txt` né nel repo |
-| Dati strutturati JSON-LD (Restaurant/Pizzeria, orari) | ⬜ | Orari e contatti arriveranno con la pagina Impostazioni |
-| Dati strutturati JSON-LD del menù (Menu, MenuSection, MenuItem) | ⬜ | Il modello dati è pronto; si genera dagli stessi dati della pagina. Vedi [guida frontend](../frontend/dati-menu.md) |
+| Dati strutturati JSON-LD (Restaurant/Pizzeria, orari) | ✅ | `Restaurant` su ogni pagina (`App\Support\StructuredData`), dai dati di `config/site.php`; testato |
+| Dati strutturati JSON-LD del menù (Menu, MenuSection, MenuItem) | ✅ | Sulla pagina menù, dallo stesso contratto dati della pagina (quindi dal pannello quando `MENU_SOURCE=database`); testato. | Il modello dati è pronto; si genera dagli stessi dati della pagina. Vedi [guida frontend](../frontend/dati-menu.md) |
 | URL puliti (minuscoli, italiani, senza parametri/slash finale) | ✅ | `/menu`, `/la-nostra-storia`, `/contatti`; da rispettare nelle nuove pagine |
 | Link interni tra le pagine (nav header/footer, rimandi dalla home) | ✅ | Testati |
 | HTTPS e reindirizzamento unico (http→https, www/non-www) | ⬜ | Sistemistica (Nicolas) |
@@ -44,9 +44,9 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 
 | Voce | Stato | Note |
 |---|---|---|
-| NAP (nome, indirizzo, telefono) identico in footer, contatti e JSON-LD | 🟡 | Dati reali in `config/site.php`, usati da footer e contatti; JSON-LD da fare |
+| NAP (nome, indirizzo, telefono) identico in footer, contatti e JSON-LD | ✅ | Tutto da `config/site.php` |
 | Città/zona in H1/title/primo paragrafo della home | 🟡 | "Vigonovo" nel primo paragrafo; da portare in H1/title con il testo definitivo |
-| Orari in HTML (tabella) e in `openingHoursSpecification` | 🟡 | Tabella HTML con orari reali; JSON-LD da fare |
+| Orari in HTML (tabella) e in `openingHoursSpecification` | ✅ | Tabella HTML e JSON-LD dagli stessi dati |
 | Mappa/indicazioni (link a mappe) nella pagina Contatti | ✅ | Mappa statica ospitata da noi (nessuna terza parte, nessun cookie) che apre il luogo esatto su Google Maps; testata |
 | Profilo Google Business collegato al sito e coerente | ⬜ | Azione del committente |
 | Link `tel:` per il telefono | ✅ | Testato |
@@ -55,12 +55,12 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 
 | Voce | Stato | Note |
 |---|---|---|
-| `Pizzeria`/`Restaurant` (`LocalBusiness`) con `address`, `geo`, `telephone`, `priceRange`, `sameAs`, `hasMenu` | ⬜ | Un'unica entità con `@id` stabile, riusata dalle pagine |
-| `openingHoursSpecification` | ⬜ | |
-| `Menu` → `MenuSection` → `MenuItem` generati dai dati Filament | ⬜ | Solo contenuto visibile in pagina |
+| `Pizzeria`/`Restaurant` (`LocalBusiness`) con `address`, `geo`, `telephone`, `priceRange`, `sameAs`, `hasMenu` | 🟡 | Fatto con `@id` unico, `alternateName` "Mundial 82", `servesCuisine`, `acceptsReservations`, `hasMap`; manca `priceRange` (dato del cliente). schema.org non ha un tipo "Pizzeria": si usa `Restaurant`. Un'unica entità con `@id` stabile, riusata dalle pagine |
+| `openingHoursSpecification` | ✅ | Dagli orari strutturati (`day_of_week`, `opens`, `closes`; la chiusura a mezzanotte diventa 23:59); le chiusure straordinarie annunciate sono `specialOpeningHoursSpecification` |
+| `Menu` → `MenuSection` → `MenuItem` generati dai dati Filament | ✅ | Solo contenuto visibile: nome, descrizione (o ingredienti), prezzo solo se presente, `suitableForDiet` dai tag vegetariano/vegano/senza-glutine; allergeni solo in HTML |
 | `BreadcrumbList` (se utile) | ⬜ | Sito piatto: probabilmente non serve |
 | Validazione (Rich Results Test / Schema.org validator) | ⬜ | Dopo la prima implementazione |
-| Test automatico: JSON-LD presente e valido JSON | ⬜ | Con la prima pagina che lo emette |
+| Test automatico: JSON-LD presente e valido JSON | ✅ | `StructuredDataTest` |
 
 ## AI-friendly
 
@@ -68,7 +68,7 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 |---|---|---|
 | Menù, orari e indirizzo in HTML (mai solo in immagini) | 🟡 | Menù (`/menu`), orari e indirizzo sono HTML server-side; dati ancora segnaposto |
 | Allergeni mostrati solo se verificati dal ristorante | 🟡 | Regola e metodi nel dominio, con test; la visualizzazione arriverà con il frontend. Vedi [guida frontend](../frontend/dati-menu.md) |
-| Dati strutturati leggibili dai motori generativi | ⬜ | Come JSON-LD sopra |
+| Dati strutturati leggibili dai motori generativi | ✅ | Come JSON-LD sopra |
 | Heading descrittivi e testi chiari, senza dipendere dal JS | ⬜ | |
 | `llms.txt` | ⬜ | Da valutare |
 | Politica esplicita sui crawler AI in `robots.txt` | ⬜ | Da decidere con il committente |

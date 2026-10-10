@@ -19,6 +19,7 @@ return [
         'sunday' => 'Domenica',
     ],
     'closed' => 'Chiuso',
+    'cuisine' => ['Pizza napoletana', 'Cucina italiana'],
     'closures' => [
         'upcoming' => 'Chiusi dal :from al :to.',
         'ongoing' => 'Chiusi fino al :to, riapriamo il :reopen.',

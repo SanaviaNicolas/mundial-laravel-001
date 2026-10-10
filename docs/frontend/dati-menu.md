@@ -218,9 +218,9 @@ La sorgente si sceglie con `MENU_SOURCE`: `static` (oggi, `config/menu.php`, dat
 - **allergeni pubblici** di una voce (assenti se non verificata, altrimenti elenco, anche vuoto) e **allergeni delle aggiunte** (a parte, per aggiunta);
 - prezzo in centesimi (assente se non noto).
 
-## 9. Collegamento con la SEO [in arrivo per la parte dati strutturati]
+## 9. Collegamento con la SEO [implementato]
 
-I **dati strutturati schema.org** (JSON-LD) per il menù verranno generati **dagli stessi dati** della pagina, così non possono discordare:
+I **dati strutturati schema.org** (JSON-LD) per il menù sono generati **dagli stessi dati** della pagina (`App\Support\StructuredData`, dal contratto `app/Menu`), così non possono discordare:
 
 - `Menu` → `MenuSection` (macrocategoria → sezione, sottocategoria → sezione annidata) → `MenuItem` (voce);
 - per ogni `MenuItem`: nome, descrizione, prezzo (`offers` con `price` in euro e `priceCurrency` EUR, solo se il prezzo c'è), `suitableForDiet` dai tag (es. vegano, senza glutine) quando pertinente;

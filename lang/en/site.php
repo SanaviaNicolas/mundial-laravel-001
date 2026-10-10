@@ -19,6 +19,7 @@ return [
         'sunday' => 'Sunday',
     ],
     'closed' => 'Closed',
+    'cuisine' => ['Neapolitan pizza', 'Italian cuisine'],
     'closures' => [
         'upcoming' => 'Closed from :from to :to.',
         'ongoing' => 'Closed until :to, we reopen on :reopen.',

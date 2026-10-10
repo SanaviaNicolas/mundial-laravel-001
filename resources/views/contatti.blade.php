@@ -36,7 +36,7 @@
                     @foreach (config('site.hours') as $riga)
                         <tr class="border-b border-ink/15 first:border-t">
                             <th scope="row" class="py-5 pr-4 font-display text-xl font-bold md:text-2xl">{{ __('site.days.'.$riga['days']) }}</th>
-                            <td class="py-5 text-right text-xl md:text-2xl">{{ $riga['open'] ?? __('site.closed') }}</td>
+                            <td class="py-5 text-right text-xl md:text-2xl">{{ $riga['opens'] ? $riga['opens'].' – '.$riga['closes'] : __('site.closed') }}</td>
                         </tr>
                     @endforeach
                 </table>

@@ -19,6 +19,10 @@
     $avvisoPagina = collect($menu)->every(fn ($sezione) => $sezione->allergensUnverified());
 @endphp
 
+@push('head')
+    {!! \App\Support\StructuredData::script(\App\Support\StructuredData::menu($menu)) !!}
+@endpush
+
 @section('content')
     <x-hero name="ingredienti" :alt="__('site.menu.hero_alt')" height="min-h-[75svh]" position="object-[60%_50%]">
         <h1 class="type-page text-white">

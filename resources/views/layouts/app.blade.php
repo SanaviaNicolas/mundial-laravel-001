@@ -38,6 +38,8 @@
         @unless (app()->isProduction())
             <meta name="robots" content="noindex, nofollow">
         @endunless
+        {!! \App\Support\StructuredData::script(\App\Support\StructuredData::restaurant()) !!}
+        @stack('head')
         <script>try{if(document.documentElement.hasAttribute('data-home')&&!sessionStorage.getItem('intro')){document.documentElement.classList.add('intro');sessionStorage.setItem('intro','1')}}catch(e){}</script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -117,7 +119,7 @@
                             @foreach (config('site.hours') as $riga)
                                 <div class="flex justify-between gap-4 border-b border-white/10 pb-2">
                                     <dt>{{ __('site.days.'.$riga['days']) }}</dt>
-                                    <dd class="whitespace-nowrap text-white">{{ $riga['open'] ?? __('site.closed') }}</dd>
+                                    <dd class="whitespace-nowrap text-white">{{ $riga['opens'] ? $riga['opens'].' – '.$riga['closes'] : __('site.closed') }}</dd>
                                 </div>
                             @endforeach
                         </dl>
