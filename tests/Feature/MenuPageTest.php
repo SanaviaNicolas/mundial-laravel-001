@@ -240,4 +240,14 @@ class MenuPageTest extends TestCase
     {
         $this->get('/menu')->assertDontSeeText('proposte')->assertSeeText('01 / 09');
     }
+
+    public function test_featured_cards_are_light(): void
+    {
+        $this->oneItem(['tags' => ['pizza-del-mese']]);
+
+        $featured = str($this->get('/menu')->getContent())->after('In evidenza')->before('categorie-menu');
+
+        $this->assertStringContainsString('rounded-2xl bg-white', $featured);
+        $this->assertStringNotContainsString('rounded-2xl bg-ink', $featured);
+    }
 }
