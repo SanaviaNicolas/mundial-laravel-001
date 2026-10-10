@@ -22,7 +22,7 @@
                 <h2 class="type-section">{{ __('site.menu.featured') }}</h2>
                 <ul class="mt-10 grid list-none gap-4 p-0 md:grid-cols-2 md:gap-6">
                     @foreach ($evidenza as $voce)
-                        <li class="row-reveal flex flex-col rounded-2xl bg-white p-7 md:p-10" data-tilt>
+                        <li class="row-reveal flex flex-col rounded-2xl bg-white p-7 md:p-10">
                             <x-badge :tipo="$voce['badge']" class="self-start" />
                             <h3 class="mt-6 text-3xl md:text-4xl">{{ $voce['nome'] }}</h3>
                             <p class="mt-3 flex-1 text-lg text-ink-soft">{{ $voce['ingredienti'] }}</p>

@@ -1,12 +1,12 @@
-{{-- Decorative band of big words moving with the scroll. `ghost` draws the letters as a faint fill, `reverse` flips the direction. --}}
-@props(['words', 'ghost' => false, 'reverse' => false])
+{{-- Decorative band of words that loops on its own (CSS only, static with reduced motion). --}}
+@props(['words'])
 
-<div {{ $attributes->class(['marquee overflow-hidden', 'marquee-rev' => $reverse]) }} aria-hidden="true">
-    <div class="marquee-track flex w-max items-center gap-8 whitespace-nowrap font-display font-extrabold leading-none tracking-tight md:gap-12">
+<div {{ $attributes->class('overflow-hidden') }} aria-hidden="true">
+    <div class="marquee-track flex w-max items-center whitespace-nowrap font-display font-bold leading-none tracking-tight">
         @foreach (range(1, 2) as $copia)
             @foreach ($words as $parola)
-                <span @class(['ghost-text' => $ghost])>{{ $parola }}</span>
-                <span class="size-3 shrink-0 rounded-full bg-current md:size-5"></span>
+                <span class="px-5 md:px-8">{{ $parola }}</span>
+                <span class="size-2 shrink-0 rounded-full bg-pomodoro md:size-2.5"></span>
             @endforeach
         @endforeach
     </div>

@@ -17,12 +17,11 @@
         </div>
     </x-hero>
 
-    <section class="overflow-hidden bg-ink pb-24 pt-12 text-white md:pb-36 md:pt-20">
+    <section class="overflow-hidden bg-ink pt-12 text-white md:pt-20">
         <div class="mx-auto max-w-6xl px-4">
             <x-frase class="max-w-5xl" :text="__('site.home.statement')" />
         </div>
-        <x-marquee :words="__('site.home.marquee')" :ghost="true" class="mt-16 text-[clamp(3.5rem,10vw,8rem)] [--ghost:rgb(255_255_255/0.14)] md:mt-24" />
-        <x-marquee :words="__('site.home.marquee')" :reverse="true" class="mt-4 text-[clamp(3.5rem,10vw,8rem)] text-pomodoro" />
+        <x-marquee :words="__('site.home.marquee')" class="mt-16 border-t border-white/15 py-5 text-[clamp(1.25rem,2.4vw,1.875rem)] text-white/85 md:mt-24 md:py-7" />
     </section>
 
     <section class="py-20 md:py-28">
@@ -34,8 +33,8 @@
             @foreach ($menu as $slug => $categoria)
                 @php($immagine = ['hero', 'impasto', 'ingredienti', 'forno'][$loop->index % 4])
                 <li class="border-b border-ink/15" @if (file_exists(public_path("images/{$immagine}-640.webp"))) data-img="{{ asset("images/{$immagine}-640.webp") }}" @endif>
-                    <a href="{{ $pageUrl('menu') }}#{{ $slug }}" class="group relative block overflow-hidden px-4 py-5 text-ink no-underline transition-colors duration-300 hover:text-white focus-visible:text-white md:py-7">
-                        <span class="absolute inset-0 -translate-x-full bg-pomodoro transition-transform duration-500 ease-out group-hover:translate-x-0 group-focus-visible:translate-x-0" aria-hidden="true"></span>
+                    <a href="{{ $pageUrl('menu') }}#{{ $slug }}" class="group relative block overflow-hidden px-4 py-5 text-ink no-underline transition-colors duration-500 ease-brand hover:text-white focus-visible:text-white md:py-7">
+                        <span class="absolute inset-0 -translate-x-full bg-pomodoro transition-transform duration-500 ease-brand group-hover:translate-x-0 group-focus-visible:translate-x-0" aria-hidden="true"></span>
                         <span class="relative flex items-baseline justify-between gap-6">
                             <span class="font-display type-list font-extrabold tracking-tight">{{ $categoria['nome'] }}</span>
                             <span class="shrink-0 text-sm opacity-70 md:text-base">{{ trans_choice('site.home.items', count($categoria['voci'])) }}</span>
@@ -56,7 +55,7 @@
         <div class="mx-auto max-w-6xl px-4">
             <h2 class="type-section text-white">{{ __('site.home.visit') }}</h2>
             <p class="mt-5 text-lg">{{ config('site.address') }}</p>
-            <a href="{{ $tel }}" class="mt-2 inline-block font-display type-phone font-extrabold tracking-tight text-white no-underline hover:underline">{{ config('site.phone') }}</a>
+            <a href="{{ $tel }}" class="mt-2 inline-block font-display type-phone font-extrabold tracking-tight text-white no-underline"><span class="link-line">{{ config('site.phone') }}</span></a>
             <div class="mt-10 flex flex-wrap gap-3">
                 <x-button :href="$tel">{{ __('site.ui.call') }}</x-button>
                 <x-button :href="$pageUrl('contact')" variant="outline-light">{{ __('site.home.hours_how') }}</x-button>

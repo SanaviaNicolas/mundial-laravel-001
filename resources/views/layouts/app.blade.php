@@ -34,7 +34,7 @@
                 <nav aria-label="{{ __('site.ui.main_nav') }}" class="max-md:hidden">
                     <ul class="flex list-none gap-1 p-0">
                         @foreach ($pagine as $nome => $url)
-                            <li><a href="{{ $url }}" @class(['inline-flex min-h-11 items-center px-3 font-medium text-current no-underline', 'underline decoration-pomodoro decoration-2 underline-offset-8' => request()->is(ltrim($url, '/'))]) @if (request()->is(ltrim($url, '/'))) aria-current="page" @endif>{{ $nome }}</a></li>
+                            <li><a href="{{ $url }}" class="inline-flex min-h-11 items-center px-3 font-medium text-current no-underline" @if (request()->is(ltrim($url, '/'))) aria-current="page" @endif><span class="link-line">{{ $nome }}</span></a></li>
                         @endforeach
                     </ul>
                 </nav>

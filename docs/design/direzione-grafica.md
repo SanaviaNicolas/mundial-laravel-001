@@ -108,7 +108,7 @@ Dopo i primi tentativi (blocchi di colore, foto a cerchio, bollino rotante, fasc
 
 - **Hero a tutto schermo** (`min-height: 100svh`): foto in cover con **lento zoom iniziale** (Ken Burns) e **parallasse allo scroll**, menu **trasparente** sopra l'immagine, titolo gigante (fino a 120 px) rivelato **riga per riga** all'apertura, poi testo e pulsanti in dissolvenza. Il gradiente finale sfuma nel nero della sezione successiva, senza stacco.
 - **Frase d'impatto a parole che si accendono**: "Almeno 2 giorni di lievitazione. Alta idratazione. Alta digeribilità…" in testo enorme su nero; ogni parola passa da opaca a piena mentre entra nello schermo (CSS `animation-timeline: view()`).
-- **Menù come indice tipografico**: le nove categorie sono righe giganti separate da filetti; all'hover/focus una **fascia rosso pomodoro** scorre da sinistra e il testo diventa bianco; a destra il numero di voci.
+- **Menù come indice tipografico**: le nove categorie sono righe giganti separate da filetti; all'hover/focus una **fascia rosso pomodoro** scorre da sinistra e il testo diventa bianco; a destra il numero di proposte ("3 proposte": "voci" suonava da gestionale).
 - **Banda fotografica** a tutta altezza con parallasse ("Una famiglia di pizzaioli") che rimanda alla storia.
 - **Contatti** su nero **piatto** con il numero di telefono gigante.
 - **Niente gradienti di colore** come decorazione (un tentativo con un bagliore rosso nei contatti è stato scartato: effetto brutto). Sono ammessi solo gli **scrim neri** sopra le foto, necessari per leggere il testo.
@@ -118,7 +118,7 @@ Dopo i primi tentativi (blocchi di colore, foto a cerchio, bollino rotante, fasc
 - **Palette**: nero inchiostro e crema dominano; il rosso pomodoro è per azioni, hover e bagliore; il blu resta solo nel logo ("82").
 - **Titoli** in Bricolage Grotesque extrabold con una **scala tipografica fluida e limitata** definita in `resources/css/app.css` (`type-hero` 76 px max, `type-page` 80, `type-band` 60, `type-section` 48, `type-list` 48, `type-statement` 48, `type-phone` 60): su desktop i testi restano misurati, su mobile occupano bene lo schermo. Testo in Inter 17 px; un solo raggio (`rounded-2xl`), pulsanti a pillola.
 - **Regole sul movimento**: solo miglioramento progressivo. Senza supporto a `animation-timeline` tutto è visibile e statico; con `prefers-reduced-motion: reduce` non si muove nulla (animazioni dentro `@media (prefers-reduced-motion: no-preference)`). Niente animazioni "a ogni sezione": il movimento è nell'hero, nella frase d'impatto, nelle bande fotografiche e nell'indice del menù.
-- **JS**: circa 1 KB (`resources/js/app.js`): classe `js`, header allo scroll, evidenziazione delle categorie. Il sito funziona senza.
+- **JS**: pochi KB (`resources/js/app.js`): classe `js`, header allo scroll, evidenziazione delle categorie, effetti del quarto passaggio (vedi sotto). Il sito funziona senza.
 - **Foto provvisorie**: l'hero e la banda "famiglia" usano due ritagli della stessa foto di prova (vedi sotto); le altre foto sono ancora segnaposto. Le foto reali dovranno avere soggetto centrale e zone scure o sfocate dove va il testo.
 
 ### Pagine interne
@@ -154,7 +154,7 @@ Il sito non è una one page: Home, Menù (`/menu`), La storia (`/la-nostra-stori
 
 ### Effetti "wow" (quarto passaggio)
 
-Tutti sono **miglioramento progressivo**: senza supporto o con `prefers-reduced-motion: reduce` il sito resta completo e statico; quelli da puntatore esistono solo con mouse (`hover: hover` e `pointer: fine`); gli elementi puramente decorativi sono `aria-hidden`. Il JS totale è circa 4 KB (`resources/js/app.js`).
+Tutti sono **miglioramento progressivo**: senza supporto o con `prefers-reduced-motion: reduce` il sito resta completo e statico; quelli da puntatore esistono solo con mouse (`hover: hover` e `pointer: fine`); gli elementi puramente decorativi sono `aria-hidden`. Il JS totale è circa 3 KB (`resources/js/app.js`).
 
 | Effetto | Dove | Tecnica |
 |---|---|---|
@@ -163,16 +163,18 @@ Tutti sono **miglioramento progressivo**: senza supporto o con `prefers-reduced-
 | **Zoom lento** e **parallasse** della foto, che segue anche il **mouse** | Hero | CSS `animation-timeline: view()` + piccolo JS (`data-mouse`) |
 | **Foto che si apre** (clip-path) mentre entra nello schermo | Bande fotografiche | `.unveil`, scroll-driven CSS |
 | **Frase a parole che si accendono** | Home, storia | componente `x-frase`, scroll-driven CSS |
-| **Fasce di parole giganti** mosse dallo scroll (una in verso opposto) | Home | componente `x-marquee`, scroll-driven CSS |
+| **Fascia di parole che scorre da sola** in continuo (una sola riga, testo medio tra due filetti: le due fasce giganti mosse dallo scroll occupavano troppo spazio) | Home | componente `x-marquee`, animazione CSS infinita |
 | **Racconto "pinned"**: la sezione si blocca e i tre punti dell'impasto cambiano scorrendo, con barra di avanzamento | Storia | JS (`--p`, `data-active`) + CSS; senza JS resta un elenco |
 | **Foto che segue il cursore** sulle righe del menù, con la riga che si colora | Home (indice del menù) | JS; usa le foto disponibili, nessuna se mancano |
-| **Cursore personalizzato** (cerchio che segue il mouse e cresce sui link) | Desktop | JS, `mix-blend-mode: difference` |
-| **Pulsanti magnetici** e **card che si inclinano in 3D** | Pulsanti; "In evidenza" del menù | JS |
+| **Etichetta del pulsante che rotola**: all'hover il testo sale e una copia entra dal basso, mentre lo sfondo cambia colore | Tutti i pulsanti (`x-button`) | CSS; la copia è contenuto generato (`content: attr(data-label) / ''`), vuoto per gli screen reader e assente dal DOM |
+| **Sottolineatura che si disegna** da sinistra | Link della navigazione e numeri di telefono (`.link-line`) | CSS |
 | **Righe del menù che entrano** una alla volta | Menù | scroll-driven CSS (`.row-reveal`) |
 | **Barra di avanzamento** di lettura | Tutte le pagine | scroll-driven CSS |
 | **Transizione tra pagine** a cerchio che si espande | Tutte (browser con View Transitions) | CSS `@view-transition` |
 | **Voci dei pannelli** (menu mobile, categorie) che entrano a cascata | Menu mobile, categorie | CSS, `@starting-style` |
 | **Scritta gigante "Visciano 82"** tenue nel footer | Tutte le pagine | CSS |
+
+**Movimento coerente** (revisione dopo il quarto passaggio): un'unica curva per tutto il sito, il token `--ease-brand` (`cubic-bezier(0.2, 0.8, 0.2, 1)`, classe Tailwind `ease-brand`), e durate da 0,3 s (colori) a 0,5 s (pulsanti, sottolineature, fasce) fino a 0,9–1 s (titoli, foto). Tolti il **cursore personalizzato** (con `mix-blend-mode: difference` invertiva i colori di ciò che stava sotto, ad esempio le bandiere del selettore di lingua), i **pulsanti magnetici** e le **card inclinate in 3D**: effetti "da sito creativo" che non aggiungevano nulla.
 
 Scelte tecniche da ricordare: niente animazioni con **timeline con nome** (`view-timeline: --x`), perché in Chromium bloccavano il rendering: il racconto "pinned" usa JS. Niente testo a contorno (`-webkit-text-stroke`) su font variabili: mostra le sovrapposizioni interne dei glifi; si usa un riempimento tenue.
 

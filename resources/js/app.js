@@ -67,68 +67,42 @@ if (track && !calm) {
 
 // Pointer effects: desktop only, never with reduced motion.
 if (fine && !calm) {
-    const mouse = { x: innerWidth / 2, y: innerHeight / 2 };
-    const lerp = (a, b, t) => a + (b - a) * t;
-    const make = (className) => document.body.appendChild(Object.assign(document.createElement('div'), { className, ariaHidden: 'true' }));
-
-    // Cursor follower that grows over links and buttons.
-    const cursor = make('cursor');
-    const pos = { ...mouse };
-    let size = 1;
-
     // Floating photo that follows the pointer over the menu index.
     const list = document.querySelector('[data-preview]');
-    const preview = list && make('preview');
-    const photo = preview && preview.appendChild(document.createElement('img'));
-    const previewPos = { ...mouse };
-    let previewOn = false;
-
-    addEventListener('pointermove', (event) => {
-        mouse.x = event.clientX;
-        mouse.y = event.clientY;
-        cursor.toggleAttribute('data-on', true);
-        size = event.target.closest('a, button') ? 2.2 : 1;
-    });
-    document.addEventListener('pointerleave', () => cursor.removeAttribute('data-on'));
 
     if (list) {
+        const preview = document.body.appendChild(Object.assign(document.createElement('div'), { className: 'preview', ariaHidden: 'true' }));
+        const photo = preview.appendChild(document.createElement('img'));
+        const mouse = { x: innerWidth / 2, y: innerHeight / 2 };
+        const pos = { ...mouse };
+        const lerp = (a, b, t) => a + (b - a) * t;
+
+        addEventListener('pointermove', (event) => {
+            mouse.x = event.clientX;
+            mouse.y = event.clientY;
+        });
         list.addEventListener('pointerover', (event) => {
             const row = event.target.closest('[data-img]');
 
-            previewOn = Boolean(row);
-            preview.toggleAttribute('data-on', previewOn);
+            preview.toggleAttribute('data-on', Boolean(row));
 
             if (row) {
                 photo.src = row.dataset.img;
             }
         });
-        list.addEventListener('pointerleave', () => {
-            previewOn = false;
-            preview.removeAttribute('data-on');
-        });
+        list.addEventListener('pointerleave', () => preview.removeAttribute('data-on'));
+
+        const frame = () => {
+            pos.x = lerp(pos.x, mouse.x + 28, 0.14);
+            pos.y = lerp(pos.y, mouse.y - 110, 0.14);
+            preview.style.setProperty('--px', `${pos.x}px`);
+            preview.style.setProperty('--py', `${pos.y}px`);
+            preview.style.setProperty('--pr', `${(mouse.x - pos.x) * 0.05}deg`);
+            requestAnimationFrame(frame);
+        };
+
+        frame();
     }
-
-    // Magnetic buttons and tilting cards.
-    document.querySelectorAll('[data-magnetic]').forEach((el) => {
-        el.addEventListener('pointermove', (event) => {
-            const box = el.getBoundingClientRect();
-
-            el.style.transform = `translate(${(event.clientX - box.left - box.width / 2) * 0.18}px, ${(event.clientY - box.top - box.height / 2) * 0.3}px)`;
-        });
-        el.addEventListener('pointerleave', () => (el.style.transform = ''));
-    });
-
-    document.querySelectorAll('[data-tilt]').forEach((el) => {
-        el.style.transition = 'transform 0.4s ease-out';
-        el.addEventListener('pointermove', (event) => {
-            const box = el.getBoundingClientRect();
-            const x = (event.clientX - box.left) / box.width - 0.5;
-            const y = (event.clientY - box.top) / box.height - 0.5;
-
-            el.style.transform = `perspective(900px) rotateX(${-y * 7}deg) rotateY(${x * 9}deg) translateZ(0)`;
-        });
-        el.addEventListener('pointerleave', () => (el.style.transform = ''));
-    });
 
     // Hero photo drifts slightly against the pointer.
     const hero = document.querySelector('[data-mouse]');
@@ -137,24 +111,4 @@ if (fine && !calm) {
         hero.style.setProperty('--mx', ((0.5 - event.clientX / innerWidth) * 28).toFixed(1));
         hero.style.setProperty('--my', ((0.5 - event.clientY / innerHeight) * 18).toFixed(1));
     });
-
-    const frame = () => {
-        pos.x = lerp(pos.x, mouse.x, 0.22);
-        pos.y = lerp(pos.y, mouse.y, 0.22);
-        cursor.style.setProperty('--cx', `${pos.x}px`);
-        cursor.style.setProperty('--cy', `${pos.y}px`);
-        cursor.style.setProperty('--cs', size);
-
-        if (preview) {
-            previewPos.x = lerp(previewPos.x, mouse.x + 28, 0.14);
-            previewPos.y = lerp(previewPos.y, mouse.y - 110, 0.14);
-            preview.style.setProperty('--px', `${previewPos.x}px`);
-            preview.style.setProperty('--py', `${previewPos.y}px`);
-            preview.style.setProperty('--pr', `${(mouse.x - previewPos.x) * 0.05}deg`);
-        }
-
-        requestAnimationFrame(frame);
-    };
-
-    frame();
 }

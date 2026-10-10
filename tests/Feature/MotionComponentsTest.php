@@ -17,14 +17,33 @@ class MotionComponentsTest extends TestCase
         $this->assertSame('Pizza napoletana fatta bene', trim(preg_replace('/\s+/', ' ', strip_tags($html))));
     }
 
-    public function test_marquee_is_decorative_and_repeats_the_words_twice(): void
+    public function test_marquee_is_a_decorative_loop_that_repeats_the_words_twice(): void
     {
-        $html = Blade::render('<x-marquee :words="[\'Uno\', \'Due\']" :ghost="true" :reverse="true" />');
+        $html = Blade::render('<x-marquee :words="[\'Uno\', \'Due\']" />');
 
         $this->assertStringContainsString('aria-hidden="true"', $html);
-        $this->assertStringContainsString('marquee-rev', $html);
+        $this->assertStringContainsString('marquee-track', $html);
         $this->assertSame(2, substr_count($html, '>Uno<'));
-        $this->assertSame(4, substr_count($html, 'ghost-text'));
+    }
+
+    public function test_home_has_a_single_marquee_band(): void
+    {
+        $this->assertSame(1, substr_count($this->get('/')->getContent(), 'marquee-track'));
+    }
+
+    public function test_button_rolls_its_label_with_css_only_and_no_pointer_gimmicks(): void
+    {
+        $html = Blade::render('<x-button href="/menu">Guarda il menù</x-button>');
+
+        $this->assertStringContainsString('class="btn-text" data-label="Guarda il menù"><span>Guarda il menù</span></span>', $html);
+        $this->assertSame(1, substr_count(strip_tags($html), 'Guarda il menù'));
+        $this->assertStringNotContainsString('data-magnetic', $html);
+    }
+
+    public function test_pages_have_no_custom_cursor_or_tilting_cards(): void
+    {
+        $this->get('/menu')->assertDontSee('data-tilt', false);
+        $this->assertStringNotContainsString("make('cursor')", file_get_contents(resource_path('js/app.js')));
     }
 
     public function test_home_has_the_scroll_driven_decorations_hidden_from_assistive_tech(): void

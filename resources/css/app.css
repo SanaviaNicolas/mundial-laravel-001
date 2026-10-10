@@ -37,6 +37,9 @@
     --color-pomodoro: #c73a1f;
     --color-pomodoro-scuro: #a92e16;
     --color-sabbia: #d9d0be;
+
+    /* One motion curve for the whole site: quick start, long soft landing. */
+    --ease-brand: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* Type scale for display text (fluid, capped for desktop). */
@@ -122,7 +125,7 @@
 
     .zoom-hover img,
     .zoom-hover > div {
-        transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+        transition: transform 0.9s var(--ease-brand);
     }
 
     .zoom-hover:hover img,
@@ -148,9 +151,7 @@
         visibility: hidden;
         opacity: 0;
         transform: translate3d(var(--px, 0), var(--py, 0), 0) rotate(var(--pr, 0deg)) scale(0.8);
-        transition:
-            opacity 0.25s ease,
-            scale 0.25s ease;
+        transition: opacity 0.3s var(--ease-brand);
     }
 
     .preview[data-on] {
@@ -165,37 +166,76 @@
         object-fit: cover;
     }
 
-    .cursor {
-        position: fixed;
-        left: 0;
-        top: 0;
-        z-index: 60;
-        width: 1.25rem;
-        height: 1.25rem;
-        border-radius: 9999px;
-        background: #fff;
-        mix-blend-mode: difference;
-        pointer-events: none;
-        opacity: 0;
-        transform: translate3d(var(--cx, 0), var(--cy, 0), 0) translate(-50%, -50%) scale(var(--cs, 1));
-        transition:
-            opacity 0.3s ease,
-            scale 0.3s ease;
+    /* Button label that rolls up on hover; the incoming copy is generated content, empty for assistive tech. */
+    .btn-text {
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
     }
 
-    .cursor[data-on] {
-        opacity: 1;
+    .btn-text > span,
+    .btn-text::after {
+        display: block;
+        transition: transform 0.5s var(--ease-brand);
+    }
+
+    .btn-text::after {
+        position: absolute;
+        inset: 100% 0 auto;
+        content: attr(data-label);
+        content: attr(data-label) / '';
+    }
+
+    .btn:hover .btn-text > span,
+    .btn:hover .btn-text::after,
+    .btn:focus-visible .btn-text > span,
+    .btn:focus-visible .btn-text::after {
+        transform: translateY(-100%);
+    }
+
+    /* Underline that draws in from the left when its link is hovered, focused or current. */
+    .link-line {
+        padding-bottom: 0.2em;
+        background: linear-gradient(currentColor, currentColor) left bottom / 0 2px no-repeat;
+        transition: background-size 0.5s var(--ease-brand);
+    }
+
+    a:hover > .link-line,
+    a:focus-visible > .link-line,
+    a[aria-current] > .link-line {
+        background-size: 100% 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .btn-text::after {
+            display: none;
+        }
+
+        .btn-text > span,
+        .link-line {
+            transition: none;
+        }
+
+        .btn:hover .btn-text > span,
+        .btn:focus-visible .btn-text > span {
+            transform: none;
+        }
     }
 
     @media (prefers-reduced-motion: no-preference) {
         .parola > span {
-            animation: rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+            animation: rise 1s var(--ease-brand) both;
             animation-delay: calc(var(--i, 0) * 90ms + var(--base, 200ms));
         }
 
         .fade-in {
             animation: fade-in 1s ease-out both;
             animation-delay: calc(var(--i, 0) * 140ms + var(--base, 200ms));
+        }
+
+        /* Endless band of words: the track holds two copies and slides by one. */
+        .marquee-track {
+            animation: marquee-slide 40s linear infinite;
         }
 
         .kenburns {
@@ -220,7 +260,7 @@
         }
 
         html.intro .curtain span {
-            animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s both;
+            animation: rise 0.9s var(--ease-brand) 0.15s both;
         }
 
         ::view-transition-old(root) {
@@ -228,7 +268,7 @@
         }
 
         ::view-transition-new(root) {
-            animation: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both page-in;
+            animation: 0.8s var(--ease-brand) both page-in;
         }
     }
 
@@ -264,17 +304,6 @@
                 animation: unveil linear both;
                 animation-timeline: view();
                 animation-range: entry 0% entry 90%;
-            }
-
-            /* Big outlined words whose position follows the scroll. */
-            .marquee-track {
-                animation: marquee-slide linear both;
-                animation-timeline: view();
-                animation-range: entry 0% exit 100%;
-            }
-
-            .marquee-rev .marquee-track {
-                animation-direction: reverse;
             }
 
             .row-reveal {
@@ -331,7 +360,7 @@
             transform: none;
             transition:
                 opacity 0.6s ease 0.25s,
-                transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.25s;
+                transform 0.6s var(--ease-brand) 0.25s;
         }
 
         .js .pin-bar {
@@ -455,8 +484,8 @@
             opacity: 0;
             transform: translateY(-1.5rem);
             transition:
-                opacity 0.35s ease,
-                transform 0.35s ease,
+                opacity 0.35s var(--ease-brand),
+                transform 0.35s var(--ease-brand),
                 overlay 0.35s allow-discrete,
                 display 0.35s allow-discrete;
         }
@@ -478,8 +507,8 @@
         opacity: 0;
         transform: translateY(1rem);
         transition:
-            opacity 0.5s ease,
-            transform 0.5s ease;
+            opacity 0.5s var(--ease-brand),
+            transform 0.5s var(--ease-brand);
         transition-delay: calc(var(--i, 0) * 70ms + 150ms);
     }
 
