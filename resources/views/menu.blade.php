@@ -15,6 +15,8 @@
         ->values();
     $accento = ['pizza-del-mese' => 'bg-pomodoro', 'la-piu-scelta' => 'bg-blu-scuro', 'novita' => 'bg-oro', 'stagionale' => 'bg-basilico'];
     $surgelati = $voci->contains(fn ($voce) => collect($voce->ingredients)->contains('frozen', true));
+    // No item verified yet: one allergen notice for the whole menu instead of one per category.
+    $avvisoPagina = collect($menu)->every(fn ($sezione) => $sezione->allergensUnverified());
 @endphp
 
 @section('content')
@@ -58,7 +60,7 @@
                                     <p class="font-display text-4xl font-extrabold text-pomodoro-scuro">{{ \App\Menu\Price::format($voce->price) }}</p>
                                 @endif
                                 <a href="#{{ $sezione->slug }}" class="ml-auto inline-flex min-h-11 items-center gap-2 font-semibold text-ink no-underline after:absolute after:inset-0">
-                                    <span class="link-line">{{ __('site.menu.in_menu') }}</span>
+                                    <span>{{ __('site.menu.in_menu') }}</span>
                                     <svg class="size-4 transition-transform duration-500 ease-brand group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
                                 </a>
                             </div>
@@ -105,6 +107,13 @@
         </div>
     </x-pannello>
 
+    @if ($avvisoPagina || $surgelati)
+        <p class="mx-auto max-w-6xl px-4 py-6 text-sm italic text-ink-soft">
+            @if ($avvisoPagina){{ __('site.menu.allergens_ask_section') }}@endif
+            @if ($surgelati)<span class="whitespace-nowrap">{{ __('site.menu.frozen') }}</span>@endif
+        </p>
+    @endif
+
     @foreach ($menu as $sezione)
         @if ($sezione->children)
             <section id="{{ $sezione->slug }}" class="scroll-mt-36">
@@ -114,29 +123,28 @@
                         @if ($sezione->description)
                             <p class="mt-4 max-w-xl text-lg text-stone-300">{{ $sezione->description }}</p>
                         @endif
+                        @if ($sezione->sharedAddons())
+                            <div class="mt-6 max-w-2xl">@include('menu.aggiunte', ['aggiunte' => $sezione->sharedAddons(), 'scuro' => true])</div>
+                        @endif
                     </div>
                 </div>
+                @php($opzioni = ['aggiunteSopra' => $sezione->sharedAddons() !== [], 'avvisoPagina' => $avvisoPagina, 'totale' => $foglie->count()])
                 @if ($sezione->items)
-                    @include('menu.sezione', ['sezione' => $sezione, 'livello' => 2, 'titolo' => false, 'numero' => $numero[$sezione->slug], 'totale' => $foglie->count()])
+                    @include('menu.sezione', ['sezione' => $sezione, 'livello' => 2, 'titolo' => false, 'numero' => $numero[$sezione->slug]] + $opzioni)
                 @endif
                 @foreach ($sezione->children as $figlia)
-                    @include('menu.sezione', ['sezione' => $figlia, 'livello' => 3, 'titolo' => true, 'numero' => $numero[$figlia->slug], 'totale' => $foglie->count()])
+                    @include('menu.sezione', ['sezione' => $figlia, 'livello' => 3, 'titolo' => true, 'numero' => $numero[$figlia->slug]] + $opzioni)
                 @endforeach
             </section>
         @else
-            @include('menu.sezione', ['sezione' => $sezione, 'livello' => 2, 'titolo' => true, 'numero' => $numero[$sezione->slug], 'totale' => $foglie->count()])
+            @include('menu.sezione', ['sezione' => $sezione, 'livello' => 2, 'titolo' => true, 'numero' => $numero[$sezione->slug], 'totale' => $foglie->count(), 'aggiunteSopra' => false, 'avvisoPagina' => $avvisoPagina])
         @endif
     @endforeach
 
     <section class="pb-16 pt-6 md:pb-24 md:pt-8">
         <div class="mx-auto max-w-6xl px-4">
-            <div class="flex flex-col gap-8 rounded-2xl bg-crema-scuro p-8 md:flex-row md:items-end md:justify-between md:p-12">
-                <div>
-                    <p class="font-display type-section font-extrabold tracking-tight">{{ __('site.menu.chosen') }}</p>
-                    @if ($surgelati)
-                        <p class="mt-4 max-w-md text-ink-soft">{{ __('site.menu.frozen') }}</p>
-                    @endif
-                </div>
+            <div class="flex flex-col gap-6 rounded-2xl bg-crema-scuro p-8 md:flex-row md:items-center md:justify-between md:p-12">
+                <p class="font-display type-section font-extrabold tracking-tight">{{ __('site.menu.chosen') }}</p>
                 <x-button :href="$tel">{{ __('site.menu.call_phone', ['phone' => config('site.phone')]) }}</x-button>
             </div>
         </div>

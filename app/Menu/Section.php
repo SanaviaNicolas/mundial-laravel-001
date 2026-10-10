@@ -51,16 +51,17 @@ final readonly class Section
     }
 
     /**
-     * Addons that every item of the section offers (shown once, at the top of the section);
-     * empty when the items differ.
+     * Addons that every item of the section, subcategories included, offers (shown once for
+     * the whole section); empty when the items differ.
      *
      * @return list<Addon>
      */
     public function sharedAddons(): array
     {
-        $first = $this->items[0]->addons ?? [];
+        $items = $this->allItems();
+        $first = $items[0]->addons ?? [];
 
-        foreach ($this->items as $item) {
+        foreach ($items as $item) {
             if ($item->addons != $first) {
                 return [];
             }
@@ -70,16 +71,25 @@ final readonly class Section
     }
 
     /**
-     * No item of the section has verified allergens: the "ask the staff" notice is shown once.
+     * No item of the section, subcategories included, has verified allergens: the "ask the
+     * staff" notice is shown once instead of on every item.
      */
     public function allergensUnverified(): bool
     {
-        foreach ($this->items as $item) {
+        foreach ($this->allItems() as $item) {
             if ($item->allergens !== null) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    /**
+     * @return list<Item>
+     */
+    private function allItems(): array
+    {
+        return array_merge($this->items, ...array_map(fn (Section $child) => $child->allItems(), $this->children));
     }
 }

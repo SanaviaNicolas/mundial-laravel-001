@@ -35,6 +35,21 @@ class MenuContractTest extends TestCase
         $this->assertSame([], $groups[1]['cooked']);
     }
 
+    public function test_ingredients_without_a_section_form_one_untitled_group_without_deprecations(): void
+    {
+        set_error_handler(fn (int $level, string $message) => throw new \ErrorException($message, 0, $level), E_DEPRECATED);
+
+        try {
+            $groups = $this->item([new Ingredient('Pomodoro'), new Ingredient('Basilico', afterCooking: true)])->ingredientGroups();
+        } finally {
+            restore_error_handler();
+        }
+
+        $this->assertCount(1, $groups);
+        $this->assertNull($groups[0]['section']);
+        $this->assertSame(['Basilico'], array_column($groups[0]['after'], 'name'));
+    }
+
     public function test_a_section_knows_its_leaves_and_shared_addons(): void
     {
         $addon = new Addon('Bufala', 200, []);
@@ -47,6 +62,17 @@ class MenuContractTest extends TestCase
         $this->assertSame([], $mixed->sharedAddons());
         $this->assertTrue($sub->allergensUnverified());
         $this->assertFalse((new Section('x', 'X', null, [$this->item(allergens: [])]))->allergensUnverified());
+    }
+
+    public function test_a_macro_category_knows_the_addons_shared_by_all_its_items(): void
+    {
+        $addon = new Addon('Bufala', 200, []);
+        $a = new Section('a', 'A', null, [$this->item(addons: [$addon])]);
+        $b = new Section('b', 'B', null, [$this->item(addons: [$addon])]);
+        $c = new Section('c', 'C', null, [$this->item()]);
+
+        $this->assertSame([$addon], (new Section('pizze', 'Pizze', null, [], [$a, $b]))->sharedAddons());
+        $this->assertSame([], (new Section('pizze', 'Pizze', null, [], [$a, $c]))->sharedAddons());
     }
 
     public function test_highlight_tags_come_in_order_of_importance(): void

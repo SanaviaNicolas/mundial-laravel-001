@@ -256,4 +256,23 @@ class MenuPageTest extends TestCase
         $this->assertStringContainsString('rounded-2xl bg-white', $featured);
         $this->assertStringNotContainsString('rounded-2xl bg-ink', $featured);
     }
+
+    public function test_when_no_item_is_verified_the_allergen_notice_is_shown_once_for_the_whole_menu(): void
+    {
+        $this->assertSame(1, substr_count($this->get('/menu')->getContent(), 'Per informazioni sugli allergeni chiedi al personale.'));
+    }
+
+    public function test_addons_shared_by_a_whole_macro_category_are_shown_once_on_it(): void
+    {
+        config(['menu.sections' => ['pizze' => [
+            'name' => 'Pizze',
+            'addons' => [['name' => 'Bufala', 'price' => 200]],
+            'children' => [
+                'a' => ['name' => 'A', 'items' => [['name' => 'Uno', 'price' => 700, 'ingredients' => []]]],
+                'b' => ['name' => 'B', 'items' => [['name' => 'Due', 'price' => 800, 'ingredients' => []]]],
+            ],
+        ]]]);
+
+        $this->assertSame(1, substr_count($this->get('/menu')->getContent(), 'Bufala'));
+    }
 }

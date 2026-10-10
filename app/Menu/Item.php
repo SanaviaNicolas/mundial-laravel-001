@@ -57,8 +57,9 @@ final readonly class Item
         $groups = [];
 
         foreach ($this->ingredients as $ingredient) {
-            $groups[$ingredient->section] ??= ['section' => $ingredient->section, 'cooked' => [], 'after' => []];
-            $groups[$ingredient->section][$ingredient->afterCooking ? 'after' : 'cooked'][] = $ingredient;
+            $key = $ingredient->section ?? '';
+            $groups[$key] ??= ['section' => $ingredient->section, 'cooked' => [], 'after' => []];
+            $groups[$key][$ingredient->afterCooking ? 'after' : 'cooked'][] = $ingredient;
         }
 
         return array_values($groups);

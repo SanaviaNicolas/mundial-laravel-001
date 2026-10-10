@@ -58,7 +58,7 @@
                 <div>
                     <h2 class="type-section">{{ __('site.home.visit') }}</h2>
                     <p class="mt-5 text-lg text-ink-soft">{{ config('site.address') }}</p>
-                    <a href="{{ $tel }}" class="mt-2 inline-block font-display type-phone font-extrabold tracking-tight text-ink no-underline"><span class="link-line">{{ config('site.phone') }}</span></a>
+                    <a href="{{ $tel }}" class="mt-2 inline-block font-display type-phone font-extrabold tracking-tight text-ink no-underline transition-opacity duration-300 ease-brand hover:opacity-70">{{ config('site.phone') }}</a>
                     <div class="mt-8 flex flex-wrap gap-3">
                         <x-button :href="$tel">{{ __('site.ui.call') }}</x-button>
                         <x-button :href="$pageUrl('contact')" variant="secondary">{{ __('site.home.hours_how') }}</x-button>

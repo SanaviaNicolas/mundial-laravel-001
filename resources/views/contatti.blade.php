@@ -17,7 +17,7 @@
             <div>
                 <h2 class="type-section">{{ __('site.contact.call_title') }}</h2>
                 <p class="mt-4 max-w-md text-lg text-ink-soft">{{ __('site.contact.call_text') }}</p>
-                <a href="{{ $tel }}" class="mt-6 inline-block font-display type-phone font-extrabold tracking-tight text-ink no-underline"><span class="link-line">{{ config('site.phone') }}</span></a>
+                <a href="{{ $tel }}" class="mt-6 inline-block font-display type-phone font-extrabold tracking-tight text-ink no-underline transition-opacity duration-300 ease-brand hover:opacity-70">{{ config('site.phone') }}</a>
                 <div class="mt-8 flex flex-wrap gap-3">
                     <x-button :href="$tel">{{ __('site.ui.call') }}</x-button>
                     <x-button :href="$mapUrl" variant="secondary" :external="true">{{ __('site.contact.map') }}</x-button>

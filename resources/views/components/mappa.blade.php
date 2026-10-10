@@ -21,7 +21,7 @@
             <span class="flex flex-col bg-white px-5 py-4 sm:absolute sm:bottom-4 sm:left-4 sm:rounded-xl sm:ring-1 sm:ring-ink/10">
                 <span class="font-display text-lg font-extrabold">{{ config('app.name') }}</span>
                 <span class="text-sm text-ink-soft">{{ config('site.address') }}</span>
-                <span class="mt-2 inline-flex items-center gap-2 text-sm font-semibold"><span class="link-line">{{ __('site.contact.map_open') }}</span><svg class="size-4 transition-transform duration-500 ease-brand group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg></span>
+                <span class="mt-2 inline-flex items-center gap-2 text-sm font-semibold"><span>{{ __('site.contact.map_open') }}</span><svg class="size-4 transition-transform duration-500 ease-brand group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg></span>
                 <span class="sr-only"> ({{ __('site.ui.new_tab') }})</span>
             </span>
         @else

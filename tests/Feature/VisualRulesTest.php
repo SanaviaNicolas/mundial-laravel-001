@@ -30,6 +30,22 @@ class VisualRulesTest extends TestCase
         $this->assertStringContainsString('mappa/mappa-800.avif 800w', substr($panel, 0, strpos($panel, '</section>')));
     }
 
+    public function test_standalone_links_are_not_underlined(): void
+    {
+        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(resource_path('views')));
+
+        foreach ($files as $file) {
+            if ($file->isFile()) {
+                $this->assertStringNotContainsString('link-line', file_get_contents($file->getPathname()), $file->getPathname());
+            }
+        }
+    }
+
+    public function test_the_current_page_is_marked_with_a_pill_in_the_navigation(): void
+    {
+        $this->assertMatchesRegularExpression('/<a href="\/menu" class="[^"]*aria-\[current=page\]:bg-current\/15[^"]*"\s+aria-current="page"\s*>/', $this->get('/menu')->getContent());
+    }
+
     /** @return array<string, array{string, string}> */
     public static function closingBands(): array
     {

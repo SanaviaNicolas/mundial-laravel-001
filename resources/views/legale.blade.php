@@ -2,7 +2,9 @@
 @php
     $pagina = \App\Support\Pages::current();
     $mancante = __('site.legal.missing');
-    $dati = [
+    // Texts are escaped first, then the placeholders become escaped data or the inline links below.
+    $link = fn (string $href, string $testo, bool $esterno = false) => '<a href="'.e($href).'" class="text-ink underline decoration-ink/30 underline-offset-4 transition-colors duration-300 hover:decoration-ink"'.($esterno ? ' target="_blank" rel="noopener"' : '').'>'.e($testo).($esterno ? '<span class="sr-only"> ('.e(__('site.ui.new_tab')).')</span>' : '').'</a>';
+    $dati = array_map('e', [
         ':company' => config('site.company') ?? $mancante,
         ':vat' => config('site.vat') ?? $mancante,
         ':email' => config('site.email') ?? $mancante,
@@ -10,6 +12,10 @@
         ':phone' => config('site.phone'),
         ':session' => config('session.cookie'),
         ':lifetime' => \Carbon\CarbonInterval::minutes(config('session.lifetime'))->cascade()->forHumans(),
+    ]) + [
+        ':cookie_policy' => $link(\App\Support\Pages::url('cookie'), __('site.legal.link_cookie')),
+        ':privacy_policy' => $link(\App\Support\Pages::url('privacy'), __('site.legal.link_privacy')),
+        ':garante' => $link('https://www.garanteprivacy.it', 'garanteprivacy.it', true),
     ];
 @endphp
 
@@ -26,7 +32,7 @@
             <section class="mt-12">
                 <h2 class="text-2xl md:text-3xl">{{ $titolo }}</h2>
                 @foreach ($paragrafi as $paragrafo)
-                    <p class="mt-4 text-lg leading-relaxed text-ink-soft">{{ strtr($paragrafo, $dati) }}</p>
+                    <p class="mt-4 text-lg leading-relaxed text-ink-soft">{!! strtr(e($paragrafo), $dati) !!}</p>
                 @endforeach
             </section>
         @endforeach

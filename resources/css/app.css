@@ -89,7 +89,7 @@
     h2,
     h3,
     h4 {
-        @apply font-display font-extrabold leading-[1.05] tracking-tight;
+        @apply font-display font-extrabold leading-[1.05] tracking-tight text-balance;
     }
 
     a:focus-visible,
@@ -192,26 +192,12 @@
         transform: translateY(-100%);
     }
 
-    /* Underline that draws in from the left when its link is hovered, focused or current. */
-    .link-line {
-        padding-bottom: 0.2em;
-        background: linear-gradient(currentColor, currentColor) left bottom / 0 2px no-repeat;
-        transition: background-size 0.5s var(--ease-brand);
-    }
-
-    a:hover > .link-line,
-    a:focus-visible > .link-line,
-    a[aria-current] > .link-line {
-        background-size: 100% 2px;
-    }
-
     @media (prefers-reduced-motion: reduce) {
         .btn-text::after {
             display: none;
         }
 
-        .btn-text > span,
-        .link-line {
+        .btn-text > span {
             transition: none;
         }
 

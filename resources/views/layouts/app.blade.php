@@ -34,7 +34,7 @@
                 <nav aria-label="{{ __('site.ui.main_nav') }}" class="max-md:hidden">
                     <ul class="flex list-none gap-1 p-0">
                         @foreach ($pagine as $nome => $url)
-                            <li><a href="{{ $url }}" class="inline-flex min-h-11 items-center px-3 font-medium text-current no-underline" @if (request()->is(ltrim($url, '/'))) aria-current="page" @endif><span class="link-line">{{ $nome }}</span></a></li>
+                            <li><a href="{{ $url }}" class="inline-flex min-h-11 items-center rounded-full px-4 font-medium text-current no-underline transition-colors duration-300 ease-brand hover:bg-current/10 aria-[current=page]:bg-current/15" @if (request()->is(ltrim($url, '/'))) aria-current="page" @endif>{{ $nome }}</a></li>
                         @endforeach
                     </ul>
                 </nav>
@@ -84,9 +84,9 @@
                     <div class="md:col-span-3">
                         <p class="font-display text-sm font-bold uppercase tracking-widest text-white">{{ __('site.footer.where') }}</p>
                         <p class="mt-4">{{ config('site.address') }}</p>
-                        <a href="{{ $mapUrl }}" target="_blank" rel="noopener" class="mt-1 inline-flex min-h-11 items-center text-white no-underline"><span class="link-line">{{ __('site.contact.map') }}</span><span class="sr-only"> ({{ __('site.ui.new_tab') }})</span></a>
+                        <a href="{{ $mapUrl }}" target="_blank" rel="noopener" class="mt-1 inline-flex min-h-11 items-center text-white no-underline transition-opacity duration-300 ease-brand hover:opacity-70">{{ __('site.contact.map') }}<span class="sr-only"> ({{ __('site.ui.new_tab') }})</span></a>
                         <p class="mt-6 font-display text-sm font-bold uppercase tracking-widest text-white">{{ __('site.footer.call') }}</p>
-                        <a href="{{ $tel }}" class="mt-2 inline-flex min-h-11 items-center font-display text-2xl font-extrabold tracking-tight text-white no-underline"><span class="link-line">{{ config('site.phone') }}</span></a>
+                        <a href="{{ $tel }}" class="mt-2 inline-flex min-h-11 items-center font-display text-2xl font-extrabold tracking-tight text-white no-underline transition-opacity duration-300 ease-brand hover:opacity-70">{{ config('site.phone') }}</a>
                     </div>
                     <div class="md:col-span-4">
                         <p class="font-display text-sm font-bold uppercase tracking-widest text-white">{{ __('site.contact.hours_title') }}</p>
@@ -103,7 +103,7 @@
                         <p class="font-display text-sm font-bold uppercase tracking-widest text-white">{{ __('site.footer.pages') }}</p>
                         <ul class="mt-2 list-none p-0">
                             @foreach ($pagine as $nome => $url)
-                                <li><a href="{{ $url }}" class="inline-flex min-h-11 items-center text-white no-underline"><span class="link-line">{{ $nome }}</span></a></li>
+                                <li><a href="{{ $url }}" class="inline-flex min-h-11 items-center text-white no-underline transition-opacity duration-300 ease-brand hover:opacity-70">{{ $nome }}</a></li>
                             @endforeach
                         </ul>
                     </nav>
@@ -112,7 +112,7 @@
                     <p>© {{ now()->year }} {{ config('site.company') ?? config('app.name') }}@if (config('site.vat')) · {{ __('site.footer.vat') }} {{ config('site.vat') }}@endif · {{ __('site.footer.rights') }}</p>
                     <ul class="flex list-none flex-wrap gap-x-6 p-0">
                         @foreach (['privacy', 'cookie'] as $legale)
-                            <li><a href="{{ $pageUrl($legale) }}" class="inline-flex min-h-11 items-center text-white no-underline"><span class="link-line">{{ __("site.legal.$legale.h1") }}</span></a></li>
+                            <li><a href="{{ $pageUrl($legale) }}" class="inline-flex min-h-11 items-center text-white no-underline transition-opacity duration-300 ease-brand hover:opacity-70">{{ __("site.legal.$legale.h1") }}</a></li>
                         @endforeach
                     </ul>
                 </div>

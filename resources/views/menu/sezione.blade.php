@@ -2,6 +2,8 @@
     A category holding items, in two columns: number, title, description and photo on the left,
     items on the right. $livello: heading level of the title (items one level below);
     $titolo false = items of a macro category shown under its own heading (no anchor, no title).
+    $aggiunteSopra: the macro category already shows the shared addons; $avvisoPagina: the page
+    already shows the allergen notice once.
 --}}
 @php
     $condivise = $sezione->sharedAddons();
@@ -20,7 +22,7 @@
                         <p class="mt-4 text-lg text-ink-soft">{{ $sezione->description }}</p>
                     @endif
                 @endif
-                <x-foto :name="'categoria-'.$sezione->slug" :alt="$sezione->name" ratio="aspect-[16/9] md:aspect-[4/3]" sizes="(min-width: 768px) 40vw, 100vw" class="mt-8 rounded-2xl" />
+                <x-foto :name="'categoria-'.$sezione->slug" :alt="$sezione->name" ratio="aspect-[2/1] md:aspect-[4/3]" sizes="(min-width: 768px) 40vw, 100vw" class="mt-8 rounded-2xl" />
             </div>
         </div>
         <div class="md:col-span-7">
@@ -29,13 +31,15 @@
                     @include('menu.voce', ['livello' => $livello + 1, 'condivise' => $condivise !== [], 'verifica' => ! $nonVerificata])
                 @endforeach
             </ul>
-            @if ($condivise || $nonVerificata)
+            @php($mostraAggiunte = $condivise && ! $aggiunteSopra)
+            @php($mostraAvviso = $nonVerificata && ! $avvisoPagina)
+            @if ($mostraAggiunte || $mostraAvviso)
                 <div class="mt-12 rounded-2xl bg-ink/[0.04] p-5 md:p-6">
-                    @if ($condivise)
+                    @if ($mostraAggiunte)
                         @include('menu.aggiunte', ['aggiunte' => $condivise])
                     @endif
-                    @if ($nonVerificata)
-                        <p @class(['text-sm italic text-ink-soft', 'mt-3' => $condivise])>{{ __('site.menu.allergens_ask_section') }}</p>
+                    @if ($mostraAvviso)
+                        <p @class(['text-sm italic text-ink-soft', 'mt-3' => $mostraAggiunte])>{{ __('site.menu.allergens_ask_section') }}</p>
                     @endif
                 </div>
             @endif
