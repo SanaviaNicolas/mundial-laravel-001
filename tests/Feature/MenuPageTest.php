@@ -200,12 +200,21 @@ class MenuPageTest extends TestCase
         $this->get('/menu')->assertSeeTextInOrder(['Almeno 2 giorni', 'Alta idratazione', 'Alta digeribilità']);
     }
 
-    public function test_each_category_is_illustrated_by_its_own_photo(): void
+    public function test_every_macro_category_opens_with_a_photo_band_and_its_title(): void
     {
-        $this->fakePhoto('categoria-prova');
-        $this->oneItem([]);
+        $this->fakePhoto('categoria-pizze');
+        $this->fakePhoto('categoria-classiche');
+        config(['menu.sections' => [
+            'pizze' => ['name' => 'Pizze', 'children' => ['classiche' => ['name' => 'Classiche', 'items' => [['name' => 'Diavola', 'price' => 800, 'ingredients' => []]]]]],
+            'dolci' => ['name' => 'Dolci', 'items' => [['name' => 'Tiramisù', 'price' => 500, 'ingredients' => []]]],
+        ]]);
 
-        $this->get('/menu')->assertSee('images/categoria-prova-640.webp 640w', false);
+        $html = $this->get('/menu')->getContent();
+
+        $this->assertSame(2, substr_count($html, 'data-band'));
+        $this->assertMatchesRegularExpression('/<section id="dolci"[^>]*>\s*<div[^>]*data-band.*?<h2[^>]*>Dolci<\/h2>/s', $html);
+        $this->assertStringContainsString('images/categoria-pizze-640.webp 640w', $html);
+        $this->assertStringNotContainsString('images/categoria-classiche-640.webp', $html, 'no photo per subcategory');
     }
 
     public function test_items_are_not_separated_by_dotted_leaders_or_rules(): void
@@ -301,14 +310,13 @@ class MenuPageTest extends TestCase
         $this->get('/en/menu')->assertDontSeeText('Sample');
     }
 
-    public function test_on_mobile_category_photos_are_hidden_and_featured_cards_scroll_sideways(): void
+    public function test_items_sit_in_two_columns_from_tablet_up_and_featured_cards_scroll_sideways_on_mobile(): void
     {
-        $this->fakePhoto('categoria-prova');
         $this->oneItem(['tags' => ['pizza-del-mese']]);
 
         $html = $this->get('/menu')->getContent();
 
-        $this->assertMatchesRegularExpression('/<picture>\s*<source[^>]*categoria-prova[^>]*>.*?<img[^>]*class="[^"]*max-md:hidden/s', $html);
+        $this->assertMatchesRegularExpression('/<ul class="[^"]*md:grid-cols-2[^"]*">\s*<li class="row-reveal">/', $html);
         $this->assertStringContainsString('snap-x snap-mandatory', str($html)->after('In evidenza')->before('categorie-menu'));
     }
 }

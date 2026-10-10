@@ -24,7 +24,7 @@
 @endpush
 
 @section('content')
-    <x-hero name="ingredienti" :alt="__('site.menu.hero_alt')" height="min-h-[60svh] md:min-h-[75svh]" position="object-[60%_50%]">
+    <x-hero name="ingredienti" :alt="__('site.menu.hero_alt')" height="min-h-[60svh]" position="object-[60%_50%]">
         <h1 class="type-page text-white">
             <x-parole :text="__('site.menu.h1')" />
         </h1>
@@ -41,15 +41,17 @@
     </ul>
 
     @if ($evidenza->isNotEmpty())
-        <section class="bg-crema-scuro py-12 md:py-24">
+        <section class="bg-crema-scuro py-12 md:py-16">
             <div class="mx-auto max-w-6xl px-4">
                 <h2 class="type-section">{{ __('site.menu.featured') }}</h2>
-                <ul class="-mx-4 mt-8 flex list-none snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:mt-10 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:p-0">
+                <ul class="-mx-4 mt-8 flex list-none snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:mt-10 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:p-0 lg:grid-cols-4">
                     @foreach ($evidenza as [$voce, $sezione])
-                        @php($badge = $voce->highlights())
-                        <li @class(['row-reveal group relative flex w-[85%] shrink-0 snap-start flex-col overflow-hidden rounded-2xl bg-white p-6 transition-transform duration-500 ease-brand hover:-translate-y-1 md:w-auto md:p-10', 'md:col-span-2' => $loop->first && $loop->count % 2 === 1])>
+                        @php
+                            $badge = $voce->highlights();
+                        @endphp
+                        <li class="row-reveal group relative flex w-[85%] shrink-0 snap-start flex-col overflow-hidden rounded-2xl bg-white p-6 transition-transform duration-500 ease-brand hover:-translate-y-1 md:w-auto md:p-8 lg:p-7">
                             <span class="absolute inset-x-0 top-0 h-1.5 {{ $accento[array_key_first($badge)] }}" aria-hidden="true"></span>
-                            <div class="flex flex-wrap items-center justify-between gap-3">
+                            <div class="flex flex-col items-start gap-3">
                                 <div class="flex flex-wrap gap-2">
                                     @foreach ($badge as $slug => $nome)
                                         <x-badge :slug="$slug" :nome="$nome" />
@@ -57,13 +59,13 @@
                                 </div>
                                 <p class="text-xs font-bold uppercase tracking-widest text-muted">{{ $sezione->name }}</p>
                             </div>
-                            <h3 class="mt-6 text-3xl md:mt-8 md:text-5xl">{{ $voce->name }}</h3>
-                            <p class="mt-4 max-w-xl flex-1 text-lg italic text-ink-soft">{{ collect($voce->ingredients)->map(fn ($ingrediente) => $ingrediente->name.($ingrediente->frozen ? '*' : ''))->implode(', ') }}</p>
-                            <div class="mt-8 flex items-end justify-between gap-6 border-t border-ink/10 pt-5 md:mt-10 md:pt-6">
+                            <h3 class="mt-6 text-3xl md:text-4xl lg:text-3xl">{{ $voce->name }}</h3>
+                            <p class="mt-3 flex-1 italic text-ink-soft md:text-lg lg:text-base">{{ collect($voce->ingredients)->map(fn ($ingrediente) => $ingrediente->name.($ingrediente->frozen ? '*' : ''))->implode(', ') }}</p>
+                            <div class="mt-6 flex items-end justify-between gap-4 border-t border-ink/10 pt-5">
                                 @if ($voce->price !== null)
-                                    <p class="whitespace-nowrap font-display text-2xl font-extrabold text-pomodoro-scuro md:text-4xl">{{ \App\Menu\Price::format($voce->price) }}</p>
+                                    <p class="whitespace-nowrap font-display text-2xl font-extrabold text-pomodoro-scuro md:text-3xl lg:text-2xl">{{ \App\Menu\Price::format($voce->price) }}</p>
                                 @endif
-                                <a href="#{{ $sezione->slug }}" class="ml-auto inline-flex min-h-11 items-center gap-2 whitespace-nowrap text-sm font-semibold text-ink no-underline after:absolute after:inset-0 md:text-base">
+                                <a href="#{{ $sezione->slug }}" class="ml-auto inline-flex min-h-11 items-center gap-2 whitespace-nowrap text-sm font-semibold text-ink no-underline after:absolute after:inset-0">
                                     <span>{{ __('site.menu.in_menu') }}</span>
                                     <svg class="size-4 transition-transform duration-500 ease-brand group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
                                 </a>
@@ -119,30 +121,37 @@
     @endif
 
     @foreach ($menu as $sezione)
-        @if ($sezione->children)
-            <section id="{{ $sezione->slug }}" class="scroll-mt-36">
-                <div class="bg-ink py-10 text-white md:py-20">
-                    <div class="mx-auto max-w-6xl px-4">
-                        <h2 class="type-page text-white">{{ $sezione->name }}</h2>
-                        @if ($sezione->description)
-                            <p class="mt-4 max-w-xl text-lg text-stone-300">{{ $sezione->description }}</p>
-                        @endif
-                        @if ($sezione->sharedAddons())
-                            <div class="mt-6 max-w-2xl">@include('menu.aggiunte', ['aggiunte' => $sezione->sharedAddons(), 'scuro' => true])</div>
-                        @endif
-                    </div>
+        {{-- Every macro category opens with a photo band, so each group is clearly separate. --}}
+        <section id="{{ $sezione->slug }}" class="scroll-mt-36">
+            <div class="relative isolate flex min-h-48 items-end overflow-hidden bg-ink text-white md:min-h-60" data-band>
+                <x-foto :name="'categoria-'.$sezione->slug" alt="" :dark="true" ratio="" sizes="100vw" label-class="self-start justify-self-end mr-4 mt-4" class="absolute inset-0 -z-10 h-full" />
+                <div class="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 via-black/35 to-black/10" aria-hidden="true"></div>
+                <div class="mx-auto w-full max-w-6xl px-4 py-8 md:py-10">
+                    <h2 class="type-page text-white">{{ $sezione->name }}</h2>
+                    @if ($sezione->description)
+                        <p class="mt-3 max-w-xl text-lg text-white/90">{{ $sezione->description }}</p>
+                    @endif
                 </div>
-                @php($opzioni = ['aggiunteSopra' => $sezione->sharedAddons() !== [], 'avvisoPagina' => $avvisoPagina, 'totale' => $foglie->count()])
+            </div>
+            @php
+                $opzioni = ['avvisoPagina' => $avvisoPagina, 'totale' => $foglie->count()];
+            @endphp
+            @if ($sezione->children)
+                @if ($sezione->sharedAddons())
+                    <div class="mx-auto max-w-6xl px-4 pt-8">
+                        <div class="rounded-2xl bg-ink/[0.04] p-5 md:p-6">@include('menu.aggiunte', ['aggiunte' => $sezione->sharedAddons()])</div>
+                    </div>
+                @endif
                 @if ($sezione->items)
-                    @include('menu.sezione', ['sezione' => $sezione, 'livello' => 2, 'titolo' => false, 'numero' => $numero[$sezione->slug]] + $opzioni)
+                    @include('menu.sezione', ['sezione' => $sezione, 'livello' => 2, 'titolo' => false, 'numero' => $numero[$sezione->slug], 'aggiunteSopra' => $sezione->sharedAddons() !== []] + $opzioni)
                 @endif
                 @foreach ($sezione->children as $figlia)
-                    @include('menu.sezione', ['sezione' => $figlia, 'livello' => 3, 'titolo' => true, 'numero' => $numero[$figlia->slug]] + $opzioni)
+                    @include('menu.sezione', ['sezione' => $figlia, 'livello' => 3, 'titolo' => true, 'numero' => $numero[$figlia->slug], 'aggiunteSopra' => $sezione->sharedAddons() !== []] + $opzioni)
                 @endforeach
-            </section>
-        @else
-            @include('menu.sezione', ['sezione' => $sezione, 'livello' => 2, 'titolo' => true, 'numero' => $numero[$sezione->slug], 'totale' => $foglie->count(), 'aggiunteSopra' => false, 'avvisoPagina' => $avvisoPagina])
-        @endif
+            @else
+                @include('menu.sezione', ['sezione' => $sezione, 'livello' => 2, 'titolo' => false, 'numero' => $numero[$sezione->slug], 'aggiunteSopra' => false] + $opzioni)
+            @endif
+        </section>
     @endforeach
 
     <section class="pb-16 pt-6 md:pb-24 md:pt-8">

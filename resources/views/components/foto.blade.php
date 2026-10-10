@@ -22,7 +22,7 @@
         <img src="{{ asset($file(1280, 'webp')) }}" alt="{{ $alt }}" @if ($size) width="{{ $size[0] }}" height="{{ $size[1] }}" @endif loading="{{ $eager ? 'eager' : 'lazy' }}" decoding="async" @if ($eager) fetchpriority="high" @endif {{ $attributes->class([$ratio, 'w-full object-cover']) }}>
     </picture>
 @else
-    <div {{ $attributes->class([$ratio, 'grid w-full place-items-center bg-gradient-to-br', 'from-[#e8dfca] to-[#d9cdb2]' => ! $dark, 'from-[#5a3720] via-[#2b1b12] to-[#14100d]' => $dark]) }} role="img" aria-label="{{ $alt }}">
+    <div {{ $attributes->class([$ratio, 'grid w-full place-items-center bg-gradient-to-br', 'from-[#e8dfca] to-[#d9cdb2]' => ! $dark, 'from-[#5a3720] via-[#2b1b12] to-[#14100d]' => $dark]) }} @if ($alt !== '') role="img" aria-label="{{ $alt }}" @else aria-hidden="true" @endif>
         <span class="{{ $labelClass }} rounded-full bg-black/60 px-3 py-1 text-xs font-semibold text-white ring-1 ring-white/30">Foto provvisoria</span>
     </div>
 @endif
