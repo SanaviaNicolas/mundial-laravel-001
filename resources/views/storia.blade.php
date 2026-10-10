@@ -53,6 +53,21 @@
         </div>
     </section>
 
+    {{-- Tribute to Maradona: text only (no photos, signature or logos: image rights), the big 10 is decorative. --}}
+    <section class="overflow-hidden py-20 md:py-32">
+        <div class="mx-auto grid max-w-6xl items-center gap-8 px-4 md:grid-cols-12 md:gap-16">
+            <p class="row-reveal select-none font-display text-[clamp(10rem,30vw,22rem)] font-extrabold leading-[0.8] tracking-tighter text-blu md:col-span-5" aria-hidden="true">10</p>
+            <div class="md:col-span-7">
+                <p class="text-xs font-bold uppercase tracking-widest text-muted">{{ __('site.story.name_eyebrow') }}</p>
+                <h2 class="mt-3 type-section">{{ __('site.story.name_title') }}</h2>
+                <div class="mt-6 space-y-5 text-lg text-ink-soft">
+                    <p>{{ __('site.story.name_1') }}</p>
+                    <p>{{ __('site.story.name_2') }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <x-hero name="ingredienti" :alt="__('site.story.end_alt')" height="min-h-[70svh]" position="object-[60%_50%]" :unveil="true">
         <h2 class="max-w-3xl type-band text-white">{{ __('site.story.end_title') }}</h2>
         <div class="mt-8 flex flex-wrap gap-3">

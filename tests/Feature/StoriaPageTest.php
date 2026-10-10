@@ -31,4 +31,20 @@ class StoriaPageTest extends TestCase
     {
         $this->get('/la-nostra-storia')->assertDontSee('TODO');
     }
+
+    public function test_storia_pays_tribute_to_maradona_with_text_and_a_decorative_number_ten(): void
+    {
+        $html = $this->get('/la-nostra-storia')
+            ->assertSeeText('Mundial 82')
+            ->assertSeeText('Diego Armando Maradona')
+            ->getContent();
+
+        $this->assertMatchesRegularExpression('/<[^>]*aria-hidden="true"[^>]*>10<\//', $html);
+        $this->assertStringNotContainsString('maradona.jpg', strtolower($html));
+    }
+
+    public function test_english_story_has_the_tribute_too(): void
+    {
+        $this->get('/en/our-story')->assertSeeText('Diego Armando Maradona')->assertSeeText('Mundial 82');
+    }
 }

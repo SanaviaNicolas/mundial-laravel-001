@@ -65,12 +65,14 @@ Il sito è **multilingua** (italiano e inglese, vedi [ADR 0009](../decisioni/000
 - Ingredienti originali, ricercati e di qualità.
 - Dopo 50 anni hanno trovato la farina e il metodo giusti (**da chiarire**: 50 anni di cosa? attività, ricerca, esperienza di famiglia?).
 - Impasto: almeno 2 giorni di lievitazione, alta idratazione, alta digeribilità.
+- **Maradona**: il titolare è appassionato di Maradona, e il vecchio nome del locale (Mundial 82) è legato al calcio e ai Mondiali.
 
 - **Obiettivo**: dare identità e fiducia, spiegare perché la pizza è diversa (impasto, tradizione).
-- **Sezioni** (un H2 ciascuna): Una famiglia di pizzaioli · La tradizione, quella vera · La farina e il metodo giusti (tre riquadri: lievitazione, idratazione, digeribilità) · invito a guardare il menù o chiamare.
+- **Sezioni** (un H2 ciascuna): Una famiglia di pizzaioli · La tradizione, quella vera · La farina e il metodo giusti (tre riquadri: lievitazione, idratazione, digeribilità) · **Il 10 nel cuore** (omaggio a Maradona) · invito a guardare il menù o chiamare.
+- **Omaggio a Maradona** (decisione: pagina La storia + dettaglio grafico, tono affettuoso, **solo testo**): una sezione con un "10" gigante decorativo nel blu del logo e un testo breve sul passaggio da Mundial 82 a Visciano 82 e sulla passione del titolare. **Nessuna foto, firma o logo** di Maradona (diritti d'immagine, gestiti dagli eredi) e nessuna frase che faccia pensare a un'approvazione ufficiale. Testo in **bozza**, da far confermare al cliente: costruito solo sulle informazioni ricevute, senza episodi, date o cimeli inventati.
 - **SEO**: title `La nostra storia — pizza napoletana di famiglia | Visciano 82`; H1 `La nostra storia`; description sulla famiglia, la tradizione e l'impasto.
 - **Dati strutturati** (da fare): stessa entità `Pizzeria`/`Restaurant` della home; eventuale `AboutPage`. Niente date, premi o nomi finché non confermati.
-- **Domande al cliente**: nome del titolare e della famiglia (se pubblicabili), anno di apertura, da quale zona di Napoli arriva la famiglia, il riconoscimento "1° premio oscar della pizza '73" (se è del locale, dove va citato), foto della famiglia e del forno.
+- **Domande al cliente**: cosa significa esattamente l'"82" e da dove viene il vecchio nome Mundial 82 (Mondiale di Spagna 1982?), se c'è un aneddoto o un oggetto legato a Maradona da raccontare (o una pizza dedicata); nome del titolare e della famiglia (se pubblicabili), anno di apertura, da quale zona di Napoli arriva la famiglia, il riconoscimento "1° premio oscar della pizza '73" (se è del locale, dove va citato), foto della famiglia e del forno.
 
 ## Contatti — `/contatti`
 
