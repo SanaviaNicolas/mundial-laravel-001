@@ -9,7 +9,7 @@ Elenco delle cose **reali, già emerse**, da completare o controllare prima di m
 | Allergeni **verificati dal ristorante per ogni voce** | ⬜ | Finché una voce non è verificata, il sito non ne mostra gli allergeni e invita a chiedere al personale. Usare il filtro "Da verificare" nella lista Voci. Vedi [guida contenuti](../contenuti/menu.md) |
 | **Stato di verifica allergeni anche per le aggiunte** | ⬜ | **Oggi manca** (funzionalità da sviluppare): nel frattempo il frontend mostra la nota "per le aggiunte chiedi al personale". Vedi [guida frontend](../frontend/dati-menu.md) |
 | **Prezzi** inseriti per tutte le voci e le aggiunte | ⬜ | Un prezzo mancante non viene mostrato: controllare che non sia una dimenticanza |
-| **Dati legali del footer** confermati dal ristorante (ragione sociale, P.IVA, ecc.) | ⬜ | Di solito obbligatori nel footer del sito di un'attività: da verificare con il ristorante e, se serve, con il commercialista |
+| **Dati legali del footer** confermati dal ristorante (ragione sociale, P.IVA, email) | ⬜ | Da inserire in `config/site.php` (`company`, `vat`, `email`): compaiono nel footer e nelle pagine legali. Di solito obbligatori nel sito di un'attività: da verificare con il ristorante e, se serve, con il commercialista |
 | Dati reali del menù caricati (seeder dedicato) | ⬜ | Arriveranno con i dati strutturati dal ristorante; il seeder sarà indipendente da `AllergenSeeder` |
 
 ## Deploy e ambiente
@@ -21,7 +21,7 @@ Elenco delle cose **reali, già emerse**, da completare o controllare prima di m
 | **`ADMIN_PATH` reale** impostato solo nell'ambiente | ⬜ | Mai nel repository né nei documenti (ADR 0003); se vuoto il pannello è disattivato |
 | Creazione degli **utenti admin** con password sicure | ⬜ | `php artisan make:filament-user` sul server; password lunghe e uniche, gestite in un password manager |
 | **Rate limit sul login** | 🟡 | Filament limita già i tentativi di login (5 tentativi, controllato nel sorgente di Filament 5). Il limite si basa sull'IP: richiede i proxy fidati (voce sotto) per funzionare dietro Cloudflare. Valutare un'ulteriore protezione su Cloudflare |
-| Informativa **privacy e cookie** | ⬜ | Dipende dalle risorse esterne scelte nel frontend (font, mappe, social, statistiche): decidere quando si sceglie il frontend |
+| Informativa **privacy e cookie** | 🟡 | Pagine `/privacy` e `/cookie` presenti con una bozza: da far **validare** al ristorante o al suo consulente e da completare con i dati legali ("[dato da completare]"). Da rivedere se si aggiungono terze parti (mappe, statistiche, social) |
 
 ## Cloudflare, rete e backup
 

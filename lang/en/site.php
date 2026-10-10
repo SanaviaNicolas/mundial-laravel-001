@@ -18,7 +18,7 @@ return [
         'sunday' => 'Sunday',
     ],
     'closed' => 'Closed',
-    'footer' => ['vat' => 'VAT no.', 'tel' => 'Tel.'],
+    'footer' => ['vat' => 'VAT no.', 'where' => 'Where we are', 'call' => 'Call us', 'pages' => 'Pages', 'rights' => 'All rights reserved'],
     'dough' => [
         ['At least 2 days', 'of leavening'],
         ['High hydration', 'for a soft dough'],
@@ -90,5 +90,66 @@ return [
         'map' => 'Open the map',
         'hours_title' => 'Opening hours',
         'hours_caption' => 'Opening hours',
+    ],
+    'legal' => [
+        'missing' => '[to be completed]',
+        'updated' => 'Last updated: 10 October 2026',
+        'privacy' => [
+            'title' => 'Privacy policy | Visciano 82',
+            'description' => 'How Visciano 82 processes the personal data of the people who visit its website.',
+            'h1' => 'Privacy policy',
+            'sections' => [
+                ['Data controller', [
+                    'The data controller is :company, :address, VAT no. :vat. For any question about your data you can write to :email or call :phone.',
+                ]],
+                ['What data we process', [
+                    'This is an informational website: there are no forms, accounts, newsletters, analytics or advertising tools.',
+                    'When you visit the pages, the server automatically logs some technical data (IP address, date and time, requested page, browser type), needed to run the website and protect it from abuse.',
+                    'If you phone us, we use your number only to answer your request.',
+                ]],
+                ['Why and on what legal basis', [
+                    'Technical data is needed to run the website and keep it secure: this is our legitimate interest (Art. 6(1)(f) of Regulation (EU) 2016/679, GDPR). The data you give us on the phone is used to answer your requests, including before a booking (Art. 6(1)(b)).',
+                ]],
+                ['How long', [
+                    'Technical data is kept only as long as strictly necessary for these purposes and then deleted.',
+                ]],
+                ['Who can see it', [
+                    'The data is processed by us and by the technical providers that host and protect the website, appointed as data processors. We do not sell or share your data. If a provider processes data outside the European Union, it does so with the safeguards required by the GDPR.',
+                ]],
+                ['Cookies', [
+                    'The website only uses technical cookies, needed for it to work: details are in the cookie policy.',
+                ]],
+                ['Your rights', [
+                    'You can ask at any time to access, correct or delete your data, restrict or object to its processing, or receive it in a readable format (Arts. 15–22 GDPR), using the contacts above.',
+                    'If you believe the processing is not lawful, you can lodge a complaint with the Italian Data Protection Authority (Garante per la protezione dei dati personali, garanteprivacy.it).',
+                ]],
+            ],
+        ],
+        'cookie' => [
+            'title' => 'Cookie policy | Visciano 82',
+            'description' => 'Which cookies the Visciano 82 website uses: only technical cookies, no profiling or third-party cookies.',
+            'h1' => 'Cookie policy',
+            'sections' => [
+                ['What cookies are', [
+                    'Cookies are small text files that a website stores in your browser so that it works properly or remembers some information from one page to the next.',
+                ]],
+                ['Cookies we use', [
+                    'We only use two technical cookies, set by our own server:',
+                    ':session — keeps your visit together from one page to the next. Duration: :lifetime.',
+                    'XSRF-TOKEN — protects the website from forged requests (security). Duration: :lifetime.',
+                    'Your browser also remembers, only while the tab stays open (sessionStorage), that you have already seen the opening animation of the home page, so it does not repeat on every page.',
+                ]],
+                ['No profiling, no third parties', [
+                    'We do not use profiling, analytics or advertising cookies, social buttons or embedded maps. Even the fonts are served by our own server.',
+                    'Technical cookies do not require consent under Italian law (Art. 122 of the Privacy Code and the Garante guidelines of 10 June 2021): this is why the website shows no cookie banner.',
+                ]],
+                ['How to manage them', [
+                    'You can delete or block cookies in your browser settings. If you block technical cookies, some features of the website may not work.',
+                ]],
+                ['Controller', [
+                    ':company, :address. Information: :email, :phone. More details in the privacy policy.',
+                ]],
+            ],
+        ],
     ],
 ];

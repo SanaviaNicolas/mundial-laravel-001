@@ -22,8 +22,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer(['layouts.app', 'home', 'menu', 'storia', 'contatti'], fn ($view) => $view->with([
+        View::composer(['layouts.app', 'home', 'menu', 'storia', 'contatti', 'legale'], fn ($view) => $view->with([
             'tel' => 'tel:'.preg_replace('/\D/', '', config('site.phone')),
+            'mapUrl' => 'https://www.google.com/maps/search/?api=1&query='.urlencode(config('site.address')),
             'pageUrl' => Pages::url(...),
             'menu' => Menu::categories(),
         ]));

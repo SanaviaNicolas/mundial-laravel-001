@@ -18,7 +18,7 @@ return [
         'sunday' => 'Domenica',
     ],
     'closed' => 'Chiuso',
-    'footer' => ['vat' => 'P.IVA', 'tel' => 'Tel.'],
+    'footer' => ['vat' => 'P.IVA', 'where' => 'Dove siamo', 'call' => 'Chiamaci', 'pages' => 'Pagine', 'rights' => 'Tutti i diritti riservati'],
     'dough' => [
         ['Almeno 2 giorni', 'di lievitazione'],
         ['Alta idratazione', 'per un impasto morbido'],
@@ -90,5 +90,66 @@ return [
         'map' => 'Apri la mappa',
         'hours_title' => 'Orari',
         'hours_caption' => 'Orari di apertura',
+    ],
+    'legal' => [
+        'missing' => '[dato da completare]',
+        'updated' => 'Ultimo aggiornamento: 10 ottobre 2026',
+        'privacy' => [
+            'title' => 'Privacy policy | Visciano 82',
+            'description' => 'Informativa sul trattamento dei dati personali di chi visita il sito di Visciano 82.',
+            'h1' => 'Privacy policy',
+            'sections' => [
+                ['Titolare del trattamento', [
+                    'Il titolare del trattamento è :company, :address, P.IVA :vat. Per qualsiasi domanda sui tuoi dati puoi scrivere a :email o chiamare il :phone.',
+                ]],
+                ['Quali dati trattiamo', [
+                    'Il sito è informativo: non ci sono moduli, account, newsletter né strumenti di statistica o pubblicità.',
+                    'Quando visiti le pagine, il server registra in automatico alcuni dati tecnici (indirizzo IP, data e ora, pagina richiesta, tipo di browser), necessari per far funzionare il sito e proteggerlo da abusi.',
+                    'Se ci telefoni, usiamo il tuo numero solo per rispondere alla tua richiesta.',
+                ]],
+                ['Perché e su quale base', [
+                    'I dati tecnici servono a far funzionare il sito e a garantirne la sicurezza: è un nostro legittimo interesse (art. 6, par. 1, lett. f del Regolamento UE 2016/679, GDPR). I dati che ci dai al telefono servono a rispondere alle tue richieste, anche prima di una prenotazione (art. 6, par. 1, lett. b).',
+                ]],
+                ['Per quanto tempo', [
+                    'I dati tecnici sono conservati per il tempo strettamente necessario agli scopi indicati e poi cancellati.',
+                ]],
+                ['Chi può vederli', [
+                    "I dati sono trattati da noi e dai fornitori tecnici che ospitano e proteggono il sito, nominati responsabili del trattamento. Non vendiamo né cediamo i tuoi dati. Se un fornitore tratta dati fuori dall'Unione europea, lo fa con le garanzie previste dal GDPR.",
+                ]],
+                ['Cookie', [
+                    'Il sito usa solo cookie tecnici, necessari al suo funzionamento: i dettagli sono nella cookie policy.',
+                ]],
+                ['I tuoi diritti', [
+                    'Puoi chiedere in ogni momento di accedere ai tuoi dati, correggerli, cancellarli, limitarne il trattamento, opporti o riceverli in un formato leggibile (artt. 15–22 GDPR), scrivendo ai contatti indicati sopra.',
+                    'Se ritieni che il trattamento non sia corretto puoi presentare reclamo al Garante per la protezione dei dati personali (garanteprivacy.it).',
+                ]],
+            ],
+        ],
+        'cookie' => [
+            'title' => 'Cookie policy | Visciano 82',
+            'description' => 'Quali cookie usa il sito di Visciano 82: solo cookie tecnici, nessun cookie di profilazione o di terze parti.',
+            'h1' => 'Cookie policy',
+            'sections' => [
+                ['Cosa sono i cookie', [
+                    'I cookie sono piccoli file di testo che il sito salva nel tuo browser per funzionare correttamente o per ricordare alcune informazioni tra una pagina e l’altra.',
+                ]],
+                ['Cookie che usiamo', [
+                    'Usiamo solo due cookie tecnici, impostati dal nostro server:',
+                    ':session — tiene insieme la tua visita tra una pagina e l’altra. Durata: :lifetime.',
+                    'XSRF-TOKEN — protegge il sito da richieste contraffatte (sicurezza). Durata: :lifetime.',
+                    'Il browser ricorda inoltre, solo finché la scheda resta aperta (sessionStorage), che hai già visto l’animazione di apertura della home, così non si ripete a ogni pagina.',
+                ]],
+                ['Niente profilazione né terze parti', [
+                    'Non usiamo cookie di profilazione, statistiche, pubblicità, pulsanti social o mappe incorporate. Anche i caratteri tipografici sono serviti dal nostro server.',
+                    'Per i cookie tecnici la legge non richiede il consenso (art. 122 del Codice privacy e Linee guida del Garante del 10 giugno 2021): per questo il sito non mostra un banner.',
+                ]],
+                ['Come gestirli', [
+                    'Puoi cancellare o bloccare i cookie dalle impostazioni del tuo browser. Bloccando quelli tecnici, alcune funzioni del sito potrebbero non funzionare.',
+                ]],
+                ['Titolare', [
+                    ':company, :address. Per informazioni: :email, :phone. Maggiori dettagli nella privacy policy.',
+                ]],
+            ],
+        ],
     ],
 ];

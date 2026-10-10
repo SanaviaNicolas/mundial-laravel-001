@@ -2,13 +2,16 @@
 
 /*
  * Business data and page map shown on the public pages.
- * `vat` is still missing from the client: it is hidden while null.
+ * Legal data (`company`, `vat`, `email`) is still missing from the client: the footer hides the
+ * VAT number while null, the legal pages show a recognizable "dato da completare" placeholder.
  * `hours` use translation keys for the days (lang files, site.php); `open` null means closed.
  */
 return [
     'phone' => '049 983 0186',
     'address' => 'Via Cadiceto, 30030 Vigonovo VE',
+    'company' => null,
     'vat' => null,
+    'email' => null,
     'hours' => [
         ['days' => 'monday', 'open' => null],
         ['days' => 'tuesday-saturday', 'open' => '18:00 – 00:00'],
@@ -25,5 +28,7 @@ return [
         'menu' => ['view' => 'menu', 'uri' => ['it' => '/menu', 'en' => '/en/menu']],
         'story' => ['view' => 'storia', 'uri' => ['it' => '/la-nostra-storia', 'en' => '/en/our-story']],
         'contact' => ['view' => 'contatti', 'uri' => ['it' => '/contatti', 'en' => '/en/contact']],
+        'privacy' => ['view' => 'legale', 'uri' => ['it' => '/privacy', 'en' => '/en/privacy']],
+        'cookie' => ['view' => 'legale', 'uri' => ['it' => '/cookie', 'en' => '/en/cookies']],
     ],
 ];

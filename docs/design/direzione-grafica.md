@@ -71,7 +71,7 @@ Regole: il blu logo non si usa mai per testo sotto i 24 px; il colore non è mai
 Elenco di ciò che serve, non un design system: si creano solo quando la prima pagina li usa.
 
 - Header con logo + navigazione (su mobile: menu compatto, raggiungibile e utilizzabile anche senza JS dove possibile) e pulsante **Chiama** sempre accessibile.
-- Footer con indirizzo, orari, telefono, social, P.IVA e link utili.
+- Footer (implementato): logo e frase, "Dove siamo" (indirizzo e link alla mappa), "Chiamaci" (telefono), orari, pagine; sotto, una barra con © anno, ragione sociale (o nome del locale finché manca), P.IVA (nascosta finché manca), "Tutti i diritti riservati" e i link a privacy e cookie policy. Social da aggiungere quando arrivano gli URL.
 - Pulsante primario (azione, pomodoro) e secondario (contorno blu scuro); link testuale (blu scuro, sottolineato).
 - Hero (immagine 16:9 + H1 + una sola azione).
 - Card pizza / voce di menù: nome, ingredienti, riga "A fine cottura"/"Servito con", nota, prezzo (segnaposto), eventuale foto.

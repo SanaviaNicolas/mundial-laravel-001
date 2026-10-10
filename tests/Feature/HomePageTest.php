@@ -127,4 +127,26 @@ class HomePageTest extends TestCase
 
         $this->get('/')->assertSee('data-img="'.asset('images/categoria-prova-640.webp').'"', false);
     }
+
+    public function test_footer_has_copyright_legal_links_and_opening_hours(): void
+    {
+        $footer = str($this->get('/')->getContent())->after('<footer')->before('</footer>');
+
+        $this->assertStringContainsString('© '.now()->year.' Visciano 82', $footer);
+        $this->assertStringContainsString('href="/privacy"', $footer);
+        $this->assertStringContainsString('href="/cookie"', $footer);
+        $this->assertStringContainsString('Martedì – Sabato', $footer);
+        $this->assertStringContainsString('href="tel:0499830186"', $footer);
+
+        $this->assertStringContainsString('href="/en/cookies"', str($this->get('/en')->getContent())->after('<footer'));
+    }
+
+    public function test_footer_shows_the_vat_number_only_when_configured(): void
+    {
+        $this->get('/')->assertDontSee('P.IVA');
+
+        config(['site.vat' => '01234567890']);
+
+        $this->get('/')->assertSee('P.IVA 01234567890');
+    }
 }

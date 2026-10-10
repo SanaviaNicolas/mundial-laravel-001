@@ -10,7 +10,7 @@
 | Telefono | Ricevuto: 049 983 0186 |
 | Orari di apertura | Ricevuti: lun chiuso; mar–sab 18:00–00:00; dom 18:30–00:00 |
 | Coordinate geografiche (per mappa e JSON-LD) | `TODO-DATO` |
-| P.IVA / ragione sociale (per il footer) | `TODO-DATO` |
+| P.IVA / ragione sociale / email (footer, privacy e cookie policy) | `TODO-DATO`: nel footer la P.IVA è nascosta, nelle pagine legali compare "[dato da completare]" (`company`, `vat`, `email` in `config/site.php`) |
 | Profili social (URL) | `TODO-DATO` |
 | Fascia di prezzo (`priceRange`) | `TODO-DATO` |
 | Prezzi, allergeni, bevande, dolci del menù | Prezzi **indicativi inseriti come segnaposto** (non forniti dal committente: da confermare); allergeni, bevande, dolci `TODO-DATO` |
@@ -26,10 +26,12 @@ Nome locale: **Visciano 82**. Il vecchio nome "Mundial 82" non compare nei conte
 | Menù | `/menu` | Alta (unica parte dinamica) |
 | La storia | `/la-nostra-storia` | Alta (identità e fiducia) |
 | Contatti | `/contatti` | Alta (SEO locale) |
+| Privacy policy | `/privacy` | Obbligatoria |
+| Cookie policy | `/cookie` | Obbligatoria |
 
-URL minuscoli, italiani, senza estensione né parametri, senza slash finale. Eventuali pagine legali (privacy/cookie, note legali) servono solo se il sito usa cookie non tecnici o servizi di terzi: da decidere con il committente (domanda aperta).
+URL minuscoli, italiani, senza estensione né parametri, senza slash finale. Le pagine legali (privacy e cookie policy) sono linkate dal footer, non dalla navigazione principale; vedi [Contesto e decisioni](../progetto/contesto-e-decisioni.md#frontend).
 
-Il sito è **multilingua** (italiano e inglese, vedi [ADR 0009](../decisioni/0009-multilingua.md)): ogni pagina ha l'URL italiano e quello inglese (`/` ↔ `/en`, `/menu` ↔ `/en/menu`, `/la-nostra-storia` ↔ `/en/our-story`, `/contatti` ↔ `/en/contact`). I testi inglesi sono bozze da validare con il cliente. Il sito è **multipagina**: ogni contenuto ha la sua pagina e la sua URL (niente one page). Navigazione principale: Menù · La storia · Contatti, più il pulsante **Chiama** (e logo → Home); gli stessi link sono nel footer.
+Il sito è **multilingua** (italiano e inglese, vedi [ADR 0009](../decisioni/0009-multilingua.md)): ogni pagina ha l'URL italiano e quello inglese (`/` ↔ `/en`, `/menu` ↔ `/en/menu`, `/la-nostra-storia` ↔ `/en/our-story`, `/contatti` ↔ `/en/contact`, `/privacy` ↔ `/en/privacy`, `/cookie` ↔ `/en/cookies`). I testi inglesi sono bozze da validare con il cliente. Il sito è **multipagina**: ogni contenuto ha la sua pagina e la sua URL (niente one page). Navigazione principale: Menù · La storia · Contatti, più il pulsante **Chiama** (e logo → Home); gli stessi link sono nel footer.
 
 ## Home — `/`
 
@@ -79,6 +81,12 @@ Il sito è **multilingua** (italiano e inglese, vedi [ADR 0009](../decisioni/000
 - **Dati strutturati**: stesso `Pizzeria`/`Restaurant` della home con `address`, `geo`, `telephone`, `openingHoursSpecification` completi (la pagina di riferimento per il NAP).
 - **SEO locale**: NAP identico a footer e profilo Google; mappa con link a Google Maps/Apple Maps. Un embed di mappa terza parte comporta cookie/tracciamento: preferire un link o un'immagine statica finché non si decide il consenso (domanda aperta).
 - Nessun modulo di contatto in questa fase.
+
+## Privacy e cookie policy — `/privacy`, `/cookie`
+
+- **Stato**: implementate con una **bozza** di testo (italiano e inglese) da validare con il ristorante o il suo consulente. Una sola vista (`legale`) per entrambe; i testi sono nei file di lingua (`site.legal`), i dati del locale arrivano da `config/site.php`, il nome e la durata dei cookie dalla configurazione della sessione (così restano veri se cambiano).
+- **Privacy**: titolare, dati trattati (solo log tecnici del server e il numero di chi telefona), basi giuridiche, conservazione, fornitori, diritti e reclamo al Garante.
+- **Cookie**: solo i due cookie tecnici (sessione e `XSRF-TOKEN`) più la nota sul `sessionStorage` dell'animazione d'apertura; nessuna terza parte, quindi nessun banner.
 
 ## Pagine tecniche
 

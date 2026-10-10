@@ -20,7 +20,7 @@
                 <a href="{{ $tel }}" class="mt-6 inline-block font-display type-phone font-extrabold tracking-tight text-ink no-underline"><span class="link-line">{{ config('site.phone') }}</span></a>
                 <div class="mt-8 flex flex-wrap gap-3">
                     <x-button :href="$tel">{{ __('site.ui.call') }}</x-button>
-                    <x-button :href="'https://www.google.com/maps/search/?api=1&query='.urlencode(config('site.address'))" variant="secondary" rel="noopener">{{ __('site.contact.map') }}</x-button>
+                    <x-button :href="$mapUrl" variant="secondary" rel="noopener">{{ __('site.contact.map') }}</x-button>
                 </div>
             </div>
             <div>
