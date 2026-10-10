@@ -32,21 +32,24 @@
         </div>
     </section>
 
-    <section class="pin-track bg-ink text-white">
-        <div class="pin-stage py-20 md:py-28">
-            <div class="mx-auto w-full max-w-6xl px-4">
-                <h2 class="max-w-3xl type-section text-white">{{ __('site.story.dough_title') }}</h2>
-                <p class="mt-5 max-w-xl text-lg text-stone-300">{{ __('site.story.dough_text') }}</p>
-                <ul class="pin-facts mt-12 list-none border-t border-white/20 p-0 md:mt-16">
-                    @foreach (__('site.dough') as [$titolo, $testo])
-                        <li class="pin-fact flex flex-col gap-1 border-b border-white/20 py-6 md:flex-row md:items-baseline md:justify-between md:py-9">
-                            <span class="pin-title font-display type-list font-extrabold tracking-tight">{{ $titolo }}</span>
-                            <span class="text-lg text-stone-300 md:text-xl">{{ $testo }}</span>
-                        </li>
-                    @endforeach
-                </ul>
-                <div class="pin-bar mt-8 h-1 origin-left bg-pomodoro" aria-hidden="true"></div>
+    <section class="bg-ink py-20 text-white md:py-32">
+        <div class="mx-auto grid max-w-6xl gap-12 px-4 md:grid-cols-12 md:gap-16">
+            <div class="md:col-span-5">
+                <div class="md:sticky md:top-32">
+                    <h2 class="type-section text-white">{{ __('site.story.dough_title') }}</h2>
+                    <p class="mt-5 text-lg text-stone-300">{{ __('site.story.dough_text') }}</p>
+                    <x-foto name="farina" :alt="__('site.story.dough_alt')" :dark="true" ratio="aspect-[4/5]" sizes="(min-width: 768px) 40vw, 100vw" class="mt-10 rounded-2xl max-md:aspect-[4/3]" />
+                </div>
             </div>
+            <ol class="list-none border-t border-white/20 p-0 md:col-span-7">
+                @foreach (__('site.dough') as [$titolo, $testo])
+                    <li class="row-reveal border-b border-white/20 py-10 md:py-14">
+                        <span class="font-display text-sm font-bold tracking-widest text-pomodoro">{{ sprintf('%02d', $loop->iteration) }}</span>
+                        <p class="mt-4 font-display type-list font-extrabold tracking-tight">{{ $titolo }}</p>
+                        <p class="mt-3 text-lg text-stone-300 md:text-xl">{{ $testo }}</p>
+                    </li>
+                @endforeach
+            </ol>
         </div>
     </section>
 

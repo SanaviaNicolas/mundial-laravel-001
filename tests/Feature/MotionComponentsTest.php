@@ -55,11 +55,12 @@ class MotionComponentsTest extends TestCase
             ->assertSee('class="curtain"', false);
     }
 
-    public function test_story_pins_the_dough_facts_while_keeping_them_as_a_readable_list(): void
+    public function test_story_lists_the_dough_facts_as_a_numbered_list_without_pinning(): void
     {
         $this->get('/la-nostra-storia')
-            ->assertSee('pin-track', false)
-            ->assertSeeInOrder(['Almeno 2 giorni', 'di lievitazione', 'Alta idratazione', 'Alta digeribilità']);
+            ->assertDontSee('pin-track', false)
+            ->assertSee('<ol', false)
+            ->assertSeeInOrder(['01', 'Almeno 2 giorni', 'di lievitazione', '02', 'Alta idratazione', '03', 'Alta digeribilità']);
     }
 
     public function test_only_the_home_page_declares_the_intro_curtain(): void

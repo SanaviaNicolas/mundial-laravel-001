@@ -44,27 +44,6 @@ if (links.length) {
     links.forEach((link) => link.addEventListener('click', () => link.closest('[popover]').hidePopover()));
 }
 
-// Pinned storytelling: progress through the tall track decides which fact is shown.
-const track = document.querySelector('.pin-track');
-
-if (track && !calm) {
-    const facts = [...track.querySelectorAll('.pin-fact')];
-    const update = () => {
-        const box = track.getBoundingClientRect();
-        const progress = Math.min(1, Math.max(0, -box.top / (box.height - innerHeight)));
-        const active = Math.min(facts.length - 1, Math.floor(progress * facts.length));
-
-        track.style.setProperty('--p', progress.toFixed(3));
-        facts.forEach((fact, i) => {
-            fact.toggleAttribute('data-active', i === active);
-            fact.toggleAttribute('data-past', i < active);
-        });
-    };
-
-    update();
-    addEventListener('scroll', update, { passive: true });
-}
-
 // Pointer effects: desktop only, never with reduced motion.
 if (fine && !calm) {
     // Floating photo that follows the pointer over the menu index.

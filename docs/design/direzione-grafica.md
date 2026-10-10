@@ -131,7 +131,7 @@ Tutte le pagine (menù, storia, contatti) condividono il linguaggio della home: 
 
 **Badge** (dati statici, chiave `badge` della voce in `config/menu.php`): `mese` → "Pizza del mese" (rosso pomodoro, stella) e `scelta` → "La più scelta" (blu logo con testo nero, cuore). Compaiono accanto alla voce e la fanno entrare in "In evidenza". Due tipi distinti, scelti per colore e icona oltre che per testo. Quando il menù passerà a Filament, `badge` sarà un campo opzionale della voce (enum con i due valori).
 
-**Storia (`/la-nostra-storia`)**: hero con titolo → frase a parole che si accendono → foto + testo sulla tradizione → tre righe giganti su nero (lievitazione, idratazione, digeribilità) → banda fotografica con invito a guardare il menù o chiamare.
+**Storia (`/la-nostra-storia`)**: hero con titolo → frase a parole che si accendono → foto + testo sulla tradizione → **"La farina e il metodo giusti"** su nero in due colonne: a sinistra titolo, testo e foto verticale (fissi da tablet in su), a destra i tre punti dell'impasto come **elenco numerato** (01–03, numero in rosso, titolo grande, frase sotto) che entra allo scroll → banda fotografica con invito a guardare il menù o chiamare.
 
 **Contatti (`/contatti`)**: hero con indirizzo → "Chiamaci" (telefono gigante, pulsanti Chiama e mappa) accanto agli orari in tabella semantica a righe grandi.
 
@@ -165,7 +165,6 @@ Tutti sono **miglioramento progressivo**: senza supporto o con `prefers-reduced-
 | **Foto che si apre** (clip-path) mentre entra nello schermo | Bande fotografiche | `.unveil`, scroll-driven CSS |
 | **Frase a parole che si accendono** | Home, storia | componente `x-frase`, scroll-driven CSS |
 | **Fascia di parole che scorre da sola** in continuo (una sola riga, testo medio tra due filetti: le due fasce giganti mosse dallo scroll occupavano troppo spazio) | Home | componente `x-marquee`, animazione CSS infinita |
-| **Racconto "pinned"**: la sezione si blocca e i tre punti dell'impasto cambiano scorrendo, con barra di avanzamento | Storia | JS (`--p`, `data-active`) + CSS; senza JS resta un elenco |
 | **Foto che segue il cursore** sulle righe del menù, con la riga che si colora | Home (indice del menù) | JS; usa la foto `categoria-{slug}` della riga, nessuna se manca |
 | **Etichetta del pulsante che rotola**: all'hover il testo sale e una copia entra dal basso, mentre lo sfondo cambia colore | Tutti i pulsanti (`x-button`) | CSS; la copia è contenuto generato (`content: attr(data-label) / ''`), vuoto per gli screen reader e assente dal DOM |
 | **Sottolineatura che si disegna** da sinistra | Link della navigazione e numeri di telefono (`.link-line`) | CSS |
@@ -177,7 +176,7 @@ Tutti sono **miglioramento progressivo**: senza supporto o con `prefers-reduced-
 
 **Movimento coerente** (revisione dopo il quarto passaggio): un'unica curva per tutto il sito, il token `--ease-brand` (`cubic-bezier(0.2, 0.8, 0.2, 1)`, classe Tailwind `ease-brand`), e durate da 0,3 s (colori) a 0,5 s (pulsanti, sottolineature, fasce) fino a 0,9–1 s (titoli, foto). Tolti il **cursore personalizzato** (con `mix-blend-mode: difference` invertiva i colori di ciò che stava sotto, ad esempio le bandiere del selettore di lingua), i **pulsanti magnetici** e le **card inclinate in 3D**: effetti "da sito creativo" che non aggiungevano nulla.
 
-Scelte tecniche da ricordare: niente animazioni con **timeline con nome** (`view-timeline: --x`), perché in Chromium bloccavano il rendering: il racconto "pinned" usa JS. Niente testo a contorno (`-webkit-text-stroke`) su font variabili: mostra le sovrapposizioni interne dei glifi; si usa un riempimento tenue.
+Scelte tecniche da ricordare: niente animazioni con **timeline con nome** (`view-timeline: --x`), perché in Chromium bloccavano il rendering. Il racconto "pinned" della storia (sezione bloccata con i tre punti che cambiavano scorrendo) è stato tolto: come layout non convinceva, ora è un elenco numerato a due colonne. Niente testo a contorno (`-webkit-text-stroke`) su font variabili: mostra le sovrapposizioni interne dei glifi; si usa un riempimento tenue.
 
 ### Bandiere nel selettore di lingua
 

@@ -75,6 +75,7 @@ return [
         'tradition_2' => 'Gli ingredienti sono originali, ricercati e di qualità.',
         'dough_title' => 'La farina e il metodo giusti',
         'dough_text' => "Ci sono voluti cinquant'anni per trovarli. Il risultato è un impasto che si sente nel piatto e anche dopo.",
+        'dough_alt' => 'Il cornicione alto e dorato di una pizza napoletana',
         'end_alt' => 'Basilico e pomodorini freschi su una pizza',
         'end_title' => 'Assaggia la differenza.',
         'see_menu' => 'Guarda il menù',

@@ -75,6 +75,7 @@ return [
         'tradition_2' => 'The ingredients are original, carefully sourced and of high quality.',
         'dough_title' => 'The right flour and the right method',
         'dough_text' => 'It took fifty years to find them. The result is a dough you can feel on the plate, and afterwards too.',
+        'dough_alt' => 'The tall, golden crust of a Neapolitan pizza',
         'end_alt' => 'Fresh basil and cherry tomatoes on a pizza',
         'end_title' => 'Taste the difference.',
         'see_menu' => 'See the menu',
