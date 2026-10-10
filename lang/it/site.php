@@ -19,6 +19,10 @@ return [
         'sunday' => 'Domenica',
     ],
     'closed' => 'Chiuso',
+    'service' => [
+        'book_takeaway' => 'Prenota un tavolo o ordina da asporto: chiamaci e passa a ritirare.',
+        'no_delivery' => 'Non facciamo consegne a domicilio.',
+    ],
     'footer' => ['vat' => 'P.IVA', 'where' => 'Dove siamo', 'call' => 'Chiamaci', 'pages' => 'Pagine', 'rights' => 'Tutti i diritti riservati'],
     'dough' => [
         ['Almeno 2 giorni', 'di lievitazione'],
@@ -95,7 +99,7 @@ return [
         'hero_alt' => 'Una pizza napoletana appena uscita dal forno',
         'h1' => 'Dove siamo',
         'call_title' => 'Chiamaci',
-        'call_text' => 'Per prenotare o per qualsiasi informazione, chiamaci: rispondiamo volentieri.',
+        'call_text' => 'Per qualsiasi informazione, chiamaci: rispondiamo volentieri.',
         'map' => 'Apri la mappa',
         'hours_title' => 'Orari',
         'hours_caption' => 'Orari di apertura',

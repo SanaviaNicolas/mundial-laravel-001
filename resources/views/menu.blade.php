@@ -144,7 +144,10 @@
     <section class="pb-16 pt-6 md:pb-24 md:pt-8">
         <div class="mx-auto max-w-6xl px-4">
             <div class="flex flex-col gap-6 rounded-2xl bg-crema-scuro p-8 md:flex-row md:items-center md:justify-between md:p-12">
-                <p class="font-display type-section font-extrabold tracking-tight">{{ __('site.menu.chosen') }}</p>
+                <div>
+                    <p class="font-display type-section font-extrabold tracking-tight">{{ __('site.menu.chosen') }}</p>
+                    <p class="mt-3 max-w-md text-ink-soft">{{ __('site.service.book_takeaway') }} {{ __('site.service.no_delivery') }}</p>
+                </div>
                 <x-button :href="$tel">{{ __('site.menu.call_phone', ['phone' => config('site.phone')]) }}</x-button>
             </div>
         </div>

@@ -56,6 +56,13 @@ Stato: **decisa, in sviluppo** (step 3). Quando sarà implementata avrà il suo 
 - **Risorse di terze parti** (font, mappe, analytics, social incorporati…): **da decidere in modo esplicito**, una per una, perché pesano su prestazioni, privacy e cookie (informativa: voce nella [checklist prima del lancio](../sviluppo/prima-del-lancio.md)). Nessuna va aggiunta "di default".
 - **Cookie e pagine legali** (decisione del 10/10/2026): il sito usa **solo cookie tecnici** (sessione e `XSRF-TOKEN` di Laravel) e nessuna risorsa di terzi, quindi **niente banner dei cookie**. Ci sono comunque una **privacy policy** (`/privacy`) e una **cookie policy** (`/cookie`), linkate nel footer insieme a copyright e P.IVA. I testi sono una **bozza da far validare** al ristorante (o al suo consulente); i dati legali mancanti compaiono come "[dato da completare]". La mappa dei contatti è un'**immagine statica ospitata da noi** (non una mappa incorporata) proprio per restare senza terze parti. Se in futuro si aggiunge una terza parte (mappa incorporata, statistiche, social incorporati), vanno riviste entrambe le informative e valutato il banner.
 
+## Servizi del locale (decisioni del 10/10/2026)
+
+- **Asporto sì, consegna a domicilio no**: il sito lo dice dove si chiama (home "Vieni a trovarci", menù "Hai scelto?", contatti): "Prenota un tavolo o ordina da asporto: chiamaci e passa a ritirare. Non facciamo consegne a domicilio." (chiavi `site.service`). Nessuna piattaforma di consegna.
+- **Prenotazioni solo per telefono**: niente moduli né servizi di prenotazione online.
+- **Servizi accessori** (parcheggio, dehors, accessibilità, pagamenti…): per ora non si mostrano.
+- **Foto vere del locale**: arriveranno dal cliente e sostituiranno quelle provvisorie.
+
 ## Già documentato altrove
 
 | Argomento | Dove |

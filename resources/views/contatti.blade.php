@@ -17,6 +17,7 @@
             <div>
                 <h2 class="type-section">{{ __('site.contact.call_title') }}</h2>
                 <p class="mt-4 max-w-md text-lg text-ink-soft">{{ __('site.contact.call_text') }}</p>
+                <p class="mt-2 max-w-md text-lg text-ink-soft">{{ __('site.service.book_takeaway') }} {{ __('site.service.no_delivery') }}</p>
                 <a href="{{ $tel }}" class="mt-6 inline-block font-display type-phone font-extrabold tracking-tight text-ink no-underline transition-opacity duration-300 ease-brand hover:opacity-70">{{ config('site.phone') }}</a>
                 <div class="mt-8 flex flex-wrap gap-3">
                     <x-button :href="$tel">{{ __('site.ui.call') }}</x-button>

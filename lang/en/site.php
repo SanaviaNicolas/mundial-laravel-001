@@ -19,6 +19,10 @@ return [
         'sunday' => 'Sunday',
     ],
     'closed' => 'Closed',
+    'service' => [
+        'book_takeaway' => 'Book a table or order takeaway: give us a call and come and pick it up.',
+        'no_delivery' => 'We do not deliver.',
+    ],
     'footer' => ['vat' => 'VAT no.', 'where' => 'Where we are', 'call' => 'Call us', 'pages' => 'Pages', 'rights' => 'All rights reserved'],
     'dough' => [
         ['At least 2 days', 'of leavening'],
@@ -95,7 +99,7 @@ return [
         'hero_alt' => 'A Neapolitan pizza fresh out of the oven',
         'h1' => 'Find us',
         'call_title' => 'Call us',
-        'call_text' => 'To book a table or for any information, give us a call: we are happy to help.',
+        'call_text' => 'For any information, give us a call: we are happy to help.',
         'map' => 'Open the map',
         'hours_title' => 'Opening hours',
         'hours_caption' => 'Opening hours',

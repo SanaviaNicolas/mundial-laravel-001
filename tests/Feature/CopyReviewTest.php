@@ -18,7 +18,7 @@ class CopyReviewTest extends TestCase
 
     public function test_contact_page_invites_to_call_for_bookings_and_information(): void
     {
-        $this->get('/contatti')->assertSeeText('Per prenotare o per qualsiasi informazione');
+        $this->get('/contatti')->assertSeeText('Per qualsiasi informazione');
     }
 
     public function test_privacy_policy_links_the_cookie_policy_and_the_garante(): void
@@ -27,5 +27,16 @@ class CopyReviewTest extends TestCase
             ->assertSee('href="/cookie"', false)
             ->assertSee('href="https://www.garanteprivacy.it"', false);
         $this->get('/en/privacy')->assertSee('href="/en/cookies"', false);
+    }
+
+    public function test_booking_and_takeaway_are_by_phone_and_there_is_no_delivery(): void
+    {
+        foreach (['/', '/menu', '/contatti'] as $uri) {
+            $this->get($uri)
+                ->assertSeeText('Prenota un tavolo o ordina da asporto')
+                ->assertSeeText('Non facciamo consegne a domicilio.');
+        }
+
+        $this->get('/en/contact')->assertSeeText('takeaway')->assertSeeText('We do not deliver.');
     }
 }
