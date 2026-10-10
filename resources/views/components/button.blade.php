@@ -9,4 +9,5 @@
     'border-transparent bg-pomodoro text-white hover:bg-pomodoro-scuro' => $variant === 'primary',
     'border-ink text-ink hover:bg-ink hover:text-white' => $variant === 'secondary',
     'border-white text-white hover:bg-white hover:text-ink' => $variant === 'outline-light',
+    'border-transparent bg-white text-pomodoro-scuro hover:bg-crema-scuro' => $variant === 'light',
 ]) }}><span class="btn-text" data-label="{{ trim($slot) }}"><span>{{ $slot }}</span></span>@if ($external)<span class="sr-only"> ({{ __('site.ui.new_tab') }})</span>@endif</a>

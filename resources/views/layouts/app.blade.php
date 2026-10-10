@@ -28,7 +28,7 @@
         <div class="progress" aria-hidden="true"></div>
         <div class="curtain" aria-hidden="true"><span><x-logo-mark class="h-[min(55svh,22rem)]" /></span></div>
         <a href="#contenuto" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-3 focus:text-ink">{{ __('site.ui.skip') }}</a>
-        <header @class(['group/h z-30', 'absolute inset-x-0 top-0 text-white transition-colors duration-300 js:fixed data-[scrolled]:bg-crema/90 data-[scrolled]:text-ink data-[scrolled]:shadow-sm data-[scrolled]:backdrop-blur' => $overlay, 'bg-crema text-ink' => ! $overlay]) @if ($overlay) data-overlay @endif>
+        <header @class(['group/h z-30', 'absolute inset-x-0 top-0 text-white transition-colors duration-300 js:fixed data-[scrolled]:bg-crema/90 data-[scrolled]:text-ink border-b border-transparent data-[scrolled]:border-ink/10 data-[scrolled]:backdrop-blur' => $overlay, 'bg-crema text-ink' => ! $overlay]) @if ($overlay) data-overlay @endif>
             <div class="mx-auto flex h-[5.25rem] max-w-6xl items-center justify-between gap-4 px-4 transition-[height] duration-300 group-data-[scrolled]/h:h-16 md:h-24 md:group-data-[scrolled]/h:h-[4.5rem]">
                 <x-logo size="header" />
                 <nav aria-label="{{ __('site.ui.main_nav') }}" class="max-md:hidden">
@@ -120,7 +120,7 @@
         </footer>
 
         <div class="fixed inset-x-4 bottom-4 z-10 md:hidden">
-            <x-button :href="$tel" class="w-full shadow-xl">{{ __('site.ui.call_now') }}</x-button>
+            <x-button :href="$tel" class="w-full outline-2 outline-white">{{ __('site.ui.call_now') }}</x-button>
         </div>
     </body>
 </html>

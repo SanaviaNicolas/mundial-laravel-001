@@ -41,7 +41,7 @@
                 <ul class="mt-10 grid list-none gap-4 p-0 md:grid-cols-2 md:gap-6">
                     @foreach ($evidenza as [$voce, $sezione])
                         @php($badge = $voce->highlights())
-                        <li @class(['row-reveal group relative flex flex-col overflow-hidden rounded-2xl bg-white p-7 shadow-sm transition-[translate,box-shadow] duration-500 ease-brand hover:-translate-y-1 hover:shadow-xl md:p-10', 'md:col-span-2' => $loop->first && $loop->count % 2 === 1])>
+                        <li @class(['row-reveal group relative flex flex-col overflow-hidden rounded-2xl bg-white p-7 transition-transform duration-500 ease-brand hover:-translate-y-1 md:p-10', 'md:col-span-2' => $loop->first && $loop->count % 2 === 1])>
                             <span class="absolute inset-x-0 top-0 h-1.5 {{ $accento[array_key_first($badge)] }}" aria-hidden="true"></span>
                             <div class="flex flex-wrap items-center justify-between gap-3">
                                 <div class="flex flex-wrap gap-2">
@@ -128,15 +128,15 @@
         @endif
     @endforeach
 
-    <section class="bg-ink py-16 text-white md:py-24">
+    <section class="bg-pomodoro py-16 text-white md:py-24">
         <div class="mx-auto flex max-w-6xl flex-col gap-8 px-4 md:flex-row md:items-end md:justify-between">
             <div>
                 <p class="font-display type-section font-extrabold tracking-tight">{{ __('site.menu.chosen') }}</p>
                 @if ($surgelati)
-                    <p class="mt-4 max-w-md text-stone-300">{{ __('site.menu.frozen') }}</p>
+                    <p class="mt-4 max-w-md text-white">{{ __('site.menu.frozen') }}</p>
                 @endif
             </div>
-            <x-button :href="$tel">{{ __('site.menu.call_phone', ['phone' => config('site.phone')]) }}</x-button>
+            <x-button :href="$tel" variant="light">{{ __('site.menu.call_phone', ['phone' => config('site.phone')]) }}</x-button>
         </div>
     </section>
 @endsection
