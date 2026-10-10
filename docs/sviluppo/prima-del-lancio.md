@@ -10,6 +10,7 @@ Elenco delle cose **reali, già emerse**, da completare o controllare prima di m
 | **Stato di verifica allergeni anche per le aggiunte** | ⬜ | **Oggi manca** (funzionalità da sviluppare): nel frattempo il frontend mostra la nota "per le aggiunte chiedi al personale". Vedi [guida frontend](../frontend/dati-menu.md) |
 | **Prezzi** inseriti per tutte le voci e le aggiunte | ⬜ | Un prezzo mancante non viene mostrato: controllare che non sia una dimenticanza |
 | **Dati legali del footer** confermati dal ristorante (ragione sociale, P.IVA, email) | ⬜ | Da inserire in `config/site.php` (`company`, `vat`, `email`): compaiono nel footer e nelle pagine legali. Di solito obbligatori nel sito di un'attività: da verificare con il ristorante e, se serve, con il commercialista |
+| **Menù dal database**: `MENU_SOURCE=database` nell'ambiente | ⬜ | Dopo aver compilato il pannello (categorie, voci, tag `pizza-del-mese`/`la-piu-scelta`/`novita`/`stagionale`); la pagina non cambia ([ADR 0010](../decisioni/0010-contratto-dati-menu.md)). Valutare una cache del menù se le pagine risultano lente |
 | Dati reali del menù caricati (seeder dedicato) | ⬜ | Arriveranno con i dati strutturati dal ristorante; il seeder sarà indipendente da `AllergenSeeder` |
 
 ## Deploy e ambiente

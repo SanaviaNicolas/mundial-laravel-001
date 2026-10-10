@@ -23,6 +23,7 @@ Indice della documentazione di Visciano 82. Va aggiornata nello stesso commit di
 - [0007 — Pannello di gestione del menù](decisioni/0007-admin-del-menu.md)
 - [0008 — Framework frontend](decisioni/0008-framework-frontend.md) — **proposta, da rivedere insieme a Nicolas**
 - [0009 — Sito multilingua](decisioni/0009-multilingua.md) — italiano e inglese, URL tradotti, hreflang
+- [0010 — Contratto dati del menù pubblico](decisioni/0010-contratto-dati-menu.md) — sorgente statica e database con la stessa forma, badge come tag
 
 ## SEO
 - [Checklist SEO, AI-friendly e mobile](seo/checklist.md) — stato di ogni voce

@@ -158,10 +158,11 @@ Per il design: servono **14 icone** (o abbreviazioni) coerenti, sempre **accompa
 - Per il layout: l'inglese è spesso più lungo dell'italiano per le descrizioni; previsto spazio per testi di lunghezza diversa nelle due lingue, senza ancorare larghezze al testo italiano. Un testo può comparire in italiano dentro una pagina inglese (fallback): niente assunzioni sulla lingua di un singolo campo.
 - Gli slug delle categorie non sono tradotti (per ora).
 
-## 5. Ordine e sezioni speciali [implementato nei dati, sezioni del sito in arrivo]
+## 5. Ordine e sezioni speciali [implementato]
 
 - **Novità** e **Stagionale** sono **tag** (slug convenzionali `novita` e `stagionale`), non categorie: la voce resta nella sua categoria normale e in più ha il tag. Una sezione speciale del sito ("Novità", "Di stagione") si costruisce **filtrando le voci per tag**; la stessa voce può quindi comparire in due punti della pagina.
-- Il ristorante può creare altri tag (es. "piccante") con lo stesso meccanismo.
+- **Sezione "In evidenza" del sito** [implementato]: raccoglie le voci con uno dei tag di rilievo `pizza-del-mese`, `la-piu-scelta`, `novita`, `stagionale` (`Item::HIGHLIGHTS`), mostrati come badge colorati; la voce compare anche nella sua categoria. Card **senza foto**. Se nessuna voce ha questi tag la sezione non c'è. I badge "Pizza del mese" e "La più scelta" sono quindi tag, non campi dedicati ([ADR 0010](../decisioni/0010-contratto-dati-menu.md)).
+- Il ristorante può creare altri tag (es. "piccante") con lo stesso meccanismo: sul sito compaiono come piccole etichette accanto alla voce.
 - Il contenuto **cambia spesso** (voci nascoste e riattivate, nuovi prezzi, stagionali): il design non deve dipendere da un numero fisso di voci o categorie, e le sezioni speciali possono essere vuote (in tal caso non mostrarle).
 
 ## 6. Ordini di grandezza utili al design (dal listino attuale)
@@ -193,15 +194,18 @@ Esempio **indicativo** di JSON per gli orari (la forma definitiva sarà fissata 
 
 Da prevedere nel design: "aperto/chiuso ora", giorni di chiusura, più fasce nello stesso giorno, chiusure straordinarie con motivo tradotto.
 
-## 8. Come il frontend riceverà i dati
+## 8. Come il frontend riceve i dati [implementato]
 
-**Oggi** il sito è renderizzato lato server (Blade): il contenuto è in HTML, leggibile senza JavaScript. Il meccanismo preciso con cui il frontend riceve i dati (view model dedicato o API) **si deciderà allo step del frontend**.
+Il sito è renderizzato lato server (Blade): il contenuto è in HTML, leggibile senza JavaScript. Le viste ricevono il menù come **contratto dati** (`app/Menu`, [ADR 0010](../decisioni/0010-contratto-dati-menu.md)): un elenco di `Section` (slug, nome, descrizione, voci, sottocategorie) con `Item` (nome, descrizione, note, prezzo in centesimi o `null`, ingredienti con surgelato/a fine cottura/sezione, tag `slug => nome`, aggiunte con supplemento e allergeni propri, allergeni `null` se non verificati). Helper per la presentazione: `Section::leaves()` (categorie con voci, per la navigazione), `Section::sharedAddons()` (aggiunte uguali per tutte le voci, mostrate una volta), `Section::allergensUnverified()` (invito unico a chiedere al personale), `Item::ingredientGroups()` (ingredienti raggruppati per sezione e divisi "in cottura" / "a fine cottura"), `Price::format()`.
 
-**Contratto che il frontend potrà dare per scontato** (e che il livello dati dedicato dovrà garantire):
+La sorgente si sceglie con `MENU_SOURCE`: `static` (oggi, `config/menu.php`, dati di esempio con la stessa struttura del pannello e allergeni mai verificati) o `database` (il pannello Filament). La pagina non cambia passando dall'una all'altra.
+
+**Contratto che il frontend dà per scontato** (garantito da entrambe le sorgenti):
 - le categorie e le voci arrivano **già filtrate per visibilità** (una macro nascosta nasconde il suo sottoalbero) e **già ordinate**;
 - i testi arrivano **già nella lingua richiesta**, con fallback sull'italiano;
 - gli **allergeni sono già gestiti secondo la regola della sezione 3** (nessun allergene mai mostrato per voci non verificate);
-- le **aggiunte** arrivano già calcolate per voce, senza quelle nascoste.
+- le **aggiunte** arrivano già calcolate per voce, senza quelle nascoste;
+- le **categorie vuote** (anche le macro con tutte le sottocategorie vuote) non ci sono.
 
 **Cosa esiste oggi nel dominio** (metodi su cui costruire quel livello; nomi indicativi di concetti, non serve conoscere i campi):
 - elenco categorie/voci "visibili" e "ordinate" (la visibilità considera l'intera catena di categorie);

@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
-use App\Support\Menu;
+use App\Menu\DatabaseMenu;
+use App\Menu\MenuSource;
+use App\Menu\StaticMenu;
 use App\Support\Pages;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -14,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(MenuSource::class, fn () => config('menu.source') === 'database' ? new DatabaseMenu : new StaticMenu);
     }
 
     /**
@@ -26,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
             'tel' => 'tel:'.preg_replace('/\D/', '', config('site.phone')),
             'mapUrl' => 'https://www.google.com/maps/search/?api=1&query='.urlencode(config('site.address')),
             'pageUrl' => Pages::url(...),
-            'menu' => Menu::categories(),
         ]));
+        View::composer(['home', 'menu'], fn ($view) => $view->with('menu', app(MenuSource::class)->sections()));
     }
 }

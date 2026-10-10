@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Menu\MenuSource;
 use Tests\Concerns\FakesPhotos;
 use Tests\TestCase;
 
@@ -58,14 +59,13 @@ class HomePageTest extends TestCase
 
     public function test_home_shows_how_many_items_each_menu_category_has(): void
     {
-        config(['menu' => ['prova' => [
-            'nome' => 'Categoria prova',
-            'descrizione' => 'Descrizione',
-            'voci' => [
-                ['nome' => 'Uno', 'ingredienti' => 'a', 'prezzo' => '€ 1,00'],
-                ['nome' => 'Due', 'ingredienti' => 'b', 'prezzo' => '€ 2,00'],
+        config(['menu.sections' => ['pizze' => ['name' => 'Pizze', 'children' => ['prova' => [
+            'name' => 'Categoria prova',
+            'items' => [
+                ['name' => 'Uno', 'price' => 100, 'ingredients' => []],
+                ['name' => 'Due', 'price' => 200, 'ingredients' => []],
             ],
-        ]]]);
+        ]]]]]);
 
         $this->get('/')->assertSeeText('Categoria prova')->assertSeeText('2 proposte');
     }
@@ -79,8 +79,10 @@ class HomePageTest extends TestCase
     {
         $response = $this->get('/');
 
-        foreach (array_keys(config('menu')) as $slug) {
-            $response->assertSee('href="/menu#'.$slug.'"', false);
+        foreach (app(MenuSource::class)->sections() as $section) {
+            foreach ($section->leaves() as $leaf) {
+                $response->assertSee('href="/menu#'.$leaf->slug.'"', false);
+            }
         }
     }
 
@@ -122,7 +124,7 @@ class HomePageTest extends TestCase
 
     public function test_menu_index_previews_the_photo_of_each_category(): void
     {
-        config(['menu' => ['prova' => ['nome' => 'Categoria prova', 'voci' => []]]]);
+        config(['menu.sections' => ['prova' => ['name' => 'Categoria prova', 'items' => [['name' => 'Uno', 'price' => 100, 'ingredients' => []]]]]]);
         $this->fakePhoto('categoria-prova');
 
         $this->get('/')->assertSee('data-img="'.asset('images/categoria-prova-640.webp').'"', false);

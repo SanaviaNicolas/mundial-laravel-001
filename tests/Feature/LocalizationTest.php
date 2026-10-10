@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Menu\MenuSource;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
@@ -76,8 +77,10 @@ class LocalizationTest extends TestCase
     {
         $response = $this->get('/en');
 
-        foreach (array_keys(config('menu')) as $slug) {
-            $response->assertSee('href="/en/menu#'.$slug.'"', false);
+        foreach (app(MenuSource::class)->sections() as $section) {
+            foreach ($section->leaves() as $leaf) {
+                $response->assertSee('href="/en/menu#'.$leaf->slug.'"', false);
+            }
         }
     }
 }

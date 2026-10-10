@@ -5,9 +5,11 @@
 @section('header-overlay', true)
 
 @php
-    $evidenza = collect($menu)
-        ->flatMap(fn ($categoria, $slug) => collect($categoria['voci'])->map(fn ($voce) => $voce + ['categoria' => $slug]))
-        ->filter(fn ($voce) => isset($voce['badge']));
+    $foglie = collect($menu)->flatMap(fn ($sezione) => $sezione->leaves())->values();
+    $numero = $foglie->mapWithKeys(fn ($sezione, $i) => [$sezione->slug => $i + 1]);
+    $voci = $foglie->flatMap(fn ($sezione) => $sezione->items);
+    $evidenza = $voci->filter(fn ($voce) => $voce->isHighlighted());
+    $surgelati = $voci->contains(fn ($voce) => collect($voce->ingredients)->contains('frozen', true));
 @endphp
 
 @section('content')
@@ -33,16 +35,17 @@
                 <h2 class="type-section">{{ __('site.menu.featured') }}</h2>
                 <ul class="mt-10 grid list-none gap-4 p-0 md:grid-cols-2 md:gap-6">
                     @foreach ($evidenza as $voce)
-                        <li class="row-reveal flex flex-col overflow-hidden rounded-2xl bg-white">
-                            <div class="zoom-hover relative overflow-hidden">
-                                <x-foto :name="'categoria-'.$voce['categoria']" :alt="$voce['nome']" ratio="aspect-[16/10]" sizes="(min-width: 768px) 50vw, 100vw" />
-                                <x-badge :tipo="$voce['badge']" class="absolute left-5 top-5" />
+                        <li class="row-reveal flex flex-col rounded-2xl bg-white p-7 md:p-9">
+                            <div class="flex flex-wrap gap-2">
+                                @foreach (array_intersect_key($voce->tags, array_flip(\App\Menu\Item::HIGHLIGHTS)) as $slug => $nome)
+                                    <x-badge :slug="$slug" :nome="$nome" />
+                                @endforeach
                             </div>
-                            <div class="flex flex-1 flex-col p-7 md:p-9">
-                                <h3 class="text-3xl md:text-4xl">{{ $voce['nome'] }}</h3>
-                                <p class="mt-3 flex-1 text-lg text-ink-soft">{{ $voce['ingredienti'] }}</p>
-                                <p class="mt-6 font-display text-3xl font-extrabold text-pomodoro-scuro">{{ $voce['prezzo'] }}</p>
-                            </div>
+                            <h3 class="mt-6 text-3xl md:text-4xl">{{ $voce->name }}</h3>
+                            <p class="mt-3 flex-1 text-lg text-ink-soft">{{ collect($voce->ingredients)->map(fn ($ingrediente) => $ingrediente->name.($ingrediente->frozen ? '*' : ''))->implode(', ') }}</p>
+                            @if ($voce->price !== null)
+                                <p class="mt-6 font-display text-3xl font-extrabold text-pomodoro-scuro">{{ \App\Menu\Price::format($voce->price) }}</p>
+                            @endif
                         </li>
                     @endforeach
                 </ul>
@@ -57,7 +60,7 @@
                 <span class="font-display text-lg font-bold" data-spy-label>{{ __('site.menu.all_categories') }}</span>
             </span>
             <span class="flex items-center gap-2 text-sm text-ink-soft">
-                <span data-spy-count>{{ __('site.menu.categories_count', ['count' => count($menu)]) }}</span>
+                <span data-spy-count>{{ __('site.menu.categories_count', ['count' => $foglie->count()]) }}</span>
                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
             </span>
         </button>
@@ -73,11 +76,11 @@
             </div>
             <nav aria-label="{{ __('site.menu.categories_nav') }}" data-spy class="mt-4">
                 <ul class="list-none border-t border-white/15 p-0">
-                    @foreach ($menu as $slug => $categoria)
+                    @foreach ($foglie as $sezione)
                         <li class="border-b border-white/15" style="--i: {{ $loop->index }}">
-                            <a href="#{{ $slug }}" data-name="{{ $categoria['nome'] }}" class="group flex items-baseline justify-between gap-4 py-4 text-white no-underline aria-[current=true]:text-pomodoro md:py-5">
-                                <span class="font-display type-list font-extrabold tracking-tight">{{ $categoria['nome'] }}</span>
-                                <span class="shrink-0 text-sm opacity-70">{{ count($categoria['voci']) }}</span>
+                            <a href="#{{ $sezione->slug }}" data-name="{{ $sezione->name }}" class="group flex items-baseline justify-between gap-4 py-4 text-white no-underline aria-[current=true]:text-pomodoro md:py-5">
+                                <span class="font-display type-list font-extrabold tracking-tight">{{ $sezione->name }}</span>
+                                <span class="shrink-0 text-sm opacity-70">{{ count($sezione->items) }}</span>
                             </a>
                         </li>
                     @endforeach
@@ -86,46 +89,36 @@
         </div>
     </x-pannello>
 
-    @foreach ($menu as $slug => $categoria)
-        <section id="{{ $slug }}" class="scroll-mt-36 py-16 md:py-24 {{ $loop->even ? 'bg-crema-scuro' : '' }}">
-            <div class="mx-auto grid max-w-6xl gap-8 px-4 md:grid-cols-12 md:gap-12">
-                <div class="md:col-span-5">
-                    <div class="md:sticky md:top-40">
-                        <p class="font-display text-sm font-bold tracking-widest"><span class="text-pomodoro">{{ sprintf('%02d', $loop->iteration) }}</span> <span class="text-muted">/ {{ sprintf('%02d', $loop->count) }} · {{ trans_choice('site.home.items', count($categoria['voci'])) }}</span></p>
-                        <h2 class="mt-3 type-section">{{ $categoria['nome'] }}</h2>
-                        @if ($categoria['descrizione'])
-                            <p class="mt-4 text-lg text-ink-soft">{{ $categoria['descrizione'] }}</p>
+    @foreach ($menu as $sezione)
+        @if ($sezione->children)
+            <section id="{{ $sezione->slug }}" class="scroll-mt-36">
+                <div class="bg-ink py-14 text-white md:py-20">
+                    <div class="mx-auto max-w-6xl px-4">
+                        <h2 class="type-page text-white">{{ $sezione->name }}</h2>
+                        @if ($sezione->description)
+                            <p class="mt-4 max-w-xl text-lg text-stone-300">{{ $sezione->description }}</p>
                         @endif
-                        <x-foto :name="'categoria-'.$slug" :alt="$categoria['nome']" ratio="aspect-[16/9] md:aspect-[4/3]" sizes="(min-width: 768px) 40vw, 100vw" class="mt-8 rounded-2xl" />
                     </div>
                 </div>
-                <ul class="list-none divide-y divide-ink/15 border-y border-ink/15 p-0 md:col-span-7">
-                    @foreach ($categoria['voci'] as $voce)
-                        <li class="row-reveal py-6">
-                            <div class="flex items-baseline gap-3">
-                                <h3 class="text-2xl">{{ $voce['nome'] }}</h3>
-                                <span class="min-w-6 flex-1 border-b-2 border-dotted border-ink/25" aria-hidden="true"></span>
-                                <span class="shrink-0 font-display text-xl font-extrabold text-pomodoro-scuro md:text-2xl">{{ $voce['prezzo'] }}</span>
-                            </div>
-                            @if ($voce['badge'])
-                                <x-badge :tipo="$voce['badge']" class="mt-3" />
-                            @endif
-                            <p class="mt-2 max-w-lg text-ink-soft">{{ $voce['ingredienti'] }}</p>
-                            @if ($voce['nota'])
-                                <p class="mt-3 text-sm font-medium text-ink">{{ $voce['nota'] }}</p>
-                            @endif
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        </section>
+                @if ($sezione->items)
+                    @include('menu.sezione', ['sezione' => $sezione, 'livello' => 2, 'titolo' => false, 'numero' => $numero[$sezione->slug], 'totale' => $foglie->count()])
+                @endif
+                @foreach ($sezione->children as $figlia)
+                    @include('menu.sezione', ['sezione' => $figlia, 'livello' => 3, 'titolo' => true, 'numero' => $numero[$figlia->slug], 'totale' => $foglie->count()])
+                @endforeach
+            </section>
+        @else
+            @include('menu.sezione', ['sezione' => $sezione, 'livello' => 2, 'titolo' => true, 'numero' => $numero[$sezione->slug], 'totale' => $foglie->count()])
+        @endif
     @endforeach
 
     <section class="bg-ink py-16 text-white md:py-24">
         <div class="mx-auto flex max-w-6xl flex-col gap-8 px-4 md:flex-row md:items-end md:justify-between">
             <div>
                 <p class="font-display type-section font-extrabold tracking-tight">{{ __('site.menu.chosen') }}</p>
-                <p class="mt-4 max-w-md text-stone-300">{{ __('site.menu.footnote') }}</p>
+                @if ($surgelati)
+                    <p class="mt-4 max-w-md text-stone-300">{{ __('site.menu.frozen') }}</p>
+                @endif
             </div>
             <x-button :href="$tel">{{ __('site.menu.call_phone', ['phone' => config('site.phone')]) }}</x-button>
         </div>
