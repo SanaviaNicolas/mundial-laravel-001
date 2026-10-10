@@ -40,9 +40,10 @@ class CopyReviewTest extends TestCase
         $this->get('/en/contact')->assertSeeText('takeaway')->assertSeeText('We do not deliver.');
     }
 
-    public function test_the_former_name_is_visible_on_the_home_page(): void
+    public function test_the_former_name_is_not_shown(): void
     {
-        $this->get('/')->assertSeeText('Visciano 82 (ex Mundial 82), pizzeria e ristorante a Vigonovo.');
-        $this->get('/en')->assertSeeText('Visciano 82 (formerly Mundial 82), pizzeria and restaurant in Vigonovo.');
+        foreach (['/', '/en', '/menu'] as $uri) {
+            $this->get($uri)->assertDontSee('Mundial 82');
+        }
     }
 }

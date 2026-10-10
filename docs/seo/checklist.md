@@ -26,7 +26,7 @@ Stato di ogni voce. Si aggiorna insieme al codice. Legenda: ✅ fatto · 🟡 pa
 | Favicon e icone (da logo SVG) | 🟡 | Favicon SVG dal logo vettorizzato; icone PNG (Apple, PWA) da fare con il logo ufficiale |
 | Core Web Vitals sotto soglia | ⬜ | Target e metodo in [mobile e performance](../sviluppo/mobile-e-performance.md) |
 | Lingua del documento (`lang="it"`) | ✅ | Testato |
-| Nome precedente "Mundial 82" visibile nei contenuti, nella forma "ex Mundial 82" | 🟡 | Molti cercano ancora il vecchio nome. Fatto in title, meta description e prima frase della home ("Visciano 82 (ex Mundial 82)…", in inglese "formerly"), testato; nei dati strutturati come `alternateName`. Vedi [contesto](../progetto/contesto-e-decisioni.md#il-progetto) |
+| Nome precedente "Mundial 82" nei contenuti | — | **Deciso di non mostrarlo** (né nei testi né nei dati strutturati): il cliente non lo vuole. |
 | `hreflang` e alternate tra le lingue (`it`, `en`, `x-default`) | ✅ | Testato; vedi [ADR 0009](../decisioni/0009-multilingua.md) |
 
 ## SEO on-page

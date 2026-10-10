@@ -20,7 +20,7 @@ class HomePageTest extends TestCase
         $this->get('/')
             ->assertSee('<html lang="it"', false)
             ->assertSee('<meta name="viewport" content="width=device-width, initial-scale=1">', false)
-            ->assertSee('<title>Visciano 82 (ex Mundial 82) — Pizzeria a Vigonovo</title>', false)
+            ->assertSee('<title>Visciano 82 — Pizzeria a Vigonovo</title>', false)
             ->assertSee('<meta name="description" content="', false);
     }
 

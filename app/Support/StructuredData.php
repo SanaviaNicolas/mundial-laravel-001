@@ -31,7 +31,6 @@ class StructuredData
             '@type' => 'Restaurant',
             '@id' => url('/').'#restaurant',
             'name' => config('app.name'),
-            'alternateName' => 'Mundial 82',
             'url' => url(Pages::url('home')),
             'image' => asset('brand/og-image.png'),
             'telephone' => '+39'.preg_replace('/\D/', '', config('site.phone')),

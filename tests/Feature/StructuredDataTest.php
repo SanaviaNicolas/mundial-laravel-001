@@ -27,7 +27,7 @@ class StructuredDataTest extends TestCase
 
         $this->assertSame('https://schema.org', $restaurant['@context']);
         $this->assertSame('Visciano 82', $restaurant['name']);
-        $this->assertSame('Mundial 82', $restaurant['alternateName']);
+        $this->assertArrayNotHasKey('alternateName', $restaurant);
         $this->assertSame('+390499830186', $restaurant['telephone']);
         $this->assertSame('Vigonovo', $restaurant['address']['addressLocality']);
         $this->assertSame('30030', $restaurant['address']['postalCode']);

@@ -6,7 +6,7 @@ Registro delle decisioni **di prodotto, di organizzazione, di infrastruttura e d
 
 - Sito multipagina della pizzeria-ristorante **"Visciano 82"** (ex "Mundial 82"). Il nome attuale è dal cognome del proprietario.
 - Identificativo tecnico: **`mundial`** (repository, database, slug, nomi dei servizi). Il nome mostrato al pubblico è "Visciano 82".
-- **SEO**: molte persone cercano ancora il vecchio nome, quindi **"Mundial 82" va tenuto visibile nei contenuti** del sito, nella forma **"ex Mundial 82"** (titoli, testi, dati strutturati dove pertinente). Voce in [checklist SEO](../seo/checklist.md).
+- **SEO e vecchio nome** (decisione aggiornata il 10/10/2026): **"Mundial 82" non si mostra** sul sito, né nei testi né nei dati strutturati, per scelta del cliente. In precedenza si era deciso di tenerlo visibile come "ex Mundial 82" perché molte persone cercano ancora il vecchio nome: chi lo cerca andrà intercettato con il profilo Google Business (che può citare il nome precedente) e con i profili social, che usano ancora "mundial82".
 
 ## Team e metodo
 
