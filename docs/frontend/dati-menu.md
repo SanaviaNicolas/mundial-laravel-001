@@ -194,6 +194,8 @@ Esempio **indicativo** di JSON per gli orari (la forma definitiva sarà fissata 
 
 Da prevedere nel design: "aperto/chiuso ora", giorni di chiusura, più fasce nello stesso giorno, chiusure straordinarie con motivo tradotto.
 
+**Chiusure straordinarie: frontend già pronto** [implementato con dati da config]: `App\Support\Closures::notice()` legge `config('site.closures')` con la forma qui sopra (`dal`, `al`, `motivo` tradotto) e restituisce l'avviso da mostrare: da 30 giorni prima dell'inizio ("Ferie: chiusi dal 10 al 20 agosto.") fino all'ultimo giorno ("Ferie: chiusi fino al 20 agosto, riapriamo il 21 agosto."), poi niente. Il sito lo mostra in una fascia oro in cima a ogni pagina (`role="status"`), sopra gli orari nei contatti e nel footer. Quando la pagina Impostazioni esisterà, `Closures` leggerà da lì: le viste non cambiano.
+
 ## 8. Come il frontend riceve i dati [implementato]
 
 Il sito è renderizzato lato server (Blade): il contenuto è in HTML, leggibile senza JavaScript. Le viste ricevono il menù come **contratto dati** (`app/Menu`, [ADR 0010](../decisioni/0010-contratto-dati-menu.md)): un elenco di `Section` (slug, nome, descrizione, voci, sottocategorie) con `Item` (nome, descrizione, note, prezzo in centesimi o `null`, ingredienti con surgelato/a fine cottura/sezione, tag `slug => nome`, aggiunte con supplemento e allergeni propri, allergeni `null` se non verificati). Helper per la presentazione: `Section::leaves()` (categorie con voci, per la navigazione), `Section::sharedAddons()` (aggiunte uguali per tutte le voci, mostrate una volta), `Section::allergensUnverified()` (invito unico a chiedere al personale), `Item::ingredientGroups()` (ingredienti raggruppati per sezione e divisi "in cottura" / "a fine cottura"), `Price::format()`.

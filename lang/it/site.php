@@ -19,6 +19,10 @@ return [
         'sunday' => 'Domenica',
     ],
     'closed' => 'Chiuso',
+    'closures' => [
+        'upcoming' => 'Chiusi dal :from al :to.',
+        'ongoing' => 'Chiusi fino al :to, riapriamo il :reopen.',
+    ],
     'service' => [
         'book_takeaway' => 'Prenota un tavolo o ordina da asporto: chiamaci e passa a ritirare.',
         'no_delivery' => 'Non facciamo consegne a domicilio.',
@@ -99,7 +103,7 @@ return [
         'hero_alt' => 'Una pizza napoletana appena uscita dal forno',
         'h1' => 'Dove siamo',
         'call_title' => 'Chiamaci',
-        'call_text' => 'Per qualsiasi informazione, chiamaci: rispondiamo volentieri.',
+        'call_text' => 'Per qualsiasi altra informazione rispondiamo volentieri.',
         'map' => 'Apri la mappa',
         'hours_title' => 'Orari',
         'hours_caption' => 'Orari di apertura',

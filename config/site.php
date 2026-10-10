@@ -20,6 +20,9 @@ return [
         'instagram' => ['name' => 'Instagram', 'url' => 'https://www.instagram.com/mundial82/'],
         'facebook' => ['name' => 'Facebook', 'url' => 'https://www.facebook.com/Mundial82'],
     ],
+    // Extraordinary closures, announced on the site (App\Support\Closures); they will move to the admin Settings page.
+    // Example: ['dal' => '2026-08-10', 'al' => '2026-08-20', 'motivo' => ['it' => 'Ferie', 'en' => 'Holidays']]
+    'closures' => [],
     'hours' => [
         ['days' => 'monday', 'open' => null],
         ['days' => 'tuesday-saturday', 'open' => '18:00 – 00:00'],

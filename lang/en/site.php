@@ -19,6 +19,10 @@ return [
         'sunday' => 'Sunday',
     ],
     'closed' => 'Closed',
+    'closures' => [
+        'upcoming' => 'Closed from :from to :to.',
+        'ongoing' => 'Closed until :to, we reopen on :reopen.',
+    ],
     'service' => [
         'book_takeaway' => 'Book a table or order takeaway: give us a call and come and pick it up.',
         'no_delivery' => 'We do not deliver.',
@@ -99,7 +103,7 @@ return [
         'hero_alt' => 'A Neapolitan pizza fresh out of the oven',
         'h1' => 'Find us',
         'call_title' => 'Call us',
-        'call_text' => 'For any information, give us a call: we are happy to help.',
+        'call_text' => 'We are happy to help with anything else, too.',
         'map' => 'Open the map',
         'hours_title' => 'Opening hours',
         'hours_caption' => 'Opening hours',

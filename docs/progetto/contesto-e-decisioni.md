@@ -62,6 +62,7 @@ Stato: **decisa, in sviluppo** (step 3). Quando sarà implementata avrà il suo 
 - **Prenotazioni solo per telefono**: niente moduli né servizi di prenotazione online.
 - **Servizi accessori** (parcheggio, dehors, accessibilità, pagamenti…): per ora non si mostrano.
 - **Foto vere del locale**: arriveranno dal cliente e sostituiranno quelle provvisorie.
+- **Chiusure per ferie** (decisione: frontend pronto ora, gestione in Filament con la pagina Impostazioni dello step 3): per ora si inseriscono in `config/site.php` (`closures`); il sito mostra l'avviso da 30 giorni prima fino alla riapertura. Vedi [guida frontend](../frontend/dati-menu.md#7-altre-informazioni-dinamiche-previste-in-arrivo--non-ancora-implementate).
 
 ## Già documentato altrove
 

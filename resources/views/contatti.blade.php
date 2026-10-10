@@ -16,8 +16,8 @@
         <div class="mx-auto grid max-w-6xl gap-14 px-4 md:grid-cols-2 md:gap-16">
             <div>
                 <h2 class="type-section">{{ __('site.contact.call_title') }}</h2>
-                <p class="mt-4 max-w-md text-lg text-ink-soft">{{ __('site.contact.call_text') }}</p>
-                <p class="mt-2 max-w-md text-lg text-ink-soft">{{ __('site.service.book_takeaway') }} {{ __('site.service.no_delivery') }}</p>
+                <p class="mt-4 max-w-md text-lg text-ink-soft">{{ __('site.service.book_takeaway') }} {{ __('site.service.no_delivery') }}</p>
+                <p class="mt-2 max-w-md text-lg text-ink-soft">{{ __('site.contact.call_text') }}</p>
                 <a href="{{ $tel }}" class="mt-6 inline-block font-display type-phone font-extrabold tracking-tight text-ink no-underline transition-opacity duration-300 ease-brand hover:opacity-70">{{ config('site.phone') }}</a>
                 <div class="mt-8 flex flex-wrap gap-3">
                     <x-button :href="$tel">{{ __('site.ui.call') }}</x-button>
@@ -28,6 +28,9 @@
             </div>
             <div>
                 <h2 class="type-section">{{ __('site.contact.hours_title') }}</h2>
+                @if ($chiusura)
+                    <p class="mt-6 rounded-xl bg-oro/30 px-5 py-4 font-semibold">{{ $chiusura }}</p>
+                @endif
                 <table class="mt-6 w-full border-collapse text-left">
                     <caption class="sr-only">{{ __('site.contact.hours_caption') }}</caption>
                     @foreach (config('site.hours') as $riga)

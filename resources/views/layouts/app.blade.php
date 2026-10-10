@@ -29,6 +29,9 @@
         <div class="curtain" aria-hidden="true"><span><x-logo-mark class="h-[min(55svh,22rem)]" /></span></div>
         <a href="#contenuto" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-3 focus:text-ink">{{ __('site.ui.skip') }}</a>
         <header @class(['group/h z-30', 'absolute inset-x-0 top-0 text-white transition-colors duration-300 js:fixed data-[scrolled]:bg-crema/90 data-[scrolled]:text-ink border-b border-transparent data-[scrolled]:border-ink/10 data-[scrolled]:backdrop-blur' => $overlay, 'bg-crema text-ink' => ! $overlay]) @if ($overlay) data-overlay @endif>
+            @if ($chiusura)
+                <p class="bg-oro px-4 py-2 text-center text-sm font-semibold text-ink" role="status">{{ $chiusura }}</p>
+            @endif
             <div class="mx-auto flex h-[5.25rem] max-w-6xl items-center justify-between gap-4 px-4 transition-[height] duration-300 group-data-[scrolled]/h:h-16 md:h-24 md:group-data-[scrolled]/h:h-[4.5rem]">
                 <x-logo size="header" />
                 <nav aria-label="{{ __('site.ui.main_nav') }}" class="max-md:hidden">
@@ -90,6 +93,9 @@
                     </div>
                     <div class="md:col-span-4">
                         <p class="font-display text-sm font-bold uppercase tracking-widest text-white">{{ __('site.contact.hours_title') }}</p>
+                        @if ($chiusura)
+                            <p class="mt-4 text-sm font-semibold text-oro">{{ $chiusura }}</p>
+                        @endif
                         <dl class="mt-4 space-y-2">
                             @foreach (config('site.hours') as $riga)
                                 <div class="flex justify-between gap-4 border-b border-white/10 pb-2">

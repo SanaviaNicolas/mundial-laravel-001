@@ -18,7 +18,7 @@ class CopyReviewTest extends TestCase
 
     public function test_contact_page_invites_to_call_for_bookings_and_information(): void
     {
-        $this->get('/contatti')->assertSeeText('Per qualsiasi informazione');
+        $this->get('/contatti')->assertSeeText('Per qualsiasi altra informazione');
     }
 
     public function test_privacy_policy_links_the_cookie_policy_and_the_garante(): void

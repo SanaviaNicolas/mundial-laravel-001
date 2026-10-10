@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Menu\DatabaseMenu;
 use App\Menu\MenuSource;
 use App\Menu\StaticMenu;
+use App\Support\Closures;
 use App\Support\Pages;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -28,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
             'tel' => 'tel:'.preg_replace('/\D/', '', config('site.phone')),
             'mapUrl' => config('site.map_url'),
             'pageUrl' => Pages::url(...),
+            'chiusura' => Closures::notice(),
         ]));
         View::composer(['home', 'menu'], fn ($view) => $view->with('menu', app(MenuSource::class)->sections()));
     }
