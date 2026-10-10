@@ -32,15 +32,15 @@ class StoriaPageTest extends TestCase
         $this->get('/la-nostra-storia')->assertDontSee('TODO');
     }
 
-    public function test_storia_pays_tribute_to_maradona_with_text_and_a_decorative_number_ten(): void
+    public function test_storia_pays_tribute_to_maradona_with_the_mural_photo_and_a_number_ten_patch(): void
     {
         $html = $this->get('/la-nostra-storia')
-            ->assertSeeText('Mundial 82')
+            ->assertSeeText('Mondiale del 1982')
             ->assertSeeText('Diego Armando Maradona')
+            ->assertSee('alt="Il murale di Diego Armando Maradona con la maglia del Napoli a Largo Maradona, nei Quartieri Spagnoli di Napoli"', false)
             ->getContent();
 
-        $this->assertMatchesRegularExpression('/<[^>]*aria-hidden="true"[^>]*>10<\//', $html);
-        $this->assertStringNotContainsString('maradona.jpg', strtolower($html));
+        $this->assertMatchesRegularExpression('/<span[^>]*rounded-full[^>]*aria-hidden="true"[^>]*>10<\/span>/', $html);
     }
 
     public function test_english_story_has_the_tribute_too(): void

@@ -53,11 +53,17 @@
         </div>
     </section>
 
-    {{-- Tribute to Maradona: text only (no photos, signature or logos: image rights), the big 10 is decorative. --}}
-    <section class="overflow-hidden py-20 md:py-32">
-        <div class="mx-auto grid max-w-6xl items-center gap-8 px-4 md:grid-cols-12 md:gap-16">
-            <p class="row-reveal select-none font-display text-[clamp(10rem,30vw,22rem)] font-extrabold leading-[0.8] tracking-tighter text-blu md:col-span-5" aria-hidden="true">10</p>
-            <div class="md:col-span-7">
+    {{-- Tribute to Maradona: no portrait photos, signature or logos of ours; the photo shows the public mural in Naples. --}}
+    <section class="py-20 md:py-32">
+        <div class="mx-auto grid max-w-6xl items-center gap-14 px-4 md:grid-cols-12 md:gap-16">
+            <figure class="md:col-span-5">
+                <div class="relative">
+                    <x-foto name="maradona" :alt="__('site.story.name_alt')" ratio="aspect-[4/5]" sizes="(min-width: 768px) 40vw, 100vw" class="rounded-2xl" />
+                    <span class="absolute -bottom-6 right-6 grid size-24 place-items-center rounded-full bg-blu font-display text-5xl font-extrabold tracking-tighter text-white md:-right-6 md:size-28 md:text-6xl" aria-hidden="true">10</span>
+                </div>
+                <figcaption class="mt-4 text-sm italic text-muted">{{ __('site.story.name_caption') }}</figcaption>
+            </figure>
+            <div class="md:col-span-6 md:col-start-7">
                 <p class="text-xs font-bold uppercase tracking-widest text-muted">{{ __('site.story.name_eyebrow') }}</p>
                 <h2 class="mt-3 type-section">{{ __('site.story.name_title') }}</h2>
                 <div class="mt-6 space-y-5 text-lg text-ink-soft">
